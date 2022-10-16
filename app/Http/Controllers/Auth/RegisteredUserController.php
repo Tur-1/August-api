@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
+use App\Models\User\User;
+
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use Illuminate\Auth\Events\Registered;
 
 class RegisteredUserController extends Controller
 {
@@ -25,9 +26,9 @@ class RegisteredUserController extends Controller
         $request->validate([
             'register_name' => ['required', 'string', 'max:255', 'min:5'],
             'register_email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'register_password' => 'required|required_with:password_confirmation|same:password_confirmation|min:4',
+            'register_password' => 'required|same:password_confirmation|min:4',
             'password_confirmation' => 'required|same:register_password|min:4',
-            'gender' => 'required|in:Female,Male'
+            'gender' => 'in:Female,Male'
         ]);
 
         $user = User::create([
@@ -38,7 +39,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        Auth::login($user, true);
 
         return response()->noContent();
     }
