@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Pages\Frontend\MyAccountPage\Http\Resources;
+namespace App\Pages\Frontend\MyAccountPage\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

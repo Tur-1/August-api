@@ -2,30 +2,57 @@
 
 namespace App\Pages\Frontend\MyAccountPage\Services;
 
-use App\Pages\Frontend\MyAccountPage\Http\Resources\UserAddressesResource;
-use App\Pages\Frontend\MyAccountPage\Http\Resources\UserInfoResource;
 
+use Exception;
+use App\Models\Address\Repository\AddressRepository;
+use App\Pages\Frontend\MyAccountPage\Resources\UserInfoResource;
+use App\Pages\Frontend\MyAccountPage\Resources\UserAddressesResource;
 
 
 class MyAccountPageService
 {
-    public  $order;
+    private $addressRepository;
+
+    public function __construct(AddressRepository $addressRepository)
+    {
+        $this->addressRepository = $addressRepository;
+    }
     public function getUserInformation()
     {
         return UserInfoResource::make(auth()->user());
     }
     public function getUserAddresses()
     {
-
-        return  UserAddressesResource::collection(auth()->user()->addresses)->resolve();
-    }
-    public function findUserAddress($address_id)
-    {
-        return  auth()->user()->addresses->find($address_id);
+        return  UserAddressesResource::collection($this->addressRepository->getUserAddresses())->resolve();
     }
     public function createAddress($validatedRequest)
     {
-        return  auth()->user()->addresses()->create($validatedRequest);
+        return  $this->addressRepository->createAddress($validatedRequest);
+    }
+    public function findUserAddress($address_id)
+    {
+        return $this->addressRepository->findUserAddress($address_id);
+    }
+    public function destroyUserAddress($address_id)
+    {
+        $address = $this->addressRepository->findUserAddress($address_id);
+
+
+        if (is_null($address)) {
+            return throw new Exception('Address Not Found', 404);
+        }
+        $address->delete();
+    }
+
+    public function updateAddress($validatedRequest)
+    {
+        $address = $this->addressRepository->findUserAddress($validatedRequest->address_id);
+
+        if (is_null($address)) {
+            return throw new Exception('Address Not Found', 404);
+        }
+
+        $this->addressRepository->updateAddress($validatedRequest);
     }
     public function updatePhoneNumber($phoneNumber)
     {

@@ -1,24 +1,22 @@
 <?php
 
-namespace App\Pages\Frontend\MyAccountPage\Http\Controllers;
+namespace App\Pages\Frontend\MyAccountPage\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Pages\Frontend\MyAccountPage\Services\MyAccountPageService;
-use App\Pages\Frontend\MyAccountPage\Http\Requests\StoreUserAddressRequest;
-use App\Pages\Frontend\MyAccountPage\Http\Requests\StoreAccountInformationRequest;
-use App\Pages\Frontend\MyAccountPage\Http\Requests\UpdateAccountPasswordRequest;
+use App\Pages\Frontend\MyAccountPage\Requests\StoreUserAddressRequest;
+use App\Pages\Frontend\MyAccountPage\Requests\StoreAccountInformationRequest;
+use App\Pages\Frontend\MyAccountPage\Requests\UpdateAccountPasswordRequest;
 
 class MyAccountPageController extends Controller
 {
 
-    public $genders = ['Female', 'Male'];
-    private $userAddressService;
     private $myAccountService;
 
-    public function __construct()
+    public function __construct(MyAccountPageService $myAccountPageService)
     {
-        $this->myAccountService =  new MyAccountPageService();
+        $this->myAccountService =  $myAccountPageService;
     }
 
     public function getUserInformation()
@@ -81,26 +79,23 @@ class MyAccountPageController extends Controller
     public function updateUserAddress(StoreUserAddressRequest $request)
     {
 
-        $address = $this->myAccountService->findUserAddress($request->address_id);
-
-        if (is_null($address)) {
+        try {
+            $this->myAccountService->updateAddress($request->validated());
+        } catch (\Exception $ex) {
             return  response()->error('Address Not Found', 404);
         }
-
-        $address->update($request->validated());
 
         return  response()->success([
             'message' => 'address has been updated successfully'
         ]);
     }
-    public function destroyUserAddress($id)
+    public function destroyUserAddress($address_id)
     {
-        $address = $this->myAccountService->findUserAddress($id);
-
-        if (is_null($address)) {
+        try {
+            $this->myAccountService->destroyUserAddress($address_id);
+        } catch (\Exception $ex) {
             return  response()->error('Address Not Found', 404);
         }
-        $address->delete();
 
         return  response()->success([
             'message' => 'address has been deleted successfully',
