@@ -44,15 +44,17 @@ class MyAccountPageService
         $address->delete();
     }
 
-    public function updateAddress($validatedRequest)
+    public function updateAddress($validatedRequest, $address_id)
     {
-        $address = $this->addressRepository->findUserAddress($validatedRequest->address_id);
+
+        $address = $this->addressRepository->findUserAddress($address_id);
+
 
         if (is_null($address)) {
-            return throw new Exception('Address Not Found', 404);
+            return  throw new Exception('Address Not Found', 404);
         }
 
-        $this->addressRepository->updateAddress($validatedRequest);
+        $this->addressRepository->updateUserAddress($validatedRequest, $address_id);
     }
     public function updatePhoneNumber($phoneNumber)
     {

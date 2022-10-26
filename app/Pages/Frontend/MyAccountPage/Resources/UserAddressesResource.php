@@ -21,7 +21,6 @@ class UserAddressesResource extends JsonResource
             'city' => $this->city,
             'street' => $this->street,
             'phone_number' => $this->phone_number,
-
         ];
     }
 }

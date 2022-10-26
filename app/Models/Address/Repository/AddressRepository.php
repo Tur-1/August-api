@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Collection;
 class AddressRepository
 {
 
+    // private $address;
+
+    // public function __construct(Address $address)
+    // {
+    //     $this->address = $address;
+    // }
     /**
      * Get All Address Models 
      *  
@@ -33,8 +39,8 @@ class AddressRepository
         return  auth()->user()->addresses()->create($request);
     }
 
-    public function updateAddress($request)
+    public function updateUserAddress($request, $address_id)
     {
-        return  auth()->user()->addresses()->update($request);
+        return  auth()->user()->addresses()->where('id', $address_id)->update($request);
     }
 }
