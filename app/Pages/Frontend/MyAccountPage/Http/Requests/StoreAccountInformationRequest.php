@@ -27,7 +27,7 @@ class StoreAccountInformationRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => ['required', 'email', Rule::unique('users')->ignore(auth()->id())],
-            'gender' => 'required|in:Female,Male'
+            'gender' => 'in:Female,Male'
         ];
     }
 }

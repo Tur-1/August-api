@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Auth;
 class AuthenticatedSessionController extends Controller
 {
 
-    public function isNotAuthenticated()
+    public function isAuthenticated()
     {
-        if (auth()->check()) {
+        if (!auth()->check()) {
             return 'false';
         }
+
         return 'true';
     }
     /**
@@ -29,7 +30,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return response()->noContent();
+        $access_token =  $request->user()->createToken('access-token')->plainTextToken;
+        return response()->json(['access_token' => $access_token]);
     }
 
     /**

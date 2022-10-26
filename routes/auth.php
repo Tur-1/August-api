@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/isNotAuthenticated', [AuthenticatedSessionController::class, 'isNotAuthenticated']);
+Route::get('/isAuthenticated', [AuthenticatedSessionController::class, 'isAuthenticated']);
 
 Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest')
