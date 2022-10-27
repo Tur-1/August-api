@@ -79,7 +79,6 @@ class MyAccountPageController extends Controller
     public function updateUserAddress(StoreUserAddressRequest $request)
     {
 
-
         try {
             $this->myAccountService->updateAddress($request->validated(), $request['address_id']);
         } catch (\Exception $ex) {
