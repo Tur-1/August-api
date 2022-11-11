@@ -41,6 +41,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
 
             $this->frontendPagesRoutes();
+
+            $this->backendPagesRoutes();
         });
     }
     protected  function frontendPagesRoutes()
@@ -49,6 +51,19 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('api')
             ->prefix('api')
             ->group(base_path('routes/Frontend/MyAccountPageRoute.php'));
+
+        // shopping page
+        Route::middleware('api')
+            ->prefix('api')
+            ->group(base_path('routes/Frontend/ShopPageRoute.php'));
+    }
+    protected  function backendPagesRoutes()
+    {
+
+        // users page
+        Route::middleware(['api', 'auth'])
+            ->prefix('api/admin')
+            ->group(base_path('routes/Backend/UsersPageRoute.php'));
     }
     /**
      * Configure the rate limiters for the application.

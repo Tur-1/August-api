@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Pages\Frontend\MyAccountPage\Controllers\MyAccountPageController;
 
+
 // account page
 
 Route::middleware(['auth:sanctum'])->controller(MyAccountPageController::class)->group(function () {

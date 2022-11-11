@@ -1,6 +1,6 @@
 <?php
 
-use App\Pages\Frontend\ShopPage\Controllers\ShopPageController;
+use App\Pages\Backend\Users\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::controller(ShopPageController::class)->name('shop.')->group(function () {
+Route::controller(UserController::class)->group(function () {
 
-    Route::get('/get-all-categories', 'getAllCategories')->name('getAllCategories');
-
-    Route::get('/shop/{category_slug?}', 'categoryPage')->name('categoryPage');
+    Route::get('/users', 'getAllUsers');
+    Route::post('/users/create', 'createUser');
+    Route::post('/users/find/{id}', 'getUser');
 });
