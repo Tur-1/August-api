@@ -8,17 +8,32 @@ use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository
 {
+    private $user;
 
-    public function getAllUsers()
+    public function __construct(User $user)
     {
-        return User::get();
+        $this->user = $user;
+    }
+    public function getAllUsers($records)
+    {
+        return $this->user->paginate($records);
     }
     public function createUser($validatedRequest)
     {
-        return User::create($validatedRequest);
+        return $this->user->create($validatedRequest);
     }
-    public function findUserById($id)
+    public function findUser($id)
     {
-        return User::find($id);
+        return $this->user->find($id);
+    }
+    public function updateUser($validatedRequest, $id)
+    {
+        $user = $this->findUser($id);
+        $user->update($validatedRequest);
+        return  $user;
+    }
+    public function deleteUser($id)
+    {
+        return $this->user->where('id', $id)->delete();
     }
 }

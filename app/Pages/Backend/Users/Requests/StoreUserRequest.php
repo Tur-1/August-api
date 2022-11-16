@@ -25,6 +25,7 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
 
+
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -39,7 +40,7 @@ class StoreUserRequest extends FormRequest
             $rules['email'] = [
                 'required',
                 'email',
-                Rule::unique('users', 'email')->ignore($this->user->id)
+                Rule::unique('users', 'email')->ignore(request()->route('id'))
             ];
 
             $rules['password'] = 'sometimes';

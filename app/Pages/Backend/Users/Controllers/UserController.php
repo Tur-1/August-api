@@ -2,12 +2,15 @@
 
 namespace App\Pages\Backend\Users\Controllers;
 
+use App\Models\User\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Pages\Backend\Users\Requests\StoreUserRequest;
 use App\Pages\Backend\Users\Services\UserService;
 
 class UserController extends Controller
 {
+
     private $userService;
 
     public function __construct(UserService $userService)
@@ -15,11 +18,13 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
-    public function getAllUsers()
+    public function index(Request $request)
     {
-        return $this->userService->getAllUsers();
+        return $this->userService->getAllUsers($request->per_page);
     }
-    public function createUser(StoreUserRequest $request)
+
+
+    public function store(StoreUserRequest $request)
     {
         $validatedReqeust = $request->validated();
 
@@ -29,12 +34,32 @@ class UserController extends Controller
             'message' => 'user has been created successfully'
         ]);
     }
-    public function getUser($id)
+
+    public function show($id)
     {
-
-
-        $user = $this->userService->getUser($id);
+        $user = $this->userService->findUser($id);
 
         return response()->success($user);
+    }
+
+    public function update(StoreUserRequest $request,  $id)
+    {
+        $validatedReqeust = $request->validated();
+
+        $user = $this->userService->updateUser($validatedReqeust, $id);
+
+        return response()->success([
+            'message' => 'user has been updated successfully',
+            'user' =>  $user,
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $this->userService->deleteUser($id);
+
+        return response()->success([
+            'message' => 'user has been deleted successfully',
+        ]);
     }
 }

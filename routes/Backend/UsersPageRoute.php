@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(UserController::class)->group(function () {
 
-    Route::get('/users', 'getAllUsers');
-    Route::post('/users/create', 'createUser');
-    Route::post('/users/find/{id}', 'getUser');
+    Route::get('/users', 'index');
+    Route::post('/users/store', 'store');
+    Route::post('/users/show/{id}', 'show');
+    Route::put('/users/update/{id}', 'update');
+    Route::delete('/users/delete/{id}', 'destroy');
 });
