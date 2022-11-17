@@ -40,31 +40,28 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
-            $this->frontendPagesRoutes();
 
-            $this->backendPagesRoutes();
+
+
+            Route::prefix('api')
+                ->middleware(['api'])
+                ->group(function ($route) {
+                    foreach (glob(base_path('routes/Frontend/*.php')) as $fileName) {
+                        require $fileName;
+                    }
+                });
+
+
+            Route::prefix('api/admin')
+                ->middleware(['api'])
+                ->group(function ($route) {
+                    foreach (glob(base_path('routes/Backend/*.php')) as $fileName) {
+                        require $fileName;
+                    }
+                });
         });
     }
-    protected  function frontendPagesRoutes()
-    {
-        // my account page
-        Route::middleware('api')
-            ->prefix('api')
-            ->group(base_path('routes/Frontend/MyAccountPageRoute.php'));
 
-        // shopping page
-        Route::middleware('api')
-            ->prefix('api')
-            ->group(base_path('routes/Frontend/ShopPageRoute.php'));
-    }
-    protected  function backendPagesRoutes()
-    {
-
-        // users page
-        Route::middleware(['api', 'auth'])
-            ->prefix('api/admin')
-            ->group(base_path('routes/Backend/UsersPageRoute.php'));
-    }
     /**
      * Configure the rate limiters for the application.
      *

@@ -4,61 +4,62 @@ namespace App\Pages\Backend\Categories\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Pages\Backend\Users\Requests\StoreUserRequest;
-use App\Pages\Backend\Users\Services\UserService;
+use App\Pages\Backend\Categories\Requests\StoreCategoryRequest;
+use App\Pages\Backend\Categories\Services\CategoryService;
+
 
 class CategoryController extends Controller
 {
 
-    private $userService;
+    private $categoryService;
 
-    public function __construct(UserService $userService)
+    public function __construct(CategoryService $categoryService)
     {
-        $this->userService = $userService;
+        $this->categoryService = $categoryService;
     }
 
     public function index(Request $request)
     {
-        return $this->userService->getAllUsers($request->per_page);
+        return $this->categoryService->getAllCategories($request->per_page);
     }
 
 
-    public function store(StoreUserRequest $request)
+    public function store(StoreCategoryRequest $request)
     {
         $validatedReqeust = $request->validated();
 
-        $this->userService->createUser($validatedReqeust);
+        $this->categoryService->storeCategory($validatedReqeust);
 
         return response()->success([
-            'message' => 'user has been created successfully'
+            'message' => 'category has been created successfully'
         ]);
     }
 
     public function show($id)
     {
-        $user = $this->userService->findUser($id);
+        $category = $this->categoryService->getCategory($id);
 
-        return response()->success($user);
+        return response()->success($category);
     }
 
-    public function update(StoreUserRequest $request,  $id)
+    public function update(StoreCategoryRequest $request,  $id)
     {
         $validatedReqeust = $request->validated();
 
-        $user = $this->userService->updateUser($validatedReqeust, $id);
+        $category = $this->categoryService->updateCategory($validatedReqeust, $id);
 
         return response()->success([
-            'message' => 'user has been updated successfully',
-            'user' =>  $user,
+            'message' => 'category has been updated successfully',
+            'category' =>  $category,
         ]);
     }
 
     public function destroy($id)
     {
-        $this->userService->deleteUser($id);
+        $this->categoryService->destroyCategory($id);
 
         return response()->success([
-            'message' => 'user has been deleted successfully',
+            'message' => 'category has been deleted successfully',
         ]);
     }
 }

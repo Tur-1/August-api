@@ -3,7 +3,6 @@
 namespace App\Pages\Backend\Categories\Services;
 
 use App\Models\Category\Repository\CategoryRepository;
-use App\Models\User\Repository\UserRepository;
 
 class CategoryService
 {
@@ -17,20 +16,20 @@ class CategoryService
     {
         return $this->categoryRepository->getAllCategories($records);
     }
-    public function createUser($validatedRequest)
+    public function storeCategory($validatedRequest)
     {
-        return $this->userRepository->createUser($validatedRequest);
+        return $this->categoryRepository->store($validatedRequest);
     }
-    public function findUser($id)
+    public function getCategory($category_id)
     {
-        return $this->userRepository->findUser($id);
+        return $this->categoryRepository->find($category_id);
     }
-    public function updateUser($validatedRequest, $id)
+    public function updateCategory($validatedRequest, $category_id)
     {
-        return $this->userRepository->updateUser($validatedRequest, $id);
+        return $this->categoryRepository->update($validatedRequest, $category_id);
     }
-    public function deleteUser($id)
+    public function destroyCategory($category_id)
     {
-        return $this->userRepository->deleteUser($id);
+        return $this->categoryRepository->destroy($category_id);
     }
 }
