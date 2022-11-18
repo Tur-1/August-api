@@ -18,9 +18,9 @@ class CategoryRepository
     {
         return $this->category::tree()->where("is_section", true);
     }
-    public function getAllCategories()
+    public function getAllCategories($records)
     {
-        return $this->category::tree();
+        return $this->category->with('section')->paginate($records);
     }
 
     public function store($validatedRequest)

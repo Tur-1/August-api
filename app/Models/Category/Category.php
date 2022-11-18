@@ -47,4 +47,9 @@ class Category extends Model
 
         return $this->image ? Storage::get('images/categories/' . $this->image) : null;
     }
+
+    public function section()
+    {
+        return  $this->belongsTo(Category::class);
+    }
 }
