@@ -18,7 +18,11 @@ class CategoryService
     }
     public function storeCategory($validatedRequest)
     {
-        return $this->categoryRepository->store($validatedRequest);
+        return $this->categoryRepository->save($validatedRequest);
+    }
+    public function getCategoriesBySection($section_id)
+    {
+        return $this->categoryRepository->getCategoriesBySection($section_id);
     }
     public function getCategory($category_id)
     {

@@ -50,6 +50,6 @@ class Category extends Model
 
     public function section()
     {
-        return  $this->belongsTo(Category::class);
+        return  $this->belongsTo(Category::class, 'section_id')->select('id', 'name');
     }
 }

@@ -22,13 +22,17 @@ class CategoryController extends Controller
     {
         return $this->categoryService->getAllCategories($request->per_page);
     }
-
-
-    public function store(StoreCategoryRequest $request)
+    public function getCategoriesBySection($section_id)
     {
-        $validatedReqeust = $request->validated();
+        return $this->categoryService->getCategoriesBySection($section_id);
+    }
 
-        $this->categoryService->storeCategory($validatedReqeust);
+
+    public function store(Request $request)
+    {
+        // $validatedReqeust = $request->validated();
+
+        return $this->categoryService->storeCategory($request);
 
         return response()->success([
             'message' => 'category has been created successfully'
