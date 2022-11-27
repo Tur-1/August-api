@@ -32,10 +32,11 @@ class CategoryController extends Controller
     {
         // $validatedReqeust = $request->validated();
 
-        return $this->categoryService->storeCategory($request);
+
 
         return response()->success([
-            'message' => 'category has been created successfully'
+            'message' => 'category has been created successfully',
+            'data' => $this->categoryService->storeCategory($request)
         ]);
     }
 

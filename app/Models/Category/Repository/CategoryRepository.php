@@ -33,6 +33,7 @@ class CategoryRepository
     }
     public function save($validatedRequest)
     {
+
         if (is_null($validatedRequest['category_id']) || empty($validatedRequest['category_id'])) {
             $parentId = $validatedRequest['section_id'];
         } else {
@@ -54,6 +55,9 @@ class CategoryRepository
         $this->category->name = Str::title($validatedRequest['name']);
         $this->category->slug =  $categorySlug . '-' . Str::slug($validatedRequest['name'], '_');
 
+        if ($validatedRequest->hasFile('image')) {
+            $this->category->image =  $validatedRequest->image->getClientOriginalName();
+        }
 
         return $this->category->save();
     }
