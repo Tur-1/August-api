@@ -20,9 +20,14 @@ class CategoriesListResource extends JsonResource
             'name' => $this['name'],
             'slug' => $this['slug'],
             'image_url' => $this['image_url'],
-            'active' => request()->route()->parameter('category_slug') == $this['slug'] ? true : false,
             'children' => $this['children'] ? CategoriesListResource::collection($this['children']) : [],
 
         ];
+    }
+    public function withResponse($request, $response)
+    {
+        $jsonResponse = json_decode($response->getContent(), true);
+        unset($jsonResponse['links'], $jsonResponse['meta']);
+        $response->setContent(json_encode($jsonResponse['data']));
     }
 }

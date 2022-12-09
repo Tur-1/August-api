@@ -3,6 +3,7 @@
 namespace App\Modules\Categories\Services;
 
 use  App\Modules\Categories\Repository\CategoryRepository;
+use App\Modules\Categories\Resources\CategoriesListResource;
 
 class CategoryService
 {
@@ -14,7 +15,11 @@ class CategoryService
     }
     public function getAllCategories($records)
     {
-        return $this->categoryRepository->getAllCategories($records);
+        return  CategoriesListResource::collection(
+            $this->categoryRepository->getAllCategories($records)
+        )
+            ->response()
+            ->getData(true);
     }
     public function getSections()
     {

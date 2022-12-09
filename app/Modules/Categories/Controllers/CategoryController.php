@@ -48,10 +48,10 @@ class CategoryController extends Controller
 
     public function storeNewSection(StoreCategorySectionRequest $request)
     {
-        $validatedReqeust = $request->validated();
+        $request->validated();
 
 
-        $this->categoryService->storeNewSection($validatedReqeust);
+        $this->categoryService->storeNewSection($request);
 
         return response()->success([
             'message' => 'section has been created successfully',
@@ -60,11 +60,11 @@ class CategoryController extends Controller
     public function updateSection(UpdateCategorySectionRequest $request,  $id)
     {
 
-        $validatedReqeust = $request->validated();
+        $request->validated();
 
         return response()->success([
             'message' => 'section has been updated successfully',
-            'category' => $this->categoryService->updateSection($validatedReqeust, $id),
+            'category' => $this->categoryService->updateSection($request, $id),
         ]);
     }
 
@@ -77,10 +77,10 @@ class CategoryController extends Controller
 
     public function update(StoreCategoryRequest $request,  $id)
     {
-        $validatedReqeust = $request->validated();
+        $request->validated();
 
-        return $validatedReqeust;
-        $category = $this->categoryService->updateCategory($validatedReqeust, $id);
+
+        $category = $this->categoryService->updateCategory($request, $id);
 
         return response()->success([
             'message' => 'category has been updated successfully',

@@ -9,23 +9,23 @@ use Illuminate\Support\Facades\Storage;
 trait ImageUpload
 {
 
-    public function uploadImageInStorage($imageRequest, $Folder): string
+
+    private $imagesPath = 'public/images/';
+
+
+    /**
+     * @return image name 
+     */
+    public function uploadImage($imageRequest, $Folder): string
     {
-
-        $newImageName = $this->generateUniqueImageName($imageRequest->getClientOriginalName(), $imageRequest->extension());
-
-        $path =    $imageRequest->storeAs('images/' . $Folder, $newImageName, 's3');
-        Storage::disk('s3')->setVisibility($path, 'public');
-
-        return $newImageName;
-    }
-
-    public function uploadImageAsWebp($imageRequest, $Folder): string
-    {
+        // generate unique name for the image
         $newImageName = $this->generateUniqueImageName($imageRequest->getClientOriginalName(), 'webp');
+
+        // convert image to webp 
         $webpImage = \Image::make($imageRequest)->encode('webp', 90);
 
-        Storage::put('public/images/' . $Folder . '/' . $newImageName, $webpImage);
+        // upload image to server
+        Storage::put($this->imagesPath . $Folder . '/' . $newImageName, $webpImage);
 
         return $newImageName;
     }
@@ -53,6 +53,11 @@ trait ImageUpload
     {
         $model->delete();
 
-        Storage::delete('public/images/' . $imagePath);
+        Storage::delete($this->imagesPath . $imagePath);
+    }
+
+    public function destroyImage($imagePath)
+    {
+        Storage::delete($this->imagesPath . $imagePath);
     }
 }

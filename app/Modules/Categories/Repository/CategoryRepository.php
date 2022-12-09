@@ -42,7 +42,7 @@ class CategoryRepository
 
         // if there is no parent id , the section id will be the parent for category
 
-        if ($this->isRequestHasNotPrentId($validatedRequest['parent_id'])) {
+        if ($this->isRequestDoesntHaveParentId($validatedRequest['parent_id'])) {
             $parentId = $validatedRequest['section_id'];
         } else {
             $parentId = $validatedRequest['parent_id'];
@@ -60,7 +60,7 @@ class CategoryRepository
         if ($validatedRequest->hasFile('image')) {
 
             $this->deletePreviousImage($this->getCategoryOldImagePath($this->category));
-            $this->category->image =   $this->uploadImageAsWebp($validatedRequest->file('image'),  $this->imageFolder);
+            $this->category->image =   $this->uploadImage($validatedRequest->file('image'),  $this->imageFolder);
         }
 
 
@@ -78,12 +78,12 @@ class CategoryRepository
 
         if ($validatedRequest->hasFile('image')) {
             $this->deletePreviousImage($this->getCategoryOldImagePath($this->category));
-            $this->category->image =   $this->uploadImageAsWebp($validatedRequest->file('image'),  $this->imageFolder);
+            $this->category->image =   $this->uploadImage($validatedRequest->file('image'),  $this->imageFolder);
         }
 
         $this->category->save();
     }
-    public function getCategoryOldImagePath($category)
+    private function getCategoryOldImagePath($category)
     {
         return $this->imageFolder . '/' . $category->image;
     }
@@ -103,14 +103,16 @@ class CategoryRepository
     {
         $this->category = $this->find($category_id);
 
-        $this->category =  $this->save($validatedRequest);
+        $this->save($validatedRequest);
 
         return  $this->category;
     }
 
     public function destroy($category_id)
     {
-        return $this->category->where('id', $category_id)->delete();
+        $category = $this->category->where('id', $category_id)->first();
+
+        $this->destroyModelWithImage($category, $this->getCategoryOldImagePath($category));
     }
 
     private function getParentCategory($parentId)
@@ -124,7 +126,7 @@ class CategoryRepository
 
         return ['ids' => array_unique($ids), 'slug' => $parentCategory['slug']];
     }
-    private function isRequestHasNotPrentId($parent_id)
+    private function isRequestDoesntHaveParentId($parent_id)
     {
         return is_null($parent_id) || empty($parent_id);
     }
