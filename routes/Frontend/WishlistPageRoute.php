@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Modules\Frontend\Wishlist\Http\Controllers\WishlistPageController;
+use App\Pages\Frontend\Wishlist\Http\Controllers\WishlistPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

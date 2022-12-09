@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Pages\Frontend\ShopPage\Resources;
+namespace App\Modules\Categories\Resources;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class CategoriesResource extends JsonResource
+class CategoriesListResource extends JsonResource
 {
     /**
-     * Transform the resource collection into an array.
+     * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
@@ -24,7 +21,7 @@ class CategoriesResource extends JsonResource
             'slug' => $this['slug'],
             'image_url' => $this['image_url'],
             'active' => request()->route()->parameter('category_slug') == $this['slug'] ? true : false,
-            'children' => $this['children'] ? CategoriesResource::collection($this['children']) : [],
+            'children' => $this['children'] ? CategoriesListResource::collection($this['children']) : [],
 
         ];
     }
