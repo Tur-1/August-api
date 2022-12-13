@@ -21,31 +21,17 @@ class StoreCategoryRequest extends FormRequest
     {
 
 
-        return $this->getMethod();
-        $rules = [
+        return [
 
             'name' => [
                 'required',
                 'max:60',
                 Rule::unique('categories', 'name')->where('section_id', $this->section_id)
-            ], 'section_id' => 'required',
-            'image' => ['file', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:1'],
+            ],
+            'section_id' => 'required',
+            'image' => ['file', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5000'],
             'parent_id' => 'nullable',
 
         ];
-
-        if ($this->getMethod() != 'POST') {
-
-            $rules['name'] = [
-                'required',
-                'max:60',
-                Rule::unique('categories', 'name')
-                    ->where('section_id', $this->section_id)
-                    ->ignore($this->id)
-            ];
-        }
-
-
-        return $rules;
     }
 }

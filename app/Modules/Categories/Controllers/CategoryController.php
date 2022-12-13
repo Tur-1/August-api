@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Modules\Categories\Requests\StoreCategoryRequest;
 use App\Modules\Categories\Requests\StoreCategorySectionRequest;
 use App\Modules\Categories\Requests\UpdateCategorySectionRequest;
+use App\Modules\Categories\Requests\UpdateCategoryRequest;
+
 use App\Modules\Categories\Services\CategoryService;
 
 
@@ -34,17 +36,6 @@ class CategoryController extends Controller
         return $this->categoryService->getSections();
     }
 
-    public function store(StoreCategoryRequest $request)
-    {
-        $request->validated();
-
-        $this->categoryService->storeCategory($request);
-
-        return response()->success([
-            'message' => 'category has been created successfully',
-
-        ]);
-    }
 
     public function storeNewSection(StoreCategorySectionRequest $request)
     {
@@ -68,27 +59,38 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function storeCategory(StoreCategoryRequest $request)
+    {
+        $request->validated();
+
+        $this->categoryService->storeCategory($request);
+
+        return response()->success([
+            'message' => 'category has been created successfully',
+
+        ]);
+    }
+
+    public function showCategory($id)
     {
         $category = $this->categoryService->getCategory($id);
 
         return response()->success($category);
     }
 
-    public function update(StoreCategoryRequest $request,  $id)
+    public function updateCategory(UpdateCategoryRequest $request,  $id)
     {
         $request->validated();
-
 
         $category = $this->categoryService->updateCategory($request, $id);
 
         return response()->success([
             'message' => 'category has been updated successfully',
-            'category' =>  $category,
+            'category' =>  $category
         ]);
     }
 
-    public function destroy($id)
+    public function destroyCategory($id)
     {
         $this->categoryService->destroyCategory($id);
 

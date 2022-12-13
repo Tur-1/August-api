@@ -3,7 +3,7 @@
 namespace App\Modules\Categories\Services;
 
 use  App\Modules\Categories\Repository\CategoryRepository;
-use App\Modules\Categories\Resources\CategoriesListResource;
+use App\Modules\Categories\Resources\CategoriesResource;
 
 class CategoryService
 {
@@ -15,11 +15,7 @@ class CategoryService
     }
     public function getAllCategories($records)
     {
-        return  CategoriesListResource::collection(
-            $this->categoryRepository->getAllCategories($records)
-        )
-            ->response()
-            ->getData(true);
+        return  $this->categoryRepository->getAllCategories($records);
     }
     public function getSections()
     {
@@ -29,7 +25,7 @@ class CategoryService
     public function storeCategory($validatedRequest)
     {
 
-        return $this->categoryRepository->save($validatedRequest);
+        return $this->categoryRepository->saveCategory($validatedRequest);
     }
     public function storeNewSection($validatedRequest)
     {
@@ -37,7 +33,11 @@ class CategoryService
     }
     public function updateSection($validatedRequest, $category_id)
     {
-        return $this->categoryRepository->updateSection($validatedRequest, $category_id);
+        $category = $this->categoryRepository->getCategory($category_id);
+
+        $this->categoryRepository->saveSection($validatedRequest, $category);
+
+        return CategoriesResource::make($category);
     }
     public function getCategoriesBySection($section_id)
     {
@@ -45,14 +45,18 @@ class CategoryService
     }
     public function getCategory($category_id)
     {
-        return $this->categoryRepository->find($category_id);
+        return CategoriesResource::make($this->categoryRepository->getCategory($category_id));
     }
     public function updateCategory($validatedRequest, $category_id)
     {
-        return $this->categoryRepository->update($validatedRequest, $category_id);
+        $category = $this->categoryRepository->getCategory($category_id);
+
+        $this->categoryRepository->saveCategory($validatedRequest, $category);
+
+        return CategoriesResource::make($category);
     }
     public function destroyCategory($category_id)
     {
-        return $this->categoryRepository->destroy($category_id);
+        return $this->categoryRepository->destroyCategory($category_id);
     }
 }

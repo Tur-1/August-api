@@ -5,6 +5,7 @@ namespace App\Modules\Categories\EloquentBuilders;
 use Illuminate\Database\Eloquent\Builder;
 
 
+
 class CategoryBuilder extends Builder
 {
     public function sections(): self

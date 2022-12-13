@@ -2,46 +2,66 @@
 
 namespace App\Modules\Categories\Repository;
 
-use Illuminate\Support\Str;
-use App\Modules\Categories\Models\Category;
 use App\Traits\ImageUpload;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use App\Modules\Categories\Models\Category;
+
 use Illuminate\Database\Eloquent\Collection;
 
-use Illuminate\Support\Facades\Storage;
 
 class CategoryRepository
 {
     use ImageUpload;
 
-    private $category;
     private $imageFolder = 'categories';
-    public function __construct(Category $category)
-    {
-        $this->category = $category;
-    }
+
 
     public function getSections()
     {
-        return $this->category->sections()->get();
+        return Category::sections()->get();
     }
     public function getAllCategories($records)
     {
-        return $this->category->withSection()->paginate($records);
+        return Category::withSection()->paginate($records);
     }
     public function getCategoriesBySection($section_id)
     {
-        return  $this->category::tree()
+        return  Category::tree()
             ->where('id', $section_id)
             ->first()['children'];
     }
-
-    public function save($validatedRequest)
+    public function getCategory($category_id)
     {
+        return Category::find($category_id);
+    }
+    public function saveSection($validatedRequest, Category $category = null)
+    {
+        if (is_null($category)) {
+            $category = new Category();
+        }
 
 
-        // if there is no parent id , the section id will be the parent for category
+        $category->name = $validatedRequest['name'];
+        $category->slug =  $validatedRequest['name'];
+        $category->is_section = true;
 
+        if ($validatedRequest->hasFile('image')) {
+            $this->deletePreviousImage($this->getCategoryOldImagePath($category->image));
+            $category->image =   $this->uploadImage($validatedRequest->file('image'),  $this->imageFolder);
+        }
+
+        $category->save();
+    }
+
+    public function saveCategory($validatedRequest, Category $category = null)
+    {
+        if (is_null($category)) {
+            $category = new Category();
+        }
+
+        // if there is no parent id , the section id will be the parent for category 
         if ($this->isRequestDoesntHaveParentId($validatedRequest['parent_id'])) {
             $parentId = $validatedRequest['section_id'];
         } else {
@@ -50,69 +70,31 @@ class CategoryRepository
 
         $parentCategory = $this->getParentCategory($parentId);
 
-        $this->category->parents_ids =  $parentCategory['ids'];
-        $this->category->section_id = $validatedRequest['section_id'];
-        $this->category->parent_id = $parentId;
-        $this->category->name = $validatedRequest['name'];
-        $this->category->slug =  $parentCategory['slug'];
+        $category->parents_ids =  $parentCategory['ids'];
+        $category->section_id = $validatedRequest['section_id'];
+        $category->parent_id = $parentId;
+        $category->slug =  $parentCategory['slug'] . '-' . Str::slug($validatedRequest['name'], '_');
+
+
+        $category->name = $validatedRequest['name'];
 
 
         if ($validatedRequest->hasFile('image')) {
 
-            $this->deletePreviousImage($this->getCategoryOldImagePath($this->category));
-            $this->category->image =   $this->uploadImage($validatedRequest->file('image'),  $this->imageFolder);
+            $this->deletePreviousImage($this->getCategoryOldImagePath($category->image));
+            $category->image =   $this->uploadImage($validatedRequest->file('image'),  $this->imageFolder);
         }
 
 
 
-        $this->category->save();
-    }
-    public function saveSection($validatedRequest)
-    {
-
-
-
-        $this->category->name = $validatedRequest['name'];
-        $this->category->slug =  $validatedRequest['name'];
-        $this->category->is_section = true;
-
-        if ($validatedRequest->hasFile('image')) {
-            $this->deletePreviousImage($this->getCategoryOldImagePath($this->category));
-            $this->category->image =   $this->uploadImage($validatedRequest->file('image'),  $this->imageFolder);
-        }
-
-        $this->category->save();
-    }
-    private function getCategoryOldImagePath($category)
-    {
-        return $this->imageFolder . '/' . $category->image;
-    }
-    public function find($category_id)
-    {
-        return $this->category->find($category_id);
-    }
-    public function updateSection($validatedRequest, $category_id)
-    {
-        $this->category = $this->find($category_id);
-
-        $this->saveSection($validatedRequest);
-
-        return  $this->category;
-    }
-    public function update($validatedRequest, $category_id)
-    {
-        $this->category = $this->find($category_id);
-
-        $this->save($validatedRequest);
-
-        return  $this->category;
+        return $category->save();
     }
 
-    public function destroy($category_id)
+    public function destroyCategory($category_id)
     {
-        $category = $this->category->where('id', $category_id)->first();
+        $category = $this->getCategory($category_id);
 
-        $this->destroyModelWithImage($category, $this->getCategoryOldImagePath($category));
+        $this->destroyModelWithImage($category, $this->getCategoryOldImagePath($category->image));
     }
 
     private function getParentCategory($parentId)
@@ -129,5 +111,9 @@ class CategoryRepository
     private function isRequestDoesntHaveParentId($parent_id)
     {
         return is_null($parent_id) || empty($parent_id);
+    }
+    private function getCategoryOldImagePath($image)
+    {
+        return $this->imageFolder . '/' . $image;
     }
 }

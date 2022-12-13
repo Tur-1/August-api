@@ -5,7 +5,7 @@ namespace App\Modules\Categories\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCategorySectionRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     public function authorize()
     {
@@ -21,19 +21,19 @@ class UpdateCategorySectionRequest extends FormRequest
     {
 
 
-        $rules = [
+        return [
 
             'name' => [
                 'required',
                 'max:60',
-                Rule::unique('categories', 'name')->ignore($this->id)
+                Rule::unique('categories', 'name')
+                    ->where('section_id', $this->section_id)
+                    ->ignore($this->id)
             ],
-
-            'image' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5000']
+            'section_id' => 'required',
+            'image' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5000'],
+            'parent_id' => 'nullable',
 
         ];
-
-
-        return $rules;
     }
 }
