@@ -24,7 +24,9 @@ class CategoryRepository
     }
     public function getAllCategories($records)
     {
-        return Category::withSection()->paginate($records);
+        return Category::withSection()
+            ->orderBySection()
+            ->paginate($records);
     }
     public function getCategoriesBySection($section_id)
     {

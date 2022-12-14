@@ -31,14 +31,14 @@ trait CategoryTrait
         }
     }
 
-    public function imageUrl(): Attribute
+    protected function imageUrl(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $this->image ? config('app.url') . Storage::url('images/categories/' . $this->image) : null,
         );
     }
 
-    public function name(): Attribute
+    protected function name(): Attribute
     {
         return Attribute::make(
             set: fn ($value) =>  Str::title($value),

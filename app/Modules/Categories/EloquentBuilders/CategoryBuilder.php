@@ -16,6 +16,10 @@ class CategoryBuilder extends Builder
     {
         return $this->with("section");
     }
+    public function orderBySection(): self
+    {
+        return $this->orderBy('is_section', 'desc');
+    }
 
     public function whereSection($section_id): self
     {

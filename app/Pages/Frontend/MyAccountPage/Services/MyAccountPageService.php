@@ -39,7 +39,7 @@ class MyAccountPageService
 
 
         if (is_null($address)) {
-            return throw new Exception('Address Not Found', 404);
+            throw new Exception('Address Not Found', 404);
         }
         $address->delete();
     }
