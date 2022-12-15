@@ -5,11 +5,11 @@ namespace App\Modules\Users\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modules\Users\Requests\StoreUserRequest;
+use App\Modules\Users\Requests\UpdateUserRequest;
 use App\Modules\Users\Services\UserService;
 
 class UserController extends Controller
 {
-
     private $userService;
 
     public function __construct(UserService $userService)
@@ -22,7 +22,6 @@ class UserController extends Controller
         return $this->userService->getAllUsers($request->per_page);
     }
 
-
     public function store(StoreUserRequest $request)
     {
         $validatedReqeust = $request->validated();
@@ -30,7 +29,7 @@ class UserController extends Controller
         $this->userService->createUser($validatedReqeust);
 
         return response()->success([
-            'message' => 'user has been created successfully'
+            'message' => 'user has been created successfully',
         ]);
     }
 
@@ -41,7 +40,7 @@ class UserController extends Controller
         return response()->success($user);
     }
 
-    public function update(StoreUserRequest $request,  $id)
+    public function update(UpdateUserRequest $request, $id)
     {
         $validatedReqeust = $request->validated();
 
@@ -49,7 +48,7 @@ class UserController extends Controller
 
         return response()->success([
             'message' => 'user has been updated successfully',
-            'user' =>  $user,
+            'user' => $user,
         ]);
     }
 
