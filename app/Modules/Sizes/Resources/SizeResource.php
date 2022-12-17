@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Modules\Sizes\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BaseResource extends JsonResource
+class SizeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,6 +14,9 @@ class BaseResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+
+        return [
+         //
+        ];
     }
 }

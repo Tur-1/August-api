@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        return $this->userService->getAllUsers($request->per_page);
+        return $this->userService->getAllUsers($request);
     }
 
     public function store(StoreUserRequest $request)

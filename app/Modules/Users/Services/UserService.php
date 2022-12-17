@@ -12,22 +12,27 @@ class UserService
     {
         $this->userRepository = $userRepository;
     }
-    public function getAllUsers($records)
+
+    public function getAllUsers($request)
     {
-        return $this->userRepository->getAllUsers($records);
+        return $this->userRepository->getAllUsers($request);
     }
+
     public function createUser($validatedRequest)
     {
         return $this->userRepository->createUser($validatedRequest);
     }
+
     public function findUser($id)
     {
         return $this->userRepository->findUser($id);
     }
+
     public function updateUser($validatedRequest, $id)
     {
         return $this->userRepository->updateUser($validatedRequest, $id);
     }
+
     public function deleteUser($id)
     {
         return $this->userRepository->deleteUser($id);

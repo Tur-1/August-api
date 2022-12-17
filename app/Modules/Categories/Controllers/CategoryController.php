@@ -8,13 +8,10 @@ use App\Modules\Categories\Requests\StoreCategoryRequest;
 use App\Modules\Categories\Requests\StoreCategorySectionRequest;
 use App\Modules\Categories\Requests\UpdateCategorySectionRequest;
 use App\Modules\Categories\Requests\UpdateCategoryRequest;
-
 use App\Modules\Categories\Services\CategoryService;
-
 
 class CategoryController extends Controller
 {
-
     private $categoryService;
 
     public function __construct(CategoryService $categoryService)
@@ -24,8 +21,9 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        return $this->categoryService->getAllCategories($request->per_page);
+        return $this->categoryService->getAllCategories($request->records);
     }
+
     public function getCategoriesBySection($section_id)
     {
         return $this->categoryService->getCategoriesBySection($section_id);
@@ -36,11 +34,9 @@ class CategoryController extends Controller
         return $this->categoryService->getSections();
     }
 
-
     public function storeNewSection(StoreCategorySectionRequest $request)
     {
         $request->validated();
-
 
         $this->categoryService->storeNewSection($request);
 
@@ -48,9 +44,9 @@ class CategoryController extends Controller
             'message' => 'section has been created successfully',
         ]);
     }
-    public function updateSection(UpdateCategorySectionRequest $request,  $id)
-    {
 
+    public function updateSection(UpdateCategorySectionRequest $request, $id)
+    {
         $request->validated();
 
         return response()->success([
@@ -67,7 +63,6 @@ class CategoryController extends Controller
 
         return response()->success([
             'message' => 'category has been created successfully',
-
         ]);
     }
 
@@ -78,7 +73,7 @@ class CategoryController extends Controller
         return response()->success($category);
     }
 
-    public function updateCategory(UpdateCategoryRequest $request,  $id)
+    public function updateCategory(UpdateCategoryRequest $request, $id)
     {
         $request->validated();
 
@@ -86,7 +81,7 @@ class CategoryController extends Controller
 
         return response()->success([
             'message' => 'category has been updated successfully',
-            'category' =>  $category
+            'category' => $category,
         ]);
     }
 

@@ -29,17 +29,12 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-
-
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/auth.php'));
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
-
-
-
 
             Route::prefix('api')
                 ->middleware(['api'])
@@ -49,11 +44,10 @@ class RouteServiceProvider extends ServiceProvider
                     }
                 });
 
-
             Route::prefix('api/admin')
                 ->middleware(['api'])
                 ->group(function ($route) {
-                    foreach (glob(base_path('routes/Backend/*.php')) as $fileName) {
+                    foreach (glob(base_path('routes\\Backend\\*.php')) as $fileName) {
                         require $fileName;
                     }
                 });

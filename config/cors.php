@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration
@@ -21,7 +20,7 @@ return [
 
     'allowed_origins' => [
         env('FRONTEND_URL', 'http://localhost:3000'),
-        env('BACKEND_URL')
+        env('BACKEND_URL'),
     ],
 
     'allowed_origins_patterns' => [],
@@ -33,5 +32,4 @@ return [
     'max_age' => 0,
 
     'supports_credentials' => true,
-
 ];

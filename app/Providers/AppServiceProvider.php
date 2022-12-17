@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
 
@@ -15,7 +16,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 
     /**
@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        ResourceCollection::withoutWrapping();
         JsonResource::withoutWrapping();
 
         Response::macro('success', function ($data) {
@@ -42,8 +42,6 @@ class AppServiceProvider extends ServiceProvider
             ], $status);
         });
 
-
-
-        // $this->loadMigrationsFrom(base_path('/app/Modules/' . $moduleName . '/database/*.php'));
+        $this->loadMigrationsFrom(glob(base_path('/app/Modules/*/Database/*')));
     }
 }
