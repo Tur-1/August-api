@@ -3,6 +3,7 @@
 namespace {namespace};
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class Store{Model}Request extends FormRequest
 {

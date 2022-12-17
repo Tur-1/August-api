@@ -3,6 +3,7 @@
 namespace App\Modules\Colors\Services;
 
 use App\Modules\Colors\Repository\ColorRepository;
+use App\Modules\Colors\Resources\ColorResource;
 
 class ColorService
 {
@@ -15,7 +16,7 @@ class ColorService
 
     public function getAll($records = 12)
     {
-        return $this->colorRepository->getAll($records);
+        return ColorResource::collection($this->colorRepository->getAll($records));
     }
 
     public function createColor($validatedRequest)
@@ -25,12 +26,12 @@ class ColorService
 
     public function showColor($id)
     {
-        return $this->colorRepository->getColor($id);
+        return ColorResource::make($this->colorRepository->getColor($id));
     }
 
     public function updateColor($validatedRequest, $id)
     {
-        return $this->colorRepository->updateColor($validatedRequest, $id);
+        return ColorResource::make($this->colorRepository->updateColor($validatedRequest, $id));
     }
 
     public function deleteColor($id)

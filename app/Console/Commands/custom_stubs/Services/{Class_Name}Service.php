@@ -4,8 +4,6 @@ namespace {namespace};
  
 use {ModulePath}\Repository\{Model}Repository;
 
-
-
 class {Class_Name}Service
 {
     private ${modelVariable}Repository;

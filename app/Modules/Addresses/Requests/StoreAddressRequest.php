@@ -1,11 +1,11 @@
 <?php
 
-namespace {namespace};
+namespace App\Modules\Addresses\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class Update{Model}Request extends FormRequest
+class StoreAddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

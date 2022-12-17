@@ -1,11 +1,11 @@
 <?php
 
-namespace {namespace};
+namespace App\Modules\Roles\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class Update{Model}Request extends FormRequest
+class UpdateRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -12,6 +12,7 @@ class {Model} extends Model
     use HasFactory;
     use {Model}Trait;
 
+    protected $fillable = [];
     
     public function newEloquentBuilder($query): {Model}Builder
     {

@@ -3,6 +3,7 @@
 namespace App\Modules\Brands\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreBrandRequest extends FormRequest
 {
@@ -24,7 +25,8 @@ class StoreBrandRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'image' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
+            'name' => ['required', 'max:60', Rule::unique('brands', 'name')],
         ];
     }
 }

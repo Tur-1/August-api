@@ -3,6 +3,7 @@
 namespace App\Modules\Brands\Services;
 
 use App\Modules\Brands\Repository\BrandRepository;
+use App\Modules\Brands\Resources\BrandResource;
 
 class BrandService
 {
@@ -15,7 +16,7 @@ class BrandService
 
     public function getAll($records = 12)
     {
-        return $this->brandRepository->getAll($records);
+        return BrandResource::collection($this->brandRepository->getAll($records));
     }
 
     public function createBrand($validatedRequest)
@@ -25,12 +26,12 @@ class BrandService
 
     public function showBrand($id)
     {
-        return $this->brandRepository->getBrand($id);
+        return BrandResource::make($this->brandRepository->getBrand($id));
     }
 
     public function updateBrand($validatedRequest, $id)
     {
-        return $this->brandRepository->updateBrand($validatedRequest, $id);
+        return BrandResource::make($this->brandRepository->updateBrand($validatedRequest, $id));
     }
 
     public function deleteBrand($id)

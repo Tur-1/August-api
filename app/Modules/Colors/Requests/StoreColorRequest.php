@@ -3,6 +3,7 @@
 namespace App\Modules\Colors\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreColorRequest extends FormRequest
 {
@@ -24,7 +25,8 @@ class StoreColorRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'image' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
+            'name' => ['required', 'max:60', Rule::unique('colors', 'name')],
         ];
     }
 }

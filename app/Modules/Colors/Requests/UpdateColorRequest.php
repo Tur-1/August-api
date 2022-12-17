@@ -3,6 +3,7 @@
 namespace App\Modules\Colors\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateColorRequest extends FormRequest
 {
@@ -24,7 +25,8 @@ class UpdateColorRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'image' => ['sometimes', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
+            'name' => ['required', 'max:60', Rule::unique('colors', 'name')->ignore($this->id)],
         ];
     }
 }
