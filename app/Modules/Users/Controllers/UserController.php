@@ -24,9 +24,9 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        $validatedReqeust = $request->validated();
+        $request->validated();
 
-        $this->userService->createUser($validatedReqeust);
+        $this->userService->createUser($request);
 
         return response()->success([
             'message' => 'user has been created successfully',
@@ -35,16 +35,16 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = $this->userService->findUser($id);
+        $user = $this->userService->getUser($id);
 
         return response()->success($user);
     }
 
     public function update(UpdateUserRequest $request, $id)
     {
-        $validatedReqeust = $request->validated();
+        $request->validated();
 
-        $user = $this->userService->updateUser($validatedReqeust, $id);
+        $user = $this->userService->updateUser($request, $id);
 
         return response()->success([
             'message' => 'user has been updated successfully',

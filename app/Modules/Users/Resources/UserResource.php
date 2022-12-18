@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\Roles\Resources;
+namespace App\Modules\Users\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RoleResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,7 +18,6 @@ class RoleResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'permissions_ids' => $this->whenLoaded('permissions', $this->permissions->pluck('id')->toArray())
 
         ];
     }

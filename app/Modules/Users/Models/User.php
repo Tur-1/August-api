@@ -5,7 +5,8 @@ namespace App\Modules\Users\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Address\Address;
-use Carbon\Carbon;
+use App\Modules\Roles\Models\Permission;
+use App\Modules\Roles\Models\Role;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
@@ -62,5 +63,14 @@ class User extends Authenticatable
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class, 'user_permissions', 'user_id', 'permission_id');
     }
 }

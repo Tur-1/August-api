@@ -16,24 +16,27 @@ class UserRepository
     public function getAllUsers($request)
     {
         return $this->user->when($request->search, function ($query) use ($request) {
-            $query->where('name', 'LIKE', '%'.$request->search.'%');
+            $query->where('name', 'LIKE', '%' . $request->search . '%');
         })->paginate($request->records = 10)->appends($request->all());
     }
 
     public function createUser($validatedRequest)
     {
-        return $this->user->create($validatedRequest);
+
+        $this->user->create($validatedRequest->all());
+        $this->user->permissions()->sync($validatedRequest['permissions']);
     }
 
-    public function findUser($id)
+    public function getUser($id)
     {
         return $this->user->find($id);
     }
 
     public function updateUser($validatedRequest, $id)
     {
-        $user = $this->findUser($id);
-        $user->update($validatedRequest);
+        $user = $this->getUser($id);
+        $user->update($validatedRequest->all());
+        $user->permissions()->sync($validatedRequest['permissions']);
 
         return $user;
     }

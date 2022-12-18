@@ -17,8 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::controller(RoleController::class)->group(function () {
 
     Route::get('/roles', 'index');
+
+    Route::get('/roles/all', 'getAllRoles');
+
     Route::post('/roles/store', 'storeRole');
     Route::post('/roles/show/{id}', 'showRole');
     Route::put('/roles/update/{id}', 'updateRole');
     Route::delete('/roles/delete/{id}', 'destroyRole');
+
+    Route::get('/roles/permissions', 'getAllPermissions');
+
+    Route::get('/roles/{id}/permissions', 'getRolePermissions');
 });

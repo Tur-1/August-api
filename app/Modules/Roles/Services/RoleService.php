@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Modules\Roles\Services;
- 
+
 use App\Modules\Roles\Repository\RoleRepository;
+use App\Modules\Roles\Resources\RoleResource;
 
 class RoleService
 {
@@ -14,19 +15,32 @@ class RoleService
     }
     public function getAll($records = 12)
     {
-        return $this->roleRepository->getAll($records);
+        return RoleResource::collection($this->roleRepository->getAll($records));
     }
+    public function getAllRoles()
+    {
+        return $this->roleRepository->getAllRoles();
+    }
+    public function getRolePermissions($id)
+    {
+        return $this->roleRepository->getRolePermissions($id);
+    }
+    public function getAllPermissions()
+    {
+        return $this->roleRepository->getAllPermissions();
+    }
+
     public function createRole($validatedRequest)
     {
         return $this->roleRepository->createRole($validatedRequest);
     }
     public function showRole($id)
     {
-        return $this->roleRepository->getRole($id);
+        return RoleResource::make($this->roleRepository->getRole($id));
     }
     public function updateRole($validatedRequest, $id)
     {
-        return $this->roleRepository->updateRole($validatedRequest, $id);
+        return RoleResource::make($this->roleRepository->updateRole($validatedRequest, $id));
     }
     public function deleteRole($id)
     {

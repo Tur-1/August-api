@@ -23,9 +23,9 @@ class UserService
         return $this->userRepository->createUser($validatedRequest);
     }
 
-    public function findUser($id)
+    public function getUser($id)
     {
-        return $this->userRepository->findUser($id);
+        return $this->userRepository->getUser($id);
     }
 
     public function updateUser($validatedRequest, $id)

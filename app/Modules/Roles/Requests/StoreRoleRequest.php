@@ -25,7 +25,8 @@ class StoreRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', Rule::unique('roles', 'name')],
+            'permissions.*' =>  'nullable',
         ];
     }
 }

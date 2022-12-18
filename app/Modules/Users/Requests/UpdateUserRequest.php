@@ -24,7 +24,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+        return [
             'name' => 'required',
             'email' => [
                 'required',
@@ -35,8 +35,7 @@ class UpdateUserRequest extends FormRequest
             'role_id' => 'nullable',
             'phone_number' => 'nullable',
             'gender' => 'nullable|in:Female,Male',
-        ];
 
-        return $rules;
+        ];
     }
 }
