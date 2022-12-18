@@ -35,7 +35,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = $this->userService->getUser($id);
+        $user = $this->userService->getUserWithPermissionsIds($id);
 
         return response()->success($user);
     }

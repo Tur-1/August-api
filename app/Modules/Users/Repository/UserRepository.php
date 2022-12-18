@@ -23,20 +23,24 @@ class UserRepository
     public function createUser($validatedRequest)
     {
 
-        $this->user->create($validatedRequest->all());
-        $this->user->permissions()->sync($validatedRequest['permissions']);
+        $user = User::create($validatedRequest->all());
+        $user->permissions()->sync($validatedRequest['permissionsIds']);
     }
 
     public function getUser($id)
     {
         return $this->user->find($id);
     }
+    public function getUserWithPermissionsIds($id)
+    {
+        return $this->user->with('permissions')->find($id);
+    }
 
     public function updateUser($validatedRequest, $id)
     {
         $user = $this->getUser($id);
         $user->update($validatedRequest->all());
-        $user->permissions()->sync($validatedRequest['permissions']);
+        $user->permissions()->sync($validatedRequest['permissionsIds']);
 
         return $user;
     }
