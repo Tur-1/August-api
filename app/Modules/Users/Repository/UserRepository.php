@@ -15,7 +15,7 @@ class UserRepository
 
     public function getAllUsers($request)
     {
-        return $this->user->when($request->search, function ($query) use ($request) {
+        return $this->user->withRoleName()->when($request->search, function ($query) use ($request) {
             $query->where('name', 'LIKE', '%' . $request->search . '%');
         })->paginate($request->records = 10)->appends($request->all());
     }

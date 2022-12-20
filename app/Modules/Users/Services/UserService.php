@@ -16,7 +16,7 @@ class UserService
 
     public function getAllUsers($request)
     {
-        return $this->userRepository->getAllUsers($request);
+        return UserResource::collection($this->userRepository->getAllUsers($request));
     }
 
     public function createUser($validatedRequest)

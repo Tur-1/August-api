@@ -7,6 +7,7 @@ namespace App\Modules\Users\Models;
 use App\Models\Address\Address;
 use App\Modules\Roles\Models\Permission;
 use App\Modules\Roles\Models\Role;
+use App\Modules\Users\EloquentBuilders\UserBuilder;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
@@ -53,6 +54,10 @@ class User extends Authenticatable
         'created_at' => 'date:Y-m-d',
     ];
 
+    public function newEloquentBuilder($query): UserBuilder
+    {
+        return new UserBuilder($query);
+    }
     protected function password(): Attribute
     {
         return Attribute::make(

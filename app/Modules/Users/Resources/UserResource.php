@@ -20,7 +20,8 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'permissionsIds' => $this->whenLoaded('permissions', $this->permissions->pluck('id')->toArray()),
             'email' => $this->email,
-            'role_id' => $this->role_id,
+            'role_name' => $this->role_name,
+            'role_id' => $this->whenLoaded('permissions', $this->role_id),
             'gender' => $this->gender,
             'phone_number' => $this->phone_number
 
