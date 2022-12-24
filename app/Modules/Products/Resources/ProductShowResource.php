@@ -1,24 +1,26 @@
 <?php
 
-namespace App\Modules\Brands\Resources;
+namespace App\Modules\Products\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BrandResource extends JsonResource
+class ProductShowResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
     {
+
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'image_url' => $this->whenLoaded($this->image, $this->image_url),
+            'price' => $this->price,
+            'stock' => $this->stock,
+            'status' => $this->is_active,
         ];
     }
 }

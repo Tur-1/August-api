@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Modules\Sizes\Services;
- 
+
 use App\Modules\Sizes\Repository\SizeRepository;
 
 
@@ -18,6 +18,11 @@ class SizeService
     {
         return $this->sizeRepository->getAll($records);
     }
+    public function getAllSizes()
+    {
+        return $this->sizeRepository->getAllSizes();
+    }
+
     public function createSize($validatedRequest)
     {
         return $this->sizeRepository->createSize($validatedRequest);

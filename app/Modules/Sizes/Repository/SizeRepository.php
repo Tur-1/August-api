@@ -17,6 +17,10 @@ class SizeRepository
     {
         return $this->size->paginate($records);
     }
+    public function getAllSizes()
+    {
+        return $this->size->get();
+    }
 
     public function createSize($validatedRequest)
     {

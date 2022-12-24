@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(BrandController::class)->group(function () {
     Route::get('/brands', 'index');
+    Route::get('/brands-get-all', 'getAllBrands');
+
     Route::post('/brands/store', 'storeBrand');
     Route::post('/brands/show/{id}', 'showBrand');
     Route::post('/brands/update/{id}', 'updateBrand');

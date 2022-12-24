@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::controller(SizeController::class)->group(function () {
 
     Route::get('/sizes', 'index');
+    Route::get('/sizes-get-all', 'getAllSizes');
+
+
     Route::post('/sizes/store', 'storeSize');
     Route::post('/sizes/show/{id}', 'showSize');
     Route::put('/sizes/update/{id}', 'updateSize');

@@ -21,6 +21,10 @@ class BrandRepository
     {
         return $this->brand->paginate($records);
     }
+    public function getAllBrands()
+    {
+        return $this->brand->get();
+    }
 
     public function saveBrand($validatedRequest, Brand $brand = null)
     {
@@ -62,6 +66,6 @@ class BrandRepository
 
     private function getBrandOldImagePath($image)
     {
-        return $this->imageFolder.'/'.$image;
+        return $this->imageFolder . '/' . $image;
     }
 }

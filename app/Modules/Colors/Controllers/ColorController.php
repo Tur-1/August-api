@@ -21,6 +21,10 @@ class ColorController extends Controller
     {
         return $this->colorService->getAll();
     }
+    public function getAllColors()
+    {
+        return $this->colorService->getAllColors();
+    }
 
     public function storeColor(StoreColorRequest $request)
     {
@@ -49,9 +53,9 @@ class ColorController extends Controller
         $color = $this->colorService->updateColor($request, $id);
 
         return response()->success([
-           'message' => 'Color has been updated successfully',
-           'color' => $color,
-       ]);
+            'message' => 'Color has been updated successfully',
+            'color' => $color,
+        ]);
     }
 
     public function destroyColor($id)

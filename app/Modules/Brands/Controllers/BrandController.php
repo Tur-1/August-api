@@ -20,51 +20,55 @@ class BrandController extends Controller
         $this->brandService = $brandService;
     }
 
- 
+
     public function index(Request $request)
     {
-       return  $this->brandService->getAll();
+        return  $this->brandService->getAll();
+    }
+    public function getAllBrands()
+    {
+        return  $this->brandService->getAllBrands();
     }
 
-   
+
     public function storeBrand(StoreBrandRequest $request)
     {
         $request->validated();
 
         $this->brandService->createBrand($request);
-        
+
         return response()->success([
             'message' => 'Brand has been created successfully'
         ]);
     }
 
-    
+
     public function showBrand($id)
     {
         $brand =  $this->brandService->showBrand($id);
 
         return response()->success([
-            'brand'=>$brand
+            'brand' => $brand
         ]);
     }
 
- 
+
     public function updateBrand(UpdateBrandRequest $request, $id)
     {
         $request->validated();
 
-       $brand =  $this->brandService->updateBrand($request, $id);
+        $brand =  $this->brandService->updateBrand($request, $id);
 
-       return response()->success([
-           'message' => 'Brand has been updated successfully',
-           'brand' => $brand,
-       ]);
+        return response()->success([
+            'message' => 'Brand has been updated successfully',
+            'brand' => $brand,
+        ]);
     }
 
-   
+
     public function destroyBrand($id)
     {
-        
+
         $this->brandService->deleteBrand($id);
 
         return response()->success([

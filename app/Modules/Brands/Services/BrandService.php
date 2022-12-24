@@ -18,6 +18,10 @@ class BrandService
     {
         return BrandResource::collection($this->brandRepository->getAll($records));
     }
+    public function getAllBrands()
+    {
+        return BrandResource::collection($this->brandRepository->getAllBrands());
+    }
 
     public function createBrand($validatedRequest)
     {

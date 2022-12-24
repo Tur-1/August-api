@@ -18,6 +18,10 @@ class ColorService
     {
         return ColorResource::collection($this->colorRepository->getAll($records));
     }
+    public function getAllColors()
+    {
+        return ColorResource::collection($this->colorRepository->getAllColors());
+    }
 
     public function createColor($validatedRequest)
     {

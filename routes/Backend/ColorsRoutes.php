@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(ColorController::class)->group(function () {
     Route::get('/colors', 'index');
+    Route::get('/colors-get-all', 'getAllColors');
+
     Route::post('/colors/store', 'storeColor');
     Route::post('/colors/show/{id}', 'showColor');
     Route::post('/colors/update/{id}', 'updateColor');

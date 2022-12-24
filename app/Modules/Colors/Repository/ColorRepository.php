@@ -22,7 +22,10 @@ class ColorRepository
     {
         return $this->color->paginate($records);
     }
-
+    public function getAllColors()
+    {
+        return $this->color->get();
+    }
     public function saveColor($validatedRequest, Color $color = null)
     {
         if (is_null($color)) {
@@ -62,6 +65,6 @@ class ColorRepository
 
     private function getColorOldImagePath($image)
     {
-        return $this->imageFolder.'/'.$image;
+        return $this->imageFolder . '/' . $image;
     }
 }

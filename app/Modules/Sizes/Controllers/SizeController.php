@@ -21,6 +21,10 @@ class SizeController extends Controller
     {
         return $this->sizeService->getAll();
     }
+    public function getAllSizes(Request $request)
+    {
+        return $this->sizeService->getAllSizes();
+    }
 
     public function storeSize(StoreSizeRequest $request)
     {
@@ -49,9 +53,9 @@ class SizeController extends Controller
         $size = $this->sizeService->updateSize($request, $id);
 
         return response()->success([
-           'message' => 'Size has been updated successfully',
-           'size' => $size,
-       ]);
+            'message' => 'Size has been updated successfully',
+            'size' => $size,
+        ]);
     }
 
     public function destroySize($id)
