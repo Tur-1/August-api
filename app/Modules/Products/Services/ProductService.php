@@ -2,7 +2,9 @@
 
 namespace App\Modules\Products\Services;
 
+use App\Modules\Products\Resources\ProductResource;
 use App\Modules\Products\Repository\ProductRepository;
+use App\Modules\Products\Resources\ProductShowResource;
 
 class ProductService
 {
@@ -14,7 +16,7 @@ class ProductService
     }
     public function getAll($records = 12)
     {
-        return $this->productRepository->getAll($records);
+        return ProductResource::collection($this->productRepository->getAll($records));
     }
     public function createProduct($validatedRequest)
     {
@@ -22,11 +24,14 @@ class ProductService
     }
     public function showProduct($id)
     {
-        return $this->productRepository->getProduct($id);
+
+        return ProductShowResource::make($this->productRepository->getProduct($id));
     }
     public function updateProduct($validatedRequest, $id)
     {
-        return $this->productRepository->updateProduct($validatedRequest, $id);
+        $this->productRepository->updateProduct($validatedRequest, $id);
+
+        return $this->showProduct($id);
     }
     public function deleteProduct($id)
     {

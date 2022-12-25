@@ -25,7 +25,7 @@ class ProductRepository
     }
     public function createProduct($validatedRequest)
     {
-        return $this->saveProduct($validatedRequest);
+        return $this->saveProduct($validatedRequest, $this->product);
     }
 
 
@@ -36,33 +36,39 @@ class ProductRepository
     public function updateProduct($validatedRequest, $id)
     {
         $product = $this->getProduct($id);
-        $product->update($validatedRequest);
-        return  $product;
+        $this->saveProduct($validatedRequest, $product);
+
+        return $product;
     }
     public function deleteProduct($id)
     {
         return $this->product->where('id', $id)->delete();
     }
 
-    public function saveProduct($request)
+    public function saveProduct($request, $product)
     {
-        $sizeOptions = $this->getSizeOptions($request->sizeOptions);
+        $sizeOptions = $this->getSizeOptions($request->sizes);
 
-        $this->product->details = $request->details;
-        $this->product->info_and_care = $request->info_and_care;
-        $this->product->brand_id = $request->brand_id;
-        $this->product->color_id = $request->color_id;
-        $this->product->price = $request->price;
-        $this->product->shipping_cost = $request->shipping_cost;
-        $this->product->name = Str::title($request->name);
-        $this->product->slug = $this->generateSlug($request->name, $this->product->id);
-        $this->product->stock = $this->getProductStock($sizeOptions);
+        $product->details = $request->details;
+        $product->info_and_care = $request->info_and_care;
+        $product->brand_id = $request->brand_id;
+        $product->color_id = $request->color_id;
+        $product->price = $request->price;
+        $product->shipping_cost = $request->shipping_cost;
+        $product->name = Str::title($request->name);
+        $product->slug = $this->generateSlug($request->name,  $product->id);
+        $product->stock = $this->getProductStock($sizeOptions);
 
-        $this->product->save();
+        $product->save();
 
-        $this->product->sizes()->sync($sizeOptions);
-        $this->storeCategories($this->product, $request->category_id);
-        $this->storeProductImages($this->product, $request->images);
+        $product->sizes()->sync($sizeOptions);
+        $this->storeCategories($product, $request->category_id);
+
+        if ($request->hasFile('images')) {
+            $this->storeProductImages($product, $request->file('images'));
+        }
+
+        return $product;
     }
     private function generateSlug($product_name, $product_id): string
     {
@@ -77,7 +83,7 @@ class ProductRepository
 
     private function getSizeOptions($sizeOptionsRequest): array
     {
-        $sizes = [];
+
         $sizeOptions = [];
         foreach ($sizeOptionsRequest as $size) {
 
@@ -106,7 +112,7 @@ class ProductRepository
 
     private  function storeProductImages(Model $product, $productImages)
     {
-        if (is_null($productImages))  return;
+
 
         $images = [];
         $imagesFolder = 'products/product_' . $product->id;

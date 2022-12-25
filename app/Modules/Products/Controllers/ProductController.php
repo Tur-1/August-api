@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Modules\Products\Requests\StoreProductRequest;
 use App\Modules\Products\Requests\UpdateProductRequest;
-use App\Modules\Products\Resources\ProductResource;
 use App\Modules\Products\Services\ProductService;
 use Illuminate\Support\Facades\Session;
 
@@ -24,14 +23,14 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        return  ProductResource::collection($this->productService->getAll());
+        return  $this->productService->getAll();
     }
 
 
     public function storeProduct(Request $request)
     {
 
-        // $validatedRequest = $request->validated();
+        // $request->validated();
 
         $this->productService->createProduct($request);
 
@@ -57,13 +56,14 @@ class ProductController extends Controller
 
     public function updateProduct(UpdateProductRequest $request, $id)
     {
-        $validatedRequest = $request->validated();
+        // $request->validated();
 
-        $product =  $this->productService->updateProduct($validatedRequest, $id);
+        $product =  $this->productService->updateProduct($request, $id);
 
         return response()->success([
             'message' => 'Product has been updated successfully',
             'product' => $product,
+            'sizes' => $request->sizes
         ]);
     }
 
