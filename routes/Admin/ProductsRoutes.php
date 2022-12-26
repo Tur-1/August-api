@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Products\Controllers\ProductController;
+use App\Modules\Products\Controllers\ProductImageController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,8 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('/products/show/{id}', 'showProduct');
     Route::post('/products/update/{id}', 'updateProduct');
     Route::delete('/products/delete/{id}', 'destroyProduct');
+});
+Route::controller(ProductImageController::class)->group(function () {
+
+    Route::delete('/products/images/delete/{id}', 'destroyProductImage');
 });

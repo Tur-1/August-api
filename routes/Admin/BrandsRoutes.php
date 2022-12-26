@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Modules\Brands\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 

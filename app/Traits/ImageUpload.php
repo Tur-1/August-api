@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -49,7 +50,7 @@ trait ImageUpload
 
         return Storage::exists('public/images/' . $imagePath);
     }
-    public function destroyModelWithImage($model, $imagePath)
+    public function destroyModelWithImage(Model $model, $imagePath)
     {
         $model->delete();
 
@@ -59,5 +60,9 @@ trait ImageUpload
     public function destroyImage($imagePath)
     {
         Storage::delete($this->imagesPath . $imagePath);
+    }
+    public function deleteImagesDirectory($directoryPath)
+    {
+        Storage::deleteDirectory('public/images/' . $directoryPath);
     }
 }

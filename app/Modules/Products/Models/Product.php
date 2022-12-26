@@ -12,7 +12,7 @@ class Product extends Model
     use HasFactory;
     use ProductTrait;
 
-    protected $fillable = [];
+    protected $guarded  = [];
 
     protected $casts = [
         'is_active' => 'boolean',

@@ -8,6 +8,7 @@ use App\Modules\Products\Models\Product;
 use App\Modules\Categories\Models\Category;
 use App\Traits\ImageUpload;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class ProductRepository
 {
@@ -42,7 +43,9 @@ class ProductRepository
     }
     public function deleteProduct($id)
     {
-        return $this->product->where('id', $id)->delete();
+        $this->product->where('id', $id)->delete();
+
+        $this->deleteImagesDirectory('products/product_' . $id);
     }
 
     public function saveProduct($request, $product)
@@ -124,10 +127,6 @@ class ProductRepository
                 'image' => $newImageName,
             ];
         }
-
-
-        // if there is no main image then the first image will be the main image
-
 
         $product->productImages()->createMany($images);
     }

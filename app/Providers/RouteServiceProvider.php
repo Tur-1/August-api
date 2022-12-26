@@ -47,7 +47,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::prefix('api/admin')
                 ->middleware(['api'])
                 ->group(function ($route) {
-                    foreach (glob(base_path('routes\\Backend\\*.php')) as $fileName) {
+                    foreach (glob(base_path('routes\\Admin\\*.php')) as $fileName) {
                         require $fileName;
                     }
                 });

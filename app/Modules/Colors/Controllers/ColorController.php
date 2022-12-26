@@ -50,11 +50,12 @@ class ColorController extends Controller
     {
         $request->validated();
 
+
         $color = $this->colorService->updateColor($request, $id);
 
         return response()->success([
             'message' => 'Color has been updated successfully',
-            'color' => $color,
+            'color' =>   $color,
         ]);
     }
 
