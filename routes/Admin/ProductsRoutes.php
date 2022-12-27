@@ -26,4 +26,5 @@ Route::controller(ProductController::class)->group(function () {
 Route::controller(ProductImageController::class)->group(function () {
 
     Route::delete('/products/images/delete/{id}', 'destroyProductImage');
+    Route::delete('/products/images/update-main-image/{id}', 'updateProductMainImage');
 });

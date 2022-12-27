@@ -28,4 +28,16 @@ class ProductImageController extends Controller
 
         ]);
     }
+
+    public function updateProductMainImage($id)
+    {
+        if (is_null($id)) return;
+
+        $this->productImageService->updateProductMainImage($id);
+
+        return response()->success([
+            'message' => 'Product main image has been updated successfully',
+
+        ]);
+    }
 }

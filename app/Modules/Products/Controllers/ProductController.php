@@ -35,10 +35,8 @@ class ProductController extends Controller
         $this->productService->createProduct($request);
 
 
-
         return response()->success([
             'message' => 'Product has been created successfully',
-
 
         ]);
     }
@@ -60,10 +58,11 @@ class ProductController extends Controller
 
         $product =  $this->productService->updateProduct($request, $id);
 
+
         return response()->success([
             'message' => 'Product has been updated successfully',
             'product' => $product,
-            'sizes' => $request->sizes
+
         ]);
     }
 

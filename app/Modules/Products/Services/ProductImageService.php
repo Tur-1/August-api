@@ -17,4 +17,8 @@ class ProductImageService
     {
         return $this->productImageRepository->deleteProductImage($id);
     }
+    public function updateProductMainImage($id)
+    {
+        return $this->productImageRepository->updateProductMainImage($id);
+    }
 }

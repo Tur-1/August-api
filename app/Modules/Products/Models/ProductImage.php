@@ -19,6 +19,9 @@ class ProductImage extends Model
         'image',
         'is_main_image'
     ];
+    protected $casts = [
+        'is_main_image' => 'boolean',
+    ];
 
     protected function imageUrl(): Attribute
     {

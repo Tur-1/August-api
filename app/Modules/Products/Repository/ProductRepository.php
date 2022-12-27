@@ -67,8 +67,8 @@ class ProductRepository
         $product->sizes()->sync($sizeOptions);
         $this->storeCategories($product, $request->category_id);
 
-        if ($request->hasFile('images')) {
-            $this->storeProductImages($product, $request->file('images'));
+        if ($request->hasFile('productImages')) {
+            $this->storeProductImages($product, $request->file('productImages'), $request->mainImage);
         }
 
         return $product;
@@ -113,20 +113,34 @@ class ProductRepository
         return collect($sizeOptions)->sum('stock');
     }
 
-    private  function storeProductImages(Model $product, $productImages)
+    private  function storeProductImages(Model $product, $productImages, $mainImage = null)
     {
 
 
         $images = [];
         $imagesFolder = 'products/product_' . $product->id;
 
+        if (!is_null($mainImage)) {
+            $newImageName = $this->uploadImage($mainImage,  $imagesFolder);
+
+            $product->productImages()->create([
+                'image' => $newImageName,
+                'is_main_image' => true,
+            ]);
+        }
         foreach ($productImages as $image) {
 
             $newImageName = $this->uploadImage($image,  $imagesFolder);
             $images[] = [
                 'image' => $newImageName,
+
             ];
         }
+
+        if (is_null($mainImage)) { // if the main image is not present,  make the first image the main image
+            $images[0]['is_main_image'] = 1;
+        }
+
 
         $product->productImages()->createMany($images);
     }
