@@ -2,38 +2,48 @@
 
 namespace App\Modules\Products\Repository;
 
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Model;
-use App\Modules\Products\Models\Product;
 use App\Modules\Categories\Models\Category;
+use App\Modules\Products\Models\Product;
 use App\Traits\ImageUpload;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class ProductRepository
 {
     use ImageUpload;
 
+    private $imagesFolder = 'products/product_';
     private $product;
 
     public function __construct(Product $product)
     {
         $this->product = $product;
     }
+
     public function getAll($records)
     {
-        return $this->product->paginate($records);
-    }
-    public function createProduct($validatedRequest)
-    {
-        return $this->saveProduct($validatedRequest, $this->product);
+        return $this->product->withMainProductImage()->paginate($records);
     }
 
+    public function createProduct()
+    {
+        $product = new Product();
+
+        $product->save();
+    }
 
     public function getProduct($id)
     {
         return $this->product->with('sizes', 'categories', 'productImages')->find($id);
     }
+    public function publishProduct($id)
+    {
+        $product = $this->getProduct($id);
+        $product->update(['is_active' => true]);
+
+        return $product;
+    }
+
     public function updateProduct($validatedRequest, $id)
     {
         $product = $this->getProduct($id);
@@ -41,6 +51,7 @@ class ProductRepository
 
         return $product;
     }
+
     public function deleteProduct($id)
     {
         $this->product->where('id', $id)->delete();
@@ -59,7 +70,7 @@ class ProductRepository
         $product->price = $request->price;
         $product->shipping_cost = $request->shipping_cost;
         $product->name = Str::title($request->name);
-        $product->slug = $this->generateSlug($request->name,  $product->id);
+        $product->slug = $this->generateSlug($request->name, $product->id);
         $product->stock = $this->getProductStock($sizeOptions);
 
         $product->save();
@@ -67,18 +78,19 @@ class ProductRepository
         $product->sizes()->sync($sizeOptions);
         $this->storeCategories($product, $request->category_id);
 
-        if ($request->hasFile('productImages')) {
+        if ($request->hasFile('productImages') || $request->mainImage) {
             $this->storeProductImages($product, $request->file('productImages'), $request->mainImage);
         }
 
         return $product;
     }
+
     private function generateSlug($product_name, $product_id): string
     {
         $product_slug = Str::slug($product_name);
 
-        if (Product::where('slug',  $product_slug)->where('id', '!=', $product_id)->exists()) { // if exists ? add random strings to product slug 
-            $product_slug .=  '-' . Str::random(2) . '-' . rand(1, 100) . '-' . Str::random(1);
+        if (Product::where('slug', $product_slug)->where('id', '!=', $product_id)->exists()) { // if exists ? add random strings to product slug
+            $product_slug .= '-' . Str::random(2) . '-' . rand(1, 100) . '-' . Str::random(1);
         }
 
         return $product_slug;
@@ -86,10 +98,8 @@ class ProductRepository
 
     private function getSizeOptions($sizeOptionsRequest): array
     {
-
         $sizeOptions = [];
         foreach ($sizeOptionsRequest as $size) {
-
             $size = json_decode($size, true);
 
             $sizeOptions[$size['size_id']] = ['size_id' => $size['size_id'], 'stock' => $size['stock']];
@@ -97,10 +107,10 @@ class ProductRepository
 
         return $sizeOptions;
     }
-    private function storeCategories(Model $product,  $category_id): void
-    {
 
-        $category = Category::where("id",  $category_id)->first();
+    private function storeCategories(Model $product, $category_id): void
+    {
+        $category = Category::where('id', $category_id)->first();
         $parents_ids = $category['parents_ids'];
 
         $parents_ids[] = $category['id'];
@@ -108,40 +118,49 @@ class ProductRepository
 
         $product->categories()->sync($parents_ids);
     }
+
     private function getProductStock($sizeOptions)
     {
         return collect($sizeOptions)->sum('stock');
     }
 
-    private  function storeProductImages(Model $product, $productImages, $mainImage = null)
+    private function storeProductImages(Model $product, $productImages, $mainImage = null)
     {
-
-
         $images = [];
-        $imagesFolder = 'products/product_' . $product->id;
+
+        $imagesFolder = $this->getImagesFolder($product->id);
 
         if (!is_null($mainImage)) {
-            $newImageName = $this->uploadImage($mainImage,  $imagesFolder);
-
+            $newImageName = $this->uploadImage($mainImage, $imagesFolder);
+            if (is_null($productImages) || empty($productImages)) {
+                $product->productImages()->update(['is_main_image' => false]);
+            }
             $product->productImages()->create([
                 'image' => $newImageName,
                 'is_main_image' => true,
             ]);
         }
-        foreach ($productImages as $image) {
 
-            $newImageName = $this->uploadImage($image,  $imagesFolder);
-            $images[] = [
-                'image' => $newImageName,
+        if (!is_null($productImages) || !empty($productImages)) {
 
-            ];
+            foreach ($productImages as $image) {
+                $newImageName = $this->uploadImage($image, $imagesFolder);
+                $images[] = [
+                    'image' => $newImageName,
+                    'is_main_image' => false,
+                ];
+            }
+
+            if (is_null($mainImage)) { // if the main image is not present,  make the first image the main image
+                $images[0]['is_main_image'] = true;
+            }
+
+            $product->productImages()->createMany($images);
         }
+    }
 
-        if (is_null($mainImage)) { // if the main image is not present,  make the first image the main image
-            $images[0]['is_main_image'] = 1;
-        }
-
-
-        $product->productImages()->createMany($images);
+    private function getImagesFolder($productId)
+    {
+        return  $this->imagesFolder . $productId;
     }
 }

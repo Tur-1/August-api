@@ -20,6 +20,9 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/products', 'index');
     Route::post('/products/store', 'storeProduct');
     Route::post('/products/show/{id}', 'showProduct');
+
+    Route::post('/products/publish/{id}', 'publishProduct');
+
     Route::post('/products/update/{id}', 'updateProduct');
     Route::delete('/products/delete/{id}', 'destroyProduct');
 });

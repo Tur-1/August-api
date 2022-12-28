@@ -17,8 +17,8 @@ return new class() extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug');
+            $table->string('name')->nullable();
+            $table->string('slug')->nullable();
             $table->text('details')->nullable();
             $table->text('info_and_care')->nullable();
             $table->decimal('price', 6, 2)->nullable();
@@ -29,7 +29,7 @@ return new class() extends Migration
             $table->date('discount_expires_at')->nullable();
             $table->decimal('discounted_price', 6, 2)->nullable();
             $table->integer('stock')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(false);
             $table->foreignId('brand_id')->nullable()->constrained('brands')->nullOnDelete();
             $table->foreignId('color_id')->nullable()->constrained('colors')->nullOnDelete();
             $table->timestamps();

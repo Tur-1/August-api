@@ -16,21 +16,23 @@ class ProductShowResource extends JsonResource
     {
 
 
-        foreach ($this->whenLoaded('categories', $this->categories) as $key => $value) {
-            $section_id = $value['section_id'];
+        if (!is_null($this->categories)) {
+
+
+            foreach ($this->whenLoaded('categories', $this->categories) as $key => $value) {
+                $section_id = $value['section_id'];
+            }
+
+            $category =  collect($this->whenLoaded('categories', $this->categories))->last();
         }
-
-        $category =  collect($this->whenLoaded('categories', $this->categories))->last();
-
-
         return [
             'id' => $this->id,
             'name' => $this->name,
             'price' => $this->price,
             'sizes' => $this->whenLoaded('sizes', ProductSizeOptionsResource::collection($this->sizes)),
             'images' => $this->whenLoaded('productImages', ProductImagesResource::collection($this->productImages)),
-            'section_id' =>  $section_id,
-            'category_id' =>  $category->id,
+            'section_id' =>  $section_id ?? null,
+            'category_id' =>  $category?->id ?? null,
             'status' => $this->is_active,
             'brand_id' => $this->brand_id,
             'color_id' => $this->color_id,

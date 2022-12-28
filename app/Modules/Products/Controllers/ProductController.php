@@ -2,12 +2,13 @@
 
 namespace App\Modules\Products\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use App\Modules\Products\Services\ProductService;
 use App\Modules\Products\Requests\StoreProductRequest;
 use App\Modules\Products\Requests\UpdateProductRequest;
-use App\Modules\Products\Services\ProductService;
-use Illuminate\Support\Facades\Session;
+
 
 class ProductController extends Controller
 {
@@ -27,13 +28,12 @@ class ProductController extends Controller
     }
 
 
-    public function storeProduct(Request $request)
+    public function storeProduct()
     {
 
         // $request->validated();
 
-        $this->productService->createProduct($request);
-
+        $this->productService->createProduct();
 
         return response()->success([
             'message' => 'Product has been created successfully',
@@ -50,10 +50,19 @@ class ProductController extends Controller
             'product' => $product
         ]);
     }
+    public function publishProduct($id)
+    {
+        $this->productService->publishProduct($id);
 
+        return response()->success([
+            'message' => 'Product has been published successfully',
+        ]);
+    }
 
     public function updateProduct(UpdateProductRequest $request, $id)
     {
+
+
         // $request->validated();
 
         $product =  $this->productService->updateProduct($request, $id);
@@ -61,7 +70,7 @@ class ProductController extends Controller
 
         return response()->success([
             'message' => 'Product has been updated successfully',
-            'product' => $product,
+            'product' =>  $product,
 
         ]);
     }

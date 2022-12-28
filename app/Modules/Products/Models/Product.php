@@ -14,6 +14,10 @@ class Product extends Model
 
     protected $guarded  = [];
 
+
+    protected $appends = ['main_image_url'];
+
+
     protected $casts = [
         'is_active' => 'boolean',
 

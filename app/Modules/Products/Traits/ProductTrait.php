@@ -25,4 +25,13 @@ trait ProductTrait
     {
         return $this->hasMany(ProductImage::class, 'product_id');
     }
+
+    protected function mainImageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->main_image ?
+                config('app.url') .  Storage::url('images/products/product_' . $this->id . '/' . $this->main_image)
+                : null,
+        );
+    }
 }

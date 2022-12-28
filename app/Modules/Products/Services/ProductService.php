@@ -18,20 +18,25 @@ class ProductService
     {
         return ProductResource::collection($this->productRepository->getAll($records));
     }
-    public function createProduct($validatedRequest)
+    public function createProduct()
     {
-        return $this->productRepository->createProduct($validatedRequest);
+        return $this->productRepository->createProduct();
     }
     public function showProduct($id)
     {
 
         return ProductShowResource::make($this->productRepository->getProduct($id));
     }
+
     public function updateProduct($validatedRequest, $id)
     {
         $this->productRepository->updateProduct($validatedRequest, $id);
 
         return $this->showProduct($id);
+    }
+    public function publishProduct($id)
+    {
+        return $this->productRepository->publishProduct($id);
     }
     public function deleteProduct($id)
     {
