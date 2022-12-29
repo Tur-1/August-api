@@ -15,7 +15,7 @@ trait ImageUpload
 
 
     /**
-     * @return image name 
+     * @return string image name 
      */
     public function uploadImage($imageRequest, $Folder): string
     {
@@ -28,13 +28,14 @@ trait ImageUpload
         // upload image to server
         Storage::put($this->imagesPath . $Folder . '/' . $newImageName, $webpImage);
 
+
         return $newImageName;
     }
 
     public function generateUniqueImageName($imageOriginalName, $extension): string
     {
         $time = time();
-        $newImageName =   $time . '-' . Str::slug(explode('.', $imageOriginalName)[0], '_');
+        $newImageName =   $time . '-' . Str::slug(pathinfo($imageOriginalName, PATHINFO_FILENAME), '_');
         return $newImageName . '.' . $extension;
     }
 
