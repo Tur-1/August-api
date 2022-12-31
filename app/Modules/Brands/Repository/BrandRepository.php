@@ -12,9 +12,9 @@ class BrandRepository
     private $imageFolder = 'brands';
     private $brand;
 
-    public function __construct(Brand $brand)
+    public function __construct()
     {
-        $this->brand = $brand;
+        $this->brand = new Brand();
     }
 
     public function getAll($records)
@@ -25,7 +25,10 @@ class BrandRepository
     {
         return $this->brand->get();
     }
-
+    public function getBrandsByProductsCategory($category_id)
+    {
+        return $this->brand->whereHasProductsWithCount($category_id)->get();
+    }
     public function saveBrand($validatedRequest, Brand $brand = null)
     {
         if (is_null($brand)) {

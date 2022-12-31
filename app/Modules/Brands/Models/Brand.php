@@ -2,11 +2,12 @@
 
 namespace App\Modules\Brands\Models;
 
-use App\Modules\Brands\EloquentBuilders\BrandBuilder;
-use App\Modules\Brands\Traits\BrandTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
- 
+use App\Modules\Products\Models\Product;
+use App\Modules\Brands\Traits\BrandTrait;
+use App\Modules\Brands\EloquentBuilders\BrandBuilder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Brand extends Model
 {
     use HasFactory;
@@ -19,4 +20,8 @@ class Brand extends Model
         return new BrandBuilder($query);
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class)->select('id', 'brand_id');
+    }
 }

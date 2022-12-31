@@ -1,7 +1,7 @@
 <?php
 
+use App\Pages\ProductDetailPage\Controllers\ProductDetailPageController;
 use Illuminate\Support\Facades\Route;
-use App\Pages\Frontend\ProductDetail\Http\Controllers\ProductDetailPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +17,9 @@ use App\Pages\Frontend\ProductDetail\Http\Controllers\ProductDetailPageControlle
 
 Route::controller(ProductDetailPageController::class)->group(function () {
 
-    Route::get('/product-detail/{product_slug}', 'index')->name('productDetailPage');
+    Route::get('/product-detail/{product_slug}', 'getProductDetail')->name('productDetailPage');
 
     Route::post('/product-detail/add-to-cart', 'addToShoppingCart')->name('addToShoppingCart');
 
-    Route::post('/product-detail/{product_slug}/comment', 'sendComment')->name('sendComment');
+    Route::post('/product-detail/{product_slug}/comment', 'addComment')->name('addComment');
 });

@@ -19,9 +19,9 @@ class CategoryController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    public function index(Request $request)
+    public function getAllSectionsWithCategories(Request $request)
     {
-        return $this->categoryService->getAllCategories($request->records);
+        return $this->categoryService->getAllSectionsWithCategories($request->records);
     }
 
     public function getCategoriesBySection($section_id)

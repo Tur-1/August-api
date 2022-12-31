@@ -19,4 +19,11 @@ trait ProductTrait
                 : null,
         );
     }
+    protected function brandImage(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) =>
+            config('app.url') .  Storage::url('images/brands/' . $value),
+        );
+    }
 }

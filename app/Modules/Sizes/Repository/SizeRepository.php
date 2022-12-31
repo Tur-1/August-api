@@ -8,14 +8,20 @@ class SizeRepository
 {
     private $size;
 
-    public function __construct(Size $size)
+
+    public function __construct()
     {
-        $this->size = $size;
+
+        $this->size = new Size();
     }
 
     public function getAll($records)
     {
         return $this->size->paginate($records);
+    }
+    public function getSizeOptionsByProductsCategory($category_id)
+    {
+        return $this->size->whereHasProductsWithCount($category_id)->get();
     }
     public function getAllSizes()
     {

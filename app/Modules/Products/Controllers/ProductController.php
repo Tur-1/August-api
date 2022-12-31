@@ -31,8 +31,6 @@ class ProductController extends Controller
     public function storeProduct()
     {
 
-        // $request->validated();
-
         $this->productService->createProduct();
 
         return response()->success([
@@ -63,7 +61,7 @@ class ProductController extends Controller
     {
 
 
-        // $request->validated();
+        $validted =  $request->validated();
 
         $product =  $this->productService->updateProduct($request, $id);
 

@@ -29,10 +29,7 @@ class AppServiceProvider extends ServiceProvider
         JsonResource::withoutWrapping();
 
         Response::macro('success', function ($data) {
-            return response()->json([
-                'success' => true,
-                'data' => $data,
-            ]);
+            return response()->json($data, 200);
         });
 
         Response::macro('error', function ($message, $status = 400) {

@@ -19,12 +19,12 @@ class CategoriesResource extends JsonResource
             'id' => $this['id'],
             'name' => $this['name'],
             'slug' => $this['slug'],
-            'section_name' => $this->section?->name,
-            'section_id' => $this['section_id'],
-            'is_section' => $this['is_section'],
-            'parent_id' => $this['parent_id'],
-            'image_url' => $this['image_url'],
-            'children' => $this['children'] ? CategoriesResource::collection($this['children']) : [],
+            'section_name'  => $this->section?->name,
+            'section_id'   => $this['section_id'],
+            'is_section'    => $this['is_section'],
+            'parent_id'  => $this['parent_id'],
+            'image_url'  => $this['image_url'],
+            'children'  => $this['children'] ? CategoriesResource::collection($this['children']) : [],
         ];
     }
 }

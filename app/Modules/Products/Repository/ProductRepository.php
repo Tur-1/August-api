@@ -15,23 +15,44 @@ class ProductRepository
     private $imagesFolder = 'products/product_';
     private $product;
 
-    public function __construct(Product $product)
+    public function __construct()
     {
-        $this->product = $product;
+        $this->product = new Product();
     }
 
     public function getAll($records)
     {
         return $this->product->withMainProductImage()->paginate($records);
     }
-
+    public function getShopPageProducts($category_id)
+    {
+        return $this->product
+            ->whereCategory($category_id)
+            ->withMainProductImage()
+            ->active()
+            ->latest()
+            ->paginate();
+    }
+    public function getProductDetail($productSlug)
+    {
+        return $this->product
+            ->where('slug', $productSlug)
+            ->with(['productImages:product_id,image', 'stockSizes', 'categories', 'reviews'])
+            ->withBrandName()
+            ->withBrandImage()
+            ->active()
+            ->first();
+    }
     public function createProduct()
     {
         $product = new Product();
 
         $product->save();
     }
-
+    public function findProductBySlug($slug)
+    {
+        return $this->product->where('slug', $slug)->first();
+    }
     public function getProduct($id)
     {
         return $this->product->with('sizes', 'categories', 'productImages')->find($id);

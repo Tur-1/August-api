@@ -16,8 +16,22 @@ class CategoryRepository
     {
         return Category::sections()->get();
     }
+    public function getCategoryWithChildren()
+    {
+        return Category::sections()->get();
+    }
+    public function getCategoriesTree()
+    {
+        return Category::tree();
+    }
 
-    public function getAllCategories($records)
+    public function getSectionsWithCategories()
+    {
+        return Category::sections()->get();
+    }
+
+
+    public function getAllSectionsWithCategories($records)
     {
         return Category::withSection()
             ->orderBySection()
@@ -43,7 +57,7 @@ class CategoryRepository
         }
 
         $category->name = $validatedRequest['name'];
-        $category->slug = $validatedRequest['name'];
+        $category->slug = Str::slug($validatedRequest['name'], '_');
         $category->is_section = true;
 
         if ($validatedRequest->hasFile('image')) {
@@ -72,7 +86,7 @@ class CategoryRepository
         $category->parents_ids = $parentCategory['ids'];
         $category->section_id = $validatedRequest['section_id'];
         $category->parent_id = $parentId;
-        $category->slug = $parentCategory['slug'].'-'.Str::slug($validatedRequest['name'], '_');
+        $category->slug = $parentCategory['slug'] . '-' . Str::slug($validatedRequest['name'], '_');
 
         $category->name = $validatedRequest['name'];
 
@@ -109,6 +123,6 @@ class CategoryRepository
 
     private function getCategoryOldImagePath($image)
     {
-        return $this->imageFolder.'/'.$image;
+        return $this->imageFolder . '/' . $image;
     }
 }

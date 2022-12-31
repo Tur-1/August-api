@@ -13,9 +13,10 @@ class ColorRepository
     private $imageFolder = 'colors';
     private $color;
 
-    public function __construct(Color $color)
+    public function __construct()
     {
-        $this->color = $color;
+
+        $this->color = new Color();
     }
 
     public function getAll($records)
@@ -25,6 +26,10 @@ class ColorRepository
     public function getAllColors()
     {
         return $this->color->get();
+    }
+    public function getColorsByProductsCategory($category_id)
+    {
+        return $this->color->whereHasProductsWithCount($category_id)->get();
     }
     public function saveColor($validatedRequest, Color $color = null)
     {

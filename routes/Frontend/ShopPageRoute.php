@@ -1,6 +1,6 @@
 <?php
 
-use App\Pages\Frontend\ShopPage\Controllers\ShopPageController;
+use App\Pages\ShopPage\Controllers\ShopPageController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(ShopPageController::class)->name('shop.')->group(function () {
 
     Route::get('/get-all-categories', 'getAllCategories')->name('getAllCategories');
+    Route::get('/get-sections', 'getSections');
 
     Route::get('/shop/{category_slug?}', 'categoryPage')->name('categoryPage');
 });

@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Categories\Controllers\CategoryController;
+use App\Modules\Categories\Controllers\FrontEndCategoryController;
 
 use Illuminate\Support\Facades\Route;
 /*
@@ -17,15 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(CategoryController::class)->group(function () {
 
-    Route::get('/categories', 'index');
+    Route::get('/categories', 'getAllSectionsWithCategories');
+
     Route::get('/categories/sections', 'getSections');
 
     Route::get('/categories/sections/{section_id}', 'getCategoriesBySection');
 
-
     Route::post('/categories/section/store', 'storeNewSection');
-    Route::post('/categories/section/update/{id}', 'updateSection');
 
+    Route::post('/categories/section/update/{id}', 'updateSection');
 
     Route::post('/categories/store', 'storeCategory');
     Route::post('/categories/show/{id}', 'showCategory');

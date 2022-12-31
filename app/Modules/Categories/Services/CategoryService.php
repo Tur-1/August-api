@@ -14,9 +14,9 @@ class CategoryService
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function getAllCategories($records)
+    public function getAllSectionsWithCategories($records)
     {
-        return CategoriesResource::collection($this->categoryRepository->getAllCategories($records));
+        return CategoriesResource::collection($this->categoryRepository->getAllSectionsWithCategories($records));
     }
 
     public function getSections()
