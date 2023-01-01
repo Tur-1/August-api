@@ -22,13 +22,20 @@ class ProductRepository
 
     public function getAll($records)
     {
-        return $this->product->withMainProductImage()->paginate($records);
+
+
+        return $this->product->withMainProductImage()->latest()->paginate(50);
+    }
+    public function getRelatedProducts($productId, $category_ids)
+    {
+        return $this->product->withRelatedProducts($productId, $category_ids)->get();
     }
     public function getShopPageProducts($category_id)
     {
         return $this->product
             ->whereCategory($category_id)
             ->withMainProductImage()
+            ->withFilters()
             ->active()
             ->latest()
             ->paginate();
@@ -90,6 +97,10 @@ class ProductRepository
         $product->color_id = $request->color_id;
         $product->price = $request->price;
         $product->shipping_cost = $request->shipping_cost;
+        $product->discount_type = $request->discount_type;
+        $product->discount_amount = $request->discount_amount;
+        $product->discount_start_at = $request->discount_start_at;
+        $product->discount_expires_at = $request->discount_expires_at;
         $product->name = Str::title($request->name);
         $product->slug = $this->generateSlug($request->name, $product->id);
         $product->stock = $this->getProductStock($sizeOptions);
@@ -121,7 +132,6 @@ class ProductRepository
     {
         $sizeOptions = [];
         foreach ($sizeOptionsRequest as $size) {
-            $size = json_decode($size, true);
 
             $sizeOptions[$size['size_id']] = ['size_id' => $size['size_id'], 'stock' => $size['stock']];
         }

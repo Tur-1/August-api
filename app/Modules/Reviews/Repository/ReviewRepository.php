@@ -18,7 +18,10 @@ class ReviewRepository
     }
     public function getAll($records)
     {
-        return $this->review->paginate($records);
+        return $this->review
+            ->with('user', 'product', 'reply')->whereNull('review_id')
+            ->latest()
+            ->paginate($records);
     }
     public function createReview($comment, $product_id)
     {

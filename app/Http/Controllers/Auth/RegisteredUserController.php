@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User\User;
-
 use Illuminate\Http\Request;
+
 use Illuminate\Validation\Rules;
+use App\Modules\Users\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;

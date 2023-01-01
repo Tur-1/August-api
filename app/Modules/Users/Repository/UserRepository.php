@@ -8,9 +8,9 @@ class UserRepository
 {
     private $user;
 
-    public function __construct(User $user)
+    public function __construct()
     {
-        $this->user = $user;
+        $this->user = new User();
     }
 
     public function getAllUsers($request)
@@ -27,6 +27,10 @@ class UserRepository
         $user->permissions()->sync($validatedRequest['permissionsIds']);
     }
 
+    public function getUserWishlist()
+    {
+        return auth()->check() ? auth()->user()->wishlist()->pluck('product_id')->toArray() : [];
+    }
     public function getUser($id)
     {
         return $this->user->find($id);

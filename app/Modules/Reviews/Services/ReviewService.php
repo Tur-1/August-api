@@ -3,6 +3,7 @@
 namespace App\Modules\Reviews\Services;
 
 use App\Modules\Reviews\Repository\ReviewRepository;
+use App\Modules\Reviews\Resources\ReviewResource;
 
 class ReviewService
 {
@@ -14,7 +15,7 @@ class ReviewService
     }
     public function getAll($records = 12)
     {
-        return $this->reviewRepository->getAll($records);
+        return ReviewResource::collection($this->reviewRepository->getAll($records));
     }
     public function createReview($comment, $product_id)
     {

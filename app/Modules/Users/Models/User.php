@@ -5,13 +5,14 @@ namespace App\Modules\Users\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Address\Address;
-use App\Modules\Roles\Models\Permission;
-use App\Modules\Roles\Models\Role;
-use App\Modules\Users\EloquentBuilders\UserBuilder;
 use Laravel\Sanctum\HasApiTokens;
+use App\Modules\Roles\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use App\Modules\Products\Models\Product;
+use App\Modules\Roles\Models\Permission;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Modules\Users\EloquentBuilders\UserBuilder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -69,7 +70,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Address::class);
     }
-
+    public function wishlistHas($product_id)
+    {
+        return  $this->wishlist()
+            ->where('product_id', $product_id)
+            ->exists('product_id');
+    }
+    public function wishlist()
+    {
+        return $this->belongsToMany(Product::class, 'wish_lists');
+    }
     public function role()
     {
         return $this->belongsTo(Role::class);

@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Exceptions\PageNotFoundException;
-use App\Modules\Users\Models\User;
-use App\Pages\ShopPage\Services\ShopPageService;
 use App\Pages\ProductDetailPage\Services\ProductDetailPageService;
 
 class ProductDetailPageController extends Controller
@@ -26,6 +24,7 @@ class ProductDetailPageController extends Controller
                 'categories' => $productService->getCategories(),
                 'images' => $productService->getProductImages(),
                 'reviews' => $productService->getProductReviews(),
+                'relatedProducts' => $productService->getRelatedProducts(),
 
             ]);
         } catch (PageNotFoundException $ex) {

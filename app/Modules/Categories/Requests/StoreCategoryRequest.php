@@ -29,7 +29,7 @@ class StoreCategoryRequest extends FormRequest
                 Rule::unique('categories', 'name')->where('section_id', $this->section_id)
             ],
             'section_id' => 'required',
-            'image' => ['file', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5000'],
+            'image' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5000'],
             'parent_id' => 'nullable',
 
         ];

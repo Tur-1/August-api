@@ -16,7 +16,18 @@ class ReviewResource extends JsonResource
     {
 
         return [
-         //
+            'id' =>  $this->id,
+            'user' => [
+                'name' => $this->user->name,
+                'gender' => $this->user->gender
+            ],
+            'product_id' => $this->product_id,
+            'product_image' => $this->product->main_image_url,
+            'review_id' => $this->review_id,
+            'is_read' => $this->is_read,
+            'comment' => $this->comment,
+            'date' =>  $this->created_at->diffForHumans(),
+            'reply' => ReviewResource::make($this->whenLoaded('reply')),
         ];
     }
 }

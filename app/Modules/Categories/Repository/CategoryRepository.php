@@ -27,7 +27,7 @@ class CategoryRepository
 
     public function getSectionsWithCategories()
     {
-        return Category::sections()->get();
+        return Category::tree()->where('is_section', true);
     }
 
 

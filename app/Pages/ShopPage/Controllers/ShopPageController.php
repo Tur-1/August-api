@@ -18,9 +18,13 @@ class ShopPageController extends Controller
     }
     public function getAllCategories(ShopPageService $shopPageService)
     {
+        return  response()->success([
+            'sections' =>  $shopPageService->getAllCategories()
+        ]);
     }
     public function categoryPage($slug, ShopPageService $shopPageService)
     {
+
 
         try {
 

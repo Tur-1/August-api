@@ -28,7 +28,7 @@ class StoreCategorySectionRequest extends FormRequest
                 'max:60',
                 Rule::unique('categories', 'name')
             ],
-            'image' => ['file', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5000']
+            'image' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5000']
 
         ];
 

@@ -25,21 +25,27 @@ class ProductShowResource extends JsonResource
 
             $category =  collect($this->whenLoaded('categories', $this->categories))->last();
         }
+
+
         return [
-            $this->id ?  'id' : ' ' => $this->id,
-            $this->name ?  'name' : ' ' => $this->name,
-            $this->price ?  'price' : ' ' => $this->price,
-            'sizes' => $this->whenLoaded('sizes', ProductSizeOptionsResource::collection($this->sizes)),
+            'id'  => $this->id ?? '',
+            'name'  => $this->name  ?? '',
+            'price'  => $this->price  ?? '',
+            'sizes' => ProductSizeOptionsResource::collection($this->sizes),
             'images'  => $this->whenLoaded('productImages', ProductImagesResource::collection($this->productImages)),
-            $this->section_id ? 'section_id' : ' ' =>  $section_id ?? null,
-            $this->category_id ? 'category_id' : ' ' =>  $category?->id ?? null,
-            $this->is_active ? 'status' : ' ' => $this->is_active,
-            $this->brand_id ? 'brand_id' : ' ' => $this->brand_id,
-            $this->color_id ? 'color_id' : ' ' => $this->color_id,
-            $this->brand_id ? 'brand_id' : ' ' => $this->brand_id,
-            $this->details ? 'details' : ' ' => $this->details,
-            $this->info_and_care ? 'info_and_care' : ' ' => $this->info_and_care,
-            $this->shipping_cost ? 'shipping_cost' : ' ' => $this->shipping_cost,
+            'section_id'  =>  $section_id ??   '',
+            'category_id'  =>  $category?->id ??  '',
+            'status'  => $this->is_active ?? '',
+            'brand_id'  => $this->brand_id ?? '',
+            'color_id'  => $this->color_id ?? '',
+            'brand_id'  => $this->brand_id ?? '',
+            'details'  => $this->details ?? '',
+            'info_and_care'  => $this->info_and_care ?? '',
+            'shipping_cost'  => $this->shipping_cost ?? '',
+            'discount_amount' => $this->discount_amount ?? '',
+            'discount_type' => $this->discount_type ?? '',
+            'discount_start_at' => $this->discount_start_at ?? '',
+            'discount_expires_at' => $this->discount_expires_at ?? '',
         ];
     }
 }

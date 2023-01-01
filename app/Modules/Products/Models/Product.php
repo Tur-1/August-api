@@ -2,15 +2,18 @@
 
 namespace App\Modules\Products\Models;
 
-use App\Modules\Products\EloquentBuilders\ProductBuilder;
-use App\Modules\Products\Traits\ProductTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use App\Modules\Sizes\Models\Size;
+use App\Modules\Brands\Models\Brand;
+use App\Modules\Colors\Models\Color;
+use App\Modules\Reviews\Models\Review;
+use Illuminate\Database\Eloquent\Model;
 use App\Modules\Categories\Models\Category;
 use App\Modules\Products\Models\ProductImage;
-use App\Modules\Reviews\Models\Review;
+use App\Modules\Products\Traits\ProductTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Modules\Products\EloquentBuilders\ProductBuilder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
@@ -59,5 +62,13 @@ class Product extends Model
             ->with('user', 'reply')
             ->select('id', 'comment', 'user_id', 'product_id', 'created_at', 'review_id')
             ->latest();;
+    }
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(Brand::class);
+    }
+    public function color(): BelongsTo
+    {
+        return $this->belongsTo(Color::class);
     }
 }

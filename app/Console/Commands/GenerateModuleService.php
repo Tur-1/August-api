@@ -20,7 +20,7 @@ class GenerateModuleService
 
     public function excute($argumentName)
     {
-        if (!$this->files->exists($this->modulePath.$argumentName)) {
+        if (!$this->files->exists($this->modulePath . $argumentName)) {
             foreach ($this->getStubsFilesPath($argumentName) as $key => $filePath) {
                 $folderName = $this->getFolderName($filePath);
 
@@ -55,9 +55,9 @@ class GenerateModuleService
             $migrtionFileContents = $this->getSourceFile($argumentName, $migrtionStubFile, 'Database\\');
             $this->files->put($migrtionfull_path, $migrtionFileContents);
 
-            return ['message' => 'Module : '.$argumentName.' created successfully.', 'success' => true];
+            return ['message' => 'Module : ' . $argumentName . ' created successfully.', 'success' => true];
         } else {
-            return ['message' => 'Module : '.$argumentName.' already exits !', 'success' => false];
+            return ['message' => 'Module : ' . $argumentName . ' already exits !', 'success' => false];
         }
     }
 
@@ -79,19 +79,19 @@ class GenerateModuleService
 
     private function getFileFullPath($argumentName, $stubFolder, $className)
     {
-        return 'App\Modules\\'.$argumentName.'\\'
-        .$this->getStubFolder($stubFolder).'\\'
-        .$className;
+        return 'App\Modules\\' . $argumentName . '\\'
+            . $this->getStubFolder($stubFolder) . '\\'
+            . $className;
     }
 
     private function getRouteFileFullPath($argumentName)
     {
-        return base_path('routes\\Backend\\').$argumentName.'Routes.php';
+        return base_path('routes\\Admin\\') . $argumentName . 'Routes.php';
     }
 
     private function getMigrtionFileFullPath($argumentName)
     {
-        return 'App\Modules\\'.$argumentName.'\\Database\\'.date('Y_m_d_His').'_create_'.Str::lower($argumentName).'_table.php';
+        return 'App\Modules\\' . $argumentName . '\\Database\\' . date('Y_m_d_His') . '_create_' . Str::lower($argumentName) . '_table.php';
     }
 
     public function getSingularFolderName($name)
@@ -113,16 +113,16 @@ class GenerateModuleService
     private function getSourceFile($argumentName, $stub, $folder)
     {
         $vars = [
-        'namespace' => 'App\Modules\\'.$argumentName.'\\'.$folder,
-        'Class_Name' => $this->getSingularClassName($argumentName),
-        'ModulePath' => 'App\Modules\\'.$argumentName,
-        'Model' => $this->getSingularClassName($argumentName),
-        'modelVariable' => Str::camel($this->getSingularClassName($argumentName)),
-        'Controller_Name' => $this->getSingularClassName($argumentName),
-        'Module' => Str::lower($argumentName),
-        'table_name' => Str::lower($argumentName),
-        'database_file_name' => date('Y_m_d').'_'.time().'_'.Str::lower($argumentName),
-       ];
+            'namespace' => 'App\Modules\\' . $argumentName . '\\' . $folder,
+            'Class_Name' => $this->getSingularClassName($argumentName),
+            'ModulePath' => 'App\Modules\\' . $argumentName,
+            'Model' => $this->getSingularClassName($argumentName),
+            'modelVariable' => Str::camel($this->getSingularClassName($argumentName)),
+            'Controller_Name' => $this->getSingularClassName($argumentName),
+            'Module' => Str::lower($argumentName),
+            'table_name' => Str::lower($argumentName),
+            'database_file_name' => date('Y_m_d') . '_' . time() . '_' . Str::lower($argumentName),
+        ];
 
         return $this->getStubContent($stub, $vars);
     }
@@ -132,7 +132,7 @@ class GenerateModuleService
         $contents = file_get_contents($stub);
 
         foreach ($vars as $search => $replace) {
-            $contents = str_replace('{'.$search.'}', $replace, $contents);
+            $contents = str_replace('{' . $search . '}', $replace, $contents);
         }
 
         return $contents;

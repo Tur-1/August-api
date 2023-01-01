@@ -11,6 +11,7 @@ use App\Pages\ProductDetailPage\Resources\ProductDetailImagesResource;
 use App\Pages\ProductDetailPage\Resources\ProductDetailCategoriesResource;
 use App\Pages\ProductDetailPage\Resources\ProductDetailReviewsResource;
 use App\Pages\ProductDetailPage\Resources\ProductDetailSizeOptionsResource;
+use App\Pages\ShopPage\Resources\ProductsListResource;
 
 class  ProductDetailPageService
 {
@@ -41,6 +42,15 @@ class  ProductDetailPageService
         return  ProductDetailSizeOptionsResource::collection($this->productDetail->stockSizes);
     }
 
+    public function getRelatedProducts()
+    {
+
+        return ProductsListResource::collection((new ProductRepository())
+            ->getRelatedProducts(
+                $this->productDetail->id,
+                $this->productDetail->categories->pluck('id')->toArray()
+            ));
+    }
     public function getProductImages()
     {
         return  ProductDetailImagesResource::collection($this->productDetail->productImages);

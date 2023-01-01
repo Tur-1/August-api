@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Pages\Frontend\Wishlist\Http\Controllers\WishlistPageController;
+use App\Pages\WishlistPage\Controllers\WishlistPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +17,7 @@ use App\Pages\Frontend\Wishlist\Http\Controllers\WishlistPageController;
 
 Route::controller(WishlistPageController::class)->group(function () {
 
-    Route::get('/wishlist', 'index')->middleware('auth')->name('wishlistPage');
+    Route::get('/wishlist', 'getUserWishlist')->middleware('auth')->name('wishlistPage');
 
-    Route::post('/add-to-wishlist', 'addToWishlist')->name('addToWishlist');
+    Route::post('/wishlist/{productId}/store', 'addToWishlist')->name('addToWishlist');
 });

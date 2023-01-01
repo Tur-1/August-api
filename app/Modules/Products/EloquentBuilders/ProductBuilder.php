@@ -5,9 +5,12 @@ namespace App\Modules\Products\EloquentBuilders;
 use App\Modules\Brands\Models\Brand;
 use Illuminate\Database\Eloquent\Builder;
 use App\Modules\Products\Models\ProductImage;
+use App\Modules\Products\Traits\ProductFilterTrait;
 
 class ProductBuilder extends Builder
 {
+    use ProductFilterTrait;
+
     public function withMainProductImage(): self
     {
         return $this->addSelect([
@@ -39,5 +42,27 @@ class ProductBuilder extends Builder
     public function active(): self
     {
         return $this->where('is_active', true);
+    }
+    public function withFilters()
+    {
+
+        return $this->when(request()->has('brand'), fn ($query) => $this->filterByBrands($query))
+            ->when(request()->has('color'), fn ($query) => $this->filterByColors($query))
+            ->when(request()->has('size'), fn ($query) => $this->filterBySizeOptions($query))
+            ->when(request()->has('price'), fn ($query) => $this->filterByPrice($query))
+            ->when(request()->has('sort'), fn ($query) => $this->filterBySorting($query))
+            ->when(request()->has('status'), fn ($query) => $this->filterByStatus($query));
+    }
+    public function withRelatedProducts($productId, $category_ids): self
+    {
+        return $this->where('id', '!=', $productId)
+            ->whereHas('categories', function ($query) use ($category_ids) {
+                $query->whereIn('id', $category_ids);
+            })
+            ->withMainProductImage()
+            ->withBrandName()
+            ->active()
+            ->inRandomOrder()
+            ->limit(20);
     }
 }

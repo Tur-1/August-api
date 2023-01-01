@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use App\Modules\Categories\Resources\CategoriesResource;
 
-class ShopPageCategoryResource extends JsonResource
+class SectionsResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -23,10 +23,6 @@ class ShopPageCategoryResource extends JsonResource
             'id' => $this['id'],
             'name' => $this['name'],
             'slug' => $this['slug'],
-            'parent_id'  => $this['parent_id'],
-            'image_url'  => $this['image_url'],
-            'children'  => $this['children'] ? ShopPageCategoryResource::collection($this['children']) : [],
-
         ];
     }
 }

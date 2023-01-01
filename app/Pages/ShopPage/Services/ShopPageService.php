@@ -36,6 +36,10 @@ class  ShopPageService
         return SectionsResource::collection($this->categoryRepository->getSections());
     }
 
+    public function getAllCategories()
+    {
+        return ShopPageCategoryResource::collection($this->categoryRepository->getSectionsWithCategories());
+    }
     public function getCategory($slug)
     {
 
