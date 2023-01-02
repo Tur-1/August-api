@@ -1,7 +1,7 @@
 <?php
 
+use App\Pages\MyAccountPage\Controllers\MyAccountPageController;
 use Illuminate\Support\Facades\Route;
-use App\Pages\Frontend\MyAccountPage\Controllers\MyAccountPageController;
 
 
 // account page
@@ -9,9 +9,8 @@ use App\Pages\Frontend\MyAccountPage\Controllers\MyAccountPageController;
 Route::middleware(['auth:sanctum'])->controller(MyAccountPageController::class)->group(function () {
 
 
-    Route::get('/my-account/get-user-info', 'getUserInformation');
+    Route::get('/my-account', 'index');
 
-    Route::get('/my-account/get-user-addresses', 'getUserAddresses');
 
     // update account information
     Route::post('/my-account/update-info', 'updateAccountInformation');

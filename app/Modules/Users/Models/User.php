@@ -4,13 +4,13 @@ namespace App\Modules\Users\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Models\Address\Address;
 use Laravel\Sanctum\HasApiTokens;
 use App\Modules\Roles\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Modules\Products\Models\Product;
 use App\Modules\Roles\Models\Permission;
 use Illuminate\Notifications\Notifiable;
+use App\Modules\Addresses\Models\Address;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Modules\Users\EloquentBuilders\UserBuilder;
 use Illuminate\Database\Eloquent\Relations\HasMany;

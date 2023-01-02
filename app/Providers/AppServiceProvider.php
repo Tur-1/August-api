@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Modules\Users\Repository\UserRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
 
@@ -55,7 +56,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('cartCounter', function ($app) {
 
             $cartCounter = 0;
-            if (!Route::is('admin.*')) {
+            if (!Route::is('admin.*') && Auth::check()) {
+
                 $cartCounter = (new UserRepository())->getCartProductsCount();
             }
             return $cartCounter;

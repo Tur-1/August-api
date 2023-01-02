@@ -67,7 +67,7 @@ class  ShoppingCartPageService
             'shipmentFees' =>  $this->getShipmentFees(),
             'subTotal' => $this->getCartSubTotal(),
             'total' =>    $this->getCartTotal(),
-
+            'coupon' => null,
         ];
 
 

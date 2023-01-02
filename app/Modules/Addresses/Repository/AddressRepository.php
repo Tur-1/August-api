@@ -3,24 +3,33 @@
 namespace App\Modules\Addresses\Repository;
 
 use App\Modules\Addresses\Models\Address;
+use App\Modules\Addresses\Resources\AddressResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 
 class AddressRepository
 {
     private $address;
+    public $userAddresses;
 
-    public function __construct(Address $address)
+    public function __construct()
     {
-        $this->address =$address;
+
+        $this->address = new Address();
     }
     public function getAll($records)
     {
         return $this->address->paginate($records);
     }
+
+    public function getUserAddresses()
+    {
+        $this->userAddresses = auth()->user()->addresses;
+        return $this->userAddresses;
+    }
     public function createAddress($validatedRequest)
     {
-        return $this->address->create($validatedRequest);
+        return auth()->user()->addresses()->create($validatedRequest);
     }
     public function getAddress($id)
     {
@@ -34,6 +43,7 @@ class AddressRepository
     }
     public function deleteAddress($id)
     {
-        return $this->address->where('id', $id)->delete();
+        $address = $this->getAddress($id);
+        return $address->delete();
     }
 }

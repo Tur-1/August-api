@@ -4,10 +4,10 @@ namespace App\Pages\MyAccountPage\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Pages\Frontend\MyAccountPage\Services\MyAccountPageService;
-use App\Pages\Frontend\MyAccountPage\Requests\StoreUserAddressRequest;
-use App\Pages\Frontend\MyAccountPage\Requests\StoreAccountInformationRequest;
-use App\Pages\Frontend\MyAccountPage\Requests\UpdateAccountPasswordRequest;
+use App\Pages\MyAccountPage\Services\MyAccountPageService;
+use App\Pages\MyAccountPage\Requests\StoreUserAddressRequest;
+use App\Pages\MyAccountPage\Requests\UpdateAccountPasswordRequest;
+use App\Pages\MyAccountPage\Requests\StoreAccountInformationRequest;
 
 class MyAccountPageController extends Controller
 {
@@ -19,16 +19,15 @@ class MyAccountPageController extends Controller
         $this->myAccountService =  $myAccountPageService;
     }
 
-    public function getUserInformation()
+    public function index()
     {
 
-        return response()->success($this->myAccountService->getUserInformation());
+        return response()->success([
+            'userAddresses' => $this->myAccountService->getUserAddresses(),
+            'userInfo' => $this->myAccountService->getUserInformation(),
+        ]);
     }
-    public function getUserAddresses()
-    {
 
-        return response()->success($this->myAccountService->getUserAddresses());
-    }
 
     public function updateAccountInformation(StoreAccountInformationRequest $request)
     {
@@ -69,9 +68,10 @@ class MyAccountPageController extends Controller
     public function storeNewAddress(StoreUserAddressRequest $request)
     {
 
-        $this->myAccountService->createAddress($request->validated());
+        $address = $this->myAccountService->createAddress($request->validated());
 
         return   response()->success([
+            'address' => $address,
             'message' => 'new address has been added successfully',
         ]);
     }
@@ -79,23 +79,18 @@ class MyAccountPageController extends Controller
     public function updateUserAddress(StoreUserAddressRequest $request)
     {
 
-        try {
-            $this->myAccountService->updateAddress($request->validated(), $request['address_id']);
-        } catch (\Exception $ex) {
-            return  response()->error('Address Not Found', 404);
-        }
+        $this->myAccountService->updateAddress($request->validated(), $request['address_id']);
+
 
         return  response()->success([
+            'userAddresses' => $this->myAccountService->getUserAddresses(),
             'message' => 'address has been updated successfully'
         ]);
     }
     public function destroyUserAddress($address_id)
     {
-        try {
-            $this->myAccountService->destroyUserAddress($address_id);
-        } catch (\Exception $ex) {
-            return  response()->error('Address Not Found', 404);
-        }
+
+        $this->myAccountService->destroyUserAddress($address_id);
 
         return  response()->success([
             'message' => 'address has been deleted successfully',

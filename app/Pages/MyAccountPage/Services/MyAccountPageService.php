@@ -4,9 +4,9 @@ namespace App\Pages\MyAccountPage\Services;
 
 
 use Exception;
-use App\Models\Address\Repository\AddressRepository;
-use App\Pages\Frontend\MyAccountPage\Resources\UserInfoResource;
-use App\Pages\Frontend\MyAccountPage\Resources\UserAddressesResource;
+use App\Modules\Addresses\Repository\AddressRepository;
+use App\Modules\Addresses\Resources\AddressResource;
+use App\Pages\MyAccountPage\Resources\UserInfoResource;
 
 
 class MyAccountPageService
@@ -23,38 +23,21 @@ class MyAccountPageService
     }
     public function getUserAddresses()
     {
-        return  UserAddressesResource::collection($this->addressRepository->getUserAddresses())->resolve();
+        return  AddressResource::collection($this->addressRepository->getUserAddresses())->resolve();
     }
     public function createAddress($validatedRequest)
     {
-        return  $this->addressRepository->createAddress($validatedRequest);
+        return  AddressResource::make($this->addressRepository->createAddress($validatedRequest))->resolve();
     }
-    public function findUserAddress($address_id)
-    {
-        return $this->addressRepository->findUserAddress($address_id);
-    }
+
     public function destroyUserAddress($address_id)
     {
-        $address = $this->addressRepository->findUserAddress($address_id);
-
-
-        if (is_null($address)) {
-            throw new Exception('Address Not Found', 404);
-        }
-        $address->delete();
+        return $this->addressRepository->deleteAddress($address_id);
     }
 
     public function updateAddress($validatedRequest, $address_id)
     {
-
-        $address = $this->addressRepository->findUserAddress($address_id);
-
-
-        if (is_null($address)) {
-            return  throw new Exception('Address Not Found', 404);
-        }
-
-        $this->addressRepository->updateUserAddress($validatedRequest, $address_id);
+        return  $this->addressRepository->updateAddress($validatedRequest, $address_id);
     }
     public function updatePhoneNumber($phoneNumber)
     {
@@ -66,6 +49,8 @@ class MyAccountPageService
     }
     public function updateAccountInfo($information)
     {
-        auth()->user()->update($information);
+        $user =  auth()->user()->update($information);
+
+        return UserInfoResource::make($user);
     }
 }
