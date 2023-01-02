@@ -4,6 +4,7 @@ namespace App\Modules\Products\Repository;
 
 use App\Modules\Categories\Models\Category;
 use App\Modules\Products\Models\Product;
+use App\Modules\Products\Services\ProductDiscountService;
 use App\Traits\ImageUpload;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -38,7 +39,7 @@ class ProductRepository
             ->withFilters()
             ->active()
             ->latest()
-            ->paginate();
+            ->paginate(12);
     }
     public function getProductDetail($productSlug)
     {
@@ -101,6 +102,7 @@ class ProductRepository
         $product->discount_amount = $request->discount_amount;
         $product->discount_start_at = $request->discount_start_at;
         $product->discount_expires_at = $request->discount_expires_at;
+        $product->discounted_price = (new ProductDiscountService())->getDiscountedPrice($request);
         $product->name = Str::title($request->name);
         $product->slug = $this->generateSlug($request->name, $product->id);
         $product->stock = $this->getProductStock($sizeOptions);

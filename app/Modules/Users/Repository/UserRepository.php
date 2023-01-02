@@ -26,8 +26,19 @@ class UserRepository
         $user = User::create($validatedRequest->all());
         $user->permissions()->sync($validatedRequest['permissionsIds']);
     }
-
-    public function getUserWishlist()
+    public function getWishlistProducts()
+    {
+        return auth()->check() ? auth()->user()->wishlistProducts : [];
+    }
+    public function getCartProducts()
+    {
+        return auth()->user()->shoppingCartProducts;
+    }
+    public function getCartProductsCount()
+    {
+        return auth()->check() ? auth()->user()->shoppingCart()->count('product_id') : 0;
+    }
+    public function getWishlistProductsIds()
     {
         return auth()->check() ? auth()->user()->wishlist()->pluck('product_id')->toArray() : [];
     }

@@ -2,6 +2,7 @@
 
 namespace App\Pages\ProductDetailPage\Resources;
 
+use App\Modules\Users\Repository\UserRepository;
 use Illuminate\Support\Str;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -26,6 +27,7 @@ class ProductDetailResource extends JsonResource
             'price' =>  $this->price,
             'brand_name' => $this->brand_name,
             'brand_image' => $this->brand_image,
+            'inWishlist' => in_array($this->id, app('inWishlist')),
         ];
     }
 }

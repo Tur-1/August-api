@@ -4,6 +4,7 @@ namespace App\Pages\WishlistPage\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Modules\Users\Repository\UserRepository;
 use App\Pages\WishlistPage\Services\WishlistPageService;
 
 class WishlistPageController extends Controller
@@ -14,13 +15,14 @@ class WishlistPageController extends Controller
     {
         return  response()->success([
             'products' =>  $wishlistPageService->getUserWishlist(),
-            'wishlistCount' =>  $wishlistPageService->countWishlistProducts(),
         ]);
     }
-    public function addToWishlist(Request $request)
+    public function addToWishlist($product_id)
     {
 
-        (new WishlistPageService())->addProductToWishlist($request->product_id);
-        return  response()->success();
+        (new WishlistPageService())->addProductToWishlist($product_id);
+
+
+        return response()->success((new UserRepository())->getWishlistProductsIds());
     }
 }

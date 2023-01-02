@@ -1,7 +1,7 @@
 <?php
 
+use App\Pages\ShoppingCartPage\Controllers\ShoppingCartPageController;
 use Illuminate\Support\Facades\Route;
-use App\Pages\Frontend\ShoppingCart\Http\Controllers\ShoppingCartPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,16 +17,16 @@ use App\Pages\Frontend\ShoppingCart\Http\Controllers\ShoppingCartPageController;
 
 Route::middleware('auth')->controller(ShoppingCartPageController::class)->group(function () {
 
-    Route::get('/cart', 'index')->name('shoppingCartPage');
+    Route::get('/cart', 'getShoppingCartProducts')->name('shoppingCartPage');
+
+    Route::get('/cart/count', 'getCartCounter')->name('getCartCounter');
 
 
+    Route::post('/cart/increase-item-quantity/{cartItemId}', 'increaseProductQuantity')->name('increaseProductQuantity');
 
-    Route::post('/increase-product-quantity/{cartItemId}', 'increaseProductQuantity')->name('increaseProductQuantity');
+    Route::post('/cart/decrease-item-quantity/{cartItemId}', 'decreaseProductQuantity')->name('decreaseProductQuantity');
 
-    Route::post('/decrease-product-quantity/{cartItemId}', 'decreaseProductQuantity')->name('decreaseProductQuantity');
+    Route::delete('/cart/remove-item/{cartItemId}', 'removeCartItem')->name('removeCartItem');
 
-    Route::delete('/remove-cart-item/{cartItemId}', 'removeCartItem')->name('removeCartItem');
-
-    Route::post('/save-for-later/{productId}/{cartItemId}', 'saveProductforLater')->name('saveProductforLater');
-    Route::post('/save-out-of-stock-for-later', 'saveOutOfStockforLater')->name('saveOutOfStockforLater');
+    Route::post('/cart/save-for-later/{cartItemId}/product/{productId}/', 'saveProductforLater')->name('saveProductforLater');
 });

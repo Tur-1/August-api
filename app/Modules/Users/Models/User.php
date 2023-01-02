@@ -65,7 +65,14 @@ class User extends Authenticatable
             set: fn ($value) =>  Hash::needsRehash($value) ? Hash::make($value) : $value,
         );
     }
-
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class, 'user_permissions', 'user_id', 'permission_id');
+    }
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
@@ -78,14 +85,39 @@ class User extends Authenticatable
     }
     public function wishlist()
     {
-        return $this->belongsToMany(Product::class, 'wish_lists');
+        return $this->belongsToMany(Product::class, 'wishlists');
     }
-    public function role()
+
+    public function wishlistProducts()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsToMany(Product::class, 'wishlists')
+            ->withMainProductImage()
+            ->withBrandName()
+            ->active();
     }
-    public function permissions()
+
+
+    public function shoppingCart()
     {
-        return $this->belongsToMany(Permission::class, 'user_permissions', 'user_id', 'permission_id');
+        return $this->belongsToMany(Product::class, 'shopping_carts', 'user_id', 'product_id')
+            ->select('products.id')
+            ->withPivot(['size_id', 'quantity', 'id'])
+            ->withTimestamps();
+    }
+    public function shoppingCartProducts()
+    {
+        return $this->belongsToMany(Product::class, 'shopping_carts', 'user_id', 'product_id')
+            ->withPivot(['size_id', 'quantity', 'id'])
+            ->with(['sizes'])
+            ->withMainProductImage()
+            ->withBrandName()
+            ->active();
+    }
+    public function shoppingCartHas($product_id, $size_id)
+    {
+        return  $this->shoppingCart()
+            ->wherePivot('product_id',  $product_id)
+            ->wherePivot('size_id', $size_id)
+            ->exists('size_id');
     }
 }

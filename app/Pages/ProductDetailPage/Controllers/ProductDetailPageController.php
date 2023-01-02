@@ -33,7 +33,18 @@ class ProductDetailPageController extends Controller
 
         return $response;
     }
+    public function addToShoppingCart(Request $request, ProductDetailPageService $productService)
+    {
 
+        if (is_null($request->size_id) || is_null($request->product_id)) {
+            return ['status' => 404];
+        }
+        $productService->addToShoppingCart($request);
+
+        return  response()->success([
+            'message' => 'The product was added to your cart!',
+        ]);
+    }
     public function addComment(ProductDetailPageService $productService, Request $request, $slug)
     {
         $request->validate(['comment' => 'required|string']);

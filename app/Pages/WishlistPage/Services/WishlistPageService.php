@@ -10,17 +10,11 @@ use App\Pages\ShopPage\Resources\ProductsListResource;
 class  WishlistPageService
 {
 
-    public $count;
     public function getUserWishlist()
     {
-        $products =  ProductsListResource::collection((new UserRepository())->getUserWishlist());
-        $this->count = count($products);
-        return $products;
+        return  ProductsListResource::collection((new UserRepository())->getWishlistProducts());
     }
-    public function countWishlistProducts()
-    {
-        return $this->count;
-    }
+
     public function addProductToWishlist($product_id = null)
     {
         // if (is_null($product_id)) {
@@ -32,7 +26,6 @@ class  WishlistPageService
         //     Session::remove('wishlist');
         //     return;
         // }
-
 
         if (!is_null($product_id)) {
             if (auth()->user()->WishlistHas($product_id)) {
