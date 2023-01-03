@@ -34,11 +34,11 @@ class ProductDiscountService
     {
 
         $discount_amount = $discountData['discount_amount'] ? $this->getDiscountAmount($discountData['discount_amount'], $discountData['discount_type']) : null;
-        $price =  $discountData['price'] . ' SAR';
+        $price =  $discountData['price'];
         $price_before_discount = null;
         if ($this->isDicountValid($discountData)) {
-            $price =  $discountData['discounted_price'] . ' SAR';
-            $price_before_discount = $discountData['price'] . ' SAR';
+            $price =  $discountData['discounted_price'];
+            $price_before_discount = $discountData['price'];
         }
 
         return [

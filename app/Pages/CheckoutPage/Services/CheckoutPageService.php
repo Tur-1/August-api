@@ -34,6 +34,8 @@ class  CheckoutPageService
     }
     public function getCheckoutDetails()
     {
-        return   $this->shoppingCartPageService->getCartDetails();
+        $cartDetails =  $this->shoppingCartPageService->getCartDetails();
+        Session::put('cartDetails', $cartDetails);
+        return  $cartDetails;
     }
 }

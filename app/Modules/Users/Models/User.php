@@ -6,6 +6,7 @@ namespace App\Modules\Users\Models;
 
 use Laravel\Sanctum\HasApiTokens;
 use App\Modules\Roles\Models\Role;
+use App\Modules\Orders\Models\Order;
 use Illuminate\Support\Facades\Hash;
 use App\Modules\Products\Models\Product;
 use App\Modules\Roles\Models\Permission;
@@ -119,5 +120,10 @@ class User extends Authenticatable
             ->wherePivot('product_id',  $product_id)
             ->wherePivot('size_id', $size_id)
             ->exists('size_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
+use App\Modules\Orders\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
-use App\Pages\CheckoutPage\Controllers\CheckoutPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,14 +14,11 @@ use App\Pages\CheckoutPage\Controllers\CheckoutPageController;
 */
 
 
+Route::controller(OrderController::class)->group(function () {
 
-Route::middleware('auth')->controller(CheckoutPageController::class)->group(function () {
-
-
-    Route::get('/checkout', 'index')->name('checkoutPage');
-
-
-    Route::post('checkout/apply-coupon', 'applyCoupon')->name('applyCoupon');
-
-    Route::post('/checkout/buy-now', 'buyNow')->name('buyNow');
+    Route::get('/orders', 'index');
+    Route::post('/orders/store', 'storeOrder');
+    Route::post('/orders/show/{id}', 'showOrder');
+    Route::put('/orders/update/{id}', 'updateOrder');
+    Route::delete('/orders/delete/{id}', 'destroyOrder');
 });

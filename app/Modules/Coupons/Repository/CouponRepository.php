@@ -10,13 +10,20 @@ class CouponRepository
 {
     private $coupon;
 
-    public function __construct(Coupon $coupon)
+    public function __construct()
     {
-        $this->coupon =$coupon;
+        $this->coupon = new Coupon();
     }
     public function getAll($records)
     {
         return $this->coupon->paginate($records);
+    }
+    public function getValidCoupon($code)
+    {
+        return Coupon::where('code', $code)
+            ->notExpired()
+            ->notReachedMaximumUses()
+            ->first();
     }
     public function createCoupon($validatedRequest)
     {

@@ -29,7 +29,7 @@ class CartProductsResource extends JsonResource
 
         $size = $this->sizes->find($this->pivot->size_id);
 
-        $price = $discountService['price_before_discount'] != null ? $discountService['price_before_discount'] : $discountService['price'];
+        $price = $discountService['price'];
         $total_price = intval($price) * $this->pivot->quantity;
 
         return [
@@ -38,8 +38,9 @@ class CartProductsResource extends JsonResource
             'name' => $this->name,
             'slug' =>  $this->slug,
             'in_stock' => $this->stock > 0 ? true : false,
-            'price' =>  $this->price,
+            'price' => $price,
             'brand_name' => $this->brand_name,
+            'main_image' => $this->main_image,
             'main_image_url' => $this->main_image_url,
             'inWishlist' => in_array($this->id,  app('inWishlist')),
             'price' => $discountService['price'],
