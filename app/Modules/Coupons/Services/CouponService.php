@@ -31,7 +31,8 @@ class CouponService
 
     public function updateCoupon($validatedRequest, $id)
     {
-        return CouponResource::make($this->couponRepository->updateCoupon($validatedRequest, $id));
+        $coupon = $this->couponRepository->updateCoupon($validatedRequest, $id);
+        return CouponResource::make($coupon);
     }
 
     public function deleteCoupon($id)

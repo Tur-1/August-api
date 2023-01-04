@@ -64,7 +64,7 @@ class  ShoppingCartPageService
     {
 
         $cartDetails = [
-            'shipmentFees' =>  $this->getShipmentFees(),
+            'shipping_fees' =>  $this->getShipmentFees(),
             'subTotal' => $this->getCartSubTotal(),
             'total' =>    $this->getCartTotal(),
             'coupon' => null,
@@ -72,6 +72,10 @@ class  ShoppingCartPageService
 
 
         return $cartDetails;
+    }
+    public function deleteUserCartProducts()
+    {
+        return auth()->user()->shoppingCart()->detach();
     }
     private function getCartSubTotal()
     {

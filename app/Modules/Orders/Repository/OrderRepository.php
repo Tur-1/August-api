@@ -24,7 +24,7 @@ class OrderRepository
     }
     public function createOrder($validatedRequest)
     {
-        return $this->order->create($validatedRequest);
+        return auth()->user()->orders()->create($validatedRequest);
     }
 
     public function storeOrderAddress($request)

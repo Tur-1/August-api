@@ -27,10 +27,13 @@ class CheckoutCouponService
     {
 
         $cartDetails = collect(Session::get('cartDetails'));
+
         $cartDetails['total'] = $this->getCartTotalAfterDiscount($cartTotal);
         $cartDetails['coupon'] =  [
             'code' => $this->coupon->code,
-            'discounted_value' =>  $this->getDiscountedValue($cartTotal),
+            'discounted_amount' =>  $this->getDiscountedValue($cartTotal),
+            'type' => $this->coupon->type,
+            'amount' => $this->coupon->amount,
             'message' => 'coupon applied',
         ];
 

@@ -20,7 +20,7 @@ class Order extends Model
         'status',
         'user_id',
         'shipping_fees',
-        'subtotal',
+        'subTotal',
         'total',
     ];
 

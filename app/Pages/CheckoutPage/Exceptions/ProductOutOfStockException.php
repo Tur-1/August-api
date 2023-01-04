@@ -4,7 +4,7 @@ namespace App\Pages\CheckoutPage\Exceptions;
 
 use Exception;
 
-class ProductNoLongerInStockException extends Exception
+class ProductOutOfStockException extends Exception
 {
     public function render($request)
     {

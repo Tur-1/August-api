@@ -33,6 +33,7 @@ class StoreCouponRequest extends FormRequest
             'minimum_purchases' => 'required|numeric',
             'use_times' => 'required',
             'used_times' => 'nullable',
+            'is_active' => 'boolean'
         ];
 
         if (request('type') == 'percentage') {

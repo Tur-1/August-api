@@ -40,7 +40,8 @@ class ShoppingCartPageController extends Controller
     {
         $cartItem = $shoppingCartPageService->getCartItem($cartItemId);
 
-        if (is_null($cartItem) || $cartItem['quantity'] > $cartItem['stock_size']) {
+
+        if (is_null($cartItem) || $cartItem['quantity'] >= $cartItem['stock_size']) {
             return;
         }
 

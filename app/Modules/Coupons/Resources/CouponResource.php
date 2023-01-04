@@ -24,7 +24,8 @@ class CouponResource extends JsonResource
             'type' => $this->type,
             'minimum_purchases' => $this->minimum_purchases,
             'use_times' => $this->use_times,
-            'is_active' => $this->expires_at <= $this->starts_at ? false : true,
+            'is_active' => $this->is_active,
+
         ];
     }
 }

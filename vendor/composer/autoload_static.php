@@ -34,6 +34,7 @@ class ComposerStaticInit4d6d7abe0595a118baeabe85da14e923
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
+        '880d9aa7c2c689853e94e8a3794c8282' => __DIR__ . '/..' . '/mavinoo/laravel-batch/src/Common/Helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -110,6 +111,7 @@ class ComposerStaticInit4d6d7abe0595a118baeabe85da14e923
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Mavinoo\\Batch\\' => 14,
         ),
         'L' => 
         array (
@@ -374,6 +376,10 @@ class ComposerStaticInit4d6d7abe0595a118baeabe85da14e923
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Mavinoo\\Batch\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mavinoo/laravel-batch/src',
+        ),
         'League\\MimeTypeDetection\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/mime-type-detection/src',
@@ -544,9 +550,6 @@ class ComposerStaticInit4d6d7abe0595a118baeabe85da14e923
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
-        'App\\Models\\OrderAddress' => __DIR__ . '/../..' . '/app/Models/OrderAddress.php',
-        'App\\Models\\OrderCoupon' => __DIR__ . '/../..' . '/app/Models/OrderCoupon.php',
-        'App\\Models\\OrderProduct' => __DIR__ . '/../..' . '/app/Models/OrderProduct.php',
         'App\\Modules\\Addresses\\Controllers\\AddressController' => __DIR__ . '/../..' . '/app/Modules/Addresses/Controllers/AddressController.php',
         'App\\Modules\\Addresses\\EloquentBuilders\\AddressBuilder' => __DIR__ . '/../..' . '/app/Modules/Addresses/EloquentBuilders/AddressBuilder.php',
         'App\\Modules\\Addresses\\Models\\Address' => __DIR__ . '/../..' . '/app/Modules/Addresses/Models/Address.php',
@@ -597,6 +600,9 @@ class ComposerStaticInit4d6d7abe0595a118baeabe85da14e923
         'App\\Modules\\Orders\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Modules/Orders/Controllers/OrderController.php',
         'App\\Modules\\Orders\\EloquentBuilders\\OrderBuilder' => __DIR__ . '/../..' . '/app/Modules/Orders/EloquentBuilders/OrderBuilder.php',
         'App\\Modules\\Orders\\Models\\Order' => __DIR__ . '/../..' . '/app/Modules/Orders/Models/Order.php',
+        'App\\Modules\\Orders\\Models\\OrderAddress' => __DIR__ . '/../..' . '/app/Modules/Orders/Models/OrderAddress.php',
+        'App\\Modules\\Orders\\Models\\OrderCoupon' => __DIR__ . '/../..' . '/app/Modules/Orders/Models/OrderCoupon.php',
+        'App\\Modules\\Orders\\Models\\OrderProduct' => __DIR__ . '/../..' . '/app/Modules/Orders/Models/OrderProduct.php',
         'App\\Modules\\Orders\\Repository\\OrderRepository' => __DIR__ . '/../..' . '/app/Modules/Orders/Repository/OrderRepository.php',
         'App\\Modules\\Orders\\Requests\\StoreOrderRequest' => __DIR__ . '/../..' . '/app/Modules/Orders/Requests/StoreOrderRequest.php',
         'App\\Modules\\Orders\\Requests\\UpdateOrderRequest' => __DIR__ . '/../..' . '/app/Modules/Orders/Requests/UpdateOrderRequest.php',
@@ -613,6 +619,7 @@ class ComposerStaticInit4d6d7abe0595a118baeabe85da14e923
         'App\\Modules\\Products\\Models\\Wishlist' => __DIR__ . '/../..' . '/app/Modules/Products/Models/Wishlist.php',
         'App\\Modules\\Products\\Repository\\ProductImageRepository' => __DIR__ . '/../..' . '/app/Modules/Products/Repository/ProductImageRepository.php',
         'App\\Modules\\Products\\Repository\\ProductRepository' => __DIR__ . '/../..' . '/app/Modules/Products/Repository/ProductRepository.php',
+        'App\\Modules\\Products\\Repository\\ProductSizeRepository' => __DIR__ . '/../..' . '/app/Modules/Products/Repository/ProductSizeRepository.php',
         'App\\Modules\\Products\\Requests\\StoreProductRequest' => __DIR__ . '/../..' . '/app/Modules/Products/Requests/StoreProductRequest.php',
         'App\\Modules\\Products\\Requests\\UpdateProductRequest' => __DIR__ . '/../..' . '/app/Modules/Products/Requests/UpdateProductRequest.php',
         'App\\Modules\\Products\\Resources\\ProductImagesResource' => __DIR__ . '/../..' . '/app/Modules/Products/Resources/ProductImagesResource.php',
@@ -664,6 +671,7 @@ class ComposerStaticInit4d6d7abe0595a118baeabe85da14e923
         'App\\Pages\\CheckoutPage\\Controllers\\CheckoutPageController' => __DIR__ . '/../..' . '/app/Pages/CheckoutPage/Controllers/CheckoutPageController.php',
         'App\\Pages\\CheckoutPage\\Exceptions\\InValidCouponCodeException' => __DIR__ . '/../..' . '/app/Pages/CheckoutPage/Exceptions/InValidCouponCodeException.php',
         'App\\Pages\\CheckoutPage\\Exceptions\\ProductNoLongerInStockException' => __DIR__ . '/../..' . '/app/Pages/CheckoutPage/Exceptions/ProductNoLongerInStockException.php',
+        'App\\Pages\\CheckoutPage\\Resources\\CheckoutProductsResource' => __DIR__ . '/../..' . '/app/Pages/CheckoutPage/Resources/CheckoutProductsResource.php',
         'App\\Pages\\CheckoutPage\\Services\\CheckoutCouponService' => __DIR__ . '/../..' . '/app/Pages/CheckoutPage/Services/CheckoutCouponService.php',
         'App\\Pages\\CheckoutPage\\Services\\CheckoutPageService' => __DIR__ . '/../..' . '/app/Pages/CheckoutPage/Services/CheckoutPageService.php',
         'App\\Pages\\MyAccountPage\\Controllers\\MyAccountPageController' => __DIR__ . '/../..' . '/app/Pages/MyAccountPage/Controllers/MyAccountPageController.php',
@@ -3429,6 +3437,11 @@ class ComposerStaticInit4d6d7abe0595a118baeabe85da14e923
         'League\\MimeTypeDetection\\GeneratedExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/GeneratedExtensionToMimeTypeMap.php',
         'League\\MimeTypeDetection\\MimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/MimeTypeDetector.php',
         'League\\MimeTypeDetection\\OverridingExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/OverridingExtensionToMimeTypeMap.php',
+        'Mavinoo\\Batch\\Batch' => __DIR__ . '/..' . '/mavinoo/laravel-batch/src/Batch.php',
+        'Mavinoo\\Batch\\BatchFacade' => __DIR__ . '/..' . '/mavinoo/laravel-batch/src/BatchFacade.php',
+        'Mavinoo\\Batch\\BatchInterface' => __DIR__ . '/..' . '/mavinoo/laravel-batch/src/BatchInterface.php',
+        'Mavinoo\\Batch\\BatchServiceProvider' => __DIR__ . '/..' . '/mavinoo/laravel-batch/src/BatchServiceProvider.php',
+        'Mavinoo\\Batch\\Common\\Common' => __DIR__ . '/..' . '/mavinoo/laravel-batch/src/Common/Common.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',

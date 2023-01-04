@@ -26,9 +26,9 @@ return new class() extends Migration
                 'Shipped',
                 'Cancelled',
                 'Refunded',
-            ]);
-            $table->decimal('shipping_fees', 6, 2);
-            $table->decimal('subtotal', 18, 2);
+            ])->default('Pending');
+            $table->decimal('shipping_fees', 6, 2)->default(0.00);
+            $table->decimal('subTotal', 18, 2);
             $table->decimal('total', 18, 2);
             $table->timestamps();
         });

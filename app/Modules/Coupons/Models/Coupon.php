@@ -21,6 +21,7 @@ class Coupon extends Model
         'minimum_purchases',
         'use_times',
         'used_times',
+        'is_active'
     ];
     protected $casts = [
         'is_active' => 'boolean',
