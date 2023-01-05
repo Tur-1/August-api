@@ -146,7 +146,7 @@ class  CheckoutPageService
                 'product_name' => $product['name'],
                 'product_slug' => $product['slug'],
                 'product_brand' => $product['brand_name'],
-                'product_image' => $product['main_image'],
+                'product_image' => $product['main_image_full_name'],
                 'product_size' => $product['size'],
                 'product_quantity'  => $product['quantity'],
                 'product_price'  => $product['price'],

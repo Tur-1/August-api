@@ -20,51 +20,49 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
- 
+
     public function index(Request $request)
     {
-       return  $this->orderService->getAll();
+        return  $this->orderService->getAll();
     }
 
-   
+
     public function storeOrder(StoreOrderRequest $request)
     {
         $validatedRequest = $request->validated();
 
         $this->orderService->createOrder($validatedRequest);
-        
+
         return response()->success([
             'message' => 'Order has been created successfully'
         ]);
     }
 
-    
+
     public function showOrder($id)
     {
         $order =  $this->orderService->showOrder($id);
 
-        return response()->success([
-            'order' => $order
-        ]);
+        return response()->success($order);
     }
 
- 
+
     public function updateOrder(UpdateOrderRequest $request, $id)
     {
         $validatedRequest = $request->validated();
 
-       $order =  $this->orderService->updateOrder($validatedRequest, $id);
+        $order =  $this->orderService->updateOrder($validatedRequest, $id);
 
-       return response()->success([
-           'message' => 'Order has been updated successfully',
-           'order' => $order,
-       ]);
+        return response()->success([
+            'message' => 'Order has been updated successfully',
+            'order' => $order,
+        ]);
     }
 
-   
+
     public function destroyOrder($id)
     {
-        
+
         $this->orderService->deleteOrder($id);
 
         return response()->success([

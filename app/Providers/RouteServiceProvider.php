@@ -45,7 +45,7 @@ class RouteServiceProvider extends ServiceProvider
                 });
 
             Route::prefix('api/admin')
-                ->middleware(['api'])
+                ->middleware(['api', 'auth'])
                 ->group(function ($route) {
                     foreach (glob(base_path('routes\\Admin\\*.php')) as $fileName) {
                         require $fileName;

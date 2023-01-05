@@ -16,7 +16,7 @@ class AuthenticatedSessionController extends Controller
             return 'false';
         }
 
-        return 'true';
+        return auth()->user();
     }
     /**
      * Handle an incoming authentication request.
@@ -31,7 +31,10 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $access_token =  $request->user()->createToken('access-token')->plainTextToken;
-        return response()->json(['access_token' => $access_token]);
+        return response()->json([
+            'user' => $request->user(),
+            'access_token' => $access_token
+        ]);
     }
 
     /**

@@ -20,7 +20,7 @@ class OrderRepository
     public function getAll($records)
     {
 
-        return $this->order->paginate($records);
+        return $this->order->with('user')->paginate($records);
     }
     public function createOrder($validatedRequest)
     {
@@ -42,7 +42,7 @@ class OrderRepository
     }
     public function getOrder($id)
     {
-        return $this->order->find($id);
+        return $this->order->with('user', 'coupon', 'products', 'address')->find($id);
     }
     public function updateOrder($validatedRequest, $id)
     {

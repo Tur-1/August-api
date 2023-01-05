@@ -39,7 +39,7 @@ class ProductRepository
             ->withFilters()
             ->active()
             ->latest()
-            ->paginate(12);
+            ->paginate(12)->withQueryString();
     }
     public function getProductDetail($productSlug)
     {

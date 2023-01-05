@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Modules\Orders\Traits\OrderTrait;
 use App\Modules\Orders\Models\OrderCoupon;
 use App\Modules\Orders\Models\OrderAddress;
+use App\Modules\Orders\Models\OrderProduct;
 use App\Modules\Orders\EloquentBuilders\OrderBuilder;
-use App\Modules\Products\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
@@ -43,6 +43,6 @@ class Order extends Model
     }
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(OrderProduct::class);
     }
 }

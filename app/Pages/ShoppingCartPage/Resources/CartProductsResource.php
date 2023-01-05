@@ -40,7 +40,7 @@ class CartProductsResource extends JsonResource
             'name' => $this['name'],
             'slug' =>  $this['slug'],
             'brand_name' => $this['brand_name'],
-            'main_image' => $this['main_image'],
+            'main_image_full_name' => $this['main_image_full_name'],
             'main_image_url' => $this['main_image_url'],
             'quantity' =>  $this['pivot']->quantity,
             'shipping_cost' => $this['shipping_cost'],

@@ -3,6 +3,7 @@
 namespace App\Modules\Orders\Services;
 
 use App\Modules\Orders\Repository\OrderRepository;
+use App\Modules\Orders\Resources\OrderResource;
 
 class OrderService
 {
@@ -14,7 +15,7 @@ class OrderService
     }
     public function getAll($records = 12)
     {
-        return $this->orderRepository->getAll($records);
+        return OrderResource::collection($this->orderRepository->getAll($records));
     }
     public function createOrder($validatedRequest)
     {
@@ -35,7 +36,7 @@ class OrderService
     }
     public function showOrder($id)
     {
-        return $this->orderRepository->getOrder($id);
+        return OrderResource::make($this->orderRepository->getOrder($id))->resolve();
     }
     public function updateOrder($validatedRequest, $id)
     {

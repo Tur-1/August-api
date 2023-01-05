@@ -19,6 +19,14 @@ trait ProductTrait
                 : null,
         );
     }
+    protected function mainImageFullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->main_image ? 'products/product_' . $this->id . '/' . $this->main_image
+                : null,
+        );
+    }
+
     protected function brandImage(): Attribute
     {
         return Attribute::make(
