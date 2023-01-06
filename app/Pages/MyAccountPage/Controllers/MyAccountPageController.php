@@ -25,6 +25,7 @@ class MyAccountPageController extends Controller
         return response()->success([
             'userAddresses' => $this->myAccountService->getUserAddresses(),
             'userInfo' => $this->myAccountService->getUserInformation(),
+            'orders' =>  $this->myAccountService->getUserOrders(),
         ]);
     }
 
@@ -94,6 +95,15 @@ class MyAccountPageController extends Controller
 
         return  response()->success([
             'message' => 'address has been deleted successfully',
+        ]);
+    }
+
+    public function showOrder($id)
+    {
+        $order = $this->myAccountService->getUserOrderDetail($id);
+
+        return response()->success([
+            'order' => $order,
         ]);
     }
 }

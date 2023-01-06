@@ -68,13 +68,12 @@ class  ProductDetailPageService
         return ProductDetailReviewsResource::collection($this->productDetail->reviews);
     }
 
-    public function createComment($comment, $slug)
+    public function createComment($comment, $productid)
     {
 
-        $product =  (new ProductRepository())->findProductBySlug($slug);
-        if (is_null($slug) || is_null($product))  return;
 
-        $comment = (new ReviewRepository())->createReview($comment, $product->id);
+
+        $comment = (new ReviewRepository())->createReview($comment, $productid);
 
         return  $comment;
     }

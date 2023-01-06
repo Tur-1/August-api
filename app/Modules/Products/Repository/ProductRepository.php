@@ -23,9 +23,16 @@ class ProductRepository
 
     public function getAll($records)
     {
-
-
         return $this->product->withMainProductImage()->latest()->paginate(50);
+    }
+    public function getLatestProducts()
+    {
+        return $this->product->withMainProductImage()
+            ->withBrandName()
+            ->active()
+            ->take(20)
+            ->latest()
+            ->get();
     }
     public function getRelatedProducts($productId, $category_ids)
     {

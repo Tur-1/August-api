@@ -19,8 +19,11 @@ class OrderRepository
     }
     public function getAll($records)
     {
-
         return $this->order->with('user')->paginate($records);
+    }
+    public function getAllOrders()
+    {
+        return $this->order->with('user')->get();
     }
     public function createOrder($validatedRequest)
     {

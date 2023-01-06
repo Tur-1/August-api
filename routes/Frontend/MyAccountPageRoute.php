@@ -29,4 +29,6 @@ Route::middleware(['auth:sanctum'])->controller(MyAccountPageController::class)-
 
     // destroy address
     Route::delete('/my-account/delete-address/{id}', 'destroyUserAddress');
+
+    Route::get('/my-account/orders/{id}', 'showOrder');
 });

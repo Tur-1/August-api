@@ -1,6 +1,6 @@
 <?php
 
-use App\Pages\HomePage\Controllers\HomePageController;
+use App\Modules\Banners\Controllers\BannerController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::controller(BannerController::class)->group(function () {
 
-Route::controller(HomePageController::class)->group(function () {
-
-    Route::get('/home', 'index');
+    Route::get('/banners', 'index');
+    Route::post('/banners/store', 'storeBanner');
+    Route::post('/banners/show/{id}', 'showBanner');
+    Route::post('/banners/update/{id}', 'updateBanner');
+    Route::delete('/banners/delete/{id}', 'destroyBanner');
 });

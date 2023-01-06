@@ -21,5 +21,5 @@ Route::controller(ProductDetailPageController::class)->group(function () {
 
     Route::post('/product-detail/add-to-cart', 'addToShoppingCart')->name('addToShoppingCart');
 
-    Route::post('/product-detail/{product_slug}/comment', 'addComment')->name('addComment');
+    Route::post('/product-detail/{product_slug}/comment', 'addComment')->middleware('auth')->name('addComment');
 });

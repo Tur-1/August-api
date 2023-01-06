@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Exceptions\PageNotFoundException;
+use App\Modules\Products\Repository\ProductRepository;
 use App\Pages\ProductDetailPage\Services\ProductDetailPageService;
 
 class ProductDetailPageController extends Controller
@@ -49,18 +50,22 @@ class ProductDetailPageController extends Controller
     {
         $request->validate(['comment' => 'required|string']);
 
-        // if (!auth()->check()) {
-        //     Session::put('productComment', [
-        //         'product_id' => $product->id,
-        //         'comment' => $request->comment,
-        //     ]);
+        $product =  (new ProductRepository())->findProductBySlug($slug);
+        if (is_null($slug) || is_null($product))  return;
+
+        if (!auth()->check()) {
+            Session::put('productComment', [
+                'product_id' => $product->id,
+                'comment' => $request->comment,
+            ]);
 
 
-        // }
+            return  response()->success(['requireAuth' => true]);
+        }
 
 
         $productService->createComment($request->comment, $slug);
 
-        return  response()->success(['message' => 'Your comment has been added successfully']);
+        return  response()->success(['message' => 'Your comment has been added successfully', 'requireAuth' => false]);
     }
 }
