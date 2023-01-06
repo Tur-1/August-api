@@ -2,16 +2,17 @@
 
 namespace App\Pages\ProductDetailPage\Services;
 
+use Illuminate\Support\Facades\Session;
 use App\Exceptions\PageNotFoundException;
-use App\Modules\Products\Repository\ProductRepository;
-use App\Modules\Reviews\Repository\ReviewRepository;
 use App\Modules\Reviews\Services\ReviewService;
+use App\Modules\Reviews\Repository\ReviewRepository;
+use App\Modules\Products\Repository\ProductRepository;
+use App\Pages\ShopPage\Resources\ProductsListResource;
 use App\Pages\ProductDetailPage\Resources\ProductDetailResource;
 use App\Pages\ProductDetailPage\Resources\ProductDetailImagesResource;
-use App\Pages\ProductDetailPage\Resources\ProductDetailCategoriesResource;
 use App\Pages\ProductDetailPage\Resources\ProductDetailReviewsResource;
+use App\Pages\ProductDetailPage\Resources\ProductDetailCategoriesResource;
 use App\Pages\ProductDetailPage\Resources\ProductDetailSizeOptionsResource;
-use App\Pages\ShopPage\Resources\ProductsListResource;
 
 class  ProductDetailPageService
 {
@@ -30,6 +31,11 @@ class  ProductDetailPageService
 
 
         return ProductDetailResource::make($this->productDetail);
+    }
+
+    public function getProductReviews($productId)
+    {
+        return  ProductDetailReviewsResource::collection((new ReviewRepository())->getProductReviews($productId));
     }
     public function addToShoppingCart($request = null)
     {
@@ -63,7 +69,7 @@ class  ProductDetailPageService
     {
         return  ProductDetailImagesResource::collection($this->productDetail->productImages);
     }
-    public function getProductReviews()
+    public function getReviews()
     {
         return ProductDetailReviewsResource::collection($this->productDetail->reviews);
     }
@@ -71,10 +77,26 @@ class  ProductDetailPageService
     public function createComment($comment, $productid)
     {
 
-
-
         $comment = (new ReviewRepository())->createReview($comment, $productid);
 
         return  $comment;
+    }
+
+    public function storeProductDetailInSession($request)
+    {
+        Session::remove('productDetailCartItem');
+        Session::put('productDetailCartItem', [
+            'product_id' => $request->product_id,
+            'size_id' => $request->size_id
+        ]);
+    }
+
+    public function storeUserCommentInSession($productid, $comment)
+    {
+        Session::remove('productComment');
+        Session::put('productComment', [
+            'product_id' => $productid,
+            'comment' => $comment,
+        ]);
     }
 }

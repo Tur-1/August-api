@@ -61,7 +61,7 @@ class Product extends Model
         return $this->hasMany(Review::class, 'product_id')->whereNull('review_id')
             ->with('user', 'reply')
             ->select('id', 'comment', 'user_id', 'product_id', 'created_at', 'review_id')
-            ->latest();;
+            ->latest();
     }
     public function brand(): BelongsTo
     {

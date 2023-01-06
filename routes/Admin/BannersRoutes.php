@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(BannerController::class)->group(function () {
 
-    Route::get('/banners', 'index');
-    Route::post('/banners/store', 'storeBanner');
-    Route::post('/banners/show/{id}', 'showBanner');
-    Route::post('/banners/update/{id}', 'updateBanner');
-    Route::delete('/banners/delete/{id}', 'destroyBanner');
+    Route::get('/getAllbanners', 'index');
+    Route::post('/bannersstore', 'storeBanner');
+    Route::post('/bannersshow/{id}', 'showBanner');
+    Route::post('/bannersupdate/{id}', 'updateBanner');
+    Route::delete('/bannersdelete/{id}', 'destroyBanner');
 });

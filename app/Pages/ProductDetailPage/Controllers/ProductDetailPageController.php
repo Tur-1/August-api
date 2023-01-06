@@ -17,16 +17,27 @@ class ProductDetailPageController extends Controller
 
 
         try {
-
-
             $response = response()->success([
                 'product' => $productService->getProductDetail($slug),
                 'sizeOptions' =>  $productService->getSizeOptions(),
                 'categories' => $productService->getCategories(),
                 'images' => $productService->getProductImages(),
-                'reviews' => $productService->getProductReviews(),
+                'reviews' => $productService->getReviews(),
                 'relatedProducts' => $productService->getRelatedProducts(),
 
+            ]);
+        } catch (PageNotFoundException $ex) {
+            $response = response()->error($ex->getMessage(), 404);
+        }
+
+        return $response;
+    }
+    public function getProductReviews($id, ProductDetailPageService $productService)
+    {
+        try {
+
+            $response = response()->success([
+                'reviews' => $productService->getProductReviews($id),
             ]);
         } catch (PageNotFoundException $ex) {
             $response = response()->error($ex->getMessage(), 404);
@@ -40,6 +51,13 @@ class ProductDetailPageController extends Controller
         if (is_null($request->size_id) || is_null($request->product_id)) {
             return ['status' => 404];
         }
+
+
+        if (!auth()->check()) {
+            $productService->storeProductDetailInSession($request);
+            return  response()->success(['requireAuth' => true]);
+        }
+
         $productService->addToShoppingCart($request);
 
         return  response()->success([
@@ -54,18 +72,18 @@ class ProductDetailPageController extends Controller
         if (is_null($slug) || is_null($product))  return;
 
         if (!auth()->check()) {
-            Session::put('productComment', [
-                'product_id' => $product->id,
-                'comment' => $request->comment,
-            ]);
 
+            $productService->storeUserCommentInSession($product->id, $request->comment);
 
             return  response()->success(['requireAuth' => true]);
         }
 
 
-        $productService->createComment($request->comment, $slug);
+        $productService->createComment($request->comment, $product->id);
 
-        return  response()->success(['message' => 'Your comment has been added successfully', 'requireAuth' => false]);
+        return  response()->success([
+            'message' => 'Your comment has been added successfully',
+            'requireAuth' => false
+        ]);
     }
 }

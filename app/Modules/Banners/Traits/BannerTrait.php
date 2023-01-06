@@ -12,7 +12,7 @@ trait BannerTrait
     protected function imageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $this->image ? config('app.url') . Storage::url('images/banners/' . $this->image) : null,
+            get: fn ($value) => $this->image ? config('app.url') . Storage::url('images/augustbanners/' . $this->image) : null,
         );
     }
 }

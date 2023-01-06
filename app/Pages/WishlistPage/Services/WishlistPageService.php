@@ -17,15 +17,6 @@ class  WishlistPageService
 
     public function addProductToWishlist($product_id = null)
     {
-        // if (is_null($product_id)) {
-        //     $wishlist = Session::get('wishlist');
-        //     $product_id = $wishlist['product_id'];
-        //     if (!auth()->user()->WishlistHas($product_id)) {
-        //         auth()->user()->wishlist()->attach($product_id);
-        //     }
-        //     Session::remove('wishlist');
-        //     return;
-        // }
 
         if (!is_null($product_id)) {
             if (auth()->user()->WishlistHas($product_id)) {

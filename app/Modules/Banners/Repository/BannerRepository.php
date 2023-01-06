@@ -12,7 +12,7 @@ class BannerRepository
 {
     use ImageUpload;
 
-    private $imageFolder = 'banners';
+    private $imageFolder = 'augustbanners';
     private $banner;
 
     public function __construct()

@@ -23,6 +23,15 @@ class ReviewRepository
             ->latest()
             ->paginate($records);
     }
+    public function getProductReviews($productId)
+    {
+        return $this->review->where('product_id', $productId)
+            ->whereNull('review_id')
+            ->with('user', 'reply')
+            ->select('id', 'comment', 'user_id', 'product_id', 'created_at', 'review_id')
+            ->latest()
+            ->get();
+    }
     public function createReview($comment, $product_id)
     {
         $currentDate = Carbon::now('GMT+3');
