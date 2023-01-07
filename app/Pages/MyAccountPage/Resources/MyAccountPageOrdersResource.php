@@ -30,9 +30,9 @@ class MyAccountPageOrdersResource extends JsonResource
             ],
             'products' => $this->whenLoaded('products', $this['products']),
             'coupon' => $this->whenLoaded('coupon', [
-                'code' => $this['coupon']['code'],
-                'discounted_amount' => $this['coupon']['discounted_amount'],
-                'amount' => $this['coupon']['type'] == 'Percentage' ?  $this['coupon']['amount'] . ' %' : ' SAR',
+                'code' => $this->coupon?->code,
+                'discounted_amount' => $this->coupon?->discounted_amount,
+                'amount' => $this->coupon?->type == 'Percentage' ?  $this->coupon?->amount . ' %' : ' SAR',
             ]),
             'address' => $this->whenLoaded('address', $this['address']),
         ];
