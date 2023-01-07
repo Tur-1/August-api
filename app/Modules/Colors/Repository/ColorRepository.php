@@ -21,7 +21,7 @@ class ColorRepository
 
     public function getAll($records)
     {
-        return $this->color->paginate($records);
+        return $this->color->withCount('products')->paginate($records);
     }
     public function getAllColors()
     {

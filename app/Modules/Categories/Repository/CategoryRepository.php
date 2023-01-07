@@ -14,7 +14,7 @@ class CategoryRepository
 
     public function getSections()
     {
-        return Category::sections()->get();
+        return Category::where('is_section', true)->has('products')->get();
     }
     public function getCategoryWithChildren()
     {
@@ -27,7 +27,7 @@ class CategoryRepository
 
     public function getSectionsWithCategories()
     {
-        return Category::tree()->where('is_section', true);
+        return Category::hasProducts()->where('is_section', true);
     }
 
 

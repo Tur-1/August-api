@@ -9,6 +9,18 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 trait CategoryTrait
 {
+    public static function hasProducts()
+    {
+
+        $allCategories =  Category::query()
+            ->whereHas('products', fn ($product) => $product->select('product_id'))
+            ->get();
+
+        $sections =  $allCategories->where('is_section', true);
+
+        self::formatTree($sections, $allCategories);
+        return $allCategories;
+    }
     public static function tree()
     {
 

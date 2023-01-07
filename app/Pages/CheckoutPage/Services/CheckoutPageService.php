@@ -53,7 +53,7 @@ class  CheckoutPageService
             $cartDetails['shipping_fees'] = 0.00;
         }
 
-        $this->order =  $this->orderRepository->createOrder($cartDetails->toArray());
+        $this->order =  $this->orderRepository->createOrder($cartDetails);
 
         return   $this->order;
     }
@@ -158,7 +158,7 @@ class  CheckoutPageService
     }
     private function isNotInStock($product)
     {
-        return $product['stock'] == 0;
+        return $product['stock_size'] == 0;
     }
     private function isStockSizeLessThanQty($product)
     {

@@ -19,7 +19,7 @@ class BrandRepository
 
     public function getAll($records)
     {
-        return $this->brand->paginate($records);
+        return $this->brand->withCount('products')->paginate($records);
     }
     public function getAllBrands()
     {

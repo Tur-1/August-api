@@ -23,7 +23,7 @@ class ProductRepository
 
     public function getAll($records)
     {
-        return $this->product->withMainProductImage()->latest()->paginate(50);
+        return $this->product->withMainProductImage()->latest()->paginate(80);
     }
     public function getLatestProducts()
     {

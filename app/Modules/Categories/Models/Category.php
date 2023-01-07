@@ -2,10 +2,11 @@
 
 namespace App\Modules\Categories\Models;
 
-use App\Modules\Categories\EloquentBuilders\CategoryBuilder;
-use App\Modules\Categories\Traits\CategoryTrait;
 use Illuminate\Database\Eloquent\Model;
+use App\Modules\Products\Models\Product;
+use App\Modules\Categories\Traits\CategoryTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Modules\Categories\EloquentBuilders\CategoryBuilder;
 
 class Category extends Model
 {
@@ -27,5 +28,9 @@ class Category extends Model
     public function section()
     {
         return $this->belongsTo(Category::class, 'section_id')->select('id', 'name');
+    }
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_categories',  'category_id', 'product_id');
     }
 }

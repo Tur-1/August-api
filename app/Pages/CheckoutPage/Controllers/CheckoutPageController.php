@@ -61,6 +61,7 @@ class CheckoutPageController extends Controller
         $cartDetails = Session::get('cartDetails');
         $cartDetailsWithCoupon = Session::get('cartDetailsWithCoupon');
 
+
         try {
             $checkoutPageService->getUserAddress($request->address_id);
         } catch (\Exception $ex) {
@@ -71,7 +72,7 @@ class CheckoutPageController extends Controller
 
         if (!is_null($cartDetailsWithCoupon)) {
 
-            $cartDetails = $cartDetailsWithCoupon;
+            $cartDetails = $cartDetailsWithCoupon->toArray();
             try {
                 $this->coupon = (new CheckoutCouponService())->getCoupon($cartDetails['coupon']['code']);
             } catch (InValidCouponCodeException $ex) {
@@ -80,6 +81,7 @@ class CheckoutPageController extends Controller
                 return  response()->error($ex->getMessage(), 404);
             }
         }
+
 
         try {
             DB::transaction(function () use ($checkoutPageService, $cartDetails) {
