@@ -27,9 +27,9 @@ class ReviewController extends Controller
     }
 
 
-    public function storeReview(StoreReviewRequest $request)
+    public function storeReview(Request $request)
     {
-        $validatedRequest = $request->validated();
+
 
         // $this->reviewService->createReview($validatedRequest);
 
@@ -37,7 +37,16 @@ class ReviewController extends Controller
             'message' => 'Review has been created successfully'
         ]);
     }
+    public function replyReview(Request $request, $review_id)
+    {
+        $review =  $this->reviewService->replyReview($request->comment, $review_id);
 
+        return response()->success([
+            'message' => 'Review has been created successfully',
+            'review' => $review,
+
+        ]);
+    }
 
     public function showReview($id)
     {
@@ -49,11 +58,11 @@ class ReviewController extends Controller
     }
 
 
-    public function updateReview(UpdateReviewRequest $request, $id)
+    public function updateReview(Request $request, $id)
     {
-        $validatedRequest = $request->validated();
 
-        $review =  $this->reviewService->updateReview($validatedRequest, $id);
+
+        $review =  $this->reviewService->updateReview($request->comment, $id);
 
         return response()->success([
             'message' => 'Review has been updated successfully',

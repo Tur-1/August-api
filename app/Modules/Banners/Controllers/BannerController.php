@@ -3,6 +3,7 @@
 namespace App\Modules\Banners\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Banners\Models\Banner;
 use Illuminate\Http\Request;
 use App\Modules\Banners\Requests\StoreBannerRequest;
 use App\Modules\Banners\Requests\UpdateBannerRequest;
@@ -23,6 +24,8 @@ class BannerController extends Controller
 
     public function index(Request $request)
     {
+
+        $this->authorize('viewAny', Banner::class);
         return  $this->bannerService->getAll();
     }
 
@@ -30,6 +33,7 @@ class BannerController extends Controller
     public function storeBanner(StoreBannerRequest $request)
     {
 
+        $this->authorize('create', Banner::class);
 
         $request->validated();
 
@@ -43,6 +47,7 @@ class BannerController extends Controller
 
     public function showBanner($id)
     {
+        $this->authorize('view', Banner::class);
         $banner =  $this->bannerService->showBanner($id);
 
         return response()->success([
@@ -53,6 +58,7 @@ class BannerController extends Controller
 
     public function updateBanner(UpdateBannerRequest $request, $id)
     {
+        $this->authorize('update', Banner::class);
         $request->validated();
 
         $banner =  $this->bannerService->updateBanner($request, $id);
@@ -66,6 +72,7 @@ class BannerController extends Controller
 
     public function destroyBanner($id)
     {
+        $this->authorize('delete', Banner::class);
 
         $this->bannerService->deleteBanner($id);
 

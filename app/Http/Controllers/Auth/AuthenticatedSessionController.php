@@ -19,7 +19,9 @@ class AuthenticatedSessionController extends Controller
             return 'false';
         }
 
-        return auth()->user();
+        $user = auth()->user()->load(['permissions']);
+
+        return ['user' => $user, 'permissions' => $user->permissions->pluck('slug')->toArray()];
     }
     /**
      * Handle an incoming authentication request.

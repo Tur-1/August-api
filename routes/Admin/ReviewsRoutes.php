@@ -19,6 +19,7 @@ Route::controller(ReviewController::class)->group(function () {
     Route::get('/reviews', 'index');
     Route::post('/reviews/store', 'storeReview');
     Route::post('/reviews/show/{id}', 'showReview');
-    Route::put('/reviews/update/{id}', 'updateReview');
+    Route::post('/reviews/update/{id}', 'updateReview');
     Route::delete('/reviews/delete/{id}', 'destroyReview');
+    Route::post('/reviews/show/{id}/reply', 'replyReview');
 });

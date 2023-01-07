@@ -21,13 +21,17 @@ class ReviewService
     {
         return $this->reviewRepository->createReview($comment, $product_id);
     }
+    public function replyReview($comment, $review_id)
+    {
+        return $this->reviewRepository->replyReview($comment, $review_id);
+    }
     public function showReview($id)
     {
-        return $this->reviewRepository->getReview($id);
+        return ReviewResource::make($this->reviewRepository->getReview($id));
     }
-    public function updateReview($validatedRequest, $id)
+    public function updateReview($comment, $id)
     {
-        return $this->reviewRepository->updateReview($validatedRequest, $id);
+        return $this->reviewRepository->updateReview($comment, $id);
     }
     public function deleteReview($id)
     {

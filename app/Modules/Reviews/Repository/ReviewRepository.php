@@ -32,6 +32,19 @@ class ReviewRepository
             ->latest()
             ->get();
     }
+    public function replyReview($comment, $review_id)
+    {
+        $currentDate = Carbon::now('GMT+3');
+
+        $review = $this->getReview($review_id);
+
+        return $review->reply()->create([
+            'user_id' => auth()->id(),
+            'product_id' => $review->product_id,
+            'comment' => $comment,
+            'create_at' =>  $currentDate
+        ]);
+    }
     public function createReview($comment, $product_id)
     {
         $currentDate = Carbon::now('GMT+3');
@@ -45,12 +58,14 @@ class ReviewRepository
     }
     public function getReview($id)
     {
-        return $this->review->find($id);
+        return $this->review->with('reply', 'user')->find($id);
     }
-    public function updateReview($validatedRequest, $id)
+    public function updateReview($comment, $id)
     {
         $review = $this->getReview($id);
-        $review->update($validatedRequest);
+        $review->update([
+            'comment' => $comment
+        ]);
         return  $review;
     }
     public function deleteReview($id)
