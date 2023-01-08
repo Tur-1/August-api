@@ -22,6 +22,6 @@ Route::controller(SizeController::class)->group(function () {
 
     Route::post('/sizes/store', 'storeSize');
     Route::post('/sizes/show/{id}', 'showSize');
-    Route::put('/sizes/update/{id}', 'updateSize');
-    Route::delete('/sizes/delete/{id}', 'destroySize');
+    Route::post('/sizes/update/{id}', 'updateSize');
+    Route::post('/sizes/delete/{id}', 'destroySize');
 });

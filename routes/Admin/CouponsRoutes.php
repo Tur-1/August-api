@@ -19,6 +19,6 @@ Route::controller(CouponController::class)->group(function () {
     Route::get('/coupons', 'index');
     Route::post('/coupons/store', 'storeCoupon');
     Route::post('/coupons/show/{id}', 'showCoupon');
-    Route::put('/coupons/update/{id}', 'updateCoupon');
-    Route::delete('/coupons/delete/{id}', 'destroyCoupon');
+    Route::post('/coupons/update/{id}', 'updateCoupon');
+    Route::post('/coupons/delete/{id}', 'destroyCoupon');
 });

@@ -24,10 +24,10 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('/products/publish/{id}', 'publishProduct');
 
     Route::post('/products/update/{id}', 'updateProduct');
-    Route::delete('/products/delete/{id}', 'destroyProduct');
+    Route::post('/products/delete/{id}', 'destroyProduct');
 });
 Route::controller(ProductImageController::class)->group(function () {
 
-    Route::delete('/products/images/delete/{id}', 'destroyProductImage');
-    Route::delete('/products/images/update-main-image/{id}', 'updateProductMainImage');
+    Route::post('/products/images/delete/{id}', 'destroyProductImage');
+    Route::post('/products/images/update-main-image/{id}', 'updateProductMainImage');
 });

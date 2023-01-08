@@ -19,6 +19,6 @@ Route::controller(OrderController::class)->group(function () {
     Route::get('/orders', 'index');
     Route::post('/orders/store', 'storeOrder');
     Route::post('/orders/show/{id}', 'showOrder');
-    Route::put('/orders/update/{id}', 'updateOrder');
-    Route::delete('/orders/delete/{id}', 'destroyOrder');
+    Route::post('/orders/update/{id}', 'updateOrder');
+    Route::post('/orders/delete/{id}', 'destroyOrder');
 });

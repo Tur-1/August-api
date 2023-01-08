@@ -27,7 +27,7 @@ Route::middleware('auth')->controller(ShoppingCartPageController::class)->group(
 
     Route::post('/cart/decrease-item-quantity/{cartItemId}', 'decreaseProductQuantity')->name('decreaseProductQuantity');
 
-    Route::delete('/cart/remove-item/{cartItemId}', 'removeCartItem')->name('removeCartItem');
+    Route::post('/cart/remove-item/{cartItemId}', 'removeCartItem')->name('removeCartItem');
 
     Route::post('/cart/save-for-later/{cartItemId}/product/{productId}/', 'saveProductforLater')->name('saveProductforLater');
 });

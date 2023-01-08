@@ -19,6 +19,6 @@ Route::controller(AddressController::class)->group(function () {
     Route::get('/addresses', 'index');
     Route::post('/addresses/store', 'storeAddress');
     Route::post('/addresses/show/{id}', 'showAddress');
-    Route::put('/addresses/update/{id}', 'updateAddress');
-    Route::delete('/addresses/delete/{id}', 'destroyAddress');
+    Route::post('/addresses/update/{id}', 'updateAddress');
+    Route::post('/addresses/delete/{id}', 'destroyAddress');
 });

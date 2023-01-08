@@ -20,5 +20,5 @@ Route::controller(BannerController::class)->group(function () {
     Route::post('/bannersstore', 'storeBanner');
     Route::post('/bannersshow/{id}', 'showBanner');
     Route::post('/bannersupdate/{id}', 'updateBanner');
-    Route::delete('/bannersdelete/{id}', 'destroyBanner');
+    Route::post('/bannersdelete/{id}', 'destroyBanner');
 });

@@ -31,5 +31,5 @@ Route::controller(CategoryController::class)->group(function () {
     Route::post('/categories/store', 'storeCategory');
     Route::post('/categories/show/{id}', 'showCategory');
     Route::post('/categories/update/{id}', 'updateCategory');
-    Route::delete('/categories/delete/{id}', 'destroyCategory');
+    Route::post('/categories/delete/{id}', 'destroyCategory');
 });

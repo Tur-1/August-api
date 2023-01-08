@@ -21,5 +21,5 @@ Route::controller(ColorController::class)->group(function () {
     Route::post('/colors/store', 'storeColor');
     Route::post('/colors/show/{id}', 'showColor');
     Route::post('/colors/update/{id}', 'updateColor');
-    Route::delete('/colors/delete/{id}', 'destroyColor');
+    Route::post('/colors/delete/{id}', 'destroyColor');
 });
