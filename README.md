@@ -10,12 +10,10 @@
 - Responsive Layout
 - Shopping Cart, Wishlist, Product Reviews
 - Coupons & Discounts
-- Product attributes: cost price, promotion price, stock, size...
-- Blog: category, tag, content, web page 
-- Module/Extension: Shipping, payment, discount, ...
+- Product attributes: cost price, promotion price, stock, size... 
+ 
 - Upload manager: banner, images,..  
-- Related Products, Recommendations for you in our categories 
-- Laravel Socialite implement(Facebook, Google & twitter) & Customer login 
+- Related Products, Recommendations for you in our categories  
 - Order Tracking system 
 many more......
 
