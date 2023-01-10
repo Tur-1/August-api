@@ -42,8 +42,9 @@ Many more....
 
 1. Clone the repo and cd into it
 2. composer install
-3. import Mysql file 
-4. php artisan serve     
+3. import tur_august.sql file 
+4. php artisan storage:link
+5. php artisan serve     
  
  
 
