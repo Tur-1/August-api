@@ -19,7 +19,7 @@
 - Order Tracking system 
 many more......
 
-- frontend repo  https://github.com/Tur-1/tur-august
+- frontend   https://github.com/Tur-1/tur-august
 
 ## ======= ADMIN =======
 
@@ -36,7 +36,7 @@ many more......
 - Profile Settings
 Many more....
 
-- admin dashboard repo  https://github.com/Tur-1/tur-august-dashboard
+- admin dashboard   https://github.com/Tur-1/tur-august-dashboard
  
 ### Set up :
 
