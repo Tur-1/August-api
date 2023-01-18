@@ -1,8 +1,9 @@
 /node_Pages
 /public/build
 /public/hot
+/public/storage/images
 /storage/public/images
- 
+/storage/*.key
 /vendor
 
 .env.backup
