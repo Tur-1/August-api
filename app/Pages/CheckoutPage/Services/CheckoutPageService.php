@@ -2,8 +2,10 @@
 
 namespace App\Pages\CheckoutPage\Services;
 
+use App\Mail\NewOrderMail;
 use Exception;
 use Mavinoo\Batch\Batch;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Modules\Products\Models\Product;
 use App\Modules\Orders\Repository\OrderRepository;
@@ -19,7 +21,7 @@ class  CheckoutPageService
     private $order;
     private $shoppingCartPageService;
     private $orderRepository;
-
+    private $orderProducts;
     private $orderAddress;
 
     public function __construct()
@@ -147,6 +149,19 @@ class  CheckoutPageService
                 'product_slug' => $product['slug'],
                 'product_brand' => $product['brand_name'],
                 'product_image' => $product['main_image_full_name'],
+
+                'product_size' => $product['size'],
+                'product_quantity'  => $product['quantity'],
+                'product_price'  => $product['price'],
+                'total_price' => $product['total_price']
+            ];
+            $this->orderProducts[] = [
+                'order_id' =>  $this->order->id,
+                'product_name' => $product['name'],
+                'product_slug' => $product['slug'],
+                'product_brand' => $product['brand_name'],
+                'product_image' => $product['main_image_full_name'],
+                'main_image_url' => $product['main_image_url'],
                 'product_size' => $product['size'],
                 'product_quantity'  => $product['quantity'],
                 'product_price'  => $product['price'],
@@ -154,7 +169,21 @@ class  CheckoutPageService
             ];
         }
 
+
         return $orderProducts;
+    }
+    public function notifyUserOfOrderAcceptance()
+    {
+        Mail::to(auth()->user()->email)->send(new NewOrderMail($this->getOrderInformation()));
+    }
+    private function getOrderInformation()
+    {
+        return  [
+            'order' => $this->order,
+            'user' => ['name' => auth()->user()->name, 'email' => auth()->user()->email],
+            'shippingAddress' => $this->orderAddress,
+            'orderProducts' => $this->orderProducts
+        ];
     }
     private function isNotInStock($product)
     {

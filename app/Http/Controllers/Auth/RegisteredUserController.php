@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
+use App\Mail\WelcomeMail;
 
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use App\Modules\Users\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Mail;
 
 class RegisteredUserController extends Controller
 {
@@ -45,7 +47,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user, true);
-
+        Mail::to($user->email)->send(new WelcomeMail($user->name));
         return response()->noContent();
     }
 }

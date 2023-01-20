@@ -89,18 +89,23 @@ class CheckoutPageController extends Controller
 
                 $checkoutPageService->checkProductsStock();
             });
+
+            $checkoutPageService->storeOrderProducts();
+            $checkoutPageService->decreaseStockSize();
+            $checkoutPageService->updateProductsStock();
+            $checkoutPageService->storeOrderAddress();
+
+            $checkoutPageService->storeOrderCoupon($cartDetails['coupon']);
+            (new CheckoutCouponService())->increaseCouponUsedTimes($this->coupon);
+
+            $checkoutPageService->notifyUserOfOrderAcceptance();
         } catch (ProductOutOfStockException $ex) {
             return response()->error($ex->getMessage(), 404);
         }
 
 
 
-        $checkoutPageService->storeOrderProducts();
-        $checkoutPageService->decreaseStockSize();
-        $checkoutPageService->updateProductsStock();
-        $checkoutPageService->storeOrderAddress();
-        $checkoutPageService->storeOrderCoupon($cartDetails['coupon']);
-        (new CheckoutCouponService())->increaseCouponUsedTimes($this->coupon);
+
 
 
         (new ShoppingCartPageService())->deleteUserCartProducts();
