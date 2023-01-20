@@ -2,11 +2,6 @@
 
 namespace App\Modules\Products\Traits;
 
-use Illuminate\Support\Str;
-
-use Illuminate\Support\Facades\Storage;
-
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 trait ProductFilterTrait
 {

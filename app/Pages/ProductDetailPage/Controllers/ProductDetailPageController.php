@@ -16,13 +16,14 @@ class ProductDetailPageController extends Controller
     {
 
 
+        $product  = $productService->getProductDetail($slug);
         try {
             $response = response()->success([
-                'product' => $productService->getProductDetail($slug),
+                'product' => $product,
                 'sizeOptions' =>  $productService->getSizeOptions(),
                 'categories' => $productService->getCategories(),
                 'images' => $productService->getProductImages(),
-                'reviews' => $productService->getReviews(),
+                'reviews' => $productService->getProductReviews($product['id']),
                 'relatedProducts' => $productService->getRelatedProducts(),
 
             ]);

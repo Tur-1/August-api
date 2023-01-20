@@ -69,10 +69,6 @@ class  ProductDetailPageService
     {
         return  ProductDetailImagesResource::collection($this->productDetail->productImages);
     }
-    public function getReviews()
-    {
-        return ProductDetailReviewsResource::collection($this->productDetail->reviews);
-    }
 
     public function createComment($comment, $productid)
     {

@@ -52,7 +52,7 @@ class ProductRepository
     {
         return $this->product
             ->where('slug', $productSlug)
-            ->with(['productImages:product_id,image', 'stockSizes', 'categories', 'reviews'])
+            ->with(['productImages:product_id,image', 'stockSizes', 'categories'])
             ->withBrandName()
             ->withBrandImage()
             ->active()

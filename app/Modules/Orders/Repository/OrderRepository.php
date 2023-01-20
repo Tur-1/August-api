@@ -25,6 +25,10 @@ class OrderRepository
     {
         return $this->order->with('user')->get();
     }
+    public function getUserOrders()
+    {
+        return auth()->user()->orders;
+    }
     public function createOrder($validatedRequest)
     {
         return auth()->user()->orders()->create($validatedRequest);

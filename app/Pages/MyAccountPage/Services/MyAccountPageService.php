@@ -4,12 +4,13 @@ namespace App\Pages\MyAccountPage\Services;
 
 
 use Exception;
+
+use App\Modules\Orders\Repository\OrderRepository;
 use App\Modules\Addresses\Resources\AddressResource;
 use App\Modules\Addresses\Repository\AddressRepository;
-use App\Modules\Orders\Repository\OrderRepository;
 use App\Pages\MyAccountPage\Resources\UserInfoResource;
 use App\Pages\MyAccountPage\Resources\MyAccountPageOrdersResource;
-
+use App\Pages\MyAccountPage\Resources\OrderPageResource;
 
 class MyAccountPageService
 {
@@ -29,11 +30,12 @@ class MyAccountPageService
     }
     public function getUserOrders()
     {
-        return  MyAccountPageOrdersResource::collection((new OrderRepository())->getAllOrders())->resolve();
+        return  MyAccountPageOrdersResource::collection((new OrderRepository())->getUserOrders())->resolve();
     }
     public function getUserOrderDetail($id)
     {
-        return  MyAccountPageOrdersResource::make((new OrderRepository())->getOrder($id))->resolve();
+
+        return  OrderPageResource::make((new OrderRepository())->getOrder($id))->resolve();
     }
     public function createAddress($validatedRequest)
     {
