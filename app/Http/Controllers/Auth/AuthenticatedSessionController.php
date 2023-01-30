@@ -19,23 +19,25 @@ class AuthenticatedSessionController extends Controller
             return 'false';
         }
 
-        $user = auth()->user()->load(['permissions']);
 
-        return ['user' => $user, 'permissions' => $user->permissions->pluck('slug')->toArray()];
+        return ['user' => auth()->user()];
     }
+
     /**
      * Handle an incoming authentication request.
      *
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LoginRequest $request)
+    public function login(LoginRequest $request)
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
+        $request->user()->load(['permissions']);
         $access_token =  $request->user()->createToken('access-token')->plainTextToken;
+        $permissions =  $request->user()->permissions->pluck('slug')->toArray();
 
         $productComment = Session::get('productComment');
         $message = null;
@@ -74,6 +76,8 @@ class AuthenticatedSessionController extends Controller
         return response()->json([
             'user' => $request->user(),
             'access_token' => $access_token,
+            'token_type' => 'Bearer',
+            'permissions' =>  $permissions,
             'message' => $message,
             'redirect_to' => $redirect_to,
         ]);
@@ -85,7 +89,7 @@ class AuthenticatedSessionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function logout(Request $request)
     {
         Auth::guard('web')->logout();
 

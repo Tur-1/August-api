@@ -21,6 +21,12 @@ class BannerService
     {
         return $this->bannerRepository->saveBanner($validatedRequest);
     }
+
+    public function publishBanner($id)
+    {
+
+        return  $this->bannerRepository->publishBanner($id);
+    }
     public function showBanner($id)
     {
 

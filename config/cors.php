@@ -14,11 +14,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['*'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [config('app.backend_url'), config('app.frontend_url')],
 
     'allowed_origins_patterns' => [],
 

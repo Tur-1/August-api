@@ -30,6 +30,19 @@ class BannerController extends Controller
     }
 
 
+
+    public function publishBanner($id)
+    {
+
+        $this->authorize('viewAny', Banner::class);
+
+
+        $this->bannerService->publishBanner($id);
+
+        return response()->success([
+            'message' => 'Banner has been updated successfully'
+        ]);
+    }
     public function storeBanner(StoreBannerRequest $request)
     {
 

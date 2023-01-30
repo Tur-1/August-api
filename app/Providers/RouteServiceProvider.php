@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -45,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider
                 });
 
             Route::prefix('api/admin')
-                ->middleware(['api', 'auth'])
+                ->middleware(['api', 'auth:sanctum'])
                 ->group(function ($route) {
                     foreach (glob(base_path('routes\\Admin\\*.php')) as $fileName) {
                         require $fileName;

@@ -1,14 +1,15 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\VerifyEmailController;
-
-use Illuminate\Support\Facades\Route;
 
 Route::get('/isAuthenticated', [AuthenticatedSessionController::class, 'isAuthenticated']);
 
@@ -16,7 +17,7 @@ Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest')
     ->name('register');
 
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+Route::post('/login', [AuthenticatedSessionController::class, 'login'])
     ->middleware('guest')
     ->name('login');
 
@@ -36,6 +37,6 @@ Route::post('/email/verification-notification', [EmailVerificationNotificationCo
     ->middleware(['auth', 'throttle:6,1'])
     ->name('verification.send');
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+Route::post('/logout', [AuthenticatedSessionController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');

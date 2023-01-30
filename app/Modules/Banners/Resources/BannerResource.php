@@ -21,6 +21,7 @@ class BannerResource extends JsonResource
             'type' => $this->type,
             'link' => $this->link,
             'image_url' => $this->image_url,
+            'is_active' => $this->is_active
         ];
     }
 }

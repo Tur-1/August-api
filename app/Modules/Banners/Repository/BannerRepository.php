@@ -52,6 +52,16 @@ class BannerRepository
     {
         return $this->banner->find($id);
     }
+    public function publishBanner($id)
+    {
+        $banner =  $this->getBanner($id);
+        if ($banner->is_active) {
+            $banner->update(['is_active' => false]);
+        } else {
+            $banner->update(['is_active' => true]);
+        }
+    }
+
     public function updateBanner($validatedRequest, $id)
     {
         $banner = $this->getBanner($id);
