@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2023 at 08:21 PM
+-- Generation Time: Jan 31, 2023 at 02:31 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -70,7 +70,7 @@ CREATE TABLE `banners` (
 INSERT INTO `banners` (`id`, `title`, `image`, `link`, `is_active`, `type`, `created_at`, `updated_at`) VALUES
 (2, 'Dfgdfgdfg', '1672949301-slide_1.webp', '#', 1, 'large', '2023-01-05 17:08:21', '2023-01-05 17:48:26'),
 (3, 'Dsfsdf', '1672951722-slide_page1_2.webp', '#', 1, 'large', '2023-01-05 17:48:42', '2023-01-05 17:48:42'),
-(4, '...', '1672951877-download.webp', '#', 1, 'medium', '2023-01-05 17:51:17', '2023-01-05 17:51:17'),
+(4, '...', '1672951877-download.webp', '#', 1, 'medium', '2023-01-05 17:51:17', '2023-01-30 17:20:20'),
 (5, '..', '1672951891-module_01_en_3.webp', '#', 1, 'medium', '2023-01-05 17:51:31', '2023-01-05 17:51:31'),
 (6, '...K', '1672951901-module_01_en_2.webp', '#', 1, 'medium', '2023-01-05 17:51:41', '2023-01-05 17:51:41'),
 (7, '...', '1672951923-module_01_en_4.webp', '#', 1, 'medium', '2023-01-05 17:52:03', '2023-01-05 17:52:03');
@@ -208,7 +208,7 @@ CREATE TABLE `coupons` (
 --
 
 INSERT INTO `coupons` (`id`, `code`, `type`, `amount`, `use_times`, `used_times`, `minimum_purchases`, `starts_at`, `expires_at`, `is_active`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'august', 'Percentage', 20, 100, 8, '10.00', '2023-01-08', '2024-01-13', 1, NULL, '2023-01-03 09:55:03', '2023-01-10 16:20:52');
+(1, 'august', 'Percentage', 20, 100, 10, '10.00', '2023-01-08', '2024-01-13', 1, NULL, '2023-01-03 09:55:03', '2023-01-20 09:31:32');
 
 -- --------------------------------------------------------
 
@@ -299,7 +299,17 @@ INSERT INTO `orders` (`id`, `user_id`, `status`, `shipping_fees`, `subTotal`, `t
 (93, 10, 'Pending', '0.00', '1118.00', '1028.56', '2023-01-07 12:09:50', '2023-01-07 12:09:50'),
 (94, 10, 'Pending', '0.00', '1332.00', '1531.80', '2023-01-07 12:26:53', '2023-01-07 12:26:53'),
 (95, 10, 'Pending', '0.00', '811.00', '746.12', '2023-01-10 16:16:06', '2023-01-10 16:16:06'),
-(96, 10, 'Pending', '0.00', '803.00', '738.76', '2023-01-10 16:20:52', '2023-01-10 16:20:52');
+(96, 10, 'Pending', '0.00', '803.00', '738.76', '2023-01-10 16:20:52', '2023-01-10 16:20:52'),
+(97, 11, 'Pending', '0.00', '226.00', '259.90', '2023-01-20 05:49:55', '2023-01-20 05:49:55'),
+(98, 10, 'Pending', '0.00', '594.00', '683.10', '2023-01-20 07:02:16', '2023-01-20 07:02:16'),
+(101, 11, 'Pending', '0.00', '634.00', '729.10', '2023-01-20 09:21:32', '2023-01-20 09:21:32'),
+(102, 11, 'Pending', '0.00', '436.00', '401.12', '2023-01-20 09:22:33', '2023-01-20 09:22:33'),
+(103, 11, 'Pending', '0.00', '436.00', '501.40', '2023-01-20 09:25:12', '2023-01-20 09:25:12'),
+(104, 11, 'Pending', '0.00', '436.00', '501.40', '2023-01-20 09:27:32', '2023-01-20 09:27:32'),
+(105, 11, 'Pending', '0.00', '436.00', '501.40', '2023-01-20 09:28:09', '2023-01-20 09:28:09'),
+(107, 11, 'Pending', '0.00', '436.00', '501.40', '2023-01-20 09:29:36', '2023-01-20 09:29:36'),
+(108, 11, 'Pending', '0.00', '778.00', '715.76', '2023-01-20 09:31:32', '2023-01-20 09:31:32'),
+(109, 11, 'Pending', '0.00', '325.00', '373.75', '2023-01-20 09:33:41', '2023-01-20 09:33:41');
 
 -- --------------------------------------------------------
 
@@ -329,7 +339,17 @@ INSERT INTO `order_addresses` (`id`, `order_id`, `full_name`, `address`, `city`,
 (9, 93, 'turki noman alharbi', 'In consequatur id', 'Ducimus nisi autem', '0552952593', 'Do assumenda ducimus', '2023-01-07 12:09:50', '2023-01-07 12:09:50'),
 (10, 94, 'turki noman alharbi', 'In consequatur id', 'Ducimus nisi autem', '0552952593', 'Do assumenda ducimus', '2023-01-07 12:26:53', '2023-01-07 12:26:53'),
 (11, 95, 'turki noman alharbi', 'In consequatur id', 'Ducimus nisi autem', '0552952593', 'Do assumenda ducimus', '2023-01-10 16:16:06', '2023-01-10 16:16:06'),
-(12, 96, 'turki alharbi', 'In consequatur id', 'Ducimus nisi autem', '0552952593', 'Do assumenda ducimus', '2023-01-10 16:20:52', '2023-01-10 16:20:52');
+(12, 96, 'turki alharbi', 'In consequatur id', 'Ducimus nisi autem', '0552952593', 'Do assumenda ducimus', '2023-01-10 16:20:52', '2023-01-10 16:20:52'),
+(13, 97, 'Sybil Jacobson', 'Rerum qui deserunt e', 'Eum qui atque repreh', '89445645646', 'Debitis illum numqu', '2023-01-20 05:49:55', '2023-01-20 05:49:55'),
+(14, 98, 'turki alharbi', 'In consequatur id', 'Ducimus nisi autem', '0552952593', 'Do assumenda ducimus', '2023-01-20 07:02:16', '2023-01-20 07:02:16'),
+(16, 101, 'Sybil Jacobson', 'Rerum qui deserunt e', 'Eum qui atque repreh', '89445645646', 'Debitis illum numqu', '2023-01-20 09:21:32', '2023-01-20 09:21:32'),
+(17, 102, 'Sybil Jacobson', 'Rerum qui deserunt e', 'Eum qui atque repreh', '89445645646', 'Debitis illum numqu', '2023-01-20 09:22:33', '2023-01-20 09:22:33'),
+(18, 103, 'Sybil Jacobson', 'Rerum qui deserunt e', 'Eum qui atque repreh', '89445645646', 'Debitis illum numqu', '2023-01-20 09:25:12', '2023-01-20 09:25:12'),
+(19, 104, 'Sybil Jacobson', 'Rerum qui deserunt e', 'Eum qui atque repreh', '89445645646', 'Debitis illum numqu', '2023-01-20 09:27:32', '2023-01-20 09:27:32'),
+(20, 105, 'Sybil Jacobson', 'Rerum qui deserunt e', 'Eum qui atque repreh', '89445645646', 'Debitis illum numqu', '2023-01-20 09:28:09', '2023-01-20 09:28:09'),
+(21, 107, 'Sybil Jacobson', 'Rerum qui deserunt e', 'Eum qui atque repreh', '89445645646', 'Debitis illum numqu', '2023-01-20 09:29:36', '2023-01-20 09:29:36'),
+(22, 108, 'Sybil Jacobson', 'Rerum qui deserunt e', 'Eum qui atque repreh', '89445645646', 'Debitis illum numqu', '2023-01-20 09:31:32', '2023-01-20 09:31:32'),
+(23, 109, 'Sybil Jacobson', 'Rerum qui deserunt e', 'Eum qui atque repreh', '89445645646', 'Debitis illum numqu', '2023-01-20 09:33:41', '2023-01-20 09:33:41');
 
 -- --------------------------------------------------------
 
@@ -357,7 +377,9 @@ INSERT INTO `order_coupons` (`id`, `order_id`, `code`, `type`, `amount`, `discou
 (6, 92, 'app', 'Percentage', '20', '164.22', '2023-01-05 09:20:11', '2023-01-05 09:20:11'),
 (7, 93, 'app', 'Percentage', '20', '257.14', '2023-01-07 12:09:50', '2023-01-07 12:09:50'),
 (8, 95, 'august', 'Percentage', '20', '186.53', '2023-01-10 16:16:06', '2023-01-10 16:16:06'),
-(9, 96, 'august', 'Percentage', '20', '184.69', '2023-01-10 16:20:52', '2023-01-10 16:20:52');
+(9, 96, 'august', 'Percentage', '20', '184.69', '2023-01-10 16:20:52', '2023-01-10 16:20:52'),
+(10, 102, 'august', 'Percentage', '20', '100.28', '2023-01-20 09:22:33', '2023-01-20 09:22:33'),
+(11, 108, 'august', 'Percentage', '20', '178.94', '2023-01-20 09:31:32', '2023-01-20 09:31:32');
 
 -- --------------------------------------------------------
 
@@ -400,7 +422,20 @@ INSERT INTO `order_products` (`id`, `order_id`, `product_name`, `product_slug`, 
 (270, 95, 'Logo Printed Hoodie', 'logo-printed-hoodie', 'Calvin Klein', 'products/product_85/1673103421-1_zoom_desktop_9.webp', 'S', 1, '453.00', '453.00', NULL, NULL),
 (271, 96, 'Essential Sweatpants', 'essential-sweatpants', 'Addidas', 'products/product_86/1673103495-1_zoom_desktop_10.webp', 'M', 1, '353.00', '353.00', NULL, NULL),
 (272, 96, 'Nsw T-Shirt', 'nsw-t-shirt', 'Nike', 'products/product_83/1673103327-1_zoom_desktop_7.webp', 'S', 1, '125.00', '125.00', NULL, NULL),
-(273, 96, 'Iconic T7 Track Pants', 'iconic-t7-track-pants', 'Puma', 'products/product_87/1673103534-1_zoom_desktop_11.webp', 'M', 1, '325.00', '325.00', NULL, NULL);
+(273, 96, 'Iconic T7 Track Pants', 'iconic-t7-track-pants', 'Puma', 'products/product_87/1673103534-1_zoom_desktop_11.webp', 'M', 1, '325.00', '325.00', NULL, NULL),
+(274, 97, 'High Low Zipped Jacket', 'high-low-zipped-jacket', 'Trendyol', 'products/product_67/1672580669-1_zoom_desktop_19.webp', 'S', 1, '226.00', '226.00', NULL, NULL),
+(275, 98, 'Pocket Detail Button Down Shirt', 'pocket-detail-button-down-shirt', 'Trendyol', 'products/product_75/1672581496-1_zoom_desktop_4.webp', 'M', 1, '124.60', '124.00', NULL, NULL),
+(276, 98, 'Always Original Laced Track Jacket', 'always-original-laced-track-jacket', 'Addidas', 'products/product_47/1672578605-1_zoom_desktop_1.webp', 'M', 1, '470.00', '470.00', NULL, NULL),
+(278, 101, 'Zip Through Fur Detail Jacket', 'zip-through-fur-detail-jacket', 'Trendyol', 'products/product_68/1672580752-1_zoom_desktop_20.webp', 'S', 1, '386.00', '386.00', NULL, NULL),
+(279, 101, 'Oversized Double Breasted Coat', 'oversized-double-breasted-coat', 'Trendyol', 'products/product_66/1672580610-1_zoom_desktop_18.webp', 'M', 1, '248.00', '248.00', NULL, NULL),
+(280, 102, 'High Waist Straight Jeans', 'high-waist-straight-jeans', 'Calvin Klein', 'products/product_73/1672581330-1_zoom_desktop_2.webp', 'S', 1, '436.00', '436.00', NULL, NULL),
+(281, 103, 'High Waist Straight Jeans', 'high-waist-straight-jeans', 'Calvin Klein', 'products/product_73/1672581330-1_zoom_desktop_2.webp', 'S', 1, '436.00', '436.00', NULL, NULL),
+(282, 104, 'High Waist Straight Jeans', 'high-waist-straight-jeans', 'Calvin Klein', 'products/product_73/1672581330-1_zoom_desktop_2.webp', 'S', 1, '436.00', '436.00', NULL, NULL),
+(283, 105, 'High Waist Straight Jeans', 'high-waist-straight-jeans', 'Calvin Klein', 'products/product_73/1672581330-1_zoom_desktop_2.webp', 'S', 1, '436.00', '436.00', NULL, NULL),
+(284, 107, 'High Waist Straight Jeans', 'high-waist-straight-jeans', 'Calvin Klein', 'products/product_73/1672581330-1_zoom_desktop_2.webp', 'M', 1, '436.00', '436.00', NULL, NULL),
+(285, 108, 'Iconic T7 Track Pants', 'iconic-t7-track-pants', 'Puma', 'products/product_87/1673103534-1_zoom_desktop_11.webp', 'M', 1, '325.00', '325.00', NULL, NULL),
+(286, 108, 'Logo Printed Hoodie', 'logo-printed-hoodie', 'Calvin Klein', 'products/product_85/1673103421-1_zoom_desktop_9.webp', 'S', 1, '453.00', '453.00', NULL, NULL),
+(287, 109, 'Iconic T7 Track Pants', 'iconic-t7-track-pants', 'Puma', 'products/product_87/1673103534-1_zoom_desktop_11.webp', 'S', 1, '325.00', '325.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -520,51 +555,39 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'a90df8d3ca01fe0338fbd30da1ab35878bf5f215e449a2f502c599e038f648af', '[\"*\"]', NULL, NULL, '2023-01-03 04:32:59', '2023-01-03 04:32:59'),
-(2, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'e48fe549f79241f0b26dad0cefe1895a242306d09d3c1ba4b726434a077c6446', '[\"*\"]', NULL, NULL, '2023-01-03 04:53:57', '2023-01-03 04:53:57'),
-(3, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'acffad94d8d21f4d0a46aeffcdafe27a9cb6d0f565fdabe0ccd97d8bac4b29c5', '[\"*\"]', NULL, NULL, '2023-01-03 08:32:55', '2023-01-03 08:32:55'),
-(4, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '18124437d68137a7da856284632e78b1c5f159e3949ca9ea1d0609c83234e494', '[\"*\"]', NULL, NULL, '2023-01-03 09:26:44', '2023-01-03 09:26:44'),
-(5, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'b8dd0136689636db99aa13bed792d0bc4f23af017a223721e0adc25e7257ac86', '[\"*\"]', NULL, NULL, '2023-01-05 11:05:58', '2023-01-05 11:05:58'),
-(6, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '67e53b7f1e1eeddf684a5edf88b71fd2677c1d03f01f040cbdb81a4694df7885', '[\"*\"]', NULL, NULL, '2023-01-05 11:11:04', '2023-01-05 11:11:04'),
-(7, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'da1b0f933ce96d02eaf3c6ea055d775dfee748bd99a0ca19e728046f9bcc854f', '[\"*\"]', NULL, NULL, '2023-01-05 11:14:34', '2023-01-05 11:14:34'),
-(8, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'ce2be5de666b2c92bc0b0cf56e35e25afd7a85e4c58e2467bc10e2f53984425b', '[\"*\"]', NULL, NULL, '2023-01-05 18:40:49', '2023-01-05 18:40:49'),
-(9, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '83b197b6ed2f6d251d168404feac162f819048003db0322b3a9db878ee1da6e3', '[\"*\"]', NULL, NULL, '2023-01-05 18:42:11', '2023-01-05 18:42:11'),
-(10, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '94f361191d35039547d9e28a31e44fb94c54346cef513bae26b4c278e6f03255', '[\"*\"]', NULL, NULL, '2023-01-05 18:43:59', '2023-01-05 18:43:59'),
-(11, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'b2951997180660e239626430112fe36b4442b25e0e2fbc296c3fccf385b45c81', '[\"*\"]', NULL, NULL, '2023-01-05 22:00:16', '2023-01-05 22:00:16'),
-(12, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '52220138619062081f22a4e919e1d98330fa90df3e701ab9751ba4b306780845', '[\"*\"]', NULL, NULL, '2023-01-06 08:46:44', '2023-01-06 08:46:44'),
-(13, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '6b4475496a0fbacd7df46cd90bdec27058148bd371634cd696284dd5f3ffcadf', '[\"*\"]', NULL, NULL, '2023-01-06 08:50:25', '2023-01-06 08:50:25'),
-(14, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'c28c028bd47713eb0aa8620c904056e523c7e89560b165c774e68be8b45fbf45', '[\"*\"]', NULL, NULL, '2023-01-06 09:06:39', '2023-01-06 09:06:39'),
-(15, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '703b10df5605d948846c100ff053e25bc677bff392c9753cc018784063732c70', '[\"*\"]', NULL, NULL, '2023-01-06 09:08:25', '2023-01-06 09:08:25'),
-(16, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '78dfb3c497176e2ac34d9b5aeca36a6e12c1a2d97a905a8c22284464f5317479', '[\"*\"]', NULL, NULL, '2023-01-06 09:12:58', '2023-01-06 09:12:58'),
-(17, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'cefaea83c2249b9c7de34c6538b50b0b3a5bdf9f140bbb7d1a984cd581e08151', '[\"*\"]', NULL, NULL, '2023-01-06 09:15:05', '2023-01-06 09:15:05'),
-(18, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '61a81e05548aa1a6b4f53c7dab8a47d523ad3010c168da55dc58399162d28804', '[\"*\"]', NULL, NULL, '2023-01-06 09:20:26', '2023-01-06 09:20:26'),
-(19, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'f48863a12ec8146561464c44ba3edac17523ab0fe7e84daee36b3fbd3ff01b18', '[\"*\"]', NULL, NULL, '2023-01-06 09:21:59', '2023-01-06 09:21:59'),
-(20, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '27f8cc6da8d704d76c02d9ad3d335e67adf66caab3971ced530d8cb8f39d043d', '[\"*\"]', NULL, NULL, '2023-01-06 09:24:54', '2023-01-06 09:24:54'),
-(21, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '36cdb79ef36e74ecb350ae071a6d68407848e329e6fa705cc5282932d989c176', '[\"*\"]', NULL, NULL, '2023-01-06 09:26:18', '2023-01-06 09:26:18'),
-(22, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '30db497672440b915b6a48099b1930ebdfe67fb0c923c0db60a75a6023a5e339', '[\"*\"]', NULL, NULL, '2023-01-06 09:27:07', '2023-01-06 09:27:07'),
-(23, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'b56d6efde27bacc7797e0f879fadf49bb3ad1a3b013530d4c1c8e7f5c8b03a78', '[\"*\"]', NULL, NULL, '2023-01-06 09:28:35', '2023-01-06 09:28:35'),
-(24, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '767e38fae7bdc01c1d71fc52e0c152a03b5b2c58165db1e3b5bb5a40b6796304', '[\"*\"]', NULL, NULL, '2023-01-06 09:28:44', '2023-01-06 09:28:44'),
-(25, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '97507ebfb5f9ad7c02dee029f7bb38aeaebcc8f27071118112f2b45986df461f', '[\"*\"]', NULL, NULL, '2023-01-06 09:45:00', '2023-01-06 09:45:00'),
-(26, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '17773a6b035e4e3fa7673640190e6cbeddcda340b762560015db9ff1d7cb05b1', '[\"*\"]', NULL, NULL, '2023-01-06 09:47:40', '2023-01-06 09:47:40'),
-(27, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '73e7e558cf70c655cbcfe4a4807f926032c15612e24fa391cd36a56ea4bad4c6', '[\"*\"]', NULL, NULL, '2023-01-06 10:18:17', '2023-01-06 10:18:17'),
-(28, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'ea4dcc224ee90ee9957824c5f89fa2481cd1dbfc5ec4d6da4d58ced2a36ca5fd', '[\"*\"]', NULL, NULL, '2023-01-06 10:27:00', '2023-01-06 10:27:00'),
-(29, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'e256c8ec4ef3bb576aa0a89d65e35fc6a82032460f6114d1827f5f02ea9661f6', '[\"*\"]', NULL, NULL, '2023-01-06 10:31:40', '2023-01-06 10:31:40'),
-(30, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '0212219a207c2000855ab80014ddba8bccd21ee1b8112d0095e63b0e40d7da3d', '[\"*\"]', NULL, NULL, '2023-01-06 11:48:46', '2023-01-06 11:48:46'),
-(31, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'efa2a9673010b37e7724247dae79d55d00287a13cef00734293f48a1e6c8e800', '[\"*\"]', NULL, NULL, '2023-01-06 21:34:17', '2023-01-06 21:34:17'),
-(32, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '95dbeb38646d23af137555dad404c1d32cb7597cacbe7cde4d46b74f0be649d1', '[\"*\"]', NULL, NULL, '2023-01-07 10:10:45', '2023-01-07 10:10:45'),
-(33, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '941bbbeedecd102783cfbec028dbdd9c078e8433be8bb6c18730c14ffa527ce7', '[\"*\"]', NULL, NULL, '2023-01-07 10:42:35', '2023-01-07 10:42:35'),
-(34, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '116b02c1571cd10e7d77c632d991f54f8e314db0b21caa112f1169d5f7f1eb8c', '[\"*\"]', NULL, NULL, '2023-01-07 10:49:36', '2023-01-07 10:49:36'),
-(35, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '2557e7ce57112ccaea13a4a16074a9e66c3598b24be8e730e33bc29a42381f0d', '[\"*\"]', NULL, NULL, '2023-01-07 10:50:44', '2023-01-07 10:50:44'),
-(36, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '11d2ae57042ae96cdf6e0f1909e41ac9787bdd1c0cd013bca027eb4156f56f28', '[\"*\"]', NULL, NULL, '2023-01-07 10:52:13', '2023-01-07 10:52:13'),
-(37, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'eab93f3dfb38dba078de65d2fc93351824e31db6f075e092b9c971c60a7cd876', '[\"*\"]', NULL, NULL, '2023-01-07 10:52:36', '2023-01-07 10:52:36'),
-(38, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '6bbaf171d2eea2798dabd58dff92b2ef2b69770f2e05ce6796c567e3edcbd4d0', '[\"*\"]', NULL, NULL, '2023-01-07 10:52:44', '2023-01-07 10:52:44'),
-(39, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'aaafff039cffeeb9b3b9ca9c1a1619d0b8afe53d891bb15f1cfe9f5a332d5590', '[\"*\"]', NULL, NULL, '2023-01-07 10:56:08', '2023-01-07 10:56:08'),
-(40, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '7be53ecc327e4e91216240ec3ff86a3baf846c0e08ae9c99e9191f51d2f5d741', '[\"*\"]', NULL, NULL, '2023-01-07 20:16:54', '2023-01-07 20:16:54'),
-(41, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '015593fea25407bb5e66e1bf735b821ec1201687ee7cfa960ef696c40ec48dde', '[\"*\"]', NULL, NULL, '2023-01-07 20:26:33', '2023-01-07 20:26:33'),
-(42, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', 'ac0b7ca296cf8b2d71ceb95ae7edca940636da103607556b381a54ca177e8a2f', '[\"*\"]', NULL, NULL, '2023-01-07 20:53:46', '2023-01-07 20:53:46'),
-(43, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '2319889d0d5d3d9d1c39d97b1ad0423cbfff4d2b9b36f42c4b3eb8a685b9f936', '[\"*\"]', NULL, NULL, '2023-01-07 20:54:14', '2023-01-07 20:54:14'),
-(44, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '9b157b1defbc7f436f617256f27332a91ed02a1a9f8633ed4be9936cdbd2fcae', '[\"*\"]', NULL, NULL, '2023-01-10 15:47:35', '2023-01-10 15:47:35'),
-(45, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', '2d33c208bb8c20888c9162329cba5e9962e82b3cfab8d91d2bed9405aa8f75ab', '[\"*\"]', NULL, NULL, '2023-01-10 16:10:29', '2023-01-10 16:10:29');
+(81, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '968cce9e8af70d071a43aee977ea6dd2288a450bac00aeef0b46983a4b5efcf2', '[\"*\"]', NULL, NULL, '2023-01-28 09:43:23', '2023-01-28 09:43:23'),
+(82, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '847bcefcb4dff4763dc340117a3b1288be54be026730378f67fc5e360c68b7ee', '[\"*\"]', NULL, NULL, '2023-01-28 09:47:20', '2023-01-28 09:47:20'),
+(83, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '3539232eed4eda6926c7b25bb6bde809e59dc1f7a462940a1cb8775a66661b99', '[\"*\"]', NULL, NULL, '2023-01-28 09:48:10', '2023-01-28 09:48:10'),
+(84, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '57a859b66a955cc0fb390247744f1eaba8c16c7b662d7f62980dd8273bdd4d09', '[\"*\"]', NULL, NULL, '2023-01-28 09:55:41', '2023-01-28 09:55:41'),
+(85, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '0f29e035a55f565d52e6625881bbdf476a72e759041d79971156c4c126513320', '[\"*\"]', NULL, NULL, '2023-01-30 15:16:11', '2023-01-30 15:16:11'),
+(86, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', 'cee49ee452f27660165d54f56682e210543b95a41b47bc351cc254c8a641e052', '[\"*\"]', NULL, NULL, '2023-01-30 15:17:11', '2023-01-30 15:17:11'),
+(87, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '6b7709d3069d6db104415c4f101ad7e3acd2cd862fe4d7acf0eab7fc63ad111b', '[\"*\"]', NULL, NULL, '2023-01-30 15:17:38', '2023-01-30 15:17:38'),
+(88, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', 'ac8c6a9cfdae408e3708274a67177c27bc001eaf50771f1a08137d2dfce2ebb2', '[\"*\"]', NULL, NULL, '2023-01-30 15:45:24', '2023-01-30 15:45:24'),
+(89, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '26143b548ea2be51bdd38cfa2095746ce343520dec1f7cef3f5177464230438a', '[\"*\"]', NULL, NULL, '2023-01-30 15:47:45', '2023-01-30 15:47:45'),
+(90, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '8a36283a166205677ff7d9550d0bf465637be9d904862596427946b47056bfde', '[\"*\"]', NULL, NULL, '2023-01-30 15:53:31', '2023-01-30 15:53:31'),
+(91, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', 'f88ad2bf1a1f9ad0691393cd841e8246f6faf0976f0c8824a101a6c4e45d894c', '[\"*\"]', NULL, NULL, '2023-01-30 15:56:49', '2023-01-30 15:56:49'),
+(92, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', 'bc6bec749b85b947c58d7f4d6f0409b6fcfa4d31f2b38c86f7b25fb3b020b370', '[\"*\"]', NULL, NULL, '2023-01-30 15:57:28', '2023-01-30 15:57:28'),
+(93, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '42f905ab4b5a360219de9b49a162eace8d69d777d9f048a86eee3e89d1dcd1d8', '[\"*\"]', NULL, NULL, '2023-01-30 15:58:46', '2023-01-30 15:58:46'),
+(94, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '417892b19a41b9985b9853ffb9c15027007376a9457eda62039360bf77218e1d', '[\"*\"]', NULL, NULL, '2023-01-30 16:05:00', '2023-01-30 16:05:00'),
+(95, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '3090a12145216a4b91055160a3426a70c5c7d3cdb80890b7422bb21c024d7083', '[\"*\"]', NULL, NULL, '2023-01-30 16:05:20', '2023-01-30 16:05:20'),
+(96, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', 'd3c00ff3caf84cfc3a148378fb047f11812381a164db441a54248f73a22aa575', '[\"*\"]', NULL, NULL, '2023-01-30 16:05:52', '2023-01-30 16:05:52'),
+(97, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '9ba0ffbabd60036e2d4bfbebb5830bcf65d82f5c0f31b1cf413827a28a418d0e', '[\"*\"]', NULL, NULL, '2023-01-30 16:07:01', '2023-01-30 16:07:01'),
+(98, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '64100be47b24c2d27e48e4ae69445b76fd2c415a78ba09679b5c1a956814d867', '[\"*\"]', NULL, NULL, '2023-01-30 16:07:42', '2023-01-30 16:07:42'),
+(99, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', 'b9f5d26eb3784a302b8c082e361096990211711f93c3b83bf9541cf710eb2728', '[\"*\"]', NULL, NULL, '2023-01-30 16:13:32', '2023-01-30 16:13:32'),
+(100, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '3ca18c41e0e15e09bf9340378ec3475734b7d623d9355df83b793b2c8a9721db', '[\"*\"]', NULL, NULL, '2023-01-30 16:13:58', '2023-01-30 16:13:58'),
+(101, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', 'e4fe8d35a48bc668a818582a612fbc3d52786a711530e7727b5b29b3b4bc07ce', '[\"*\"]', NULL, NULL, '2023-01-30 16:14:13', '2023-01-30 16:14:13'),
+(102, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', 'aa86481cd880a945136a6a35a704b9bb83eab0b8b2be50cf9ff0de2d47895509', '[\"*\"]', NULL, NULL, '2023-01-30 16:14:36', '2023-01-30 16:14:36'),
+(103, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '803fb20ea13c901780be8b2063670d511f4925c0c9dc2b98c22532e83be8d6da', '[\"*\"]', NULL, NULL, '2023-01-30 16:15:52', '2023-01-30 16:15:52'),
+(104, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '3d77d0f31e43e0945893f26358c9ea8792de6bcb869692e371ba414266ea637a', '[\"*\"]', NULL, NULL, '2023-01-30 16:16:52', '2023-01-30 16:16:52'),
+(105, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '8c586b3e86f9bea8e36df3192e0bb1264983dd5c618c72fedf209042e107b0fe', '[\"*\"]', NULL, NULL, '2023-01-30 16:17:30', '2023-01-30 16:17:30'),
+(106, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', 'fc27b37fed53b3e382bdc73f72fee09b62a09d4ee2fe35a768b372fd98881183', '[\"*\"]', NULL, NULL, '2023-01-30 16:18:24', '2023-01-30 16:18:24'),
+(107, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', 'd10a6fb4af3fd9ea75e9c9b3381e7cbd17178518b708da7b547c7c0a515cacdc', '[\"*\"]', NULL, NULL, '2023-01-30 16:30:51', '2023-01-30 16:30:51'),
+(108, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '617fd6e431302bf662b0fd22922339a37c5730fcaa1567249818f66ddfcaf8d9', '[\"*\"]', NULL, NULL, '2023-01-30 16:31:59', '2023-01-30 16:31:59'),
+(109, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '65610099b599344ebdc2c8f32ff5262ecafcd95b8eb9dc02d81a5e666d607406', '[\"*\"]', NULL, NULL, '2023-01-30 16:46:36', '2023-01-30 16:46:36'),
+(110, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '80b66f48fed01714b53e486ac22fb1ce2d9f548b7bf61253c04778657d463e46', '[\"*\"]', NULL, NULL, '2023-01-30 16:49:25', '2023-01-30 16:49:25'),
+(111, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'c41274bef3b7622c01d84292a2fce13557fb6bdd10d0a111f199c08a6d8bea1a', '[\"*\"]', NULL, NULL, '2023-01-30 17:29:06', '2023-01-30 17:29:06'),
+(112, 'App\\Modules\\Users\\Models\\User', 11, 'access-token', '7908bd386c85d5872a4e0ff73d22fd398831d6e5d097320147297ac0ea5753ea', '[\"*\"]', NULL, NULL, '2023-01-30 17:37:16', '2023-01-30 17:37:16'),
+(113, 'App\\Modules\\Users\\Models\\User', 10, 'access-token', 'a8b8153eb1b16f197fe8de90d0ce94520d8df775a977f0f9cfb9f62ad023939c', '[\"*\"]', NULL, NULL, '2023-01-30 17:41:23', '2023-01-30 17:41:23');
 
 -- --------------------------------------------------------
 
@@ -599,7 +622,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `slug`, `details`, `info_and_care`, `price`, `shipping_cost`, `discount_amount`, `discount_type`, `discount_start_at`, `discount_expires_at`, `discounted_price`, `stock`, `is_active`, `brand_id`, `color_id`, `created_at`, `updated_at`) VALUES
 (46, 'Ribbed Button Detail Dress', 'ribbed-button-detail-dress', '<p><strong>Feminine and glamorous, this outfit makes an alluring addition to your evening Dress collection.<br><span style=\"color: rgb(102, 102, 102)\">Reconsidered: Made with 65% Naia™ Triacetate, created from wood pulp.</span><br><br></strong></p><ul><li><p>Rib-knit and comfortable acetate blend fabric</p></li><li><p>Cut-out detail to shoulders</p></li><li><p>Collar neck and long raglan sleeves</p></li><li><p>Secure button down closure to front</p></li><li><p>Midi dress style</p></li><li><p>Calvin Klein signature branding</p></li></ul>', '<p>SKU78768ATPPYKPColorblackNeck TypeCollar NeckApparel TypeDressModel Height178 cmSize shown in imageSSupplier Style No.K20K205107Model MeasurementsBust: 85 cm - Waist: 62 cm - Hips: 91 cmWashing InstructionsWash according to instructions on Care Label.Product Material63% Acetate 37% Polyamide</p>', '832.00', '0.00', NULL, NULL, NULL, NULL, NULL, 16, 1, 10, 8, '2023-01-01 09:12:58', '2023-01-01 10:58:19'),
-(47, 'Always Original Laced Track Jacket', 'always-original-laced-track-jacket', '<p><strong>Each day presents a new opportunity for play, and this adidas track jacket encourages you to do just that.<br><span style=\"color: rgb(102, 102, 102)\">Recycled: Recycling helps use natural resources efficiently and it supports sustainable development.</span><br><br></strong></p><ul><li><p>Soft and stretchable polyester fabric</p></li><li><p>High neck and long sleeves</p></li><li><p>Secure zipper closure to front</p></li><li><p>Lace-up side details for cinched look</p></li><li><p>Dual, easy slip-in side pockets</p></li><li><p>Embroidered adidas Originals trefoil branding</p></li><li><p>Each item sold separately</p></li></ul>', '<p>SKU14448ATJSGHPColorblackNeck TypeHigh NeckApparel TypeJacketModel Height174 cmSize shown in imageSSupplier Style No.HK5075Model MeasurementsBust: 92 cm - Waist: 60 cm - Hips: 84 cmWashing InstructionsWash according to instructions on care label.Product MaterialRecycled Polyester</p>', '470.00', '0.00', NULL, NULL, NULL, NULL, NULL, 15, 1, 3, 8, '2023-01-01 10:08:53', '2023-01-01 10:58:19'),
+(47, 'Always Original Laced Track Jacket', 'always-original-laced-track-jacket', '<p><strong>Each day presents a new opportunity for play, and this adidas track jacket encourages you to do just that.<br><span style=\"color: rgb(102, 102, 102)\">Recycled: Recycling helps use natural resources efficiently and it supports sustainable development.</span><br><br></strong></p><ul><li><p>Soft and stretchable polyester fabric</p></li><li><p>High neck and long sleeves</p></li><li><p>Secure zipper closure to front</p></li><li><p>Lace-up side details for cinched look</p></li><li><p>Dual, easy slip-in side pockets</p></li><li><p>Embroidered adidas Originals trefoil branding</p></li><li><p>Each item sold separately</p></li></ul>', '<p>SKU14448ATJSGHPColorblackNeck TypeHigh NeckApparel TypeJacketModel Height174 cmSize shown in imageSSupplier Style No.HK5075Model MeasurementsBust: 92 cm - Waist: 60 cm - Hips: 84 cmWashing InstructionsWash according to instructions on care label.Product MaterialRecycled Polyester</p>', '470.00', '0.00', NULL, NULL, NULL, NULL, NULL, 14, 1, 3, 8, '2023-01-01 10:08:53', '2023-01-20 07:02:16'),
 (48, 'Trefoil Dress', 'trefoil-dress', '<p><strong>So much style and just as much comfort make this adidas dress a must-have in your closet.<br><span style=\"color: rgb(102, 102, 102)\">Recycled: Recycling helps use natural resources efficiently and it supports sustainable development.</span><br><br></strong></p><ul><li><p>Soft and comfortable cotton blend fabric</p></li><li><p>Round neck and long sleeves</p></li><li><p>Ribbed trims to neck and cuffs</p></li><li><p>adidas Originals trefoil and 3-stripe branding</p></li></ul>', '<p>SKU14448ATDRGNPColordark purpleNeck TypeRound NeckApparel TypeDressModel Height174 cmSize shown in imageSSupplier Style No.HM1734Model MeasurementsBust: 92 cm - Waist: 60 cm - Hips: 84 cmWashing InstructionsWash according to instructions on care label.Product Material67% Cotton 33% Recycled Polyester</p>', '356.00', '0.00', NULL, NULL, NULL, NULL, NULL, 11, 1, 3, 8, '2023-01-01 10:08:55', '2023-01-05 09:20:11'),
 (49, 'Velour Pants', 'velour-pants', '<ul><li><p>SKU14448ATRBALP</p></li><li><p>Color blue</p></li><li><p> Supplier Style No.IB2048</p></li></ul>', NULL, '320.00', '0.00', NULL, NULL, NULL, NULL, NULL, 22, 1, 3, 13, '2023-01-01 10:08:58', '2023-01-01 10:58:19'),
 (50, 'Qatar Sweatpants', 'qatar-sweatpants', '<p><strong>Relaxed fit everyday casual outfit. A must have in every individual\'s wardrobe.<br></strong></p><ul><li><p>Smooth soft cotton blend fabric</p></li><li><p>Contrast graphic taping detail along the legs</p></li><li><p>Elasticated waistband with adjustable drawstrings</p></li><li><p>Dual side easy slip-in pockets to front</p></li><li><p>Each item sold separately</p></li></ul>', NULL, '236.00', '0.00', NULL, NULL, NULL, NULL, NULL, 14, 1, 2, 12, '2023-01-01 10:08:59', '2023-01-01 10:58:19'),
@@ -618,16 +641,16 @@ INSERT INTO `products` (`id`, `name`, `slug`, `details`, `info_and_care`, `price
 (63, 'Dri-Fit Graphic Hoodie', 'dri-fit-graphic-hoodie', NULL, NULL, '189.00', '0.00', NULL, NULL, NULL, NULL, NULL, 5, 1, 2, 10, '2023-01-01 10:38:42', '2023-01-01 10:58:19'),
 (64, 'Mesh Combo Hoodie', 'mesh-combo-hoodie', '<ul><li><p><strong>Smooth, stretchable polyester fabric</strong></p></li><li><p><strong>Inner attached mesh lining for breathability</strong></p></li><li><p><strong>Hoodie neck and long sleeves</strong></p></li><li><p><strong>Visible and secure front zipper placket</strong></p></li><li><p><strong>Cropped silhouette</strong></p></li><li><p><strong>Contrast FILA signature branding</strong></p></li><li><p><strong>Each item sold separately</strong></p></li></ul>', NULL, '170.00', '0.00', NULL, NULL, NULL, NULL, NULL, 17, 1, 4, 12, '2023-01-01 10:38:43', '2023-01-01 10:58:19'),
 (65, 'Knitted Hoodie', 'knitted-hoodie', NULL, NULL, '276.00', '0.00', NULL, NULL, NULL, NULL, NULL, 12, 1, 12, 10, '2023-01-01 10:38:44', '2023-01-05 08:42:27'),
-(66, 'Oversized Double Breasted Coat', 'oversized-double-breasted-coat', NULL, NULL, '248.00', '0.00', NULL, NULL, NULL, NULL, '248.00', 19, 1, 12, 14, '2023-01-01 10:41:41', '2023-01-04 19:40:20'),
-(67, 'High Low Zipped Jacket', 'high-low-zipped-jacket', '<p><strong>Chilly days are on the horizon, so cosy up with this stylish jacket designed for a casual look with a premium feel.<br><span style=\"color: rgb(102, 102, 102)\">Recycled: Recycling helps use natural resources efficiently and it supports sustainable development.</span><br><br></strong></p><ul><li><p>Quilted and comfortable polyester fabric</p></li><li><p>Padded lining for extra warmth</p></li><li><p>Long, detachable sleeves with elasticated cuffs</p></li><li><p>Secure zipper closure to front</p></li><li><p>Dual easy slip-in pockets to side</p></li><li><p>Each item sold separately</p></li></ul>', NULL, '226.00', '0.00', NULL, NULL, NULL, NULL, '226.00', 8, 1, 12, 12, '2023-01-01 10:41:42', '2023-01-05 09:18:20'),
-(68, 'Zip Through Fur Detail Jacket', 'zip-through-fur-detail-jacket', '<p><strong>Opulent yet understated, Trendyol’s range will complete both smart and casual outfits with finesse.<br></strong></p><ul><li><p>Soft and comfortable polyester fabric</p></li><li><p>Collar neck with long sleeves</p></li><li><p>Secure zipper closure to front</p></li><li><p>Dual side slip-in pockets</p></li><li><p>Each item sold separately</p></li></ul>', NULL, '386.00', '0.00', NULL, NULL, NULL, NULL, NULL, 12, 1, 12, 8, '2023-01-01 10:41:43', '2023-01-05 08:42:27'),
+(66, 'Oversized Double Breasted Coat', 'oversized-double-breasted-coat', NULL, NULL, '248.00', '0.00', NULL, NULL, NULL, NULL, '248.00', 18, 1, 12, 14, '2023-01-01 10:41:41', '2023-01-20 09:21:32'),
+(67, 'High Low Zipped Jacket', 'high-low-zipped-jacket', '<p><strong>Chilly days are on the horizon, so cosy up with this stylish jacket designed for a casual look with a premium feel.<br><span style=\"color: rgb(102, 102, 102)\">Recycled: Recycling helps use natural resources efficiently and it supports sustainable development.</span><br><br></strong></p><ul><li><p>Quilted and comfortable polyester fabric</p></li><li><p>Padded lining for extra warmth</p></li><li><p>Long, detachable sleeves with elasticated cuffs</p></li><li><p>Secure zipper closure to front</p></li><li><p>Dual easy slip-in pockets to side</p></li><li><p>Each item sold separately</p></li></ul>', NULL, '226.00', '0.00', NULL, NULL, NULL, NULL, '226.00', 7, 1, 12, 12, '2023-01-01 10:41:42', '2023-01-20 05:49:55'),
+(68, 'Zip Through Fur Detail Jacket', 'zip-through-fur-detail-jacket', '<p><strong>Opulent yet understated, Trendyol’s range will complete both smart and casual outfits with finesse.<br></strong></p><ul><li><p>Soft and comfortable polyester fabric</p></li><li><p>Collar neck with long sleeves</p></li><li><p>Secure zipper closure to front</p></li><li><p>Dual side slip-in pockets</p></li><li><p>Each item sold separately</p></li></ul>', NULL, '386.00', '0.00', NULL, NULL, NULL, NULL, NULL, 11, 1, 12, 8, '2023-01-01 10:41:43', '2023-01-20 09:21:32'),
 (69, 'Deco Glam Women Jacket', 'deco-glam-women-jacket', '<p><strong>Embrace the winter in this regular fit jacket designed by PUMA to keep you in style for off-duty days.<br></strong></p><ul><li><p>Soft and comfortable polyester blend fabric</p></li><li><p>High neck with long sleeves</p></li><li><p>Secure zipper closure to front</p></li><li><p>Elasticated hem for adjustable fit</p></li><li><p>Each item sold separately</p></li></ul>', NULL, '325.00', '0.00', NULL, NULL, NULL, NULL, NULL, 6, 1, 9, 1, '2023-01-01 10:41:44', '2023-01-07 12:09:50'),
-(70, 'Longline Coat', 'longline-coat', '<p><strong>Layer your outfit with this coat from Trendyol for a casual yet stylish look, ideal for daily wear.<br></strong></p><ul><li><p>Made from polyester fabric</p></li><li><p>Long sleeves with adjustable straps to cuffs</p></li><li><p>Secure double breasted button down closure</p></li><li><p>Adjustable self-tie belt to waist</p></li><li><p>Dual side easy slip-in pockets</p></li><li><p>Product Length: 110 cm</p></li><li><p>Each item sold separately</p></li></ul>', NULL, '340.00', '0.00', NULL, NULL, NULL, NULL, NULL, 13, 1, 10, 6, '2023-01-01 10:41:45', '2023-01-04 13:53:50'),
+(70, 'Longline Coat', 'longline-coat', '<p><strong>Layer your outfit with this coat from Trendyol for a casual yet stylish look, ideal for daily wear.<br></strong></p><ul><li><p>Made from polyester fabric</p></li><li><p>Long sleeves with adjustable straps to cuffs</p></li><li><p>Secure double breasted button down closure</p></li><li><p>Adjustable self-tie belt to waist</p></li><li><p>Dual side easy slip-in pockets</p></li><li><p>Product Length: 110 cm</p></li><li><p>Each item sold separately</p></li></ul>', NULL, '340.00', '0.00', NULL, NULL, NULL, NULL, NULL, 21, 1, 10, 6, '2023-01-01 10:41:45', '2023-01-20 08:42:05'),
 (71, 'High Waist Jeans', 'high-waist-jeans', '<p><strong>Casual with edgy edits, these jeans adds up for an effortlessly comfortable fit.<br></strong></p><ul><li><p>Made from comfortable cotton denim fabric</p></li><li><p>Concealed zipper fly and button top closure</p></li><li><p>Classic five pocket styling</p></li><li><p>Contrast Tommy Hilfiger signature patch branding</p></li><li><p>Each item sold separately</p></li></ul>', NULL, '426.00', '0.00', NULL, NULL, NULL, NULL, NULL, 9, 1, 8, 13, '2023-01-01 10:53:22', '2023-01-05 08:42:27'),
 (72, 'High Waist Skinny Jeans', 'high-waist-skinny-jeans', '<p><strong>An elevated take on the timeless Jeans with this iconic look.<br></strong></p><ul><li><p>Comfortable, soft cotton blend fabric</p></li><li><p>Concealed zipper fly with button top closure</p></li><li><p>Classic five pocket styling and secure belt hooks</p></li><li><p>Calvin Klein branded hardware and leather badge</p></li><li><p>Each item sold separately</p></li></ul>', NULL, '563.00', '0.00', NULL, NULL, NULL, NULL, NULL, 5, 1, 10, 6, '2023-01-01 10:53:23', '2023-01-04 13:51:50'),
-(73, 'High Waist Straight Jeans', 'high-waist-straight-jeans', NULL, NULL, '436.00', '0.00', NULL, NULL, NULL, NULL, NULL, 7, 1, 10, 8, '2023-01-01 10:53:24', '2023-01-05 09:18:20'),
+(73, 'High Waist Straight Jeans', 'high-waist-straight-jeans', NULL, NULL, '436.00', '0.00', NULL, NULL, NULL, NULL, NULL, 2, 1, 10, 8, '2023-01-01 10:53:24', '2023-01-20 09:29:36'),
 (74, 'High Waist Straight Jeans', 'high-waist-straight-jeans-UK-29-C', NULL, NULL, '234.00', '0.00', NULL, NULL, NULL, NULL, NULL, 14, 1, 11, 13, '2023-01-01 10:53:25', '2023-01-07 12:09:50'),
-(75, 'Pocket Detail Button Down Shirt', 'pocket-detail-button-down-shirt', NULL, NULL, '178.00', '0.00', 30, 'Percentage', '2023-01-02', '2023-01-21', '124.60', 11, 1, 12, 13, '2023-01-01 10:53:26', '2023-01-10 16:16:06'),
+(75, 'Pocket Detail Button Down Shirt', 'pocket-detail-button-down-shirt', NULL, NULL, '178.00', '0.00', 30, 'Percentage', '2023-01-02', '2023-01-21', '124.60', 10, 1, 12, 13, '2023-01-01 10:53:26', '2023-01-20 07:02:16'),
 (76, 'Air Max Excee Ewt Style', 'air-max-excee-ewt-style', '<p><strong>Inspired by the Nike Air Max 90, the Nike Air Max Excee Ewt Style celebrates a classic through a new lens.<br></strong></p><ul><li><p>Durable genuine leather upper with synthetic overlays</p></li><li><p>Eyelets with secure lace-up closure</p></li><li><p>Max Air unit delivers lightweight cushioning with every step</p></li><li><p>Foam midsole and foam and rubber outsole pods for added durability</p></li><li><p>Waffle patterned rubber outsole adds traction</p></li><li><p>Embroidered Nike swoosh branding</p></li></ul>', '<p>SKU72704SHWVKDPColorpinkClosingLace upToe ShapeRoundSole MaterialRubberUpper MaterialLeatherLining MaterialTextileSupplier Style No.DX0113-600</p>', '574.00', '0.00', NULL, NULL, NULL, NULL, '574.00', 5, 1, 2, 11, '2023-01-07 11:42:04', '2023-01-07 11:46:26'),
 (77, '4Dfwd', '4dfwd', NULL, NULL, '346.00', '0.00', NULL, NULL, NULL, NULL, '346.00', 8, 1, 3, 8, '2023-01-07 11:42:06', '2023-01-07 11:46:26'),
 (78, 'Re Lock Convertible Crossbody Bag', 're-lock-convertible-crossbody-bag', '<p><strong>The ultimate hands-free accessory, keeping everything organized and your look effortless.<br></strong></p><ul><li><p>Lightweight, durable PU upper</p></li><li><p>Main compartment with zipper closure</p></li><li><p>Dual inner slip-in slots</p></li><li><p>Easy accessible external pocket with magnetic closure</p></li><li><p>Dual side shoulder straps</p></li><li><p>Embossed Calvin Klein signature branding</p></li></ul>', NULL, '896.00', '0.00', NULL, NULL, NULL, NULL, '896.00', 7, 1, 10, 8, '2023-01-07 11:46:38', '2023-01-07 12:26:53'),
@@ -637,9 +660,9 @@ INSERT INTO `products` (`id`, `name`, `slug`, `details`, `info_and_care`, `price
 (82, 'Ess Men T-Shirt', 'ess-men-t-shirt', NULL, NULL, '234.00', '0.00', NULL, NULL, NULL, NULL, '234.00', 14, 1, 9, 7, '2023-01-07 11:53:38', '2023-01-10 16:16:06'),
 (83, 'Nsw T-Shirt', 'nsw-t-shirt', NULL, NULL, '125.00', '0.00', NULL, NULL, NULL, NULL, '125.00', 6, 1, 2, 10, '2023-01-07 11:53:39', '2023-01-10 16:20:52'),
 (84, 'N31 Fleece Essential Logo Hoodie', 'n31-fleece-essential-logo-hoodie', NULL, NULL, '245.00', '0.00', NULL, NULL, NULL, NULL, '245.00', 7, 1, 2, 8, '2023-01-07 11:53:41', '2023-01-10 16:10:34'),
-(85, 'Logo Printed Hoodie', 'logo-printed-hoodie', NULL, NULL, '453.00', '0.00', NULL, NULL, NULL, NULL, '453.00', 15, 1, 10, 10, '2023-01-07 11:53:43', '2023-01-10 16:16:06'),
+(85, 'Logo Printed Hoodie', 'logo-printed-hoodie', NULL, NULL, '453.00', '0.00', NULL, NULL, NULL, NULL, '453.00', 14, 1, 10, 10, '2023-01-07 11:53:43', '2023-01-20 09:31:32'),
 (86, 'Essential Sweatpants', 'essential-sweatpants', NULL, NULL, '353.00', '0.00', NULL, NULL, NULL, NULL, '353.00', 14, 1, 3, 14, '2023-01-07 11:53:45', '2023-01-10 16:20:52'),
-(87, 'Iconic T7 Track Pants', 'iconic-t7-track-pants', NULL, NULL, '325.00', '0.00', NULL, NULL, NULL, NULL, '325.00', 7, 1, 9, 8, '2023-01-07 11:53:47', '2023-01-10 16:20:52');
+(87, 'Iconic T7 Track Pants', 'iconic-t7-track-pants', NULL, NULL, '325.00', '0.00', NULL, NULL, NULL, NULL, '325.00', 5, 1, 9, 8, '2023-01-07 11:53:47', '2023-01-20 09:33:41');
 
 -- --------------------------------------------------------
 
@@ -885,7 +908,7 @@ INSERT INTO `product_sizes` (`id`, `product_id`, `size_id`, `stock`) VALUES
 (73, 46, 2, 3),
 (74, 46, 3, 8),
 (75, 47, 1, 5),
-(76, 47, 2, 7),
+(76, 47, 2, 6),
 (77, 47, 3, 3),
 (78, 48, 1, 6),
 (79, 48, 2, 5),
@@ -929,27 +952,27 @@ INSERT INTO `product_sizes` (`id`, `product_id`, `size_id`, `stock`) VALUES
 (117, 65, 1, 5),
 (118, 65, 2, 7),
 (119, 66, 1, 7),
-(120, 66, 2, 5),
+(120, 66, 2, 4),
 (121, 66, 3, 7),
 (122, 67, 2, 3),
-(123, 67, 1, 5),
-(124, 68, 1, 4),
+(123, 67, 1, 4),
+(124, 68, 1, 3),
 (125, 68, 2, 8),
 (126, 69, 1, 4),
 (127, 69, 2, 2),
 (128, 70, 1, 8),
 (129, 70, 2, 5),
-(130, 70, 3, 9),
+(130, 70, 3, 8),
 (131, 71, 1, 5),
 (132, 71, 2, 4),
 (133, 72, 1, 6),
 (134, 72, 2, 7),
-(135, 73, 1, 4),
-(136, 73, 2, 3),
+(135, 73, 1, 0),
+(136, 73, 2, 2),
 (137, 74, 1, 5),
 (138, 74, 2, 9),
 (139, 75, 1, 6),
-(140, 75, 2, 5),
+(140, 75, 2, 4),
 (141, 76, 1, 5),
 (142, 77, 1, 8),
 (143, 78, 1, 7),
@@ -961,11 +984,11 @@ INSERT INTO `product_sizes` (`id`, `product_id`, `size_id`, `stock`) VALUES
 (149, 83, 1, 6),
 (150, 84, 1, 7),
 (151, 85, 2, 7),
-(152, 85, 1, 8),
+(152, 85, 1, 7),
 (153, 86, 1, 7),
 (154, 86, 2, 7),
-(155, 87, 1, 5),
-(156, 87, 2, 2);
+(155, 87, 1, 4),
+(156, 87, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -990,7 +1013,13 @@ CREATE TABLE `reviews` (
 
 INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `review_id`, `comment`, `is_read`, `created_at`, `updated_at`) VALUES
 (17, 10, 73, NULL, 'turkifb', 0, '2023-01-06 09:45:00', '2023-01-06 09:45:00'),
-(19, 10, 73, 17, 'thank you', 0, '2023-01-06 21:08:47', '2023-01-06 21:08:47');
+(19, 10, 73, 17, 'thank you', 0, '2023-01-06 21:08:47', '2023-01-06 21:08:47'),
+(22, 10, 74, NULL, 'turydf', 0, '2023-01-20 05:14:03', '2023-01-20 05:14:03'),
+(23, 10, 74, NULL, 'fghjfghjfg', 0, '2023-01-20 05:15:02', '2023-01-20 05:15:02'),
+(24, 10, 74, NULL, 'fghfghfghfgh', 0, '2023-01-20 05:16:50', '2023-01-20 05:16:50'),
+(25, 10, 74, NULL, 'dfhdfhdfhdfhdfhdfhd', 0, '2023-01-20 05:17:43', '2023-01-20 05:17:43'),
+(26, 10, 74, NULL, 'thsdjigsd', 0, '2023-01-20 05:19:44', '2023-01-20 05:19:44'),
+(27, 10, 74, NULL, 'ok', 0, '2023-01-20 05:19:51', '2023-01-20 05:19:51');
 
 -- --------------------------------------------------------
 
@@ -1112,6 +1141,14 @@ CREATE TABLE `shopping_carts` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `shopping_carts`
+--
+
+INSERT INTO `shopping_carts` (`id`, `user_id`, `product_id`, `size_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(83, 17, 73, 2, 1, '2023-01-20 09:16:59', '2023-01-20 09:16:59'),
+(84, 17, 71, 2, 1, '2023-01-20 09:17:05', '2023-01-20 09:17:05');
+
 -- --------------------------------------------------------
 
 --
@@ -1162,8 +1199,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `phone_number`, `gender`, `remember_token`, `created_at`, `updated_at`, `role_id`) VALUES
-(10, 'turki alharbi', 'turki@example.com', NULL, '$2y$10$bjOIcqSKdTsX.//eQk80UO4fUEeJaHMHUjjys1xFFfyVJc9E40Zfu', 5529525933, 'Male', '5I9gQ0yEaxlVXJ2ihJlbj0Q2pUhf5WrZoblmLwnw1JnV4EnygUqUlWQPJ7NI', '2023-01-01 16:42:05', '2023-01-06 14:54:11', 1),
-(11, 'admin', 'admin@admin.com', NULL, '$2y$10$L8B1vf4.FIrsPlKjs8u13OCGPsqS6p7JDgAxYqZhw7.nEl4vbrpc.', NULL, 'Male', '4AE4hbJFP5OGxFaoonMmzMb6nlihllxHIkvOjslCKc72AaxDRJHbvTYmotG4', '2023-01-07 20:51:43', '2023-01-07 20:51:43', 1);
+(10, 'turki alharbi', 'turki@example.com', NULL, '$2y$10$0gc3lHkqxVlHJI.Ijomg1eRveZtI6HyTdIf5fmIfR2cC1Ol9AYfZe', 5529525933, 'Male', 'RDOPs1MM2awiFc9AkS0iIjR0l4csV47q2Q6t874pOnx4gCurSr8Gd1sNIIj0', '2023-01-01 16:42:05', '2023-01-20 08:32:22', 1),
+(11, 'admin', 'admin@admin.com', NULL, '$2y$10$L8B1vf4.FIrsPlKjs8u13OCGPsqS6p7JDgAxYqZhw7.nEl4vbrpc.', NULL, 'Male', '1o3NVw8lIBV6QzoKJsDHBVzHX0xr5q9yOZRfsRGMIlWOEzzB8s31yXVk0tmp', '2023-01-07 20:51:43', '2023-01-07 20:51:43', 1),
+(14, 'turki alharbi', 'alharbi.tur1@gmail.com', NULL, '$2y$10$XlzWj1qQR2B0Vz4ju82RceQ3vX.TXNEiTG89aIz5pMgdWiAdbeEXy', NULL, 'Male', 'yGcH4rdghRXAO21tj2gPzuwqBUBMjzl0t6q8sqVbRdWuMxF7Ud5xSVrIz10R', '2023-01-20 09:01:01', '2023-01-20 09:01:01', NULL),
+(15, 'turki alharbi', 'alharbi.sdfsdasdftur1@gmail.com', NULL, '$2y$10$pvZEuRfV6Gn2FlRFasgwAO45hPQDDV/.SaXfFP/enItBsM8XsGzL.', NULL, 'Male', 'oYOFEHF5lE8XCUf9b9USsmjCo1Tt0Rsr3p8vwBi5dQrThEQevWlD2sdWCsQO', '2023-01-20 09:02:57', '2023-01-20 09:02:57', NULL),
+(16, 'turki alharbi', 'alhardasfbi.sdfsdasdftur1@gmail.com', NULL, '$2y$10$.0K4ryVJyh/4M9Sd5RVmnONnd1.poxas5xnq8QJbIhV0b9nHqoiiy', NULL, 'Male', 'us9iGjsmq5zY7FqGrppTKEVd8BkAJtZvZba6nwnx1kjaasjHbIFSUezt6NpL', '2023-01-20 09:04:05', '2023-01-20 09:04:05', NULL),
+(17, 'turlio', 'alharssdfdasfbi.sdfsdasdftur1@gmail.com', NULL, '$2y$10$YSWFxmKGah1dtmL0r6ZxdeizwxsJTIw07DypJYC7apWPRTju9AHTK', NULL, 'Male', 'X4ekc7JP2mVJBxmmIeT0042eng7XO7PMtl2XUfKpnVzBwQGbKF3VP4XGpYLQ', '2023-01-20 09:07:06', '2023-01-20 09:07:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -1284,8 +1325,7 @@ CREATE TABLE `wishlists` (
 --
 
 INSERT INTO `wishlists` (`user_id`, `product_id`) VALUES
-(10, 70),
-(10, 69);
+(11, 85);
 
 --
 -- Indexes for dumped tables
@@ -1499,7 +1539,7 @@ ALTER TABLE `wishlists`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `banners`
@@ -1547,25 +1587,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `order_addresses`
 --
 ALTER TABLE `order_addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `order_coupons`
 --
 ALTER TABLE `order_coupons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `order_products`
 --
 ALTER TABLE `order_products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=274;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -1577,7 +1617,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1601,7 +1641,7 @@ ALTER TABLE `product_sizes`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1613,7 +1653,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `shopping_carts`
 --
 ALTER TABLE `shopping_carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `sizes`
@@ -1625,7 +1665,7 @@ ALTER TABLE `sizes`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
