@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\Sizes\Controllers\SizeController;
+use App\Pages\Admin\SizesPage\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------

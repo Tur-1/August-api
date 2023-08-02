@@ -1,6 +1,6 @@
 <?php
 
-use App\Pages\ShoppingCartPage\Controllers\ShoppingCartPageController;
+use App\Pages\Frontend\ShoppingCartPage\Controllers\ShoppingCartPageController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------

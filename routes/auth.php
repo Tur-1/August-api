@@ -40,3 +40,8 @@ Route::post('/email/verification-notification', [EmailVerificationNotificationCo
 Route::post('/logout', [AuthenticatedSessionController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
+
+
+Route::get('/get-authenticated-user', [AuthenticatedSessionController::class, 'getAuthUser'])
+    ->middleware('auth')
+    ->name('authenticatedUser');

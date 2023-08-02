@@ -25,18 +25,20 @@ trait ProductFilterTrait
         });
     }
 
-
     public function filterByStatus($query)
     {
         return $query->when(request()->input('status') == 'Active', fn ($query) => $query->Active())
             ->when(request()->input('status') == 'inactive', fn ($query) => $query->InActive());
     }
+
     public function filterBySorting($query)
     {
         return $query->when(request('sort') == 'new', fn ($query) => $query->latest())
             ->when(request('sort') == 'price-low-to-high', fn ($query) => $query->orderBy('price', 'Asc'))
             ->when(request('sort') == 'price-high-to-low', fn ($query) => $query->orderByDesc('price'));
     }
+
+
     public function filterByPrice($query)
     {
         $priceArray = request()->input('price');

@@ -21,7 +21,7 @@ class ProductBuilder extends Builder
         ]);
     }
 
-    public function whereCategory($category_id): self
+    public function whereHasCategory($category_id): self
     {
         return $this->whereHas('categories', function ($query) use ($category_id) {
             return $query->where('categories.id', $category_id)->select('categories.id');

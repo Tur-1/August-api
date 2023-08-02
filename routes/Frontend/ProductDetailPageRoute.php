@@ -1,6 +1,6 @@
 <?php
 
-use App\Pages\ProductDetailPage\Controllers\ProductDetailPageController;
+use App\Pages\Frontend\ProductDetailPage\Controllers\ProductDetailPageController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------

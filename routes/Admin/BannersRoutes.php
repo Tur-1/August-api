@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\Banners\Controllers\BannerController;
+use App\Pages\Admin\BannersPage\Controllers\BannerController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------

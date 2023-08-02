@@ -1,7 +1,7 @@
 <?php
 
-use App\Modules\Roles\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
+use App\Pages\Admin\RolesPage\Controllers\RoleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

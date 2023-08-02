@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Pages\WishlistPage\Services\WishlistPageService;
-use App\Pages\ProductDetailPage\Services\ProductDetailPageService;
+use App\Pages\Frontend\WishlistPage\Services\WishlistPageService;
+use App\Pages\Frontend\ProductDetailPage\Services\ProductDetailPageService;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -23,6 +23,19 @@ class AuthenticatedSessionController extends Controller
         return ['user' => auth()->user()];
     }
 
+    public function getAuthUser()
+    {
+
+        $user = auth()->user()->load('permissions');
+        $permissions = $user->permissions->pluck('slug')->toArray();
+
+
+
+        return response()->json([
+            'user' => $user,
+            'permissions' =>  $permissions,
+        ]);
+    }
     /**
      * Handle an incoming authentication request.
      *

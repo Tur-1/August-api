@@ -5,118 +5,123 @@ namespace App\Modules\Categories\Repository;
 use App\Traits\ImageUpload;
 use Illuminate\Support\Str;
 use App\Modules\Categories\Models\Category;
+use Illuminate\Support\Facades\Request;
 
 class CategoryRepository
 {
     use ImageUpload;
-
+    private $category;
     private $imageFolder = 'categories';
 
-    public function getSections()
+    public function __construct()
     {
-        return Category::where('is_section', true)->has('products')->get();
+        $this->category = new Category();
     }
-    public function getCategoryWithChildren()
+
+    public function getAllCategoriesHasProducts()
     {
-        return Category::sections()->get();
+        return $this->category::query()
+            ->select('id', 'name', 'url', 'slug', 'parent_id', 'section_id', 'is_section', 'parents_ids')
+            ->hasProducts()
+            ->get();
     }
-    public function getCategoriesTree()
-    {
-        return Category::tree();
-    }
+
+
 
     public function getSectionsWithCategories()
     {
-        return Category::hasProducts()->where('is_section', true);
+        return  Category::sectionsWithCategories();
     }
 
 
-    public function getAllSectionsWithCategories($records)
+
+    public function getAllCategories($section_id = null, $searchQuery = '')
     {
-        return Category::withSection()
-            ->orderBySection()
-            ->paginate($records);
+
+        return $this->category::WhenSearchByName($searchQuery)
+            ->withSection()
+            ->WhenSortBySection($section_id)
+            ->latest()
+            ->paginate(15)
+            ->withQueryString();
     }
 
-    public function getCategoriesBySection($section_id)
+
+    public function getAllCategoriesBySection($section_id)
     {
-        return Category::tree()
-            ->where('id', $section_id)
-            ->first()['children'];
+        return $this->category::query()
+            ->where('section_id', $section_id)
+            ->select('id', 'name', 'section_id', 'parent_id')
+            ->get();
     }
 
-    public function getCategory($category_id)
+    public function find($category_id)
     {
-        return Category::find($category_id);
+        return $this->category::find($category_id);
     }
 
-    public function saveSection($validatedRequest, Category $category = null)
+
+    public function save($request)
     {
-        if (is_null($category)) {
-            $category = new Category();
-        }
 
-        $category->name = $validatedRequest['name'];
-        $category->slug = Str::slug($validatedRequest['name'], '_');
-        $category->is_section = true;
 
-        if ($validatedRequest->hasFile('image')) {
-            $this->deletePreviousImage($this->getCategoryOldImagePath($category->image));
-            $category->image = $this->uploadImage($validatedRequest->file('image'), $this->imageFolder);
-        }
-
-        $category->save();
-    }
-
-    public function saveCategory($validatedRequest, Category $category = null)
-    {
-        if (is_null($category)) {
-            $category = new Category();
-        }
+        $parentId = $request['parent_id'];
 
         // if there is no parent id , the section id will be the parent for category
-        if ($this->isRequestDoesntHaveParentId($validatedRequest['parent_id'])) {
-            $parentId = $validatedRequest['section_id'];
-        } else {
-            $parentId = $validatedRequest['parent_id'];
+        if ($this->isCategoryDoesntHaveParentId($request['parent_id'])) {
+            $parentId = $request['section_id'];
         }
 
         $parentCategory = $this->getParentCategory($parentId);
 
-        $category->parents_ids = $parentCategory['ids'];
-        $category->section_id = $validatedRequest['section_id'];
-        $category->parent_id = $parentId;
-        $category->slug = $parentCategory['slug'] . '-' . Str::slug($validatedRequest['name'], '_');
+        $this->category->parents_ids = $parentCategory['parents_ids'];
+        $this->category->section_id = $request['section_id'];
+        $this->category->parent_id = $parentId;
+        $this->category->name = $request['name'];
+        $this->category->slug = Str::slug($request['name'], '_');
+        $this->category->url =   $parentCategory['url'] . '-' .  Str::slug($request['name'], '_');
 
-        $category->name = $validatedRequest['name'];
 
-        if ($validatedRequest->hasFile('image')) {
-            $this->deletePreviousImage($this->getCategoryOldImagePath($category->image));
-            $category->image = $this->uploadImage($validatedRequest->file('image'), $this->imageFolder);
+
+        if ($request->hasFile('image')) {
+            $this->deletePreviousImage($this->getCategoryOldImagePath($this->category->image));
+            $this->category->image = $this->uploadImage($request->file('image'), $this->imageFolder);
         }
 
-        return $category->save();
+        return $this->category->save();
     }
 
-    public function destroyCategory($category_id)
+    public function update($request, $category_id)
     {
-        $category = $this->getCategory($category_id);
+        $this->category = $this->find($category_id);
+
+        $this->save($request);
+
+
+        return $this->category;
+    }
+    public function destroy($category_id)
+    {
+        $category = $this->find($category_id);
 
         $this->destroyModelWithImage($category, $this->getCategoryOldImagePath($category->image));
     }
 
-    private function getParentCategory($parentId)
+    private function getParentCategory($parent_id)
     {
-        $parentCategory = Category::where('id', $parentId)->first();
 
-        $ids = $parentCategory['parents_ids'] ?? [intval($parentId)];
+        $parentCategory =   $this->category::query()
+            ->select('parents_ids', 'url', 'id')
+            ->find($parent_id);
 
-        $ids[] = $parentCategory['id'];
+        $parents_ids = $parentCategory['parents_ids'];
+        $parents_ids[] = $parentCategory['id'];
 
-        return ['ids' => array_unique($ids), 'slug' => $parentCategory['slug']];
+        return ['parents_ids' => $parents_ids, 'url' => $parentCategory['url']];
     }
 
-    private function isRequestDoesntHaveParentId($parent_id)
+
+    private function isCategoryDoesntHaveParentId($parent_id)
     {
         return is_null($parent_id) || empty($parent_id);
     }

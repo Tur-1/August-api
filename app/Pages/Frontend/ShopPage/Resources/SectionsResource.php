@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Pages\Frontend\ShopPage\Resources;
+
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Modules\Categories\Resources\CategoriesResource;
+
+class SectionsResource extends JsonResource
+{
+    /**
+     * Transform the resource collection into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     */
+    public function toArray($request)
+    {
+
+        return [
+            'id' => $this['id'],
+            'name' => $this['name'],
+            'slug' => $this['slug'],
+        ];
+    }
+}

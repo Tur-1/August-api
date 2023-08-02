@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Pages\Frontend\WishlistPage\Services;
+
+use Illuminate\Support\Facades\Session;
+use App\Modules\Users\Repository\UserRepository;
+use App\Modules\Products\Repository\ProductRepository;
+use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
+
+class  WishlistPageService
+{
+
+    public function getUserWishlist()
+    {
+        return  ProductsListResource::collection((new UserRepository())->getWishlistProducts());
+    }
+
+    public function addProductToWishlist($product_id = null)
+    {
+
+        if (!is_null($product_id)) {
+            if (auth()->user()->WishlistHas($product_id)) {
+
+                auth()->user()->wishlist()->detach($product_id);
+            } else {
+
+                auth()->user()->wishlist()->attach($product_id);
+            }
+        }
+    }
+}

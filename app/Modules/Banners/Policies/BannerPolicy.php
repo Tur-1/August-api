@@ -2,9 +2,7 @@
 
 namespace App\Modules\Banners\Policies;
 
-use App\Modules\Users\Models\User;
 use App\Actions\UserCanAccessAction;
-use App\Modules\Banners\Models\Banner;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BannerPolicy

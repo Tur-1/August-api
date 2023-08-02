@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\Coupons\Controllers\CouponController;
+use App\Pages\Admin\CouponsPage\Controllers\CouponController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------

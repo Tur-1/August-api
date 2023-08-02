@@ -1,8 +1,8 @@
 <?php
 
 
-use App\Modules\Brands\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
+use App\Pages\Admin\BrandsPage\Controllers\BrandController;
 
 /*
 |--------------------------------------------------------------------------

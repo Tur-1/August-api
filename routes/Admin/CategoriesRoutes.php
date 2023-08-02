@@ -1,8 +1,7 @@
 <?php
 
-use App\Modules\Categories\Controllers\CategoryController;
-use App\Modules\Categories\Controllers\FrontEndCategoryController;
-
+use App\Pages\Admin\CategoriesPage\Controllers\CategoryController;
+use App\Pages\Admin\CategoriesPage\Controllers\SectionController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -18,18 +17,36 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(CategoryController::class)->group(function () {
 
-    Route::get('/categories', 'getAllSectionsWithCategories');
+    // get all categories 
+    Route::get('/categories', 'getAllCategories');
 
+    // get all categories by section id
+    Route::get('/categories/{section_id}/sections', 'getAllCategoriesBySection');
+
+
+    // store new category
+    Route::post('/categories/store', 'storeCategory');
+
+    // show category
+    Route::post('/categories/show/{id}', 'showCategory');
+
+    // update category
+    Route::post('/categories/update/{id}', 'updateCategory');
+
+    // delete category
+    Route::post('/categories/delete/{id}', 'destroyCategory');
+});
+
+
+Route::controller(SectionController::class)->group(function () {
+
+
+    // get all sections 
     Route::get('/categories/sections', 'getSections');
 
-    Route::get('/categories/sections/{section_id}', 'getCategoriesBySection');
+    // store new section
+    Route::post('/categories/sections/store', 'storeNewSection');
 
-    Route::post('/categories/section/store', 'storeNewSection');
-
-    Route::post('/categories/section/update/{id}', 'updateSection');
-
-    Route::post('/categories/store', 'storeCategory');
-    Route::post('/categories/show/{id}', 'showCategory');
-    Route::post('/categories/update/{id}', 'updateCategory');
-    Route::post('/categories/delete/{id}', 'destroyCategory');
+    // delete category
+    Route::post('/categories/sections/{id}/update', 'updateSection');
 });

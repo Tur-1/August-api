@@ -1,6 +1,6 @@
 <?php
 
-use App\Pages\HomePage\Controllers\HomePageController;
+use App\Pages\Frontend\HomePage\Controllers\HomePageController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -17,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(HomePageController::class)->group(function () {
 
-    Route::get('/home', 'index');
+    Route::get('/home-items', 'getBanners');
+    Route::get('/home-latest-products', 'getLatestProducts');
 });

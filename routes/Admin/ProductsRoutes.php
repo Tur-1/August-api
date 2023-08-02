@@ -1,8 +1,8 @@
 <?php
 
-use App\Modules\Products\Controllers\ProductController;
-use App\Modules\Products\Controllers\ProductImageController;
 use Illuminate\Support\Facades\Route;
+use App\Pages\Admin\ProductsPage\Controllers\ProductController;
+use App\Pages\Admin\ProductsPage\Controllers\ProductImageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

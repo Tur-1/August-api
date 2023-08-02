@@ -1,6 +1,7 @@
 <?php
 
-use App\Modules\Reviews\Controllers\ReviewController;
+use App\Pages\Admin\ReviewsPage\Controllers\ReviewController;
+
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------

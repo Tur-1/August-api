@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Modules\Products\Models\Product;
 use App\Modules\Roles\Models\Permission;
 use Illuminate\Notifications\Notifiable;
-use App\Modules\Addresses\Models\Address;
+use App\Modules\Users\Models\UserAddress;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Modules\Users\EloquentBuilders\UserBuilder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -76,7 +76,7 @@ class User extends Authenticatable
     }
     public function addresses(): HasMany
     {
-        return $this->hasMany(Address::class);
+        return $this->hasMany(UserAddress::class, 'user_id');
     }
     public function wishlistHas($product_id)
     {

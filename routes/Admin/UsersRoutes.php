@@ -1,7 +1,7 @@
 <?php
 
-use App\Modules\Users\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Pages\Admin\UsersPage\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

@@ -29,6 +29,6 @@ class UserPermissionsSeeder extends Seeder
             ];
         }
 
-        DB::table('user_permission')->insert($user_permissions);
+        DB::table('user_permissions')->insert($user_permissions);
     }
 }

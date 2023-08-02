@@ -1,6 +1,6 @@
 <?php
 
-use App\Pages\Frontend\Categories\Http\Controllers\CategoriesPageController;
+use App\Pages\Frontend\CategoriesPage\Controllers\CategoriesPageController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(CategoriesPageController::class)->group(function () {
 
-    Route::get('/categories', 'index')->name('categoriesPage');
+    Route::get('/categories', 'getSectionsWithCategories');
+
+    Route::get('/categories/sections', 'getAllSections');
 });

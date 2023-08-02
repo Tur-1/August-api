@@ -1,6 +1,6 @@
 <?php
 
-use App\Modules\Colors\Controllers\ColorController;
+use App\Pages\Admin\ColorsPage\Controllers\ColorController;
 use Illuminate\Support\Facades\Route;
 
 /*

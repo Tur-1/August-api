@@ -3,6 +3,7 @@
 namespace App\Modules\Products\Repository;
 
 use App\Modules\Categories\Models\Category;
+use App\Modules\Products\Actions\GenerateProductSlug;
 use App\Modules\Products\Models\Product;
 use App\Modules\Products\Services\ProductDiscountService;
 use App\Traits\ImageUpload;
@@ -41,12 +42,13 @@ class ProductRepository
     public function getShopPageProducts($category_id)
     {
         return $this->product
-            ->whereCategory($category_id)
+            ->whereHasCategory($category_id)
             ->withMainProductImage()
             ->withFilters()
             ->active()
             ->latest()
-            ->paginate(12)->withQueryString();
+            ->paginate(10)
+            ->withQueryString();
     }
     public function getProductDetail($productSlug)
     {
@@ -111,7 +113,7 @@ class ProductRepository
         $product->discount_expires_at = $request->discount_expires_at;
         $product->discounted_price = (new ProductDiscountService())->getDiscountedPrice($request);
         $product->name = Str::title($request->name);
-        $product->slug = $this->generateSlug($request->name, $product->id);
+        $product->slug = (new GenerateProductSlug())->handle($request->name, $product->id);
         $product->stock = $this->getProductStock($sizeOptions);
 
         $product->save();
@@ -126,16 +128,7 @@ class ProductRepository
         return $product;
     }
 
-    private function generateSlug($product_name, $product_id): string
-    {
-        $product_slug = Str::slug($product_name);
 
-        if (Product::where('slug', $product_slug)->where('id', '!=', $product_id)->exists()) { // if exists ? add random strings to product slug
-            $product_slug .= '-' . Str::random(2) . '-' . rand(1, 100) . '-' . Str::random(1);
-        }
-
-        return $product_slug;
-    }
 
     private function getSizeOptions($sizeOptionsRequest): array
     {
