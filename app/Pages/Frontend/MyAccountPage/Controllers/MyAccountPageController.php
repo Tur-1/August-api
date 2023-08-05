@@ -5,38 +5,31 @@ namespace App\Pages\Frontend\MyAccountPage\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Pages\Frontend\MyAccountPage\Services\MyAccountPageService;
-use App\Pages\Frontend\MyAccountPage\Requests\StoreUserAddressRequest;
-use App\Pages\Frontend\MyAccountPage\Requests\UpdateAccountPasswordRequest;
-use App\Pages\Frontend\MyAccountPage\Requests\StoreAccountInformationRequest;
-use App\Pages\Frontend\MyAccountPage\Services\UserAddressService;
+use App\Pages\Frontend\MyAccountPage\Requests\UpdateUserPasswordRequest;
+use App\Pages\Frontend\MyAccountPage\Requests\StoreUserInformationRequest;
 
 class MyAccountPageController extends Controller
 {
 
     private $myAccountService;
-    private $userAddressService;
 
 
-    public function __construct(MyAccountPageService $myAccountPageService, UserAddressService $userAddressService)
+    public function __construct(MyAccountPageService $myAccountPageService)
     {
         $this->myAccountService =  $myAccountPageService;
-        $this->userAddressService =  $userAddressService;
     }
 
-    public function index()
+    public function getUserInformation()
     {
-
-        return response()->success([
-            'userInfo' => $this->myAccountService->getUserInformation(),
-            'orders' =>  $this->myAccountService->getUserOrders(),
-        ]);
+        return response()->success($this->myAccountService->getUserInformation());
     }
 
-
-    public function updateAccountInformation(StoreAccountInformationRequest $request)
+    public function updateUserInformation(StoreUserInformationRequest $request)
     {
 
-        $user = $this->myAccountService->updateAccountInfo($request->validated());
+        $validatedRequest =  $request->validated();
+
+        $user = $this->myAccountService->updateAccountInfo($validatedRequest);
 
 
         return response()->success([
@@ -46,11 +39,10 @@ class MyAccountPageController extends Controller
     }
 
 
-    public function updateAccountPhoneNumber(Request $request)
+    public function updateUserPhoneNumber(Request $request)
     {
 
         $request->validate(['phone_number' => 'required|digits_between:10,20|numeric']);
-
 
         $this->myAccountService->updatePhoneNumber($request->phone_number);
 
@@ -59,7 +51,7 @@ class MyAccountPageController extends Controller
         ]);
     }
 
-    public function updateAccountPassword(UpdateAccountPasswordRequest $request)
+    public function updateUserPassword(UpdateUserPasswordRequest $request)
     {
         $request->validated();
 
@@ -67,48 +59,6 @@ class MyAccountPageController extends Controller
 
         return   response()->success([
             'message' => 'your password has been updated successfully',
-        ]);
-    }
-
-
-    public function storeNewAddress(StoreUserAddressRequest $request)
-    {
-
-        $address = $this->userAddressService->createUserAddress($request->validated());
-
-        return   response()->success([
-            'address' => $address,
-            'message' => 'new address has been added successfully',
-        ]);
-    }
-
-    public function updateUserAddress(StoreUserAddressRequest $request)
-    {
-
-        $this->userAddressService->updateUserAddress($request->validated(), $request['address_id']);
-
-
-        return  response()->success([
-            'userAddresses' => $this->userAddressService->getUserAddresses(),
-            'message' => 'address has been updated successfully'
-        ]);
-    }
-    public function destroyUserAddress($address_id)
-    {
-
-        $this->userAddressService->destroyUserAddress($address_id);
-
-        return  response()->success([
-            'message' => 'address has been deleted successfully',
-        ]);
-    }
-
-    public function showOrder($id)
-    {
-        $order = $this->myAccountService->getUserOrderDetail($id);
-
-        return response()->success([
-            'order' => $order,
         ]);
     }
 }

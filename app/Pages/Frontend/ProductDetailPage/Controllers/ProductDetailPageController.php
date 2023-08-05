@@ -18,20 +18,16 @@ class ProductDetailPageController extends Controller
 
         $product  = $productService->getProductDetail($slug);
         try {
-            $response = response()->success([
+            return response()->success([
                 'product' => $product,
                 'sizeOptions' =>  $productService->getSizeOptions(),
                 'categories' => $productService->getCategories(),
                 'images' => $productService->getProductImages(),
-                'reviews' => $productService->getProductReviews($product['id']),
-                'relatedProducts' => $productService->getRelatedProducts(),
 
             ]);
         } catch (PageNotFoundException $ex) {
-            $response = response()->error($ex->getMessage(), 404);
+            return response()->error($ex->getMessage(), 404);
         }
-
-        return $response;
     }
     public function getProductReviews($id, ProductDetailPageService $productService)
     {
@@ -39,6 +35,19 @@ class ProductDetailPageController extends Controller
 
             $response = response()->success([
                 'reviews' => $productService->getProductReviews($id),
+            ]);
+        } catch (PageNotFoundException $ex) {
+            $response = response()->error($ex->getMessage(), 404);
+        }
+
+        return $response;
+    }
+    public function getRelatedProducts($productid, ProductDetailPageService $productService)
+    {
+        try {
+
+            $response = response()->success([
+                'reviews' => $productService->getProductReviews($productid),
             ]);
         } catch (PageNotFoundException $ex) {
             $response = response()->error($ex->getMessage(), 404);

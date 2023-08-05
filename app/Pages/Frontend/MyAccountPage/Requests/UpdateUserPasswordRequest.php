@@ -5,7 +5,7 @@ namespace App\Pages\Frontend\MyAccountPage\Requests;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAccountPasswordRequest extends FormRequest
+class UpdateUserPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

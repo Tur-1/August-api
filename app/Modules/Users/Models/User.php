@@ -5,22 +5,21 @@ namespace App\Modules\Users\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use Laravel\Sanctum\HasApiTokens;
-use App\Modules\Roles\Models\Role;
-use App\Modules\Orders\Models\Order;
-use Illuminate\Support\Facades\Hash;
 use App\Modules\Products\Models\Product;
-use App\Modules\Roles\Models\Permission;
 use Illuminate\Notifications\Notifiable;
-use App\Modules\Users\Models\UserAddress;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Modules\Users\EloquentBuilders\UserBuilder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Modules\Users\Traits\UserAttributesTrait;
+use App\Modules\Users\Traits\UserRelationshipsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens,
+        HasFactory,
+        Notifiable,
+        UserAttributesTrait,
+        UserRelationshipsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -60,33 +59,14 @@ class User extends Authenticatable
     {
         return new UserBuilder($query);
     }
-    protected function password(): Attribute
-    {
-        return Attribute::make(
-            set: fn ($value) =>  Hash::needsRehash($value) ? Hash::make($value) : $value,
-        );
-    }
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
-    public function permissions()
-    {
-        return $this->belongsToMany(Permission::class, 'user_permissions', 'user_id', 'permission_id');
-    }
-    public function addresses(): HasMany
-    {
-        return $this->hasMany(UserAddress::class, 'user_id');
-    }
+
+
+
     public function wishlistHas($product_id)
     {
         return  $this->wishlist()
             ->where('product_id', $product_id)
             ->exists('product_id');
-    }
-    public function wishlist()
-    {
-        return $this->belongsToMany(Product::class, 'wishlists');
     }
 
     public function wishlistProducts()
@@ -120,10 +100,5 @@ class User extends Authenticatable
             ->wherePivot('product_id',  $product_id)
             ->wherePivot('size_id', $size_id)
             ->exists('size_id');
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'user_id');
     }
 }

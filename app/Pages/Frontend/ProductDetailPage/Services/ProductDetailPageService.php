@@ -37,14 +37,7 @@ class  ProductDetailPageService
     {
         return  ProductDetailReviewsResource::collection((new ReviewRepository())->getProductReviews($productId));
     }
-    public function addToShoppingCart($request = null)
-    {
 
-        if (!auth()->user()->shoppingCartHas($request['product_id'], $request['size_id'])) {
-
-            auth()->user()->shoppingCart()->attach($request['product_id'], ['size_id' => $request['size_id'], 'quantity' => 1]);
-        }
-    }
     public function getCategories()
     {
 

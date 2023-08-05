@@ -4,7 +4,7 @@ namespace App\Pages\Frontend\MyAccountPage\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserInfoResource extends JsonResource
+class UserInformationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

@@ -5,7 +5,6 @@ namespace App\Pages\Frontend\MyAccountPage\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Pages\Frontend\MyAccountPage\Requests\StoreUserAddressRequest;
-use App\Pages\Frontend\MyAccountPage\Requests\UpdateAccountPasswordRequest;
 use App\Pages\Frontend\MyAccountPage\Services\UserAddressService;
 
 class UserAddressController extends Controller
@@ -20,12 +19,12 @@ class UserAddressController extends Controller
         $this->userAddressService =  $userAddressService;
     }
 
-    public function index()
+    public function getUserAddresses()
     {
 
-        return response()->success([
-            'userAddresses' => $this->userAddressService->getUserAddresses(),
 
+        return response()->success([
+            'addresses' => $this->userAddressService->getUserAddresses(),
         ]);
     }
 
@@ -48,7 +47,7 @@ class UserAddressController extends Controller
 
 
         return  response()->success([
-            'userAddresses' => $this->userAddressService->getUserAddresses(),
+            'addresses' => $this->userAddressService->getUserAddresses(),
             'message' => 'address has been updated successfully'
         ]);
     }

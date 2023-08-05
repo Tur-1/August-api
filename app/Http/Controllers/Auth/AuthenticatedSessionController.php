@@ -110,6 +110,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return response()->noContent();
+        return response()->success(['message' => "You have successfully logged out!"]);
     }
 }

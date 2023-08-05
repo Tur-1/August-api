@@ -11,33 +11,30 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->controller(MyAccountPageController::class)->group(function () {
 
-    // my account page
-    Route::get('/my-account', 'index');
+
+    Route::get('/my-account/user-info', 'getUserInformation');
 
     // update account information
-    Route::post('/my-account/update-info', 'updateAccountInformation');
+    Route::post('/my-account/user/update-info', 'updateUserInformation');
 
     // update phone number
-    Route::post('/my-account/update-phone-number',  'updateAccountPhoneNumber');
+    Route::post('/my-account/user/update-phone-number',  'updateUserPhoneNumber');
 
     // update password
-    Route::post('/my-account/update-password',  'updateAccountPassword');
-
-    // show order 
-    Route::get('/my-account/orders/{id}', 'showOrder');
+    Route::post('/my-account/user/update-password',  'updateUserPassword');
 });
 
 Route::middleware(['auth:sanctum'])->controller(UserAddressController::class)->group(function () {
 
     // get user addresses
-    Route::get('/my-account/user-addresses',  'index');
+    Route::get('/my-account/user/addresses',  'getUserAddresses');
 
     // store new address
-    Route::post('/my-account/new-address',  'storeNewAddress');
+    Route::post('/my-account/user/addresses/store',  'storeNewAddress');
 
     // update address
-    Route::post('/my-account/update-address', 'updateUserAddress');
+    Route::post('/my-account/user/addresses/update', 'updateUserAddress');
 
     // destroy address
-    Route::post('/my-account/delete-address/{id}', 'destroyUserAddress');
+    Route::post('/my-account/user/addresses/{id}/delete', 'destroyUserAddress');
 });

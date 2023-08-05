@@ -16,7 +16,6 @@ class ProductDiscountService
     }
     public function getDiscountAmount($discountAmount, $discount_type)
     {
-        $discounted_price = 0;
 
         $discount_amount = $discountAmount;
 

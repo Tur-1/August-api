@@ -5,7 +5,7 @@ namespace App\Pages\Frontend\MyAccountPage\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAccountInformationRequest extends FormRequest
+class StoreUserInformationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 trait ProductAttributesTrait
 {
 
-    // private $productImagePath = '/products/product_' . $this->id . '/';
 
     protected function mainImageUrl(): Attribute
     {

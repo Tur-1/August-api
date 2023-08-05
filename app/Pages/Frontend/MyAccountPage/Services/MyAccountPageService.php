@@ -7,7 +7,7 @@ use Exception;
 
 use App\Modules\Orders\Repository\OrderRepository;
 
-use App\Pages\Frontend\MyAccountPage\Resources\UserInfoResource;
+use App\Pages\Frontend\MyAccountPage\Resources\UserInformationResource;
 use App\Pages\Frontend\MyAccountPage\Resources\MyAccountPageOrdersResource;
 use App\Pages\Frontend\MyAccountPage\Resources\OrderPageResource;
 
@@ -16,7 +16,7 @@ class MyAccountPageService
 
     public function getUserInformation()
     {
-        return UserInfoResource::make(auth()->user());
+        return UserInformationResource::make(auth()->user());
     }
 
     public function getUserOrders()
@@ -31,7 +31,7 @@ class MyAccountPageService
 
     public function updatePhoneNumber($phoneNumber)
     {
-        auth()->user()->update(['phone_number' => intval($phoneNumber)]);
+        return auth()->user()->update(['phone_number' => intval($phoneNumber)]);
     }
     public function updatePassword($password)
     {
@@ -41,6 +41,6 @@ class MyAccountPageService
     {
         $user =  auth()->user()->update($information);
 
-        return UserInfoResource::make($user);
+        return UserInformationResource::make($user);
     }
 }
