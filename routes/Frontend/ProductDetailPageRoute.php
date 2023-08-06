@@ -17,12 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(ProductDetailPageController::class)->group(function () {
 
-    Route::get('/product-detail/{product_slug}', 'getProductDetail')->name('productDetailPage');
+    Route::get('/product-detail/{product_slug}', 'getProductDetail');
 
-    Route::get('/product-detail-reviews/{product_id}', 'getProductReviews')->name('ProductReviews');
+    Route::get('/product-detail/{product_id}/reviews', 'getProductReviews');
+
+    Route::get('/product-detail/{product_id}/related-products', 'getRelatedProducts');
 
 
-    Route::post('/product-detail/add-to-cart', 'addToShoppingCart')->name('addToShoppingCart');
+    Route::post('/product-detail/add-to-cart', 'addToCart');
 
-    Route::post('/product-detail/{product_slug}/comment', 'addComment')->name('addComment');
+    Route::post('/product-detail/{product_slug}/comment', 'addComment');
 });

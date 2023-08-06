@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Exceptions\PageNotFoundException;
+use App\Modules\ShoppingCart\Models\ShoppingCart;
 use App\Modules\Products\Repository\ProductRepository;
+use App\Modules\ShoppingCart\Requests\StoreCartItemRequest;
 use App\Pages\Frontend\ProductDetailPage\Services\ProductDetailPageService;
 
 class ProductDetailPageController extends Controller
@@ -16,8 +18,9 @@ class ProductDetailPageController extends Controller
     {
 
 
-        $product  = $productService->getProductDetail($slug);
         try {
+            $product  = $productService->getProductDetail($slug);
+
             return response()->success([
                 'product' => $product,
                 'sizeOptions' =>  $productService->getSizeOptions(),
@@ -47,7 +50,7 @@ class ProductDetailPageController extends Controller
         try {
 
             $response = response()->success([
-                'reviews' => $productService->getProductReviews($productid),
+                'relatedProducts' => $productService->getRelatedProducts($productid),
             ]);
         } catch (PageNotFoundException $ex) {
             $response = response()->error($ex->getMessage(), 404);
@@ -55,20 +58,17 @@ class ProductDetailPageController extends Controller
 
         return $response;
     }
-    public function addToShoppingCart(Request $request, ProductDetailPageService $productService)
+    public function addToCart(StoreCartItemRequest $request, ProductDetailPageService $productService)
     {
 
-        if (is_null($request->size_id) || is_null($request->product_id)) {
-            return ['status' => 404];
-        }
-
+        $request->validated();
 
         if (!auth()->check()) {
             $productService->storeProductDetailInSession($request);
             return  response()->success(['requireAuth' => true]);
         }
 
-        $productService->addToShoppingCart($request);
+        $productService->addToCart($request);
 
         return  response()->success([
             'message' => 'The product was added to your cart!',

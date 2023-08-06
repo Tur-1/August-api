@@ -4,6 +4,7 @@ namespace App\Pages\Frontend\HomePage\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Modules\Products\Models\ShoppingCart;
 use App\Pages\Frontend\HomePage\Services\HomePageService;
 
 class HomePageController extends Controller
@@ -12,6 +13,7 @@ class HomePageController extends Controller
 
     public function getBanners(HomePageService $homePageService)
     {
+
         $banners = $homePageService->getBanners();
         $mediumBanners =  $homePageService->getMediumBanners($banners);
         $largeBanners = $homePageService->getLargeBanners($banners);

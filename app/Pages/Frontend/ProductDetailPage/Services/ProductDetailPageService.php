@@ -7,8 +7,10 @@ use App\Exceptions\PageNotFoundException;
 use App\Modules\Reviews\Services\ReviewService;
 use App\Modules\Reviews\Repository\ReviewRepository;
 use App\Modules\Products\Repository\ProductRepository;
+use App\Modules\ShoppingCart\Repository\ShoppingCartRepository;
 use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
 use App\Pages\Frontend\ProductDetailPage\Resources\ProductDetailResource;
+use App\Pages\Frontend\ProductDetailPage\Actions\StoreCategoriesIdsInSession;
 use App\Pages\Frontend\ProductDetailPage\Resources\ProductDetailImagesResource;
 use App\Pages\Frontend\ProductDetailPage\Resources\ProductDetailReviewsResource;
 use App\Pages\Frontend\ProductDetailPage\Resources\ProductDetailCategoriesResource;
@@ -18,6 +20,7 @@ class  ProductDetailPageService
 {
 
     private $productDetail;
+
 
     public function getProductDetail($productSlug)
     {
@@ -29,14 +32,15 @@ class  ProductDetailPageService
             throw new PageNotFoundException();
         }
 
+        (new StoreCategoriesIdsInSession())->handle($this->productDetail->categories);
 
         return ProductDetailResource::make($this->productDetail);
     }
-
-    public function getProductReviews($productId)
+    public function getProductImages()
     {
-        return  ProductDetailReviewsResource::collection((new ReviewRepository())->getProductReviews($productId));
+        return  ProductDetailImagesResource::collection($this->productDetail->productImages);
     }
+
 
     public function getCategories()
     {
@@ -49,26 +53,29 @@ class  ProductDetailPageService
         return  ProductDetailSizeOptionsResource::collection($this->productDetail->stockSizes);
     }
 
-    public function getRelatedProducts()
+    public function getRelatedProducts($product_id)
     {
-
         return ProductsListResource::collection((new ProductRepository())
-            ->getRelatedProducts(
-                $this->productDetail->id,
-                $this->productDetail->categories->pluck('id')->toArray()
-            ));
-    }
-    public function getProductImages()
-    {
-        return  ProductDetailImagesResource::collection($this->productDetail->productImages);
+            ->getRelatedProducts($product_id, Session::get('categoriesIds')));
     }
 
+    public function getProductReviews($productId)
+    {
+        return  ProductDetailReviewsResource::collection(
+            (new ReviewRepository())->getProductReviews($productId)
+        );
+    }
     public function createComment($comment, $productid)
     {
 
         $comment = (new ReviewRepository())->createReview($comment, $productid);
 
         return  $comment;
+    }
+    public function addToCart($request)
+    {
+
+        (new ShoppingCartRepository())->storeCartItem($request['product_id'], $request['size_id']);
     }
 
     public function storeProductDetailInSession($request)

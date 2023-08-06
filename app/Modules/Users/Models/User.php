@@ -7,8 +7,9 @@ namespace App\Modules\Users\Models;
 use Laravel\Sanctum\HasApiTokens;
 use App\Modules\Products\Models\Product;
 use Illuminate\Notifications\Notifiable;
-use App\Modules\Users\EloquentBuilders\UserBuilder;
+use App\Modules\ShoppingCart\Models\ShoppingCart;
 use App\Modules\Users\Traits\UserAttributesTrait;
+use App\Modules\Users\EloquentBuilders\UserBuilder;
 use App\Modules\Users\Traits\UserRelationshipsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -76,7 +77,10 @@ class User extends Authenticatable
             ->withBrandName()
             ->active();
     }
-
+    public function carts()
+    {
+        return $this->hasMany(ShoppingCart::class, 'user_id');
+    }
 
     public function shoppingCart()
     {

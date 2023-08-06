@@ -34,7 +34,6 @@ class ProductDetailResource extends JsonResource
             'info_and_care' => $this->info_and_care,
             'details' => $this->details,
             'in_stock' => $this->stock > 0 ? true : false,
-
             'brand_name' => $this->brand_name,
             'brand_image' => $this->brand_image,
             'inWishlist' => in_array($this->id, app('inWishlist')),
