@@ -35,27 +35,34 @@ class CartProductsResource extends JsonResource
         $total_price = intval($price) * $this['pivot']['quantity'];
 
         return [
-            'cart_item_id' => $this['pivot']->id,
-            'id' => $this['id'],
-            'name' => $this['name'],
-            'slug' =>  $this['slug'],
-            'brand_name' => $this['brand_name'],
-            'main_image_full_name' => $this['main_image_full_name'],
-            'main_image_url' => $this['main_image_url'],
-            'quantity' =>  $this['pivot']->quantity,
-            'shipping_cost' => $this['shipping_cost'],
-            'sizes' => $this['sizes'],
-            'inWishlist' => in_array($this['id'],  app('inWishlist')),
-            'price' => $price,
-            'price' => $discountService['price'],
-            'total_price' => $total_price,
-            'price_before_discount' => $discountService['price_before_discount'],
-            'discount_amount' => $discountService['discount_amount'],
-            'stock_size' => $size->pivot->stock,
-            'size' => $size->name,
-            'size_id' => $size->pivot->id,
-            'in_stock' => $size->pivot->stock > 0 ? true : false,
-            'stock' => $this['stock'],
+            'cart_item' => [
+                'id' => $this['pivot']->id,
+                'quantity' =>  $this['pivot']->quantity,
+                'shipping_cost' => $this['shipping_cost'],
+                'sizes' => $this['sizes'],
+                'total_price' => $total_price,
+                'stock_size' => $size->pivot->stock,
+                'size_id' => $size->pivot->id,
+                'in_stock' => $size->pivot->stock > 0 ? true : false,
+            ],
+            'product' => [
+                'id' => $this['id'],
+                'name' => $this['name'],
+                'slug' =>  $this['slug'],
+                'brand_name' => $this['brand_name'],
+                'main_image_url' => $this['main_image_url'],
+                'main_image_full_name' => $this['main_image_full_name'],
+                'price' => $price,
+                'price' => $discountService['price'],
+                'price_before_discount' => $discountService['price_before_discount'],
+                'discount_amount' => $discountService['discount_amount'],
+                'stock' => $this['stock'],
+                'size' => $size->name,
+
+            ],
+
+            // 'inWishlist' => in_array($this['id'],  app('inWishlist')),
+
 
         ];
     }

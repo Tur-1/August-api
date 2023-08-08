@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Session;
 use App\Modules\Products\Models\ShoppingCart;
 use App\Modules\Users\Repository\UserRepository;
 use App\Modules\Products\Repository\ProductRepository;
+use App\Modules\ShoppingCart\Repository\ShoppingCartRepository;
 use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
 use App\Pages\Frontend\ShoppingCartPage\Resources\CartProductsResource;
 
@@ -27,9 +28,9 @@ class  ShoppingCartPageService
 
         return $this->cart;
     }
-    public function removeCartItem($cartItemId)
+    public function removeCartItem($item_id)
     {
-        return auth()->user()->shoppingCart()->wherePivot('id', $cartItemId)->detach();
+        return (new ShoppingCartRepository())->removeCartItem($item_id);
     }
     public function getCartItem($cartItemId)
     {
@@ -50,15 +51,15 @@ class  ShoppingCartPageService
             ->where(['user_id' => auth()->id(), 'id' =>  $cartItemId])
             ->decrement('quantity', 1);
     }
-    public function saveProductforLater($productId, $cartItemId)
+    public function moveToWishlist($cart_item_id, $product_id)
     {
 
-        if (!auth()->user()->wishlistHas($productId)) {
+        if (!auth()->user()->wishlistHas($product_id)) {
 
-            auth()->user()->wishlist()->attach($productId);
+            auth()->user()->wishlist()->attach($product_id);
         }
 
-        return auth()->user()->shoppingCart()->wherePivot('id', $cartItemId)->detach();
+        return $this->removeCartItem($cart_item_id);
     }
     public function getCartDetails()
     {

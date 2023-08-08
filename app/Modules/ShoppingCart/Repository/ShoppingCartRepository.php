@@ -36,4 +36,12 @@ class ShoppingCartRepository
                 ]);
         }
     }
+    public function removeCartItem($item_id)
+    {
+        return   $this->shoppingCart->query()
+            ->where([
+                'user_id' => auth()->id(),
+                'id' => $item_id
+            ])->delete();
+    }
 }

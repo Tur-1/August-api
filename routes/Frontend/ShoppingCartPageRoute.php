@@ -23,11 +23,11 @@ Route::middleware('auth')->controller(ShoppingCartPageController::class)->group(
 
     Route::get('/cart', 'getShoppingCartProducts')->name('shoppingCartPage');
 
-    Route::post('/cart/increase-item-quantity/{cartItemId}', 'increaseProductQuantity')->name('increaseProductQuantity');
+    Route::post('/cart/increase-item-quantity/{cart_item_id}', 'increaseProductQuantity');
 
-    Route::post('/cart/decrease-item-quantity/{cartItemId}', 'decreaseProductQuantity')->name('decreaseProductQuantity');
+    Route::post('/cart/decrease-item-quantity/{cart_item_id}', 'decreaseProductQuantity');
 
-    Route::post('/cart/remove-item/{cartItemId}', 'removeCartItem')->name('removeCartItem');
+    Route::post('/cart/remove-item/{cart_item_id}', 'removeCartItem');
 
-    Route::post('/cart/save-for-later/{cartItemId}/product/{productId}/', 'saveProductforLater')->name('saveProductforLater');
+    Route::post('/cart/move-to-wishlist/{cart_item_id}/product/{product_id}/', 'moveToWishlist');
 });

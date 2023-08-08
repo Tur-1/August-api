@@ -29,31 +29,50 @@ class ShoppingCartPageController extends Controller
     public function removeCartItem($cartItemId, ShoppingCartPageService $shoppingCartPageService)
     {
         $shoppingCartPageService->removeCartItem($cartItemId);
+        return  response()->success([
+            'message' => 'The product has been removed from your cart!'
+        ]);
     }
-    public function saveProductforLater($cartItemId, $productId, ShoppingCartPageService $shoppingCartPageService)
+    public function moveToWishlist($cart_item_id, $product_id, ShoppingCartPageService $shoppingCartPageService)
     {
 
-        $shoppingCartPageService->saveProductforLater($productId, $cartItemId);
+        if (!isset($cart_item_id) || !isset($product_id)) {
+
+            return  response()->error([
+                'message' => 'try Again!'
+            ]);
+        }
+
+        try {
+            $shoppingCartPageService->moveToWishlist($cart_item_id, $product_id);
+            return  response()->success([
+                'message' => 'The product has been moved to your wishlist!'
+            ]);
+        } catch (\Exception $ex) {
+            return  response()->error([
+                'message' => 'try Again'
+            ]);
+        }
     }
 
-    public function increaseProductQuantity($cartItemId, ShoppingCartPageService $shoppingCartPageService)
+    public function increaseProductQuantity($cart_item_id, ShoppingCartPageService $shoppingCartPageService)
     {
-        $cartItem = $shoppingCartPageService->getCartItem($cartItemId);
+        $cartItem = $shoppingCartPageService->getCartItem($cart_item_id);
 
 
         if (is_null($cartItem) || $cartItem['quantity'] >= $cartItem['stock_size']) {
             return;
         }
 
-        $shoppingCartPageService->incrementCartItemQuantity($cartItemId);
+        $shoppingCartPageService->incrementCartItemQuantity($cart_item_id);
     }
-    public function decreaseProductQuantity($cartItemId, ShoppingCartPageService $shoppingCartPageService)
+    public function decreaseProductQuantity($cart_item_id, ShoppingCartPageService $shoppingCartPageService)
     {
-        $cartItem = $shoppingCartPageService->getCartItem($cartItemId);
+        $cartItem = $shoppingCartPageService->getCartItem($cart_item_id);
         if (is_null($cartItem) || $cartItem['quantity'] == 1) {
             return;
         }
 
-        $shoppingCartPageService->decrementCartItemQuantity($cartItemId);
+        $shoppingCartPageService->decrementCartItemQuantity($cart_item_id);
     }
 }
