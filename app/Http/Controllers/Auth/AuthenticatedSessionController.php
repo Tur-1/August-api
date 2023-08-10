@@ -52,43 +52,14 @@ class AuthenticatedSessionController extends Controller
         $access_token =  $request->user()->createToken('access-token')->plainTextToken;
         $permissions =  $request->user()->permissions->pluck('slug')->toArray();
 
-        $productComment = Session::get('productComment');
         $message = null;
         $redirect_to = null;
 
-        if (!is_null($productComment)) {
-            (new ProductDetailPageService())->createComment($productComment['comment'], $productComment['product_id']);
 
-            Session::remove('productComment');
-
-            $message = 'Your comment has been added successfully';
-            $redirect_to = 'product_detail';
-        }
-
-        $productDetailCartItem = Session::get('productDetailCartItem');
-        if (!is_null($productDetailCartItem)) {
-            (new ProductDetailPageService())->addToShoppingCart($productDetailCartItem);
-
-            Session::remove('productComment');
-
-            $message = 'The product was added to your cart!';
-            $redirect_to = 'product_detail';
-        }
-
-        $wishlistItemId = Session::get('wishlistItemId');
-        if (!is_null($wishlistItemId)) {
-            (new WishlistPageService())->addProductToWishlist($wishlistItemId);
-
-            Session::remove('productComment');
-
-            $redirect_to = 'wishlist';
-        }
-
-
-
-        return response()->json([
+        return response()->success([
             'user' => $request->user(),
             'access_token' => $access_token,
+            'isAuthenticated' => true,
             'token_type' => 'Bearer',
             'permissions' =>  $permissions,
             'message' => $message,

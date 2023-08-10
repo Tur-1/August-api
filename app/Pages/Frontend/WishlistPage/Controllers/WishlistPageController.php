@@ -3,8 +3,8 @@
 namespace App\Pages\Frontend\WishlistPage\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Wishlist\Services\WishlistSessionService;
 use App\Pages\Frontend\WishlistPage\Services\WishlistPageService;
-use Illuminate\Support\Facades\Session;
 
 class WishlistPageController extends Controller
 {
@@ -20,11 +20,10 @@ class WishlistPageController extends Controller
     {
 
 
-        // if (!auth()->check()) {
-        //     Session::put('wishlistItemId', $product_id);
-
-        //     return  response()->success(['requireAuth' => true]);
-        // };
+        if (!auth()->check()) {
+            (new WishlistSessionService())->storeProduct($product_id);
+            return  response()->success(['requireAuth' => true]);
+        };
 
 
         $inWishlist = (new WishlistPageService())->addProductToWishlist($product_id);
