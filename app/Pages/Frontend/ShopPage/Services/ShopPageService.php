@@ -2,20 +2,22 @@
 
 namespace App\Pages\Frontend\ShopPage\Services;
 
+use Illuminate\Support\Facades\Session;
 use App\Exceptions\PageNotFoundException;
+use App\Modules\Sizes\Repository\SizeRepository;
+use App\Modules\Users\Repository\UserRepository;
 use App\Modules\Brands\Repository\BrandRepository;
-use App\Pages\Frontend\ShopPage\Resources\SectionsResource;
-use App\Modules\Categories\Repository\CategoryRepository;
-use App\Modules\Categories\Repository\SectionRepository;
 use App\Modules\Colors\Repository\ColorRepository;
 use App\Modules\Products\Repository\ProductRepository;
-use App\Modules\Sizes\Repository\SizeRepository;
-use App\Pages\Frontend\ShopPage\Resources\BrandsListResource;
+use App\Modules\Categories\Repository\SectionRepository;
+use App\Modules\Categories\Repository\CategoryRepository;
+use App\Modules\Wishlist\Repository\WishlistRepository;
+use App\Pages\Frontend\ShopPage\Resources\SectionsResource;
 use App\Pages\Frontend\ShopPage\Resources\ColorListResource;
+use App\Pages\Frontend\ShopPage\Resources\BrandsListResource;
 use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
-use App\Pages\Frontend\ShopPage\Resources\ShopPageCategoryResource;
 use App\Pages\Frontend\ShopPage\Resources\SizeOptionsListResource;
-use Illuminate\Support\Facades\Session;
+use App\Pages\Frontend\ShopPage\Resources\ShopPageCategoryResource;
 
 class  ShopPageService
 {
@@ -51,8 +53,15 @@ class  ShopPageService
     {
         $this->products = (new ProductRepository())->getShopPageProducts($this->category['id']);
 
+        $wishlistIds =  (new WishlistRepository())->getWishlistProductsIds();
+
+        $this->products->each(function ($product) use ($wishlistIds) {
+            $product->inWishlist = in_array($product->id, $wishlistIds);
+        });
         $this->setBrandNameForEachProduct();
-        return ProductsListResource::collection($this->products)->response()->getData(true);
+
+        return ProductsListResource::collection($this->products)->response()
+            ->getData(true);
     }
     public function getSizeOptions()
     {

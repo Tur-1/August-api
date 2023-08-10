@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
             return response()->json($data, 200);
         });
 
-        Response::macro('error', function ($message, $status = 400) {
+        Response::macro('error', function ($message, $status = 404) {
             return response()->json([
                 'success' => false,
                 'message' => $message,
@@ -52,15 +52,6 @@ class AppServiceProvider extends ServiceProvider
         //         $inWishlist = (new UserRepository())->getWishlistProductsIds();
         //     }
         //     return $inWishlist;
-        // });
-        // $this->app->singleton('cartCounter', function ($app) {
-
-        //     $cartCounter = 0;
-        //     if (!Route::is('admin.*') && Auth::check()) {
-
-        //         $cartCounter = (new UserRepository())->getCartProductsCount();
-        //     }
-        //     return $cartCounter;
         // });
     }
 }

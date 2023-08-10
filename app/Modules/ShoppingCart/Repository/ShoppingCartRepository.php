@@ -44,4 +44,9 @@ class ShoppingCartRepository
                 'id' => $item_id
             ])->delete();
     }
+    public function getCartCount()
+    {
+        return   $this->shoppingCart->query()
+            ->where('user_id', auth()->id())->count();
+    }
 }

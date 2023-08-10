@@ -2,11 +2,10 @@
 
 namespace App\Pages\Frontend\HomePage\Services;
 
-use Illuminate\Support\Facades\Session;
-use App\Modules\Users\Repository\UserRepository;
 use App\Modules\Banners\Repository\BannerRepository;
-use App\Pages\Frontend\HomePage\Resources\HomeBannerResource;
 use App\Modules\Products\Repository\ProductRepository;
+use App\Modules\Wishlist\Repository\WishlistRepository;
+use App\Pages\Frontend\HomePage\Resources\HomeBannerResource;
 use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
 
 class  HomePageService
@@ -14,7 +13,15 @@ class  HomePageService
 
     public function getLatestProducts()
     {
-        return  ProductsListResource::collection((new ProductRepository())->getLatestProducts());
+
+        $products = (new ProductRepository())->getHomePageProducts();
+
+        $wishlistIds =  (new WishlistRepository())->getWishlistProductsIds();
+
+        $products->each(function ($product) use ($wishlistIds) {
+            $product->inWishlist = in_array($product->id, $wishlistIds);
+        });
+        return  ProductsListResource::collection($products);
     }
     public function getBanners()
     {

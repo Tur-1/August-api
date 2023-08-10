@@ -28,20 +28,14 @@ class UserRepository
     }
     public function getWishlistProducts()
     {
-        return auth()->check() ? auth()->user()->wishlistProducts : [];
+        return auth()->user()->wishlistProducts;
     }
     public function getCartProducts()
     {
         return auth()->user()->shoppingCartProducts;
     }
-    public function getCartProductsCount()
-    {
-        return auth()->check() ? auth()->user()->shoppingCart()->count('product_id') : 0;
-    }
-    public function getWishlistProductsIds()
-    {
-        return auth()->check() ? auth()->user()->wishlist()->pluck('product_id')->toArray() : [];
-    }
+
+
     public function getUser($id)
     {
         return $this->user->find($id);

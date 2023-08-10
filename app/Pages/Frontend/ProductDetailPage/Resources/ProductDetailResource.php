@@ -2,10 +2,9 @@
 
 namespace App\Pages\Frontend\ProductDetailPage\Resources;
 
-use Illuminate\Support\Str;
-use App\Modules\Users\Repository\UserRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Modules\Products\Services\ProductDiscountService;
+use App\Modules\Wishlist\Repository\WishlistRepository;
+use App\Pages\Frontend\ShopPage\Services\ProductDiscountService;
 
 class ProductDetailResource extends JsonResource
 {
@@ -26,20 +25,29 @@ class ProductDetailResource extends JsonResource
             'discount_expires_at' =>   $this->discount_expires_at
         ];
 
-        $discountService =  (new ProductDiscountService())->getDiscount($discountData);
+        $discount = new ProductDiscountService($discountData);;
+
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'slug' =>  $this->slug,
             'info_and_care' => $this->info_and_care,
             'details' => $this->details,
-            'in_stock' => $this->stock > 0 ? true : false,
             'brand_name' => $this->brand_name,
             'brand_image' => $this->brand_image,
-            'inWishlist' => in_array($this->id, app('inWishlist')),
-            'price' => $discountService['price'],
-            'price_before_discount' => $discountService['price_before_discount'],
-            'discount_amount' => $discountService['discount_amount'],
+            'main_image_url' => $this->main_image_url,
+            'inWishlist' => (new WishlistRepository())->isExists($this->id),
+            'in_stock' => $this->stock > 0 ? true : false,
+            'price' => $discount->getPrice(),
+            'discount' => $this->when(
+                $discount->isDiscountValid(),
+                [
+                    'amount' => $discount->getDiscountAmount(),
+                    'price_before' => $discount->getPriceBeforeDiscount(),
+                ]
+            )
+
         ];
     }
 }

@@ -18,7 +18,7 @@ class  ShoppingCartPageService
 
     public function getCartCounter()
     {
-        return app('cartCounter');
+        return (new ShoppingCartRepository())->getCartCount();
     }
     public function getShoppingCartProducts()
     {

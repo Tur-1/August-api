@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Pages\Frontend\ShopPage\Resources;
+namespace App\Pages\Frontend\ProductDetailPage\Resources;
 
-use Illuminate\Support\Str;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BrandsListResource extends JsonResource
+class ProductSizeOptionsResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -20,7 +19,6 @@ class BrandsListResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'products_count' => $this->products_count,
         ];
     }
 }

@@ -5,7 +5,7 @@ namespace App\Pages\Frontend\ProductDetailPage\Resources;
 use Illuminate\Support\Str;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductDetailCategoriesResource extends JsonResource
+class ProductCategoriesResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.

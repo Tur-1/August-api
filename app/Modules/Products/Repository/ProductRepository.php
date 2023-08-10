@@ -2,13 +2,13 @@
 
 namespace App\Modules\Products\Repository;
 
+use App\Traits\ImageUpload;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use App\Modules\Products\Models\Product;
 use App\Modules\Categories\Models\Category;
 use App\Modules\Products\Actions\GenerateProductSlug;
-use App\Modules\Products\Models\Product;
-use App\Modules\Products\Services\ProductDiscountService;
-use App\Traits\ImageUpload;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+use App\Pages\Admin\ProductsPage\Services\StoreProductDiscountService;
 
 class ProductRepository
 {
@@ -26,9 +26,10 @@ class ProductRepository
     {
         return $this->product->withMainProductImage()->latest()->paginate(80);
     }
-    public function getLatestProducts()
+    public function getHomePageProducts()
     {
-        return $this->product->withMainProductImage()
+        return $this->product->query()
+            ->withMainProductImage()
             ->withBrandName()
             ->active()
             ->take(20)
@@ -111,7 +112,7 @@ class ProductRepository
         $product->discount_amount = $request->discount_amount;
         $product->discount_start_at = $request->discount_start_at;
         $product->discount_expires_at = $request->discount_expires_at;
-        $product->discounted_price = (new ProductDiscountService())->getDiscountedPrice($request);
+        $product->discounted_price = (new StoreProductDiscountService())->getDiscountedPrice($request);
         $product->name = Str::title($request->name);
         $product->slug = (new GenerateProductSlug())->handle($request->name, $product->id);
         $product->stock = $this->getProductStock($sizeOptions);

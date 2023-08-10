@@ -2,9 +2,7 @@
 
 namespace App\Pages\Frontend\WishlistPage\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Modules\Users\Repository\UserRepository;
 use App\Pages\Frontend\WishlistPage\Services\WishlistPageService;
 use Illuminate\Support\Facades\Session;
 
@@ -15,20 +13,23 @@ class WishlistPageController extends Controller
     public function getUserWishlist(WishlistPageService $wishlistPageService)
     {
         return  response()->success([
-            'products' =>  $wishlistPageService->getUserWishlist(),
+            'products' =>  $wishlistPageService->getWishlistProducts(),
         ]);
     }
     public function addToWishlist($product_id)
     {
 
-        if (!auth()->check()) {
-            Session::put('wishlistItemId', $product_id);
 
-            return  response()->success(['requireAuth' => true]);
-        };
-        (new WishlistPageService())->addProductToWishlist($product_id);
+        // if (!auth()->check()) {
+        //     Session::put('wishlistItemId', $product_id);
+
+        //     return  response()->success(['requireAuth' => true]);
+        // };
 
 
-        return response()->success((new UserRepository())->getWishlistProductsIds());
+        $inWishlist = (new WishlistPageService())->addProductToWishlist($product_id);
+
+
+        return  response()->success(['inWishlist' => $inWishlist]);
     }
 }

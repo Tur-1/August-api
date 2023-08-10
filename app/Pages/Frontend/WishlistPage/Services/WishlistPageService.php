@@ -2,30 +2,41 @@
 
 namespace App\Pages\Frontend\WishlistPage\Services;
 
-use Illuminate\Support\Facades\Session;
 use App\Modules\Users\Repository\UserRepository;
-use App\Modules\Products\Repository\ProductRepository;
+use App\Modules\Wishlist\Repository\WishlistRepository;
 use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
 
 class  WishlistPageService
 {
 
-    public function getUserWishlist()
+    private $wishlistRepository;
+
+
+    public function __construct()
     {
-        return  ProductsListResource::collection((new UserRepository())->getWishlistProducts());
+        $this->wishlistRepository = new WishlistRepository();
+    }
+    public function getWishlistProducts()
+    {
+        $products = (new UserRepository())->getWishlistProducts();
+
+        $products->each(function ($product) {
+            $product->inWishlist = true;
+        });
+        return  ProductsListResource::collection($products);
     }
 
-    public function addProductToWishlist($product_id = null)
+    public function addProductToWishlist($product_id)
     {
+        $inWishlist = false;
 
-        if (!is_null($product_id)) {
-            if (auth()->user()->WishlistHas($product_id)) {
-
-                auth()->user()->wishlist()->detach($product_id);
-            } else {
-
-                auth()->user()->wishlist()->attach($product_id);
-            }
+        if ($this->wishlistRepository->isExists($product_id)) {
+            $this->wishlistRepository->removeWishlistProduct($product_id);
+        } else {
+            $this->wishlistRepository->storeWishlistProduct($product_id);
+            $inWishlist = true;
         }
+
+        return $inWishlist;
     }
 }

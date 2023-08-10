@@ -62,14 +62,6 @@ class User extends Authenticatable
     }
 
 
-
-    public function wishlistHas($product_id)
-    {
-        return  $this->wishlist()
-            ->where('product_id', $product_id)
-            ->exists('product_id');
-    }
-
     public function wishlistProducts()
     {
         return $this->belongsToMany(Product::class, 'wishlists')

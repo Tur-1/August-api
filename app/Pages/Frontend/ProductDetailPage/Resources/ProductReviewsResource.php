@@ -2,10 +2,9 @@
 
 namespace App\Pages\Frontend\ProductDetailPage\Resources;
 
-use Illuminate\Support\Str;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductDetailSizeOptionsResource extends JsonResource
+class ProductReviewsResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -17,9 +16,13 @@ class ProductDetailSizeOptionsResource extends JsonResource
     {
 
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'slug' => $this->slug,
+            'user' => [
+                'name' => $this->user->name,
+                'gender' => $this->user->gender
+            ],
+            'comment' => $this->comment,
+            'date' =>  $this->created_at->diffForHumans(),
+            'reply' => ProductReviewsResource::make($this->whenLoaded('reply')),
         ];
     }
 }

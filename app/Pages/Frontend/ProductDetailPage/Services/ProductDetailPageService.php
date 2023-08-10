@@ -4,17 +4,16 @@ namespace App\Pages\Frontend\ProductDetailPage\Services;
 
 use Illuminate\Support\Facades\Session;
 use App\Exceptions\PageNotFoundException;
-use App\Modules\Reviews\Services\ReviewService;
 use App\Modules\Reviews\Repository\ReviewRepository;
 use App\Modules\Products\Repository\ProductRepository;
 use App\Modules\ShoppingCart\Repository\ShoppingCartRepository;
 use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
 use App\Pages\Frontend\ProductDetailPage\Resources\ProductDetailResource;
+use App\Pages\Frontend\ProductDetailPage\Resources\ProductImagesResource;
+use App\Pages\Frontend\ProductDetailPage\Resources\ProductReviewsResource;
+use App\Pages\Frontend\ProductDetailPage\Resources\ProductSizeOptionsResource;
+use App\Pages\Frontend\ProductDetailPage\Resources\ProductCategoriesResource;
 use App\Pages\Frontend\ProductDetailPage\Actions\StoreCategoriesIdsInSession;
-use App\Pages\Frontend\ProductDetailPage\Resources\ProductDetailImagesResource;
-use App\Pages\Frontend\ProductDetailPage\Resources\ProductDetailReviewsResource;
-use App\Pages\Frontend\ProductDetailPage\Resources\ProductDetailCategoriesResource;
-use App\Pages\Frontend\ProductDetailPage\Resources\ProductDetailSizeOptionsResource;
 
 class  ProductDetailPageService
 {
@@ -34,23 +33,25 @@ class  ProductDetailPageService
 
         (new StoreCategoriesIdsInSession())->handle($this->productDetail->categories);
 
+
+
         return ProductDetailResource::make($this->productDetail);
     }
     public function getProductImages()
     {
-        return  ProductDetailImagesResource::collection($this->productDetail->productImages);
+        return  ProductImagesResource::collection($this->productDetail->productImages);
     }
 
 
     public function getCategories()
     {
 
-        return  ProductDetailCategoriesResource::collection($this->productDetail->categories);
+        return  ProductCategoriesResource::collection($this->productDetail->categories);
     }
     public function getSizeOptions()
     {
 
-        return  ProductDetailSizeOptionsResource::collection($this->productDetail->stockSizes);
+        return  ProductSizeOptionsResource::collection($this->productDetail->stockSizes);
     }
 
     public function getRelatedProducts($product_id)
@@ -61,7 +62,7 @@ class  ProductDetailPageService
 
     public function getProductReviews($productId)
     {
-        return  ProductDetailReviewsResource::collection(
+        return  ProductReviewsResource::collection(
             (new ReviewRepository())->getProductReviews($productId)
         );
     }
