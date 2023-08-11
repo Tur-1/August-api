@@ -4,8 +4,9 @@ namespace App\Modules\Products\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class ProductSize extends Model
+class ProductSize extends Pivot
 {
     use HasFactory;
 

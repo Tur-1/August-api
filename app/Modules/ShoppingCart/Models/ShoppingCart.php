@@ -16,7 +16,8 @@ class ShoppingCart extends Model
         'user_id',
         'product_id',
         'quantity',
-        'size_id'
+        'size_id',
+        'total_price'
     ];
 
 
@@ -25,7 +26,7 @@ class ShoppingCart extends Model
         return new ShoppingCartBuilder($query);
     }
 
-    public function products()
+    public function product()
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }

@@ -18,7 +18,7 @@ class ProductCategoriesResource extends JsonResource
 
         return [
             'name' => $this->name,
-            'slug' => $this->slug,
+            'url' => $this->url,
         ];
     }
 }

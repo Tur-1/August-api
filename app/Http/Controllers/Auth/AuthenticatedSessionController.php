@@ -15,12 +15,13 @@ class AuthenticatedSessionController extends Controller
 
     public function isAuthenticated()
     {
-        if (!auth()->check()) {
-            return 'false';
-        }
+        $isAuth = false;
 
+        if (auth()->check()) $isAuth = true;
 
-        return ['user' => auth()->user()];
+        return response()->success([
+            'isAuthenticated' => $isAuth,
+        ]);
     }
 
     public function getAuthUser()
@@ -28,8 +29,6 @@ class AuthenticatedSessionController extends Controller
 
         $user = auth()->user()->load('permissions');
         $permissions = $user->permissions->pluck('slug')->toArray();
-
-
 
         return response()->json([
             'user' => $user,

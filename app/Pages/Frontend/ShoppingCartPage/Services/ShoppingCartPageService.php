@@ -3,10 +3,11 @@
 namespace App\Pages\Frontend\ShoppingCartPage\Services;
 
 use Illuminate\Support\Facades\Session;
-use App\Modules\Products\Models\ShoppingCart;
 use App\Modules\Users\Repository\UserRepository;
+use App\Modules\ShoppingCart\Models\ShoppingCart;
 use App\Modules\Products\Repository\ProductRepository;
 use App\Modules\ShoppingCart\Repository\ShoppingCartRepository;
+use App\Modules\Wishlist\Repository\WishlistRepository;
 use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
 use App\Pages\Frontend\ShoppingCartPage\Resources\CartProductsResource;
 
@@ -22,7 +23,7 @@ class  ShoppingCartPageService
     }
     public function getShoppingCartProducts()
     {
-        $userCart = (new UserRepository())->getCartProducts();
+        $userCart =  (new UserRepository())->getCartProducts();
 
         $this->cart = collect(CartProductsResource::collection($userCart)->resolve());
 
@@ -30,33 +31,27 @@ class  ShoppingCartPageService
     }
     public function removeCartItem($item_id)
     {
-        return (new ShoppingCartRepository())->removeCartItem($item_id);
+        $item = $this->getCartItem($item_id);
+
+        if (!is_null($item)) {
+            return (new ShoppingCartRepository())->removeCartItem($item_id);
+        }
     }
     public function getCartItem($cartItemId)
     {
-        return $this->getShoppingCartProducts()->where('cart_item_id', $cartItemId)->first();
+        return $this->getShoppingCartProducts()
+            ->where('cart_item.id', $cartItemId)
+            ->first();
     }
 
-    public function incrementCartItemQuantity($cartItemId)
-    {
 
-        return  ShoppingCart::query()
-            ->where(['user_id' => auth()->id(), 'id' =>  $cartItemId])
-            ->increment('quantity', 1);
-    }
-    public function decrementCartItemQuantity($cartItemId)
-    {
-
-        return   ShoppingCart::query()
-            ->where(['user_id' => auth()->id(), 'id' =>  $cartItemId])
-            ->decrement('quantity', 1);
-    }
     public function moveToWishlist($cart_item_id, $product_id)
     {
 
-        if (!auth()->user()->wishlistHas($product_id)) {
+        $wishlist = new WishlistRepository();
+        if (!$wishlist->isExists($product_id)) {
 
-            auth()->user()->wishlist()->attach($product_id);
+            $wishlist->storeWishlistProduct($product_id);
         }
 
         return $this->removeCartItem($cart_item_id);
@@ -66,7 +61,7 @@ class  ShoppingCartPageService
 
         $cartDetails = [
             'shipping_fees' =>  $this->getShipmentFees(),
-            'subTotal' => $this->getCartSubTotal(),
+            'sub_total' => $this->getCartSubTotal(),
             'total' =>    $this->getCartTotal(),
             'coupon' => null,
         ];
@@ -80,7 +75,7 @@ class  ShoppingCartPageService
     }
     private function getCartSubTotal()
     {
-        $this->cartSubTotal = $this->cart->sum('total_price');
+        $this->cartSubTotal = $this->cart->sum('cart_item.total_price');
 
         return floatval($this->cartSubTotal);
     }
@@ -97,13 +92,9 @@ class  ShoppingCartPageService
     }
     private function getShipmentFees()
     {
-        $this->shipmentFees =  $this->cart->where('shipping_cost', '!=', 0.00)->sum('shipping_cost');
-        $shipmentFees =  $this->shipmentFees . ' SAR';
-        if ($this->shipmentFees == 0) {
-            $shipmentFees =  'Free';
-        }
+        $this->shipmentFees =  $this->cart->where('product.shipping_cost')->sum('product.shipping_cost');
 
-        return  $shipmentFees;
+        return $this->shipmentFees;
     }
 
 

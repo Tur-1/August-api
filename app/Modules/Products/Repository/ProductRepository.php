@@ -71,6 +71,10 @@ class ProductRepository
     {
         return $this->product->where('slug', $slug)->first();
     }
+    public function getShoppingCartProduct($id)
+    {
+        return $this->product->select('id', 'price')->find($id);
+    }
     public function getProduct($id)
     {
         return $this->product->with('sizes', 'categories', 'productImages')->find($id);

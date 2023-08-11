@@ -5,35 +5,43 @@ namespace App\Pages\Frontend\ShoppingCartPage\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Modules\Users\Repository\UserRepository;
+use App\Pages\Frontend\ShoppingCartPage\Actions\CartItemQuantity;
 use App\Pages\Frontend\ShoppingCartPage\Services\ShoppingCartPageService;
 
 class ShoppingCartPageController extends Controller
 {
 
+    public $shoppingCartPageService;
 
-    public function getShoppingCartProducts(ShoppingCartPageService $shoppingCartPageService)
+    public  function __construct(ShoppingCartPageService $shoppingCartPageService)
+    {
+        $this->shoppingCartPageService = $shoppingCartPageService;
+    }
+
+    public function getShoppingCartProducts()
+    {
+
+
+        return  response()->success([
+            'cart_items' =>  $this->shoppingCartPageService->getShoppingCartProducts(),
+            'cart_details' => $this->shoppingCartPageService->getCartDetails()
+        ]);
+    }
+    public function getCartCounter()
     {
 
         return  response()->success([
-            'products' =>  $shoppingCartPageService->getShoppingCartProducts(),
-            'cartDetails' => $shoppingCartPageService->getCartDetails(),
+            'cartCounter' =>  $this->shoppingCartPageService->getCartCounter(),
         ]);
     }
-    public function getCartCounter(ShoppingCartPageService $shoppingCartPageService)
+    public function removeCartItem($cartItemId)
     {
-
-        return  response()->success([
-            'cartCounter' =>  $shoppingCartPageService->getCartCounter(),
-        ]);
-    }
-    public function removeCartItem($cartItemId, ShoppingCartPageService $shoppingCartPageService)
-    {
-        $shoppingCartPageService->removeCartItem($cartItemId);
+        $this->shoppingCartPageService->removeCartItem($cartItemId);
         return  response()->success([
             'message' => 'The product has been removed from your cart!'
         ]);
     }
-    public function moveToWishlist($cart_item_id, $product_id, ShoppingCartPageService $shoppingCartPageService)
+    public function moveToWishlist($cart_item_id, $product_id)
     {
 
         if (!isset($cart_item_id) || !isset($product_id)) {
@@ -44,7 +52,7 @@ class ShoppingCartPageController extends Controller
         }
 
         try {
-            $shoppingCartPageService->moveToWishlist($cart_item_id, $product_id);
+            $this->shoppingCartPageService->moveToWishlist($cart_item_id, $product_id);
             return  response()->success([
                 'message' => 'The product has been moved to your wishlist!'
             ]);
@@ -55,24 +63,26 @@ class ShoppingCartPageController extends Controller
         }
     }
 
-    public function increaseProductQuantity($cart_item_id, ShoppingCartPageService $shoppingCartPageService)
+    public function increaseProductQuantity($cart_item_id, CartItemQuantity $cartItemQuantity)
     {
-        $cartItem = $shoppingCartPageService->getCartItem($cart_item_id);
+        $cartItem = $this->shoppingCartPageService->getCartItem($cart_item_id);
 
-
-        if (is_null($cartItem) || $cartItem['quantity'] >= $cartItem['stock_size']) {
+        if (is_null($cartItem) || $cartItem['cart_item']['quantity'] >= $cartItem['cart_item']['size']['stock']) {
             return;
         }
 
-        $shoppingCartPageService->incrementCartItemQuantity($cart_item_id);
+        $cartItemQuantity->increment($cart_item_id);
+
+        return  response()->success(true);
     }
-    public function decreaseProductQuantity($cart_item_id, ShoppingCartPageService $shoppingCartPageService)
+    public function decreaseProductQuantity($cart_item_id, CartItemQuantity $cartItemQuantity)
     {
-        $cartItem = $shoppingCartPageService->getCartItem($cart_item_id);
-        if (is_null($cartItem) || $cartItem['quantity'] == 1) {
+        $cartItem = $this->shoppingCartPageService->getCartItem($cart_item_id);
+        if (is_null($cartItem) || $cartItem['cart_item']['quantity'] == 1) {
             return;
         }
 
-        $shoppingCartPageService->decrementCartItemQuantity($cart_item_id);
+        $cartItemQuantity->decrement($cart_item_id);
+        return  response()->success(true);
     }
 }

@@ -78,22 +78,4 @@ class  ProductDetailPageService
 
         (new ShoppingCartRepository())->storeCartItem($request['product_id'], $request['size_id']);
     }
-
-    public function storeProductDetailInSession($request)
-    {
-        Session::remove('productDetailCartItem');
-        Session::put('productDetailCartItem', [
-            'product_id' => $request->product_id,
-            'size_id' => $request->size_id
-        ]);
-    }
-
-    public function storeUserCommentInSession($productid, $comment)
-    {
-        Session::remove('productComment');
-        Session::put('productComment', [
-            'product_id' => $productid,
-            'comment' => $comment,
-        ]);
-    }
 }

@@ -69,11 +69,6 @@ class User extends Authenticatable
             ->withBrandName()
             ->active();
     }
-    public function carts()
-    {
-        return $this->hasMany(ShoppingCart::class, 'user_id');
-    }
-
     public function shoppingCart()
     {
         return $this->belongsToMany(Product::class, 'shopping_carts', 'user_id', 'product_id')
@@ -84,17 +79,10 @@ class User extends Authenticatable
     public function shoppingCartProducts()
     {
         return $this->belongsToMany(Product::class, 'shopping_carts', 'user_id', 'product_id')
-            ->withPivot(['size_id', 'quantity', 'id'])
-            ->with(['sizes'])
             ->withMainProductImage()
             ->withBrandName()
-            ->active();
-    }
-    public function shoppingCartHas($product_id, $size_id)
-    {
-        return  $this->shoppingCart()
-            ->wherePivot('product_id',  $product_id)
-            ->wherePivot('size_id', $size_id)
-            ->exists('size_id');
+            ->active()
+            ->with('sizes')
+            ->withPivot(['size_id', 'quantity', 'id']);
     }
 }

@@ -7,6 +7,7 @@ use App\Modules\Brands\Models\Brand;
 use App\Modules\Colors\Models\Color;
 use App\Modules\Reviews\Models\Review;
 use App\Modules\Categories\Models\Category;
+use App\Modules\Products\Models\ProductSize;
 use App\Modules\Products\Models\ProductImage;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,6 +19,7 @@ trait ProductRelationshipsTrait
     {
         return $this->belongsToMany(Size::class, 'product_sizes', 'product_id', 'size_id')->withPivot(['id', 'stock']);
     }
+
     public function stockSizes(): BelongsToMany
     {
         return $this->belongsToMany(Size::class, 'product_sizes', 'product_id', 'size_id')

@@ -63,16 +63,17 @@ class ProductDetailPageController extends Controller
 
         $request->validated();
 
-        if (!auth()->check()) {
-            $productService->storeProductDetailInSession($request);
-            return  response()->success(['requireAuth' => true]);
+
+        try {
+            $productService->addToCart($request);
+            $response =  response()->success([
+                'message' => 'The product was added to your cart!',
+            ]);
+        } catch (\Exception $ex) {
+            $response = response()->error($ex->getMessage(), 404);
         }
 
-        $productService->addToCart($request);
-
-        return  response()->success([
-            'message' => 'The product was added to your cart!',
-        ]);
+        return $response;
     }
     public function addComment(ProductDetailPageService $productService, Request $request, $slug)
     {
