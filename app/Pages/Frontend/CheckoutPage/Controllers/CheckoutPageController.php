@@ -21,9 +21,9 @@ class CheckoutPageController extends Controller
     {
         Session::remove('cartDetailsWithCoupon');
         return  response()->success([
-            'userAddresses' => $checkoutPageService->getUserAddresses(),
+            'user_addresses' => $checkoutPageService->getUserAddresses(),
             'products' => $checkoutPageService->getCheckoutProducts(),
-            'cartDetails' => $checkoutPageService->getCheckoutDetails(),
+            'cart_details' => $checkoutPageService->getCheckoutDetails(),
         ]);
     }
 

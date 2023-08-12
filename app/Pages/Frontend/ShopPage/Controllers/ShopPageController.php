@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Pages\Frontend\ShopPage\Services\CategoriesService;
 use App\Pages\Frontend\ShopPage\Services\ShopPageService;
-use Illuminate\Support\Facades\Session;
 
 class ShopPageController extends Controller
 {
@@ -19,15 +18,15 @@ class ShopPageController extends Controller
         try {
             $category = $categoriesService->getCategoryByUrl($category_url);
 
-            Session::put('category', $category['category']);
             return  response()->success($category);
         } catch (PageNotFoundException $ex) {
             return response()->error($ex->getMessage(), 404);
         }
     }
 
-    public function getProducts(ShopPageService $shopPageService)
+    public function getProducts($category_url)
     {
+        $shopPageService = new ShopPageService($category_url);
         try {
             return response()->success([
                 'brands' => $shopPageService->getBrands(),

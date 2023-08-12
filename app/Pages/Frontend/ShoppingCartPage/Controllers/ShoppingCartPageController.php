@@ -36,10 +36,17 @@ class ShoppingCartPageController extends Controller
     }
     public function removeCartItem($cartItemId)
     {
-        $this->shoppingCartPageService->removeCartItem($cartItemId);
-        return  response()->success([
-            'message' => 'The product has been removed from your cart!'
-        ]);
+        try {
+            //code...
+            $this->shoppingCartPageService->removeCartItem($cartItemId);
+            return  response()->success([
+                'message' => 'The product has been removed from your cart!'
+            ]);
+        } catch (\Exception $ex) {
+            return  response()->error([
+                'message' => $ex->getMessage()
+            ]);
+        }
     }
     public function moveToWishlist($cart_item_id, $product_id)
     {

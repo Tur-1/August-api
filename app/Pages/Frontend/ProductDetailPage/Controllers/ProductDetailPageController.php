@@ -9,6 +9,7 @@ use App\Exceptions\PageNotFoundException;
 use App\Modules\ShoppingCart\Models\ShoppingCart;
 use App\Modules\Products\Repository\ProductRepository;
 use App\Modules\ShoppingCart\Requests\StoreCartItemRequest;
+use App\Pages\Frontend\ProductDetailPage\Actions\CreateCommentAction;
 use App\Pages\Frontend\ProductDetailPage\Services\ProductDetailPageService;
 
 class ProductDetailPageController extends Controller
@@ -75,26 +76,25 @@ class ProductDetailPageController extends Controller
 
         return $response;
     }
-    public function addComment(ProductDetailPageService $productService, Request $request, $slug)
+    public function addComment(Request $request, $product_slug, CreateCommentAction $createComment)
     {
         $request->validate(['comment' => 'required|string']);
 
-        $product =  (new ProductRepository())->findProductBySlug($slug);
-        if (is_null($slug) || is_null($product))  return;
+        if (is_null($product_slug)) return;
 
-        if (!auth()->check()) {
 
-            $productService->storeUserCommentInSession($product->id, $request->comment);
+        try {
 
-            return  response()->success(['requireAuth' => true]);
+            $createComment->handle($request->comment, $product_slug);
+        } catch (\Exception $ex) {
+            return  response()->error([
+                'message' => 'try Again!'
+            ], 404);
         }
 
 
-        $productService->createComment($request->comment, $product->id);
-
         return  response()->success([
-            'message' => 'Your comment has been added successfully',
-            'requireAuth' => false
+            'message' => 'Your comment has been added successfully'
         ]);
     }
 }

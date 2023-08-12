@@ -2,14 +2,11 @@
 
 namespace App\Pages\Frontend\ShoppingCartPage\Services;
 
-use Illuminate\Support\Facades\Session;
+use Exception;
 use App\Modules\Users\Repository\UserRepository;
-use App\Modules\ShoppingCart\Models\ShoppingCart;
-use App\Modules\Products\Repository\ProductRepository;
-use App\Modules\ShoppingCart\Repository\ShoppingCartRepository;
 use App\Modules\Wishlist\Repository\WishlistRepository;
-use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
-use App\Pages\Frontend\ShoppingCartPage\Resources\CartProductsResource;
+use App\Modules\ShoppingCart\Repository\ShoppingCartRepository;
+use App\Pages\Frontend\ShoppingCartPage\Resources\ShoppingCartItemsResource;
 
 class  ShoppingCartPageService
 {
@@ -25,7 +22,7 @@ class  ShoppingCartPageService
     {
         $userCart =  (new UserRepository())->getCartProducts();
 
-        $this->cart = collect(CartProductsResource::collection($userCart)->resolve());
+        $this->cart = collect(ShoppingCartItemsResource::collection($userCart)->resolve());
 
         return $this->cart;
     }
@@ -33,14 +30,15 @@ class  ShoppingCartPageService
     {
         $item = $this->getCartItem($item_id);
 
-        if (!is_null($item)) {
-            return (new ShoppingCartRepository())->removeCartItem($item_id);
+        if (is_null($item)) {
+            throw new Exception("not found");
         }
+        return (new ShoppingCartRepository())->removeCartItem($item_id);
     }
-    public function getCartItem($cartItemId)
+    public function getCartItem($item_id)
     {
         return $this->getShoppingCartProducts()
-            ->where('cart_item.id', $cartItemId)
+            ->where('id', $item_id)
             ->first();
     }
 
@@ -75,7 +73,7 @@ class  ShoppingCartPageService
     }
     private function getCartSubTotal()
     {
-        $this->cartSubTotal = $this->cart->sum('cart_item.total_price');
+        $this->cartSubTotal = $this->cart->sum('total_price');
 
         return floatval($this->cartSubTotal);
     }

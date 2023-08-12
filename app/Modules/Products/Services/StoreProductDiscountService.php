@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Pages\Admin\ProductsPage\Services;
+namespace App\Modules\Products\Services;
 
 class StoreProductDiscountService
 {

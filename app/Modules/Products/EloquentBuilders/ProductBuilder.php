@@ -21,10 +21,10 @@ class ProductBuilder extends Builder
         ]);
     }
 
-    public function whereHasCategory($category_id): self
+    public function whereHasCategory($category_url): self
     {
-        return $this->whereHas('categories', function ($query) use ($category_id) {
-            return $query->where('categories.id', $category_id)->select('categories.id');
+        return $this->whereHas('categories', function ($query) use ($category_url) {
+            return $query->where('categories.url', $category_url)->select('categories.url');
         });
     }
     public function withBrandImage()
@@ -49,7 +49,6 @@ class ProductBuilder extends Builder
         return $this->when(request()->has('brand'), fn ($query) => $this->filterByBrands($query))
             ->when(request()->has('color'), fn ($query) => $this->filterByColors($query))
             ->when(request()->has('size'), fn ($query) => $this->filterBySizeOptions($query))
-            ->when(request()->has('price'), fn ($query) => $this->filterByPrice($query))
             ->when(request()->has('sort'), fn ($query) => $this->filterBySorting($query))
             ->when(request()->has('status'), fn ($query) => $this->filterByStatus($query));
     }

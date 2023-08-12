@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Pages\Frontend\ShopPage\Services\ProductDiscountService;
 
-class CartProductsResource extends JsonResource
+class ShoppingCartItemsResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -31,17 +31,17 @@ class CartProductsResource extends JsonResource
 
 
         return [
-            'cart_item' => [
-                'id' => $this->pivot->id,
-                'quantity' =>  $this->pivot->quantity,
-                'total_price' => $price * $this->pivot->quantity,
-                'in_stock' => $size->pivot->stock > 0 ? true : false,
-                'size' => [
-                    'id' =>  $size->pivot->id,
-                    'name' => $size->name,
-                    'stock' => $size->pivot->stock,
-                ],
+
+            'id' => $this->pivot->id,
+            'quantity' =>  $this->pivot->quantity,
+            'total_price' => $price * $this->pivot->quantity,
+            'in_stock' => $size->pivot->stock > 0 ? true : false,
+            'size' => [
+                'id' =>  $size->pivot->id,
+                'name' => $size->name,
+                'stock' => $size->pivot->stock,
             ],
+
             'product' => [
                 'id' => $this->id,
                 'name' => $this->name,

@@ -2,39 +2,33 @@
 
 namespace App\Pages\Frontend\ShopPage\Services;
 
-use Illuminate\Support\Facades\Session;
 use App\Exceptions\PageNotFoundException;
 use App\Modules\Sizes\Repository\SizeRepository;
-use App\Modules\Users\Repository\UserRepository;
 use App\Modules\Brands\Repository\BrandRepository;
 use App\Modules\Colors\Repository\ColorRepository;
 use App\Modules\Products\Repository\ProductRepository;
-use App\Modules\Categories\Repository\SectionRepository;
-use App\Modules\Categories\Repository\CategoryRepository;
 use App\Modules\Wishlist\Repository\WishlistRepository;
-use App\Pages\Frontend\ShopPage\Resources\SectionsResource;
 use App\Pages\Frontend\ShopPage\Resources\ColorListResource;
 use App\Pages\Frontend\ShopPage\Resources\BrandsListResource;
 use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
 use App\Pages\Frontend\ShopPage\Resources\SizeOptionsListResource;
-use App\Pages\Frontend\ShopPage\Resources\ShopPageCategoryResource;
 
 class  ShopPageService
 {
-    private $category;
+    private $category_url;
     private $products;
     private $brands;
 
-    public function __construct()
+    public function __construct($category_url)
     {
-        $this->category = Session::get('category');
+        $this->category_url = $category_url;
     }
 
 
     public function getBrands()
     {
 
-        $brands = (new BrandRepository())->getBrandsByProductsCategory($this->category['id']);
+        $brands = (new BrandRepository())->getBrandsByProductsCategory($this->category_url);
 
 
         $this->brands = $brands->mapWithKeys(function ($brand) {
@@ -44,14 +38,14 @@ class  ShopPageService
     }
     public function getColors()
     {
-        $colors = (new ColorRepository())->getColorsByProductsCategory($this->category['id']);
+        $colors = (new ColorRepository())->getColorsByProductsCategory($this->category_url);
 
 
         return ColorListResource::collection($colors);
     }
     public function getProducts()
     {
-        $this->products = (new ProductRepository())->getShopPageProducts($this->category['id']);
+        $this->products = (new ProductRepository())->getShopPageProducts($this->category_url);
 
         $wishlistIds =  (new WishlistRepository())->getWishlistProductsIds();
 
@@ -66,7 +60,7 @@ class  ShopPageService
     public function getSizeOptions()
     {
 
-        $sizes = (new SizeRepository())->getSizeOptionsByProductsCategory($this->category['id']);
+        $sizes = (new SizeRepository())->getSizeOptionsByProductsCategory($this->category_url);
 
         return SizeOptionsListResource::collection($sizes);
     }

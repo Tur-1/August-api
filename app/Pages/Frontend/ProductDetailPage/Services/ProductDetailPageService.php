@@ -66,13 +66,7 @@ class  ProductDetailPageService
             (new ReviewRepository())->getProductReviews($productId)
         );
     }
-    public function createComment($comment, $productid)
-    {
 
-        $comment = (new ReviewRepository())->createReview($comment, $productid);
-
-        return  $comment;
-    }
     public function addToCart($request)
     {
 

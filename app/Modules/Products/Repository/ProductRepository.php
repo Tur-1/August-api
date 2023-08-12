@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Modules\Products\Models\Product;
 use App\Modules\Categories\Models\Category;
 use App\Modules\Products\Actions\GenerateProductSlug;
-use App\Pages\Admin\ProductsPage\Services\StoreProductDiscountService;
+use App\Modules\Products\Services\StoreProductDiscountService;
 
 class ProductRepository
 {
