@@ -1,10 +1,10 @@
 <?php
 
-namespace {namespace};
+namespace App\Pages\Admin\OrdersPage\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class {Model}Resource extends JsonResource
+class OrderProductsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,7 +16,12 @@ class {Model}Resource extends JsonResource
     {
 
         return [
-         //
+            'id' => $this['id'],
+            'name' => $this['user']['name'],
+            'date' => $this['created_at']->format('d/m/Y h:i A'),
+            'status' => $this['status'],
+            'total' => $this['total'],
+
         ];
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class ProductSize extends Pivot
+class ProductSize extends Model
 {
     use HasFactory;
 
@@ -17,4 +17,6 @@ class ProductSize extends Pivot
         'size_id',
         'stock',
     ];
+
+    protected $table = 'product_sizes';
 }

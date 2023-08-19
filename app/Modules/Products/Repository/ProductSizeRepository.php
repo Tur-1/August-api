@@ -8,6 +8,8 @@ use App\Modules\Products\Models\Product;
 use App\Modules\Products\Models\ProductImage;
 use App\Modules\Products\Models\ProductSize;
 
+use Mavinoo\Batch\Batch;
+
 class ProductSizeRepository
 {
 
@@ -17,10 +19,14 @@ class ProductSizeRepository
     {
         $this->productSize = new ProductSize();
     }
-
-    public function decreaseStockSize($quantity, $size_id)
+    public function decrementManyStockSize($sizes)
     {
-        $this->productSize->where('id', $size_id)
-            ->decrement('stock', $quantity);
+        return batch()->update($this->productSize, $sizes, 'id');
     }
+    // public function decrementStockSize($quantity, $size_id)
+    // {
+    //     $this->productSize->query()
+    //         ->where('id', $size_id)
+    //         ->decrement('stock', $quantity);
+    // }
 }

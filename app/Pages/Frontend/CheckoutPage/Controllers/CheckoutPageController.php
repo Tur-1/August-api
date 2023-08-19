@@ -5,21 +5,23 @@ namespace App\Pages\Frontend\CheckoutPage\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Pages\Frontend\CheckoutPage\Actions\NotifyUserOfOrderAcceptance;
 use Illuminate\Support\Facades\Session;
 use App\Pages\Frontend\CheckoutPage\Services\CheckoutPageService;
 use App\Pages\Frontend\CheckoutPage\Services\CheckoutCouponService;
 use App\Pages\Frontend\ShoppingCartPage\Services\ShoppingCartPageService;
 use App\Pages\Frontend\CheckoutPage\Exceptions\InValidCouponCodeException;
 use App\Pages\Frontend\CheckoutPage\Exceptions\ProductOutOfStockException;
+use App\Pages\Frontend\CheckoutPage\Services\CheckoutOrderService;
 
 class CheckoutPageController extends Controller
 {
 
     private $coupon;
-
+    private $order;
     public function index(CheckoutPageService $checkoutPageService)
     {
-        Session::remove('cartDetailsWithCoupon');
+        Session::forget(['cartDetails', 'cartDetailsWithCoupon']);
         return  response()->success([
             'user_addresses' => $checkoutPageService->getUserAddresses(),
             'products' => $checkoutPageService->getCheckoutProducts(),
@@ -29,6 +31,7 @@ class CheckoutPageController extends Controller
 
     public function applyCoupon(Request $request, CheckoutCouponService $checkoutCouponService)
     {
+
 
         $coupon = Session::get('cartDetailsWithCoupon');
         if (!is_null($coupon)) {
@@ -40,40 +43,42 @@ class CheckoutPageController extends Controller
         }
 
         try {
-            $checkoutCouponService->getCoupon($request->couponCode);
+            $checkoutCouponService->getCoupon($request->code);
         } catch (InValidCouponCodeException $ex) {
             return  response()->error($ex->getMessage(), 404);
         }
 
 
-
-        $cartDetails = $checkoutCouponService->getCartTotalWithCoupon($request->cartTotal);
+        $cartDetails = $checkoutCouponService->getCartDetailsWithCoupon();
 
         Session::put('cartDetailsWithCoupon', $cartDetails);
 
         return  response()->success([
-            'cartDetails' => Session::get('cartDetailsWithCoupon'),
+            'cartDetails' =>  $cartDetails,
+            'message' => 'coupon applied',
         ]);
     }
-    public function buyNow(Request $request, CheckoutPageService $checkoutPageService)
+    public function buyNow(Request $request,  CheckoutOrderService $checkoutOrderService)
     {
+
+
         $cartDetails = Session::get('cartDetails');
         $cartDetailsWithCoupon = Session::get('cartDetailsWithCoupon');
+        $couponService = new CheckoutCouponService();
 
 
         try {
-            $checkoutPageService->getUserAddress($request->address_id);
+            $checkoutOrderService->getUserAddress($request->address_id);
         } catch (\Exception $ex) {
             return  response()->error($ex->getMessage(), 404);
         }
-
 
 
         if (!is_null($cartDetailsWithCoupon)) {
 
             $cartDetails = $cartDetailsWithCoupon->toArray();
             try {
-                $this->coupon = (new CheckoutCouponService())->getCoupon($cartDetails['coupon']['code']);
+                $this->coupon = $couponService->getCoupon($cartDetails['coupon']['code']);
             } catch (InValidCouponCodeException $ex) {
 
                 Session::remove('cartDetailsWithCoupon');
@@ -83,28 +88,25 @@ class CheckoutPageController extends Controller
 
 
         try {
-            DB::transaction(function () use ($checkoutPageService, $cartDetails) {
-                $this->order =  $checkoutPageService->createNewOrder($cartDetails);
+            DB::transaction(function () use ($checkoutOrderService, $cartDetails) {
+                $this->order =  $checkoutOrderService->createNewOrder($cartDetails);
 
-                $checkoutPageService->checkProductsStock();
+                $checkoutOrderService->checkProductsStock();
             });
 
-            $checkoutPageService->storeOrderProducts();
-            $checkoutPageService->decreaseStockSize();
-            $checkoutPageService->updateProductsStock();
-            $checkoutPageService->storeOrderAddress();
+            $checkoutOrderService->storeOrderProducts();
+            $checkoutOrderService->decrementStockSize();
+            $checkoutOrderService->updateProductsStock();
+            $checkoutOrderService->storeOrderAddress();
 
-            $checkoutPageService->storeOrderCoupon($cartDetails['coupon']);
-            (new CheckoutCouponService())->increaseCouponUsedTimes($this->coupon);
+            $checkoutOrderService->storeOrderCoupon($cartDetails['coupon']);
+            $couponService->increaseCouponUsedTimes($this->coupon);
 
-            $checkoutPageService->notifyUserOfOrderAcceptance();
+
+            (new NotifyUserOfOrderAcceptance())->handle($checkoutOrderService->getOrderInformation());
         } catch (ProductOutOfStockException $ex) {
             return response()->error($ex->getMessage(), 404);
         }
-
-
-
-
 
 
         (new ShoppingCartPageService())->deleteUserCartProducts();

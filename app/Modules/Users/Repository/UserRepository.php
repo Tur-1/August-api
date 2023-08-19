@@ -32,6 +32,12 @@ class UserRepository
     }
     public function getCartProducts()
     {
+
+        return auth()->user()->shoppingCartProducts;
+    }
+    public function getCheckoutProducts()
+    {
+
         return auth()->user()->shoppingCartProducts;
     }
 

@@ -70,6 +70,6 @@ class  ProductDetailPageService
     public function addToCart($request)
     {
 
-        (new ShoppingCartRepository())->storeCartItem($request['product_id'], $request['size_id']);
+        return (new ShoppingCartRepository())->storeCartItem($request['product_id'], $request['size_id']);
     }
 }

@@ -16,19 +16,22 @@ class OrderProduct extends Model
         'order_id',
         'product_name',
         'product_slug',
-        'product_brand',
+        'product_attributes',
         'product_image',
-        'product_size',
         'product_quantity',
         'product_price',
         'total_price',
     ];
 
+    protected $casts = [
+        'product_attributes' => 'array',
+
+    ];
     protected function productImage(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $value ?
-                config('app.url') .  Storage::url('images/' . $value)
+                config('app.url') .  Storage::url("images/orders/order-$this->order_id/" . $value)
                 : null,
         );
     }

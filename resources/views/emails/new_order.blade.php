@@ -511,7 +511,7 @@
                                                                                     style="font-size:14px;line-height:21px">Subtotal:</span>
                                                                             </td>
                                                                             <td style="padding:0;Margin:0"><span
-                                                                                    style="font-size:14px;line-height:21px">{{ $order['subtotal'] }}
+                                                                                    style="font-size:14px;line-height:21px">{{ $order['sub_total'] }}
                                                                                     SAR</span>
                                                                             </td>
                                                                         </tr>
@@ -758,7 +758,7 @@
                                                                                 <a href="{{ config('app.frontend_url') . '/product-detail/' . $product['product_slug'] }}"
                                                                                     target="_blank"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#D48344;font-size:14px">
-                                                                                    <img src="{{ $product['main_image_url'] }}"
+                                                                                    <img src="{{ $product['product_image'] }}"
                                                                                         alt="Natural Balance L.I.D., sale 30%"
                                                                                         class="adapt-img"
                                                                                         title="Natural Balance L.I.D., sale 30%"

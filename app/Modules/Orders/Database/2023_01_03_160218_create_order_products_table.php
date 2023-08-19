@@ -18,9 +18,8 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->string('product_name')->nullable();
             $table->string('product_slug')->nullable();
-            $table->string('product_brand')->nullable();
             $table->string('product_image')->nullable();
-            $table->string('product_size')->nullable();
+            $table->json('product_attributes')->nullable();
             $table->integer('product_quantity')->nullable();
             $table->decimal('product_price', 6, 2)->nullable();
             $table->decimal('total_price', 18, 2)->nullable();

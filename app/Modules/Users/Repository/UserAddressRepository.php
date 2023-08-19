@@ -7,7 +7,12 @@ use App\Modules\Users\Models\UserAddress;
 
 class UserAddressRepository
 {
+    public $userAddress;
 
+    public function __construct()
+    {
+        $this->userAddress = new UserAddress();
+    }
     public function getAll($records)
     {
         return auth()->user()->addresses()->paginate($records);
@@ -15,7 +20,7 @@ class UserAddressRepository
 
     public function getUserAddresses()
     {
-        return auth()->user()->addresses;
+        return  $this->userAddress->query()->where('user_id', auth()->id())->get();
     }
     public function createAddress($validatedRequest)
     {

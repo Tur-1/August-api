@@ -2,6 +2,7 @@
 
 namespace App\Modules\Orders\Repository;
 
+use Illuminate\Support\Facades\DB;
 use App\Modules\Orders\Models\Order;
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\Orders\Models\OrderCoupon;
@@ -25,6 +26,7 @@ class OrderRepository
     {
         return $this->order->with('user')->get();
     }
+
     public function getUserOrders()
     {
         return auth()->user()->orders;
@@ -45,6 +47,7 @@ class OrderRepository
     }
     public function storeOrderProducts($products)
     {
+
         OrderProduct::insert($products);
     }
     public function getOrder($id)

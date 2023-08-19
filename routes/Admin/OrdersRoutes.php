@@ -1,7 +1,7 @@
 <?php
 
-use App\Modules\Orders\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
+use App\Pages\Admin\OrdersPage\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

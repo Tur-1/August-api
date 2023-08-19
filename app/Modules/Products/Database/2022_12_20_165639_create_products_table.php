@@ -27,7 +27,8 @@ return new class() extends Migration
             $table->enum('discount_type', ['Percentage', 'Fixed'])->nullable();
             $table->date('discount_start_at')->nullable();
             $table->date('discount_expires_at')->nullable();
-            $table->decimal('discounted_price', 6, 2)->nullable();
+            $table->decimal('price_after_discount', 6, 2)->nullable();
+            $table->json('discount')->nullable();
             $table->integer('stock')->nullable();
             $table->boolean('is_active')->default(false);
             $table->foreignId('brand_id')->nullable()->constrained('brands')->nullOnDelete();

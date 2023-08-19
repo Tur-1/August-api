@@ -69,12 +69,12 @@ class User extends Authenticatable
             ->withBrandName()
             ->active();
     }
+
+
     public function shoppingCart()
     {
         return $this->belongsToMany(Product::class, 'shopping_carts', 'user_id', 'product_id')
-            ->select('products.id')
-            ->withPivot(['size_id', 'quantity', 'id'])
-            ->withTimestamps();
+            ->select('products.id');
     }
     public function shoppingCartProducts()
     {

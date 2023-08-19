@@ -28,14 +28,15 @@ class ShoppingCartItemsResource extends JsonResource
         $discount = new ProductDiscountService($discountData);
         $price = $discount->getPrice();
         $size = $this['sizes']->find($this['pivot']['size_id']);
-
+        $total_price = number_format($price * $this->pivot->quantity, 2, '.', '');
 
         return [
 
             'id' => $this->pivot->id,
             'quantity' =>  $this->pivot->quantity,
-            'total_price' => $price * $this->pivot->quantity,
+            'total_price' =>  $total_price,
             'in_stock' => $size->pivot->stock > 0 ? true : false,
+            'sizes' => $this['sizes'],
             'size' => [
                 'id' =>  $size->pivot->id,
                 'name' => $size->name,
@@ -47,9 +48,12 @@ class ShoppingCartItemsResource extends JsonResource
                 'name' => $this->name,
                 'slug' =>  $this->slug,
                 'brand_name' => $this->brand_name,
+                'main_image_name' => $this->main_image_name,
+                'main_image' => $this->main_image,
                 'main_image_url' => $this->main_image_url,
                 'shipping_cost' => $this->shipping_cost,
                 'price' => $price,
+                'stock' => $this->stock,
                 'discount' => $this->when(
                     $discount->isDiscountValid(),
                     [

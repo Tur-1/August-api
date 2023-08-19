@@ -3,6 +3,7 @@
 namespace App\Modules\Users\Traits;
 
 use App\Modules\Roles\Models\Role;
+use App\Modules\Orders\Models\Order;
 use App\Modules\Products\Models\Product;
 use App\Modules\Roles\Models\Permission;
 use App\Modules\Users\Models\UserAddress;

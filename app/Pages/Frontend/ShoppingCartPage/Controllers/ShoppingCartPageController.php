@@ -2,10 +2,7 @@
 
 namespace App\Pages\Frontend\ShoppingCartPage\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Modules\Users\Repository\UserRepository;
-use App\Pages\Frontend\ShoppingCartPage\Actions\CartItemQuantity;
 use App\Pages\Frontend\ShoppingCartPage\Services\ShoppingCartPageService;
 
 class ShoppingCartPageController extends Controller
@@ -20,7 +17,6 @@ class ShoppingCartPageController extends Controller
 
     public function getShoppingCartProducts()
     {
-
 
         return  response()->success([
             'cart_items' =>  $this->shoppingCartPageService->getShoppingCartProducts(),
@@ -37,7 +33,7 @@ class ShoppingCartPageController extends Controller
     public function removeCartItem($cartItemId)
     {
         try {
-            //code...
+
             $this->shoppingCartPageService->removeCartItem($cartItemId);
             return  response()->success([
                 'message' => 'The product has been removed from your cart!'
@@ -52,7 +48,6 @@ class ShoppingCartPageController extends Controller
     {
 
         if (!isset($cart_item_id) || !isset($product_id)) {
-
             return  response()->error([
                 'message' => 'try Again!'
             ]);
@@ -70,26 +65,26 @@ class ShoppingCartPageController extends Controller
         }
     }
 
-    public function increaseProductQuantity($cart_item_id, CartItemQuantity $cartItemQuantity)
+    public function increaseProductQuantity($cart_item_id)
     {
         $cartItem = $this->shoppingCartPageService->getCartItem($cart_item_id);
 
-        if (is_null($cartItem) || $cartItem['cart_item']['quantity'] >= $cartItem['cart_item']['size']['stock']) {
+        if (is_null($cartItem) || $cartItem['quantity'] >= $cartItem['size']['stock']) {
             return;
         }
 
-        $cartItemQuantity->increment($cart_item_id);
+        $this->shoppingCartPageService->increment($cart_item_id);
 
         return  response()->success(true);
     }
-    public function decreaseProductQuantity($cart_item_id, CartItemQuantity $cartItemQuantity)
+    public function decreaseProductQuantity($cart_item_id)
     {
         $cartItem = $this->shoppingCartPageService->getCartItem($cart_item_id);
-        if (is_null($cartItem) || $cartItem['cart_item']['quantity'] == 1) {
+        if (is_null($cartItem) || $cartItem['quantity'] == 1) {
             return;
         }
 
-        $cartItemQuantity->decrement($cart_item_id);
+        $this->shoppingCartPageService->decrement($cart_item_id);
         return  response()->success(true);
     }
 }

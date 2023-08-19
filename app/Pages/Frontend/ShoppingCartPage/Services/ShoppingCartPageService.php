@@ -10,19 +10,28 @@ use App\Pages\Frontend\ShoppingCartPage\Resources\ShoppingCartItemsResource;
 
 class  ShoppingCartPageService
 {
+    private $shoppingCartRepository;
     private $cart;
     private $cartSubTotal;
     private $shipmentFees;
 
+    public function __construct()
+    {
+        $this->shoppingCartRepository = new ShoppingCartRepository();
+    }
+
     public function getCartCounter()
     {
-        return (new ShoppingCartRepository())->getCartCount();
+        return $this->shoppingCartRepository->getCartCount();
     }
     public function getShoppingCartProducts()
     {
-        $userCart =  (new UserRepository())->getCartProducts();
 
-        $this->cart = collect(ShoppingCartItemsResource::collection($userCart)->resolve());
+        $this->cart = collect(
+            ShoppingCartItemsResource::collection(
+                (new UserRepository())->getCartProducts()
+            )->resolve()
+        );
 
         return $this->cart;
     }
@@ -33,7 +42,7 @@ class  ShoppingCartPageService
         if (is_null($item)) {
             throw new Exception("not found");
         }
-        return (new ShoppingCartRepository())->removeCartItem($item_id);
+        return $this->shoppingCartRepository->removeCartItem($item_id);
     }
     public function getCartItem($item_id)
     {
@@ -41,7 +50,14 @@ class  ShoppingCartPageService
             ->where('id', $item_id)
             ->first();
     }
-
+    public function increment($item_id)
+    {
+        return $this->shoppingCartRepository->increment($item_id);
+    }
+    public function decrement($item_id)
+    {
+        return $this->shoppingCartRepository->decrement($item_id);
+    }
 
     public function moveToWishlist($cart_item_id, $product_id)
     {
@@ -53,6 +69,10 @@ class  ShoppingCartPageService
         }
 
         return $this->removeCartItem($cart_item_id);
+    }
+    public function deleteUserCartProducts()
+    {
+        return auth()->user()->shoppingCart()->detach();
     }
     public function getCartDetails()
     {
@@ -67,15 +87,12 @@ class  ShoppingCartPageService
 
         return $cartDetails;
     }
-    public function deleteUserCartProducts()
-    {
-        return auth()->user()->shoppingCart()->detach();
-    }
+
     private function getCartSubTotal()
     {
         $this->cartSubTotal = $this->cart->sum('total_price');
 
-        return floatval($this->cartSubTotal);
+        return number_format($this->cartSubTotal, 2, '.', '');
     }
 
     private function getCartTotal()
@@ -94,7 +111,6 @@ class  ShoppingCartPageService
 
         return $this->shipmentFees;
     }
-
 
     private function getCartTotalWithVat($cartTotal)
     {

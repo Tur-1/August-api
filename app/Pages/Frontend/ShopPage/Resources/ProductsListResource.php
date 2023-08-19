@@ -4,7 +4,7 @@ namespace App\Pages\Frontend\ShopPage\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Pages\Frontend\ShopPage\Services\ProductDiscountService;
-
+use App\Modules\Coupons\Services\DiscountService;
 
 class ProductsListResource extends JsonResource
 {
@@ -31,7 +31,6 @@ class ProductsListResource extends JsonResource
         $discount = new ProductDiscountService($discountData);
 
 
-
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -41,6 +40,7 @@ class ProductsListResource extends JsonResource
             'inWishlist' => $this->inWishlist,
             'in_stock' => $this->stock > 0 ? true : false,
             'price' => $discount->getPrice(),
+
             'discount' => $this->when(
                 $discount->isDiscountValid(),
                 [

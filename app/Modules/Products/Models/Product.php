@@ -18,11 +18,12 @@ class Product extends Model
     protected $guarded  = [];
 
 
-    protected $appends = ['main_image_url'];
+    protected $appends = ['main_image_url', 'main_image_name'];
 
 
     protected $casts = [
         'is_active' => 'boolean',
+        'discount' => 'array'
 
     ];
 

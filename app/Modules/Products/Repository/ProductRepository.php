@@ -94,7 +94,10 @@ class ProductRepository
 
         return $product;
     }
-
+    public function updateManyProductsStock(array $stock)
+    {
+        return batch()->update($this->product, $stock, 'id');
+    }
     public function deleteProduct($id)
     {
         $this->product->where('id', $id)->delete();
@@ -106,6 +109,7 @@ class ProductRepository
     {
         $sizeOptions = $this->getSizeOptions($request->sizes);
 
+        $price_After =  (new StoreProductDiscountService())->getDiscountedPrice($request);
         $product->details = $request->details;
         $product->info_and_care = $request->info_and_care;
         $product->brand_id = $request->brand_id;
@@ -116,11 +120,17 @@ class ProductRepository
         $product->discount_amount = $request->discount_amount;
         $product->discount_start_at = $request->discount_start_at;
         $product->discount_expires_at = $request->discount_expires_at;
-        $product->discounted_price = (new StoreProductDiscountService())->getDiscountedPrice($request);
+        $product->discounted_price = $price_After;
         $product->name = Str::title($request->name);
         $product->slug = (new GenerateProductSlug())->handle($request->name, $product->id);
         $product->stock = $this->getProductStock($sizeOptions);
-
+        $product->discount = [
+            'price_after_discount' =>  $price_After,
+            'type' => $request->discount_type,
+            'amount' => $request->discount_amount,
+            'start_at' => $request->discount_start_at,
+            'expires_at' => $request->discount_expires_at,
+        ];
         $product->save();
 
         $product->sizes()->sync($sizeOptions);

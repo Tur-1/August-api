@@ -4,6 +4,7 @@ namespace App\Pages\Frontend\CheckoutPage\Services;
 
 use Illuminate\Support\Facades\Session;
 use App\Modules\Coupons\Repository\CouponRepository;
+use App\Modules\Coupons\Services\DiscountService;
 use App\Pages\Frontend\CheckoutPage\Exceptions\InValidCouponCodeException;
 
 class CheckoutCouponService
@@ -16,6 +17,7 @@ class CheckoutCouponService
 
         $this->coupon =  (new CouponRepository())->getValidCoupon($code);
 
+        Session::put('coupon', $this->coupon);
         if (is_null($this->coupon)) {
             throw new InValidCouponCodeException('This coupon is not Valid');
         }
@@ -23,18 +25,25 @@ class CheckoutCouponService
 
         return $this->coupon;
     }
-    public function getCartTotalWithCoupon($cartTotal)
+    public function getCartDetailsWithCoupon()
     {
-
         $cartDetails = collect(Session::get('cartDetails'));
 
-        $cartDetails['total'] = $this->getCartTotalAfterDiscount($cartTotal);
+        $discountData = [
+            'price' =>  $cartDetails['total'],
+            'amount' =>  $this->coupon->amount,
+            'type' => $this->coupon->type,
+        ];
+
+        $discountService = new DiscountService($discountData);
+
+
+        $cartDetails['total'] = number_format($discountService->getPriceAfterDiscount(), 2, '.', '');
         $cartDetails['coupon'] =  [
             'code' => $this->coupon->code,
-            'discounted_amount' =>  $this->getDiscountedValue($cartTotal),
             'type' => $this->coupon->type,
             'amount' => $this->coupon->amount,
-            'message' => 'coupon applied',
+            'discounted_amount' => number_format($discountService->getDiscountedAmount(), 2),
         ];
 
         return $cartDetails;
@@ -42,47 +51,5 @@ class CheckoutCouponService
     public function increaseCouponUsedTimes($copuon)
     {
         if (!is_null($copuon)) $copuon->increment('used_times', 1);
-    }
-
-    private function calculateDiscountInPercentages($cartTotal)
-    {
-        $cartTotal = $cartTotal - ($cartTotal * $this->getCouponAmount() / 100);
-
-        return number_format($cartTotal, 2, '.', '');
-    }
-    private function calculateDiscountInFixedAmount($cartTotal)
-    {
-        $cartTotal =  $cartTotal - $this->getCouponAmount();
-        return number_format($cartTotal, 2, '.', '');
-    }
-    private function getCouponAmount()
-    {
-        return $this->coupon->amount;
-    }
-    private function getCartTotalAfterDiscount($cartTotal)
-    {
-        if ($this->isCouponTypePercentage()) {
-
-            return  $this->calculateDiscountInPercentages($cartTotal);
-        }
-
-        return $this->calculateDiscountInFixedAmount($cartTotal);
-    }
-    private function isCouponTypePercentage()
-    {
-        return $this->coupon->type == 'Percentage';
-    }
-
-    private function getDiscountedValue($cartTotal)
-    {
-
-        if ($this->isCouponTypePercentage()) {
-            $discounted_Value = $this->getCouponAmount() / 100 * $cartTotal;
-        } else {
-            $discounted_Value =  $this->getCouponAmount();
-        }
-
-
-        return number_format($discounted_Value, 2);
     }
 }

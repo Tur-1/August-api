@@ -17,7 +17,6 @@ class ShoppingCart extends Model
         'product_id',
         'quantity',
         'size_id',
-        'total_price'
     ];
 
 
