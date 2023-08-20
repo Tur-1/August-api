@@ -4,6 +4,7 @@ namespace App\Pages\Admin\OrdersPage\Services;
 
 use App\Modules\Orders\Repository\OrderRepository;
 use App\Pages\Admin\OrdersPage\Resources\OrderResource;
+use App\Pages\Admin\OrdersPage\Resources\OrdersListResource;
 
 class OrderService
 {
@@ -13,9 +14,9 @@ class OrderService
     {
         $this->orderRepository = new OrderRepository();
     }
-    public function getAll($records = 12)
+    public function getAll()
     {
-        return OrderResource::collection($this->orderRepository->getAll($records));
+        return OrdersListResource::collection($this->orderRepository->getAll());
     }
 
     public function showOrder($id)

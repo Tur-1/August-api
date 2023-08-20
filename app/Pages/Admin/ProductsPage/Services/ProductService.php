@@ -34,9 +34,9 @@ class ProductService
 
         return $this->showProduct($id);
     }
-    public function publishProduct($id)
+    public function publishProduct($id, $value)
     {
-        return $this->productRepository->publishProduct($id);
+        return $this->productRepository->publishProduct($id, $value);
     }
     public function deleteProduct($id)
     {

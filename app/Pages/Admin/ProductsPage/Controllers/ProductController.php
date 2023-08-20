@@ -48,13 +48,21 @@ class ProductController extends Controller
             'product' => $product
         ]);
     }
-    public function publishProduct($id)
+    public function publishProduct($id, $value)
     {
-        $this->productService->publishProduct($id);
 
-        return response()->success([
-            'message' => 'Product has been published successfully',
-        ]);
+        try {
+            //code...
+            $this->productService->publishProduct($id, $value);
+
+            return response()->success([
+                'message' => 'Product has been published successfully',
+            ]);
+        } catch (\Exception $ex) {
+            return response()->error([
+                'message' => 'try Again',
+            ]);
+        }
     }
 
     public function updateProduct(UpdateProductRequest $request, $id)

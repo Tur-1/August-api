@@ -79,10 +79,11 @@ class ProductRepository
     {
         return $this->product->with('sizes', 'categories', 'productImages')->find($id);
     }
-    public function publishProduct($id)
+    public function publishProduct($id, $value)
     {
         $product = $this->getProduct($id);
-        $product->update(['is_active' => true]);
+        $is_active = $value == 'true' ? 1 : 0;
+        $product->update(['is_active' => $is_active]);
 
         return $product;
     }

@@ -18,9 +18,9 @@ class OrderRepository
     {
         $this->order = new Order();
     }
-    public function getAll($records)
+    public function getAll()
     {
-        return $this->order->with('user')->paginate($records);
+        return $this->order->with('user')->paginate(12);
     }
     public function getAllOrders()
     {

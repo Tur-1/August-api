@@ -21,7 +21,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('/products/store', 'storeProduct');
     Route::post('/products/show/{id}', 'showProduct');
 
-    Route::post('/products/publish/{id}', 'publishProduct');
+    Route::post('/products/{id}/publish/{value}', 'publishProduct');
 
     Route::post('/products/update/{id}', 'updateProduct');
     Route::post('/products/delete/{id}', 'destroyProduct');
