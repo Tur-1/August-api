@@ -5,7 +5,6 @@ namespace App\Pages\Frontend\CheckoutPage\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Pages\Frontend\CheckoutPage\Actions\NotifyUserOfOrderAcceptance;
 use Illuminate\Support\Facades\Session;
 use App\Pages\Frontend\CheckoutPage\Services\CheckoutPageService;
 use App\Pages\Frontend\CheckoutPage\Services\CheckoutCouponService;
@@ -103,15 +102,13 @@ class CheckoutPageController extends Controller
             $couponService->increaseCouponUsedTimes($this->coupon);
 
 
-            (new NotifyUserOfOrderAcceptance())->handle($checkoutOrderService->getOrderInformation());
+            (new ShoppingCartPageService())->deleteUserCartProducts();
+
+            Session::forget(['cartDetailsWithCoupon', 'cartDetails']);
         } catch (ProductOutOfStockException $ex) {
             return response()->error($ex->getMessage(), 404);
         }
 
-
-        (new ShoppingCartPageService())->deleteUserCartProducts();
-
-        Session::forget(['cartDetailsWithCoupon', 'cartDetails']);
 
         return  response()->success([
             'message' => 'Your order number #' . $this->order->id . ' has been received successfully',

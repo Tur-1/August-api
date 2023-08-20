@@ -15,4 +15,11 @@ class UserBuilder extends Builder
             'role_name' => Role::select('name')->whereColumn('id', 'users.role_id'),
         ]);
     }
+
+    public function search($search): self
+    {
+        return $this->when($search, function ($query) use ($search) {
+            $query->where('name', 'LIKE', '%' . $search . '%');
+        });
+    }
 }

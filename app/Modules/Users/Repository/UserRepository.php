@@ -15,16 +15,18 @@ class UserRepository
 
     public function getAllUsers($request)
     {
-        return $this->user->withRoleName()->when($request->search, function ($query) use ($request) {
-            $query->where('name', 'LIKE', '%' . $request->search . '%');
-        })->paginate($request->records = 10)->appends($request->all());
+        return $this->user->query()
+            ->withRoleName()
+            ->search($request->search)
+            ->paginate(12)
+            ->appends($request->all());
     }
 
     public function createUser($validatedRequest)
     {
 
         $user = User::create($validatedRequest->all());
-        $user->permissions()->sync($validatedRequest['permissionsIds']);
+        $user->permissions()->sync($validatedRequest['permissions_id']);
     }
     public function getWishlistProducts()
     {
@@ -55,7 +57,7 @@ class UserRepository
     {
         $user = $this->getUser($id);
         $user->update($validatedRequest->all());
-        $user->permissions()->sync($validatedRequest['permissionsIds']);
+        $user->permissions()->sync($validatedRequest['permissions_id']);
 
         return $user;
     }

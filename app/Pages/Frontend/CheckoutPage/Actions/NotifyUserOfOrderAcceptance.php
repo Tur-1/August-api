@@ -10,6 +10,6 @@ class NotifyUserOfOrderAcceptance
 {
     public function handle($orderInformation)
     {
-        Mail::to(auth()->user()->email)->send(new NewOrderMail($orderInformation));
+        // Mail::to(auth()->user()->email)->send(new NewOrderMail($orderInformation));
     }
 }

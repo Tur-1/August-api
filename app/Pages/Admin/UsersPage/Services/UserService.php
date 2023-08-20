@@ -4,6 +4,7 @@ namespace App\Pages\Admin\UsersPage\Services;
 
 use App\Modules\Users\Repository\UserRepository;
 use App\Pages\Admin\UsersPage\Resources\UserResource;
+use App\Pages\Admin\UsersPage\Resources\UsersListResource;
 
 class UserService
 {
@@ -16,7 +17,7 @@ class UserService
 
     public function getAllUsers($request)
     {
-        return UserResource::collection($this->userRepository->getAllUsers($request));
+        return UsersListResource::collection($this->userRepository->getAllUsers($request));
     }
 
     public function createUser($validatedRequest)

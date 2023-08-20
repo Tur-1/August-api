@@ -4,7 +4,7 @@ namespace App\Pages\Admin\UsersPage\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class UsersListResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,13 +18,10 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'permissions_id' => $this->permissions->pluck('id')->toArray(),
             'email' => $this->email,
-            'role_id' => $this->role_id,
+            'role_name' => $this->role_name,
             'gender' => $this->gender,
             'phone_number' => $this->phone_number,
-
-
         ];
     }
 }

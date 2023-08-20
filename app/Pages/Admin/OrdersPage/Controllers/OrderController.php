@@ -25,8 +25,6 @@ class OrderController extends Controller
     }
 
 
-
-
     public function showOrder($id)
     {
         $order =  $this->orderService->showOrder($id);

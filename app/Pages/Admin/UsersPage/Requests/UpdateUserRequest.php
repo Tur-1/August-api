@@ -35,6 +35,7 @@ class UpdateUserRequest extends FormRequest
             'role_id' => 'nullable',
             'phone_number' => 'nullable',
             'gender' => 'nullable|in:Female,Male',
+            'permissions_id' => 'nullable'
 
         ];
     }
