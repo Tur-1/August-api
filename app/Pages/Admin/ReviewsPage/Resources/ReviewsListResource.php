@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\Reviews\Resources;
+namespace App\Pages\Admin\ReviewsPage\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ReviewResource extends JsonResource
+class ReviewsListResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,15 +19,11 @@ class ReviewResource extends JsonResource
             'id' =>  $this->id,
             'user' => [
                 'name' => $this->user->name,
-                'gender' => $this->user->gender
             ],
             'product_id' => $this->product_id,
             'product_image' => $this->product->main_image_url,
-            'review_id' => $this->review_id,
-            'is_read' => $this->is_read,
             'comment' => $this->comment,
             'date' =>  $this->created_at->diffForHumans(),
-            'reply' => ReviewResource::make($this->whenLoaded('reply')),
         ];
     }
 }

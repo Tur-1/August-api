@@ -26,6 +26,9 @@ class Review extends Model
     protected $casts = [
         'is_read' => 'boolean',
     ];
+
+    public $timestamps = true;
+
     public function newEloquentBuilder($query): ReviewBuilder
     {
         return new ReviewBuilder($query);

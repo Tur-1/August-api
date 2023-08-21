@@ -3,8 +3,6 @@
 namespace App\Modules\Reviews\Repository;
 
 use App\Modules\Reviews\Models\Review;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
 
 class ReviewRepository
@@ -16,12 +14,13 @@ class ReviewRepository
 
         $this->review = new Review();
     }
-    public function getAll($records)
+    public function getAll()
     {
         return $this->review
-            ->with('user', 'product', 'reply')->whereNull('review_id')
+            ->with('user', 'product')
+            ->whereNull('review_id')
             ->latest()
-            ->paginate($records);
+            ->paginate(20);
     }
     public function getProductReviews($productId)
     {
@@ -37,13 +36,21 @@ class ReviewRepository
         $currentDate = Carbon::now('GMT+3');
 
         $review = $this->getReview($review_id);
-
-        return $review->reply()->create([
-            'user_id' => auth()->id(),
-            'product_id' => $review->product_id,
-            'comment' => $comment,
-            'create_at' =>  $currentDate
-        ]);
+        $reply = null;
+        if (!is_null($review->reply)) {
+            $reply =   $review->reply()->update([
+                'comment' => $comment,
+            ]);
+        } else {
+            $reply =   $review->reply()->create([
+                'user_id' => auth()->id(),
+                'product_id' => $review->product_id,
+                'comment' => $comment,
+                'create_at' =>  $currentDate,
+            ]);
+        }
+        $review->load('reply');
+        return $review;
     }
     public function createReview($comment, $product_id)
     {
@@ -53,18 +60,22 @@ class ReviewRepository
             'user_id' => auth()->id(),
             'product_id' => $product_id,
             'comment' => $comment,
-            'create_at' =>  $currentDate
+            'create_at' =>  $currentDate,
+
         ]);
     }
     public function getReview($id)
     {
-        return $this->review->with('reply', 'user')->find($id);
+
+        return  $this->review->with('reply', 'user')->find($id);
     }
     public function updateReview($comment, $id)
     {
+        $currentDate = Carbon::now('GMT+3');
         $review = $this->getReview($id);
         $review->update([
-            'comment' => $comment
+            'comment' => $comment,
+            'create_at' =>  $currentDate,
         ]);
         return  $review;
     }

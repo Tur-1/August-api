@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(ReviewController::class)->group(function () {
 
     Route::get('/reviews', 'index');
-    Route::post('/reviews/store', 'storeReview');
     Route::post('/reviews/show/{id}', 'showReview');
-    Route::post('/reviews/update/{id}', 'updateReview');
     Route::post('/reviews/delete/{id}', 'destroyReview');
     Route::post('/reviews/show/{id}/reply', 'replyReview');
 });

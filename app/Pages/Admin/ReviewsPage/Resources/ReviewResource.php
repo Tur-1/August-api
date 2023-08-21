@@ -27,7 +27,7 @@ class ReviewResource extends JsonResource
             'is_read' => $this->is_read,
             'comment' => $this->comment,
             'date' =>  $this->created_at->diffForHumans(),
-            'reply' => ReviewResource::make($this->whenLoaded('reply')),
+            'reply' => $this->whenLoaded('reply', ReviewResource::make($this->reply)),
         ];
     }
 }

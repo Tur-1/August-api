@@ -3,7 +3,6 @@
 namespace App\Pages\Admin\ReviewsPage\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreReviewRequest extends FormRequest
 {
@@ -24,6 +23,8 @@ class StoreReviewRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+        return [
+            'comment' => 'required',
+        ];
     }
 }

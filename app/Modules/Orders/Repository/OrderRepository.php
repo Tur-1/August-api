@@ -20,7 +20,7 @@ class OrderRepository
     }
     public function getAll()
     {
-        return $this->order->with('user')->paginate(12);
+        return $this->order->with('user')->latest()->paginate(12);
     }
     public function getAllOrders()
     {
