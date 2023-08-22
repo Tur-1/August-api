@@ -22,6 +22,12 @@ Route::middleware(['auth:sanctum'])->controller(MyAccountPageController::class)-
 
     // update password
     Route::post('/my-account/user/update-password',  'updateUserPassword');
+
+    // update password
+    Route::get('/my-account/orders', 'getUserOrders');
+
+    // update password
+    Route::get('/my-account/orders/{order_id}', 'showUserOrder');
 });
 
 Route::middleware(['auth:sanctum'])->controller(UserAddressController::class)->group(function () {

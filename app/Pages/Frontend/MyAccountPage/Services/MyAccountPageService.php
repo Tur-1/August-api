@@ -8,8 +8,8 @@ use Exception;
 use App\Modules\Orders\Repository\OrderRepository;
 
 use App\Pages\Frontend\MyAccountPage\Resources\UserInformationResource;
-use App\Pages\Frontend\MyAccountPage\Resources\MyAccountPageOrdersResource;
-use App\Pages\Frontend\MyAccountPage\Resources\OrderPageResource;
+use App\Pages\Frontend\MyAccountPage\Resources\OrdersListResource;
+use App\Pages\Frontend\MyAccountPage\Resources\OrderShowResource;
 
 class MyAccountPageService
 {
@@ -21,12 +21,13 @@ class MyAccountPageService
 
     public function getUserOrders()
     {
-        return  MyAccountPageOrdersResource::collection((new OrderRepository())->getUserOrders())->resolve();
+        return  OrdersListResource::collection((new OrderRepository())->getUserOrders())->resolve();
     }
-    public function getUserOrderDetail($id)
+    public function showUserOrder($order_id)
     {
 
-        return  OrderPageResource::make((new OrderRepository())->getOrder($id))->resolve();
+
+        return  OrderShowResource::make((new OrderRepository())->getUserOrder($order_id));
     }
 
     public function updatePhoneNumber($phoneNumber)

@@ -5,7 +5,7 @@ namespace App\Pages\Frontend\MyAccountPage\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderPageResource extends JsonResource
+class OrderShowResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,7 +19,7 @@ class OrderPageResource extends JsonResource
             'id' => $this['id'],
             'date' => $this['created_at']->format('d/m/Y h:i A'),
             'status' => $this['status'],
-            'subTotal' =>  $this['subTotal'],
+            'sub_total' =>  $this['sub_total'],
             'total' => $this['total'],
             'shipping_fees' => $this['shipping_fees'] != 0 ? $this['shipping_fees'] . ' SAR' : 'Free',
             'products' => $this['products'],

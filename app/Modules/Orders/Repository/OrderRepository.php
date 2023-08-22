@@ -29,7 +29,7 @@ class OrderRepository
 
     public function getUserOrders()
     {
-        return auth()->user()->orders;
+        return auth()->user()->orders()->latest()->get();
     }
     public function createOrder($validatedRequest)
     {
@@ -52,7 +52,15 @@ class OrderRepository
     }
     public function getOrder($id)
     {
-        return $this->order->with('user', 'coupon', 'products', 'address')->find($id);
+        return $this->order->query()
+            ->with('user', 'coupon', 'products', 'address')
+            ->find($id);
+    }
+    public function getUserOrder($id)
+    {
+        return $this->order->query()->where('user_id', auth()->id())
+            ->with('user', 'coupon', 'products', 'address')
+            ->find($id);
     }
     public function updateOrder($validatedRequest, $id)
     {
