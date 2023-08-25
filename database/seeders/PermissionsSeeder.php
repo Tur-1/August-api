@@ -19,7 +19,7 @@ class PermissionsSeeder extends Seeder
         $pages = [
             "brands",
             "banners",
-            "users",
+            "admins",
             "customers",
             "roles",
             "categories",

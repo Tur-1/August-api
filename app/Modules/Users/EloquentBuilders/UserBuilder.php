@@ -9,12 +9,6 @@ use Illuminate\Database\Eloquent\Builder;
 class UserBuilder extends Builder
 {
 
-    public function withRoleName(): self
-    {
-        return $this->addSelect([
-            'role_name' => Role::select('name')->whereColumn('id', 'users.role_id'),
-        ]);
-    }
 
     public function search($search): self
     {

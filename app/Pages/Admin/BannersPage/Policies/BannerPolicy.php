@@ -19,30 +19,30 @@ class BannerPolicy
     public function viewAny()
     {
 
-        return $this->userCanAccessAction->userCanAccess('access-banners');
+        return $this->userCanAccessAction->userCan('access-banners');
     }
 
     public function view()
     {
-        return $this->userCanAccessAction->userCanAccess('view-banners');
+        return $this->userCanAccessAction->userCan('view-banners');
     }
 
     public function create()
     {
 
-        return $this->userCanAccessAction->userCanAccess('create-banners');
+        return $this->userCanAccessAction->userCan('create-banners');
     }
 
     public function update()
     {
 
-        return $this->userCanAccessAction->userCanAccess('update-banners');
+        return $this->userCanAccessAction->userCan('update-banners');
     }
 
     public function delete()
     {
 
-        return $this->userCanAccessAction->userCanAccess('delete-banners');
+        return $this->userCanAccessAction->userCan('delete-banners');
     }
     public function restore()
     {

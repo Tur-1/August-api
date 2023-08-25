@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Modules\Banners\Models\Banner;
-use App\Modules\Banners\Policies\BannerPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -15,8 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        Banner::class => BannerPolicy::class,
+        // 'App\Models\Model' => 'App\Policies\ModelPolicy', 
     ];
 
     /**

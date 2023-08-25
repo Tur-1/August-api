@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Pages\Admin\UsersPage\Requests;
+namespace App\Pages\Admin\CustomersPage\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class UpdateCustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,17 +24,17 @@ class StoreUserRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+        return [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'role_id' => 'nullable',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('customers', 'email')->ignore($this->id),
+            ],
+            'password' => 'sometimes',
             'phone_number' => 'nullable',
-            'gender' => 'nullable|in:Female,Male',
-            'permissions_id' => 'nullable'
+            'gender' => 'required|in:Female,Male',
 
         ];
-
-        return $rules;
     }
 }

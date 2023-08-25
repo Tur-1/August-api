@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Pages\Admin\UsersPage\Resources;
+namespace App\Pages\Admin\CustomersPage\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UsersListResource extends JsonResource
+class CustomerShowResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,9 +19,10 @@ class UsersListResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'role_name' => $this->role_name,
             'gender' => $this->gender,
             'phone_number' => $this->phone_number,
+
+
         ];
     }
 }

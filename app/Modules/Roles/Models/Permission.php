@@ -18,6 +18,7 @@ class Permission extends Model
         'page_name'
     ];
 
+
     public function newEloquentBuilder($query): RoleBuilder
     {
         return new RoleBuilder($query);

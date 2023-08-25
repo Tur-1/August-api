@@ -37,14 +37,7 @@ class GenerateModuleService
                 }
             }
 
-            // create route File
-            $routeStubFile = $this->getRouteStubFile();
-            $routefull_path = $this->getRouteFileFullPath($argumentName);
 
-            $this->makeDirectory(dirname($routefull_path));
-
-            $routeFileContents = $this->getSourceFile($argumentName, $routeStubFile, 'Routes');
-            $this->files->put($routefull_path, $routeFileContents);
 
             // create migrtion File
             $migrtionStubFile = $this->getMigrationsStubFile();

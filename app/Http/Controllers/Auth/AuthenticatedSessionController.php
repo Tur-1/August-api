@@ -47,22 +47,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $request->user()->load(['permissions']);
-        $access_token =  $request->user()->createToken('access-token')->plainTextToken;
-        $permissions =  $request->user()->permissions->pluck('slug')->toArray();
-
-        $message = null;
-        $redirect_to = null;
+        $user =  $request->user('admin')->load(['permissions']);
+        $access_token =  $request->user('admin')->createToken('access-token')->plainTextToken;
+        $permissions =   $user->permissions->pluck('slug')->toArray();
 
 
         return response()->success([
-            'user' => $request->user(),
+            'user' => $user,
             'access_token' => $access_token,
-            'isAuthenticated' => true,
             'token_type' => 'Bearer',
             'permissions' =>  $permissions,
-            'message' => $message,
-            'redirect_to' => $redirect_to,
         ]);
     }
 

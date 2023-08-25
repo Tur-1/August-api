@@ -1,6 +1,6 @@
 <?php
 
-use {ModulePath}\Controllers\{Controller_Name}Controller;
+use App\Pages\Admin\CustomersPage\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::controller({Controller_Name}Controller::class)->group(function () {
+Route::controller(CustomerController::class)->group(function () {
 
-    Route::get('/{Module}', 'index');
-    Route::post('/{Module}/store', 'store{Model}');
-    Route::post('/{Module}/show/{id}', 'show{Model}');
-    Route::post('/{Module}/update/{id}', 'update{Model}');
-    Route::post('/{Module}/delete/{id}', 'destroy{Model}');
+    Route::get('/customers', 'index');
+    Route::post('/customers/store', 'store');
+    Route::post('/customers/show/{id}', 'show');
+    Route::post('/customers/update/{id}', 'update');
+    Route::post('/customers/delete/{id}', 'destroy');
 });

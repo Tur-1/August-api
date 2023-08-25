@@ -44,14 +44,5 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->loadMigrationsFrom(glob(base_path('/app/Modules/*/Database/*')));
-
-
-        // $this->app->singleton('inWishlist', function ($app) {
-        //     $inWishlist = [];
-        //     if (Route::is('homePage') || Route::is('shop.categoryPage') || Route::is('productDetailPage') || Route::is('wishlistPage')) {
-        //         $inWishlist = (new UserRepository())->getWishlistProductsIds();
-        //     }
-        //     return $inWishlist;
-        // });
     }
 }

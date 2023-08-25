@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Pages\Admin\UsersPage\Controllers\UserController;
+use App\Pages\Admin\Auth\Controllers\LoginContoller;
+use App\Pages\Admin\Auth\Controllers\LogoutContoller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +16,7 @@ use App\Pages\Admin\UsersPage\Controllers\UserController;
 */
 
 
-Route::controller(UserController::class)->group(function () {
 
-    Route::get('/users', 'index');
-    Route::post('/users/store', 'store');
-    Route::post('/users/show/{id}', 'show');
-    Route::post('/users/update/{id}', 'update');
-    Route::post('/users/delete/{id}', 'destroy');
-});
+Route::middleware('guest')->post('/login', LoginContoller::class);
+
+Route::middleware(['auth:sanctum'])->post('/logout', LogoutContoller::class);

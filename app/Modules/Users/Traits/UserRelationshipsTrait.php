@@ -13,14 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait UserRelationshipsTrait
 {
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
-    public function permissions(): BelongsToMany
-    {
-        return $this->belongsToMany(Permission::class, 'user_permissions', 'user_id', 'permission_id');
-    }
+
     public function addresses(): HasMany
     {
         return $this->hasMany(UserAddress::class, 'user_id');

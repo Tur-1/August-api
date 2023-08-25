@@ -27,6 +27,6 @@ class RolePermissionsSeeder extends Seeder
         }
 
 
-        DB::table('role_permissions')->insert($role_permissions);
+        DB::table('role_permission')->insert($role_permissions);
     }
 }

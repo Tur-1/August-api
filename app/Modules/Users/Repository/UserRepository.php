@@ -16,7 +16,6 @@ class UserRepository
     public function getAllUsers($request)
     {
         return $this->user->query()
-            ->withRoleName()
             ->search($request->search)
             ->paginate(12)
             ->appends($request->all());
@@ -24,9 +23,7 @@ class UserRepository
 
     public function createUser($validatedRequest)
     {
-
-        $user = User::create($validatedRequest->all());
-        $user->permissions()->sync($validatedRequest['permissions_id']);
+        $user = User::create($validatedRequest);
     }
     public function getWishlistProducts()
     {
@@ -48,16 +45,12 @@ class UserRepository
     {
         return $this->user->find($id);
     }
-    public function getUserWithPermissionsIds($id)
-    {
-        return $this->user->with('permissions')->find($id);
-    }
+
 
     public function updateUser($validatedRequest, $id)
     {
         $user = $this->getUser($id);
-        $user->update($validatedRequest->all());
-        $user->permissions()->sync($validatedRequest['permissions_id']);
+        $user->update($validatedRequest);
 
         return $user;
     }
