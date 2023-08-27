@@ -19,9 +19,9 @@ class MyAccountPageController extends Controller
         $this->myAccountService =  $myAccountPageService;
     }
 
-    public function getUserInformation()
+    public function getUserInformation(Request $request)
     {
-        return response()->success($this->myAccountService->getUserInformation());
+        return response()->success($this->myAccountService->getUserInformation($request));
     }
 
     public function getUserOrders()

@@ -4,6 +4,7 @@ namespace App\Pages\Frontend\ShoppingCartPage\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Pages\Frontend\ShoppingCartPage\Services\ShoppingCartPageService;
+use Illuminate\Http\Request;
 
 class ShoppingCartPageController extends Controller
 {

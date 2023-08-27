@@ -33,9 +33,9 @@ class RoleController extends Controller
     {
         return  $this->roleService->getAllPermissions();
     }
-    public function getRolePermissions($role_id)
+    public function getRoleWithPermissions($role_id)
     {
-        return  $this->roleService->getRolePermissions($role_id);
+        return  $this->roleService->getRoleWithPermissions($role_id);
     }
 
 

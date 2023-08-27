@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(ShoppingCartPageController::class)->group(function () {
 
+
     Route::get('/cart/count', 'getCartCounter')->name('getCartCounter');
 });
 Route::middleware('auth')->controller(ShoppingCartPageController::class)->group(function () {

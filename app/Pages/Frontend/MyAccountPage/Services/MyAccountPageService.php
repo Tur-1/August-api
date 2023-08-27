@@ -14,9 +14,10 @@ use App\Pages\Frontend\MyAccountPage\Resources\OrderShowResource;
 class MyAccountPageService
 {
 
-    public function getUserInformation()
+    public function getUserInformation($request)
     {
-        return UserInformationResource::make(auth()->user());
+
+        return UserInformationResource::make($request->user('web'));
     }
 
     public function getUserOrders()
@@ -25,7 +26,6 @@ class MyAccountPageService
     }
     public function showUserOrder($order_id)
     {
-
 
         return  OrderShowResource::make((new OrderRepository())->getUserOrder($order_id));
     }

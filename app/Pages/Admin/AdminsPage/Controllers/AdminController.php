@@ -4,12 +4,15 @@ namespace App\Pages\Admin\AdminsPage\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Pages\Admin\AdminsPage\Services\AdminService;
 use App\Pages\Admin\AdminsPage\Requests\StoreAdminRequest;
 use App\Pages\Admin\AdminsPage\Requests\UpdateAdminRequest;
-use App\Pages\Admin\AdminsPage\Services\AdminService;
+use App\Traits\UserCanAccess;
 
 class AdminController extends Controller
 {
+    use UserCanAccess;
+
     private $adminService;
 
     public function __construct(AdminService $adminService)
@@ -19,11 +22,15 @@ class AdminController extends Controller
 
     public function index(Request $request)
     {
+        $this->userCan('access-admins');
+
         return $this->adminService->getAllAdmins($request);
     }
 
     public function store(StoreAdminRequest $request)
     {
+        $this->userCan('create-admins');
+
         $validatedRequest = $request->validated();
 
         $this->adminService->createAdmin($validatedRequest);
@@ -35,6 +42,8 @@ class AdminController extends Controller
 
     public function show($id)
     {
+        $this->userCan('view-admins');
+
         $Admin = $this->adminService->getAdminWithPermissionsIds($id);
 
         return response()->success($Admin);
@@ -42,6 +51,8 @@ class AdminController extends Controller
 
     public function update(UpdateAdminRequest $request, $id)
     {
+        $this->userCan('update-admins');
+
         $validatedRequest = $request->validated();
 
         $admin = $this->adminService->updateAdmin($validatedRequest, $id);
@@ -54,6 +65,8 @@ class AdminController extends Controller
 
     public function destroy($id)
     {
+        $this->userCan('delete-admins');
+
         try {
             $this->adminService->deleteAdmin($id);
 

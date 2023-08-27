@@ -29,7 +29,7 @@ class UpdateCustomerRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('customers', 'email')->ignore($this->id),
+                Rule::unique('users', 'email')->ignore($this->id),
             ],
             'password' => 'sometimes',
             'phone_number' => 'nullable',

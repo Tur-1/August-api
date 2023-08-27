@@ -25,7 +25,7 @@ class PermissionsSeeder extends Seeder
             "categories",
             "products",
             "colors",
-            "size options",
+            "sizes",
             "reviews",
             "coupons",
             "orders",

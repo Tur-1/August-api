@@ -48,7 +48,7 @@ class CustomerController extends Controller
 
         return response()->success([
             'message' => 'Customer has been updated successfully',
-            'Customer' => $Customer,
+            'customer' => $Customer,
         ]);
     }
 

@@ -2,16 +2,17 @@
 
 namespace App\Pages\Admin\BrandsPage\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Pages\Admin\BrandsPage\Services\BrandService;
 use App\Pages\Admin\BrandsPage\Requests\StoreBrandRequest;
 use App\Pages\Admin\BrandsPage\Requests\UpdateBrandRequest;
-use App\Pages\Admin\BrandsPage\Services\BrandService;
-
+use App\Traits\UserCanAccess;
 
 class BrandController extends Controller
 {
 
+    use UserCanAccess;
 
     private $brandService;
 
@@ -23,7 +24,7 @@ class BrandController extends Controller
 
     public function index(Request $request)
     {
-
+        $this->userCan('access-brands');
         return  $this->brandService->getAll();
     }
     public function getAllBrands()
@@ -34,6 +35,7 @@ class BrandController extends Controller
 
     public function storeBrand(StoreBrandRequest $request)
     {
+        $this->userCan('create-brands');
         $request->validated();
 
         $this->brandService->createBrand($request);
@@ -46,6 +48,8 @@ class BrandController extends Controller
 
     public function showBrand($id)
     {
+        $this->userCan('view-brands');
+
         $brand =  $this->brandService->showBrand($id);
 
         return response()->success([
@@ -56,6 +60,8 @@ class BrandController extends Controller
 
     public function updateBrand(UpdateBrandRequest $request, $id)
     {
+        $this->userCan('update-brands');
+
         $request->validated();
 
         $brand =  $this->brandService->updateBrand($request, $id);
@@ -69,6 +75,7 @@ class BrandController extends Controller
 
     public function destroyBrand($id)
     {
+        $this->userCan('delete-brands');
 
         $this->brandService->deleteBrand($id);
 

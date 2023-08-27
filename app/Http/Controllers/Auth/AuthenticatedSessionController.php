@@ -4,44 +4,56 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\AdminLoginRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Pages\Frontend\WishlistPage\Services\WishlistPageService;
-use App\Pages\Frontend\ProductDetailPage\Services\ProductDetailPageService;
+use App\Http\Resources\AuthAdminResource;
 
 class AuthenticatedSessionController extends Controller
 {
 
-    public function isAuthenticated()
+
+    public function getUserPermissions(Request $request)
     {
-        $isAuth = false;
-
-        if (auth()->check()) $isAuth = true;
-
-        return response()->success([
-            'isAuthenticated' => $isAuth,
-        ]);
-    }
-
-    public function getAuthUser()
-    {
-
-        $user = auth()->user()->load('permissions');
-        $permissions = $user->permissions->pluck('slug')->toArray();
+        $permissions = [];
+        if (auth('admin')->check()) {
+            $user = $request->user('admin')->load('permissions');
+            $permissions = $user->permissions->pluck('slug')->toArray();
+        }
 
         return response()->json([
-            'user' => $user,
             'permissions' =>  $permissions,
         ]);
     }
-    /**
-     * Handle an incoming authentication request.
-     *
-     * @param  \App\Http\Requests\Auth\LoginRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function login(LoginRequest $request)
+
+    public function userLogin(LoginRequest $request)
+    {
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        $user =  $request->user('web');
+        $access_token =  $request->user('web')->createToken('access-token')->plainTextToken;
+
+
+        return response()->success([
+            'user' => AuthAdminResource::make($user),
+            'access_token' => $access_token,
+            'token_type' => 'Bearer',
+            'message' => "You have successfully logged in!"
+        ]);
+    }
+    public function userLogout(Request $request)
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return response()->success(['message' => "You have successfully logged out!"]);
+    }
+    public function adminLogin(AdminLoginRequest $request)
     {
         $request->authenticate();
 
@@ -53,22 +65,16 @@ class AuthenticatedSessionController extends Controller
 
 
         return response()->success([
-            'user' => $user,
+            'user' => AuthAdminResource::make($user),
             'access_token' => $access_token,
             'token_type' => 'Bearer',
             'permissions' =>  $permissions,
+            'message' => "You have successfully logged in!"
         ]);
     }
-
-    /**
-     * Destroy an authenticated session.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function logout(Request $request)
+    public function adminLogout(Request $request)
     {
-        Auth::guard('web')->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
 

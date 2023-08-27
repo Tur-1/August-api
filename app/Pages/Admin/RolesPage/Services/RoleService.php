@@ -21,9 +21,9 @@ class RoleService
     {
         return $this->roleRepository->getAllRoles();
     }
-    public function getRolePermissions($id)
+    public function getRoleWithPermissions($id)
     {
-        return $this->roleRepository->getRolePermissions($id);
+        return $this->roleRepository->getRoleWithPermissions($id);
     }
     public function getAllPermissions()
     {

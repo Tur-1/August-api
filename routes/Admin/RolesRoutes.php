@@ -18,7 +18,7 @@ Route::controller(RoleController::class)->group(function () {
 
     Route::get('/roles', 'index');
 
-    Route::get('/roles/all', 'getAllRoles');
+    Route::get('/get-all-roles', 'getAllRoles');
 
     Route::post('/roles/store', 'storeRole');
     Route::post('/roles/show/{id}', 'showRole');
@@ -27,5 +27,5 @@ Route::controller(RoleController::class)->group(function () {
 
     Route::get('/roles/permissions', 'getAllPermissions');
 
-    Route::get('/roles/{id}/permissions', 'getRolePermissions');
+    Route::get('/roles/{id}/permissions', 'getRoleWithPermissions');
 });

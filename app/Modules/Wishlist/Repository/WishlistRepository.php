@@ -16,7 +16,8 @@ class WishlistRepository
 
     public function getWishlistProductsIds(): array
     {
-        return $this->wishlist->query()
+        return [];
+        $this->wishlist->query()
             ->where(['user_id' => auth()->id()])
             ->pluck('product_id')
             ->toArray();

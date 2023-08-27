@@ -3,34 +3,26 @@
 namespace App\Pages\Admin\BannersPage\Controllers;
 
 use Illuminate\Http\Request;
-use App\Actions\UserCanAccessAction;
-use App\Exceptions\UnauthorizedException;
 use App\Http\Controllers\Controller;
 use App\Pages\Admin\BannersPage\Services\BannerService;
 use App\Pages\Admin\BannersPage\Requests\StoreBannerRequest;
 use App\Pages\Admin\BannersPage\Requests\UpdateBannerRequest;
+use App\Traits\UserCanAccess;
 
 class BannerController extends Controller
 {
-
-
-    private $userCanAccess;
+    use UserCanAccess;
     private $bannerService;
 
-    public function __construct(BannerService $bannerService, UserCanAccessAction $userCanAccessAction)
+    public function __construct(BannerService $bannerService)
     {
         $this->bannerService = $bannerService;
-        $this->userCanAccess = $userCanAccessAction;
     }
 
 
     public function index(Request $request)
     {
-        try {
-            $this->userCanAccess->userCan('access-banners');
-        } catch (UnauthorizedException $ex) {
-            return response()->error($ex->getMessage(), $ex->getCode());
-        }
+        $this->userCan('access-banners');
 
         return $this->bannerService->getAll();
     }
@@ -40,7 +32,7 @@ class BannerController extends Controller
     public function publishBanner($id)
     {
 
-        $this->userCanAccess->userCan('access-banners');
+        $this->userCan('access-banners');
 
 
         $this->bannerService->publishBanner($id);
@@ -52,7 +44,7 @@ class BannerController extends Controller
     public function storeBanner(StoreBannerRequest $request)
     {
 
-        $this->userCanAccess->userCan('create-banners');
+        $this->userCan('create-banners');
 
         $request->validated();
 
@@ -66,7 +58,7 @@ class BannerController extends Controller
 
     public function showBanner($id)
     {
-        $this->userCanAccess->userCan('view-banners');
+        $this->userCan('view-banners');
         $banner =  $this->bannerService->showBanner($id);
 
         return response()->success([
@@ -77,7 +69,7 @@ class BannerController extends Controller
 
     public function updateBanner(UpdateBannerRequest $request, $id)
     {
-        $this->userCanAccess->userCan('update-banners');
+        $this->userCan('update-banners');
         $request->validated();
 
         $banner =  $this->bannerService->updateBanner($request, $id);
@@ -91,7 +83,7 @@ class BannerController extends Controller
 
     public function destroyBanner($id)
     {
-        $this->userCanAccess->userCan('delete-banners');
+        $this->userCan('delete-banners');
 
         $this->bannerService->deleteBanner($id);
 

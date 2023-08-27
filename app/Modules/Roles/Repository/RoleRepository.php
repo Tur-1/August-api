@@ -2,10 +2,11 @@
 
 namespace App\Modules\Roles\Repository;
 
-use App\Modules\Roles\Models\Permission;
 use Illuminate\Support\Str;
 use App\Modules\Roles\Models\Role;
 use Illuminate\Database\Eloquent\Model;
+use App\Modules\Roles\Models\Permission;
+use App\Modules\Roles\Models\RolePermission;
 use Illuminate\Database\Eloquent\Collection;
 
 class RoleRepository
@@ -43,9 +44,9 @@ class RoleRepository
     }
     public function getRole($id)
     {
-        return $this->role->with('permissions')->find($id);
+        return $this->role->with('permissions:id,name,page_name')->find($id);
     }
-    public function getRolePermissions($role_id)
+    public function getRoleWithPermissions($role_id)
     {
         $role =  $this->getRole($role_id);
 
