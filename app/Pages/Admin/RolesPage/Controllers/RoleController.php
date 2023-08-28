@@ -8,7 +8,6 @@ use App\Pages\Admin\RolesPage\Requests\StoreRoleRequest;
 use App\Pages\Admin\RolesPage\Requests\UpdateRoleRequest;
 use App\Pages\Admin\RolesPage\Services\RoleService;
 
-
 class RoleController extends Controller
 {
 
@@ -23,6 +22,7 @@ class RoleController extends Controller
 
     public function index(Request $request)
     {
+        $this->userCan('access-roles');
         return  $this->roleService->getAll();
     }
     public function getAllRoles()
@@ -41,6 +41,8 @@ class RoleController extends Controller
 
     public function storeRole(StoreRoleRequest $request)
     {
+        $this->userCan('create-roles');
+
         $validatedRequest = $request->validated();
 
         $this->roleService->createRole($request);
@@ -53,6 +55,8 @@ class RoleController extends Controller
 
     public function showRole($id)
     {
+        $this->userCan('view-roles');
+
         $role =  $this->roleService->showRole($id);
 
 
@@ -64,6 +68,8 @@ class RoleController extends Controller
 
     public function updateRole(UpdateRoleRequest $request, $id)
     {
+        $this->userCan('update-roles');
+
         $validatedRequest = $request->validated();
 
         $role =  $this->roleService->updateRole($request, $id);
@@ -77,6 +83,7 @@ class RoleController extends Controller
 
     public function destroyRole($id)
     {
+        $this->userCan('delete-roles');
 
         $this->roleService->deleteRole($id);
 

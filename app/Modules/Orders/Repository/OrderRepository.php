@@ -29,7 +29,7 @@ class OrderRepository
 
     public function getUserOrders()
     {
-        return auth()->user()->orders()->latest()->get();
+        return auth('web')->user()->orders()->latest()->get();
     }
     public function createOrder($validatedRequest)
     {

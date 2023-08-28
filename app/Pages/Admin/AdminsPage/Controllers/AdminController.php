@@ -7,11 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Pages\Admin\AdminsPage\Services\AdminService;
 use App\Pages\Admin\AdminsPage\Requests\StoreAdminRequest;
 use App\Pages\Admin\AdminsPage\Requests\UpdateAdminRequest;
-use App\Traits\UserCanAccess;
 
 class AdminController extends Controller
 {
-    use UserCanAccess;
+
 
     private $adminService;
 

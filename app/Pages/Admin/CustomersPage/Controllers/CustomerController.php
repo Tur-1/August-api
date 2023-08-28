@@ -10,6 +10,7 @@ use App\Pages\Admin\CustomersPage\Services\CustomerService;
 
 class CustomerController extends Controller
 {
+
     private $customerService;
 
     public function __construct(CustomerService $customerService)
@@ -19,11 +20,14 @@ class CustomerController extends Controller
 
     public function index(Request $request)
     {
+        $this->userCan('access-customers');
+
         return $this->customerService->getAllCustomers($request);
     }
 
     public function store(StoreCustomerRequest $request)
     {
+        $this->userCan('create-customers');
         $validatedRequest = $request->validated();
 
         $this->customerService->createCustomer($validatedRequest);
@@ -35,6 +39,8 @@ class CustomerController extends Controller
 
     public function show($id)
     {
+        $this->userCan('view-customers');
+
         $Customer = $this->customerService->getCustomer($id);
 
         return response()->success($Customer);
@@ -42,6 +48,8 @@ class CustomerController extends Controller
 
     public function update(UpdateCustomerRequest $request, $id)
     {
+        $this->userCan('update-customers');
+
         $validatedRequest = $request->validated();
 
         $Customer = $this->customerService->updateCustomer($validatedRequest, $id);
@@ -54,6 +62,8 @@ class CustomerController extends Controller
 
     public function destroy($id)
     {
+        $this->userCan('delete-customers');
+
         try {
             $this->customerService->deleteCustomer($id);
 

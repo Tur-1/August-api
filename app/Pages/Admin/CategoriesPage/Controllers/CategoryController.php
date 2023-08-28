@@ -22,7 +22,7 @@ class CategoryController extends Controller
     public function getAllCategories(Request $request)
     {
 
-
+        $this->userCan('access-categories');
         return $this->categoryService->getAllCategories($request->input('section'), $request->input('search'));
     }
 
@@ -35,6 +35,8 @@ class CategoryController extends Controller
 
     public function storeCategory(StoreCategoryRequest $request)
     {
+        $this->userCan('create-categories');
+
         $request->validated();
 
         $this->categoryService->storeCategory($request);
@@ -46,6 +48,8 @@ class CategoryController extends Controller
 
     public function showCategory($id)
     {
+        $this->userCan('view-categories');
+
         $category = $this->categoryService->getCategory($id);
 
         return response()->success($category);
@@ -53,6 +57,8 @@ class CategoryController extends Controller
 
     public function updateCategory(UpdateCategoryRequest $request, $id)
     {
+        $this->userCan('update-categories');
+
         $request->validated();
 
         $category = $this->categoryService->updateCategory($request, $id);
@@ -65,6 +71,8 @@ class CategoryController extends Controller
 
     public function destroyCategory($id)
     {
+        $this->userCan('delete-categories');
+
         $this->categoryService->destroyCategory($id);
 
         return response()->success([

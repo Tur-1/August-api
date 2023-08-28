@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Pages\Admin\ReviewsPage\Services\ReviewService;
 use App\Pages\Admin\ReviewsPage\Requests\StoreReviewRequest;
 
-
 class ReviewController extends Controller
 {
 
@@ -22,6 +21,8 @@ class ReviewController extends Controller
 
     public function index(Request $request)
     {
+        $this->userCan('access-reviews');
+
         return  $this->reviewService->getAll();
     }
 
@@ -42,6 +43,7 @@ class ReviewController extends Controller
 
     public function showReview($id)
     {
+        $this->userCan('view-reviews');
 
         try {
             $review =  $this->reviewService->showReview($id);
@@ -56,6 +58,7 @@ class ReviewController extends Controller
 
     public function destroyReview($id)
     {
+        $this->userCan('delete-reviews');
 
         $this->reviewService->deleteReview($id);
 

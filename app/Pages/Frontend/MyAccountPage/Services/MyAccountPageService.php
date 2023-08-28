@@ -17,7 +17,7 @@ class MyAccountPageService
     public function getUserInformation($request)
     {
 
-        return UserInformationResource::make($request->user('web'));
+        return UserInformationResource::make($request->user());
     }
 
     public function getUserOrders()

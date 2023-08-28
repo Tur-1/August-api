@@ -19,11 +19,15 @@ class CouponController extends Controller
 
     public function index(Request $request)
     {
+        $this->userCan('access-coupons');
+
         return $this->couponService->getAll($request->records);
     }
 
     public function storeCoupon(StoreCouponRequest $request)
     {
+        $this->userCan('create-coupons');
+
         $validatedRequest = $request->validated();
 
         $this->couponService->createCoupon($validatedRequest);
@@ -35,6 +39,8 @@ class CouponController extends Controller
 
     public function showCoupon($id)
     {
+        $this->userCan('view-coupons');
+
         $coupon = $this->couponService->showCoupon($id);
 
         return response()->success([
@@ -44,6 +50,8 @@ class CouponController extends Controller
 
     public function updateCoupon(UpdateCouponRequest $request, $id)
     {
+        $this->userCan('update-coupons');
+
         $validatedRequest = $request->validated();
 
         $coupon = $this->couponService->updateCoupon($validatedRequest, $id);
@@ -56,6 +64,8 @@ class CouponController extends Controller
 
     public function destroyCoupon($id)
     {
+        $this->userCan('delete-coupons');
+
         $this->couponService->deleteCoupon($id);
 
         return response()->success([

@@ -47,6 +47,7 @@ class Handler extends ExceptionHandler
         $this->renderable(function (UnauthorizedException $ex, Request $request) {
             return   response()->error(
                 $ex->getMessage(),
+                [],
                 $ex->getCode()
             );
         });

@@ -19,6 +19,8 @@ class ColorController extends Controller
 
     public function index(Request $request)
     {
+        $this->userCan('access-colors');
+
         return $this->colorService->getAll();
     }
     public function getAllColors()
@@ -29,6 +31,7 @@ class ColorController extends Controller
     public function storeColor(StoreColorRequest $request)
     {
 
+        $this->userCan('create-colors');
 
         $request->validated();
 
@@ -41,6 +44,8 @@ class ColorController extends Controller
 
     public function showColor($id)
     {
+        $this->userCan('view-colors');
+
         $color = $this->colorService->showColor($id);
 
         return response()->success([
@@ -50,6 +55,8 @@ class ColorController extends Controller
 
     public function updateColor(UpdateColorRequest $request, $id)
     {
+        $this->userCan('update-colors');
+
         $request->validated();
 
 
@@ -63,6 +70,8 @@ class ColorController extends Controller
 
     public function destroyColor($id)
     {
+        $this->userCan('delete-colors');
+
         $this->colorService->deleteColor($id);
 
         return response()->success([

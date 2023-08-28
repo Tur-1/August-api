@@ -20,6 +20,10 @@ class SizeController extends Controller
 
     public function index(Request $request)
     {
+
+
+        $this->userCan('access-sizes');
+
         return $this->sizeService->getAll();
     }
     public function getAllSizes(Request $request)
@@ -29,6 +33,8 @@ class SizeController extends Controller
 
     public function storeSize(StoreSizeRequest $request)
     {
+        $this->userCan('create-sizes');
+
         $validatedRequest = $request->validated();
 
         $this->sizeService->createSize($request);
@@ -40,6 +46,8 @@ class SizeController extends Controller
 
     public function showSize($id)
     {
+        $this->userCan('view-sizes');
+
         $size = $this->sizeService->showSize($id);
 
         return response()->success([
@@ -49,6 +57,8 @@ class SizeController extends Controller
 
     public function updateSize(UpdateSizeRequest $request, $id)
     {
+        $this->userCan('update-sizes');
+
         $validatedRequest = $request->validated();
 
         $size = $this->sizeService->updateSize($request, $id);
@@ -61,6 +71,8 @@ class SizeController extends Controller
 
     public function destroySize($id)
     {
+        $this->userCan('delete-sizes');
+
         $this->sizeService->deleteSize($id);
 
         return response()->success([

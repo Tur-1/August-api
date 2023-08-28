@@ -7,12 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Pages\Admin\BrandsPage\Services\BrandService;
 use App\Pages\Admin\BrandsPage\Requests\StoreBrandRequest;
 use App\Pages\Admin\BrandsPage\Requests\UpdateBrandRequest;
-use App\Traits\UserCanAccess;
 
 class BrandController extends Controller
 {
 
-    use UserCanAccess;
+
 
     private $brandService;
 

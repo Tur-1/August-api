@@ -9,7 +9,6 @@ use App\Pages\Admin\ProductsPage\Services\ProductService;
 use App\Pages\Admin\ProductsPage\Requests\StoreProductRequest;
 use App\Pages\Admin\ProductsPage\Requests\UpdateProductRequest;
 
-
 class ProductController extends Controller
 {
 
@@ -24,12 +23,15 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+        $this->userCan('access-products');
+
         return  $this->productService->getAll();
     }
 
 
     public function storeProduct()
     {
+        $this->userCan('create-products');
 
         $this->productService->createProduct();
 
@@ -42,6 +44,8 @@ class ProductController extends Controller
 
     public function showProduct($id)
     {
+        $this->userCan('view-products');
+
         $product =  $this->productService->showProduct($id);
 
         return response()->success([
@@ -50,6 +54,7 @@ class ProductController extends Controller
     }
     public function publishProduct($id, $value)
     {
+        $this->userCan('update-products');
 
         try {
             //code...
@@ -67,6 +72,7 @@ class ProductController extends Controller
 
     public function updateProduct(UpdateProductRequest $request, $id)
     {
+        $this->userCan('update-products');
 
         $request->validated();
 
@@ -84,6 +90,7 @@ class ProductController extends Controller
 
     public function destroyProduct($id)
     {
+        $this->userCan('delete-products');
 
         $this->productService->deleteProduct($id);
 

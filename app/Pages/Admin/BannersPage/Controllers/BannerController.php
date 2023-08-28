@@ -7,11 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Pages\Admin\BannersPage\Services\BannerService;
 use App\Pages\Admin\BannersPage\Requests\StoreBannerRequest;
 use App\Pages\Admin\BannersPage\Requests\UpdateBannerRequest;
-use App\Traits\UserCanAccess;
 
 class BannerController extends Controller
 {
-    use UserCanAccess;
+
     private $bannerService;
 
     public function __construct(BannerService $bannerService)
