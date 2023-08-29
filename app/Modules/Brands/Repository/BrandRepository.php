@@ -39,6 +39,7 @@ class BrandRepository
         $brand->slug = Str::slug($validatedRequest->name);
 
         if ($validatedRequest->hasFile('image')) {
+
             $this->deletePreviousImage($this->getBrandOldImagePath($brand->image));
             $brand->image = $this->uploadImage($validatedRequest->file('image'), $this->imageFolder);
         }

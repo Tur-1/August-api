@@ -27,12 +27,12 @@ class GenerateModule extends Command
      */
     public function handle(GenerateModuleService $generateModuleService)
     {
-        $model = $generateModuleService->excute($this->argument('name'));
+        $module = $generateModuleService->excute($this->argument('name'));
 
-        if (!$model['success']) {
-            return $this->error($model['message']);
+        if (!$module['success']) {
+            return $this->error($module['message']);
         }
 
-        return $this->info($model['message']);
+        return $this->info($module['message']);
     }
 }

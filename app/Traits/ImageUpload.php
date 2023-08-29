@@ -20,23 +20,20 @@ trait ImageUpload
     public function uploadImage($imageRequest, $Folder): string
     {
         // generate unique name for the image
-        $newImageName = $this->generateUniqueImageName($imageRequest->getClientOriginalName(), 'webp');
-
-        // convert image to webp 
-        $webpImage = \Image::make($imageRequest)->encode('webp', 90);
+        $newImageName = $this->generateUniqueImageName($imageRequest);
 
         // upload image to server
-        Storage::put($this->imagesPath . $Folder . '/' . $newImageName, $webpImage);
 
+        Storage::putFileAs($this->imagesPath . $Folder, $imageRequest, $newImageName);
 
         return $newImageName;
     }
 
-    public function generateUniqueImageName($imageOriginalName, $extension): string
+    public function generateUniqueImageName($imageOriginalName): string
     {
         $time = time();
-        $newImageName =   $time . '-' . Str::slug(pathinfo($imageOriginalName, PATHINFO_FILENAME), '_');
-        return $newImageName . '.' . $extension;
+        $newImageName =   $time . '-' . $imageOriginalName->getClientOriginalName();
+        return $newImageName;
     }
 
     public function deletePreviousImage($imagePath)
