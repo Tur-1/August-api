@@ -14,10 +14,9 @@
  
 - Upload manager: banner, images,..  
 - Related Products, Recommendations for you in our categories  
-- Order Tracking system 
 many more......
 
-- frontend   https://github.com/Tur-1/tur-august
+- frontend   https://github.com/Tur-1/ecommerce
 
 ## ======= ADMIN =======
 
@@ -34,15 +33,14 @@ many more......
 - Profile Settings
 Many more....
 
-- admin dashboard   https://github.com/Tur-1/tur-august-dashboard
+- admin dashboard   https://github.com/Tur-1/ecommerce-admin-dashboard
  
 ### Set up :
 
 1. Clone the repo and cd into it
 2. composer install
-3. import tur_august.sql file 
-4. php artisan storage:link
-5. php artisan serve     
+3. php artisan storage:link
+4. php artisan serve     
  
  
 
