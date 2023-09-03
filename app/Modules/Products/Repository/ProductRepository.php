@@ -110,7 +110,7 @@ class ProductRepository
     {
         $sizeOptions = $this->getSizeOptions($request->sizes);
 
-        $price_After =  (new StoreProductDiscountService())->getDiscountedPrice($request);
+        $price_after_discount =  (new StoreProductDiscountService())->getPriceAfterDiscount($request);
         $product->details = $request->details;
         $product->info_and_care = $request->info_and_care;
         $product->brand_id = $request->brand_id;
@@ -121,12 +121,12 @@ class ProductRepository
         $product->discount_amount = $request->discount_amount;
         $product->discount_start_at = $request->discount_start_at;
         $product->discount_expires_at = $request->discount_expires_at;
-        $product->discounted_price = $price_After;
+        $product->price_after_discount = $price_after_discount;
         $product->name = Str::title($request->name);
         $product->slug = (new GenerateProductSlug())->handle($request->name, $product->id);
         $product->stock = $this->getProductStock($sizeOptions);
         $product->discount = [
-            'price_after_discount' =>  $price_After,
+            'price_after_discount' =>  $price_after_discount,
             'type' => $request->discount_type,
             'amount' => $request->discount_amount,
             'start_at' => $request->discount_start_at,

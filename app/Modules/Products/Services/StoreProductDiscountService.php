@@ -4,19 +4,19 @@ namespace App\Modules\Products\Services;
 
 class StoreProductDiscountService
 {
-    public function getDiscountedPrice($request)
+    public function getPriceAfterDiscount($request)
     {
-        $discounted_price = null;
+        $price_after_discount = null;
         if ($this->isDiscountTypePercentage($request)) {
 
-            $discounted_price = $this->calculatePercentageDiscount($request);
+            $price_after_discount = $this->calculatePercentageDiscount($request);
         }
 
         if ($this->isDiscountTypeFixed($request)) {
-            $discounted_price = $this->calculateFixedDiscount($request);
+            $price_after_discount = $this->calculateFixedDiscount($request);
         }
 
-        return $discounted_price;
+        return $price_after_discount;
     }
 
 

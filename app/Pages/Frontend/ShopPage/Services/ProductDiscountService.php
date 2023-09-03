@@ -9,14 +9,14 @@ class ProductDiscountService
     public $price;
     public $start_at;
     public $expires_at;
-    public $discounted_price;
+    public $price_after_discount;
     public $type;
     public $amount;
 
     public function __construct($discountData)
     {
         $this->price = $discountData['price'];
-        $this->discounted_price = $discountData['discounted_price'];
+        $this->price_after_discount = $discountData['price_after_discount'];
 
         $this->start_at = $discountData['discount_start_at'];
         $this->expires_at = $discountData['discount_expires_at'];
@@ -30,7 +30,7 @@ class ProductDiscountService
         $price = null;
 
         if ($this->isDiscountValid()) {
-            $price = $this->discounted_price;
+            $price = $this->price_after_discount;
         }
 
         if (!$this->isDiscountValid()) {
@@ -62,7 +62,7 @@ class ProductDiscountService
     public function isDiscountValid()
     {
         $currentDate =  Carbon::now('GMT+3');
-        return  !is_null($this->discounted_price) && $currentDate->between($this->start_at, $this->expires_at);
+        return  !is_null($this->price_after_discount) && $currentDate->between($this->start_at, $this->expires_at);
     }
 
     private function isDiscountTypePercentage()
