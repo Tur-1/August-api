@@ -3,6 +3,7 @@
 namespace App\Pages\Frontend\ShoppingCartPage\Services;
 
 use Exception;
+use App\Exceptions\PageNotFoundException;
 use App\Modules\Users\Repository\UserRepository;
 use App\Modules\Wishlist\Repository\WishlistRepository;
 use App\Modules\ShoppingCart\Repository\ShoppingCartRepository;
@@ -39,16 +40,17 @@ class  ShoppingCartPageService
     {
         $item = $this->getCartItem($item_id);
 
-        if (is_null($item)) {
-            throw new Exception("not found");
-        }
         return $this->shoppingCartRepository->removeCartItem($item_id);
     }
     public function getCartItem($item_id)
     {
-        return $this->getShoppingCartProducts()
+        $cartItem = $this->getShoppingCartProducts()
             ->where('id', $item_id)
             ->first();
+        if (is_null($cartItem)) {
+            throw new PageNotFoundException();
+        }
+        return $cartItem;
     }
     public function increment($item_id)
     {

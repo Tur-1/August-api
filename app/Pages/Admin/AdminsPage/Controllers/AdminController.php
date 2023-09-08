@@ -73,9 +73,7 @@ class AdminController extends Controller
                 'message' => 'Admin has been deleted successfully',
             ]);
         } catch (\Exception $ex) {
-            return response()->error([
-                'message' => 'try Again',
-            ], 401);
+            return response()->error('try Again');
         }
     }
 }

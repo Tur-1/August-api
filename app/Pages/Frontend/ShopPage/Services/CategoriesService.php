@@ -26,7 +26,7 @@ class  CategoriesService
         $this->category =  $this->allCategories->where('url', $url)->first();
 
         if (is_null($this->category)) {
-            throw new PageNotFoundException('sorry page not found');
+            throw new PageNotFoundException();
         }
 
         $parentCategory =  $this->getParentCategory($this->category->parent_id);

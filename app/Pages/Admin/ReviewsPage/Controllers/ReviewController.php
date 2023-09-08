@@ -45,14 +45,10 @@ class ReviewController extends Controller
     {
         $this->userCan('view-reviews');
 
-        try {
-            $review =  $this->reviewService->showReview($id);
-            return response()->success([
-                'review' => $review
-            ]);
-        } catch (\Exception $ex) {
-            return response()->error([], 404);
-        }
+        $review =  $this->reviewService->showReview($id);
+        return response()->success([
+            'review' => $review
+        ]);
     }
 
 

@@ -64,9 +64,7 @@ class ProductController extends Controller
                 'message' => 'Product has been published successfully',
             ]);
         } catch (\Exception $ex) {
-            return response()->error([
-                'message' => 'try Again',
-            ]);
+            return response()->error('try Again');
         }
     }
 

@@ -66,9 +66,14 @@ class OrderRepository
     }
     public function getUserOrder($id)
     {
-        return $this->order->query()->where('user_id', auth()->id())
+        $this->order = $this->order->query()->where('user_id', auth()->id())
             ->with('user', 'coupon', 'products', 'address')
             ->find($id);
+
+        if (is_null($this->order)) {
+            throw new PageNotFoundException();
+        }
+        return $this->order;
     }
     public function updateOrder($validatedRequest, $id)
     {

@@ -26,12 +26,9 @@ class MyAccountPageController extends Controller
     }
     public function showUserOrder($order_id)
     {
+        $order = $this->myAccountService->showUserOrder($order_id);
 
-        try {
-            return response()->success($this->myAccountService->showUserOrder($order_id));
-        } catch (\Exception $ex) {
-            return response()->error([], 404);
-        }
+        return response()->success($order);
     }
     public function updateUserInformation(StoreUserInformationRequest $request)
     {

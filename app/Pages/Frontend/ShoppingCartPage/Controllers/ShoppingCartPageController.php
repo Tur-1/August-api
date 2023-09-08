@@ -40,18 +40,14 @@ class ShoppingCartPageController extends Controller
                 'message' => 'The product has been removed from your cart!'
             ]);
         } catch (\Exception $ex) {
-            return  response()->error([
-                'message' => $ex->getMessage()
-            ]);
+            return  response()->error($ex->getMessage());
         }
     }
     public function moveToWishlist($cart_item_id, $product_id)
     {
 
         if (!isset($cart_item_id) || !isset($product_id)) {
-            return  response()->error([
-                'message' => 'try Again!'
-            ]);
+            return  response()->error('try Again!');
         }
 
         try {
@@ -60,9 +56,7 @@ class ShoppingCartPageController extends Controller
                 'message' => 'The product has been moved to your wishlist!'
             ]);
         } catch (\Exception $ex) {
-            return  response()->error([
-                'message' => 'try Again'
-            ]);
+            return  response()->error('try Again');
         }
     }
 

@@ -15,27 +15,20 @@ class ShopPageController extends Controller
     public function getCategory($category_url, CategoriesService $categoriesService)
     {
 
-        try {
-            $category = $categoriesService->getCategoryByUrl($category_url);
+        $category = $categoriesService->getCategoryByUrl($category_url);
 
-            return  response()->success($category);
-        } catch (PageNotFoundException $ex) {
-            return response()->error($ex->getMessage(), 404);
-        }
+        return  response()->success($category);
     }
 
     public function getProducts($category_url)
     {
         $shopPageService = new ShopPageService($category_url);
-        try {
-            return response()->success([
-                'brands' => $shopPageService->getBrands(),
-                'colors' => $shopPageService->getColors(),
-                'products' => $shopPageService->getProducts(),
-                'sizeOptions' => $shopPageService->getSizeOptions(),
-            ]);
-        } catch (PageNotFoundException $ex) {
-            return response()->error($ex->getMessage(), 404);
-        }
+
+        return response()->success([
+            'brands' => $shopPageService->getBrands(),
+            'colors' => $shopPageService->getColors(),
+            'products' => $shopPageService->getProducts(),
+            'sizeOptions' => $shopPageService->getSizeOptions(),
+        ]);
     }
 }
