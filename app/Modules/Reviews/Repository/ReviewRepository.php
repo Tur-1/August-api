@@ -2,8 +2,9 @@
 
 namespace App\Modules\Reviews\Repository;
 
-use App\Modules\Reviews\Models\Review;
 use Carbon\Carbon;
+use App\Modules\Reviews\Models\Review;
+use App\Exceptions\PageNotFoundException;
 
 class ReviewRepository
 {
@@ -66,8 +67,12 @@ class ReviewRepository
     }
     public function getReview($id)
     {
+        $this->review = $this->review->with('reply', 'user')->find($id);
+        if (is_null($this->review)) {
+            throw new PageNotFoundException();
+        }
 
-        return  $this->review->with('reply', 'user')->find($id);
+        return $this->review;
     }
     public function updateReview($comment, $id)
     {

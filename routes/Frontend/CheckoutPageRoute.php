@@ -15,7 +15,7 @@ use App\Pages\Frontend\CheckoutPage\Controllers\CheckoutPageController;
 
 
 
-Route::middleware('auth')->controller(CheckoutPageController::class)->group(function () {
+Route::middleware('auth:web')->controller(CheckoutPageController::class)->group(function () {
 
 
     Route::get('/checkout', 'index')->name('checkoutPage');

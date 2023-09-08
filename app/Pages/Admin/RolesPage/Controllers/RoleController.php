@@ -43,7 +43,7 @@ class RoleController extends Controller
     {
         $this->userCan('create-roles');
 
-        $validatedRequest = $request->validated();
+        $request->validated();
 
         $this->roleService->createRole($request);
 
@@ -58,7 +58,6 @@ class RoleController extends Controller
         $this->userCan('view-roles');
 
         $role =  $this->roleService->showRole($id);
-
 
         return response()->success([
             'role' => $role

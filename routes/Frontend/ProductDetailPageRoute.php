@@ -24,7 +24,7 @@ Route::controller(ProductDetailPageController::class)->group(function () {
     Route::get('/product-detail/{product_id}/related-products', 'getRelatedProducts');
 });
 
-Route::middleware('auth')->controller(ProductDetailPageController::class)->group(function () {
+Route::middleware('auth:web')->controller(ProductDetailPageController::class)->group(function () {
     Route::post('/product-detail/add-to-cart', 'addToCart');
 
     Route::post('/product-detail/{product_slug}/comment', 'addComment');

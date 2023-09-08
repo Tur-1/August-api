@@ -2,9 +2,10 @@
 
 namespace App\Modules\Brands\Repository;
 
-use App\Modules\Brands\Models\Brand;
 use App\Traits\ImageUpload;
 use Illuminate\Support\Str;
+use App\Modules\Brands\Models\Brand;
+use App\Exceptions\PageNotFoundException;
 
 class BrandRepository
 {
@@ -49,7 +50,13 @@ class BrandRepository
 
     public function getBrand($id)
     {
-        return $this->brand->find($id);
+
+        $this->brand = $this->brand->find($id);
+        if (is_null($this->brand)) {
+            throw new PageNotFoundException();
+        }
+
+        return $this->brand;
     }
 
     public function updateBrand($validatedRequest, $id)

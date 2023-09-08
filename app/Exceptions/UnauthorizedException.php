@@ -3,14 +3,23 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Support\Facades\Session;
 
 class UnauthorizedException extends Exception
 {
 
-    public static function userNotAuthorized()
-    {
 
-        return new self('you are not authorized', 403);
+    public $permissions;
+    public function __construct($permissions)
+    {
+        $this->permissions = $permissions;
+    }
+
+    public function render($request)
+    {
+        return response()->error(
+            'you are not authorized',
+            403,
+            $this->permissions
+        );
     }
 }

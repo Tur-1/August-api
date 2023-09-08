@@ -12,7 +12,7 @@ class CreateCommentAction
     {
         $product =  (new ProductRepository())->findProductBySlug($product_slug);
         if (is_null($product)) {
-            throw new Exception('not Found');
+            return;
         }
 
         return (new ReviewRepository())->createReview($comment, $product->id);

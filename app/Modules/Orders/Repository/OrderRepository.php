@@ -5,6 +5,7 @@ namespace App\Modules\Orders\Repository;
 use Illuminate\Support\Facades\DB;
 use App\Modules\Orders\Models\Order;
 use Illuminate\Database\Eloquent\Model;
+use App\Exceptions\PageNotFoundException;
 use App\Modules\Orders\Models\OrderCoupon;
 use App\Modules\Orders\Models\OrderAddress;
 use App\Modules\Orders\Models\OrderProduct;
@@ -29,7 +30,7 @@ class OrderRepository
 
     public function getUserOrders()
     {
-        return auth('web')->user()->orders()->latest()->get();
+        return auth()->user()->orders()->latest()->get();
     }
     public function createOrder($validatedRequest)
     {
@@ -52,9 +53,16 @@ class OrderRepository
     }
     public function getOrder($id)
     {
-        return $this->order->query()
+
+
+        $this->order = $this->order->query()
             ->with('user', 'coupon', 'products', 'address')
             ->find($id);
+        if (is_null($this->order)) {
+            throw new PageNotFoundException();
+        }
+
+        return $this->order;
     }
     public function getUserOrder($id)
     {

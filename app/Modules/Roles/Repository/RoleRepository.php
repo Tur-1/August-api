@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Modules\Roles\Models\Role;
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\Roles\Models\Permission;
+use App\Exceptions\PageNotFoundException;
 use App\Modules\Roles\Models\RolePermission;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -44,7 +45,13 @@ class RoleRepository
     }
     public function getRole($id)
     {
-        return $this->role->with('permissions:id,name,page_name')->find($id);
+
+        $this->role = $this->role->with('permissions:id,name,page_name')->find($id);
+        if (is_null($this->role)) {
+            throw new PageNotFoundException();
+        }
+
+        return  $this->role;
     }
     public function getRoleWithPermissions($role_id)
     {

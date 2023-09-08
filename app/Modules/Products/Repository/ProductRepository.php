@@ -6,6 +6,7 @@ use App\Traits\ImageUpload;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\Products\Models\Product;
+use App\Exceptions\PageNotFoundException;
 use App\Modules\Categories\Models\Category;
 use App\Modules\Products\Actions\GenerateProductSlug;
 use App\Modules\Products\Services\StoreProductDiscountService;
@@ -77,7 +78,12 @@ class ProductRepository
     }
     public function getProduct($id)
     {
-        return $this->product->with('sizes', 'categories', 'productImages')->find($id);
+        $this->product = $this->product->with('sizes', 'categories', 'productImages')->find($id);
+        if (is_null($this->product)) {
+            throw new PageNotFoundException();
+        }
+
+        return $this->product;
     }
     public function publishProduct($id, $value)
     {

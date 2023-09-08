@@ -64,15 +64,10 @@ class ProductDetailPageController extends Controller
 
         $request->validated();
 
-
-        try {
-            $productService->addToCart($request);
-            $response =  response()->success([
-                'message' => 'The product was added to your cart!',
-            ]);
-        } catch (\Exception $ex) {
-            $response = response()->error($ex->getMessage(), 404);
-        }
+        $productService->addToCart($request);
+        $response =  response()->success([
+            'message' => 'The product was added to your cart!',
+        ]);
 
         return $response;
     }
@@ -82,16 +77,7 @@ class ProductDetailPageController extends Controller
 
         if (is_null($product_slug)) return;
 
-
-        try {
-
-            $createComment->handle($request->comment, $product_slug);
-        } catch (\Exception $ex) {
-            return  response()->error([
-                'message' => 'try Again!'
-            ], 404);
-        }
-
+        $createComment->handle($request->comment, $product_slug);
 
         return  response()->success([
             'message' => 'Your comment has been added successfully'

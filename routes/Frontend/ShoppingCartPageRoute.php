@@ -19,7 +19,7 @@ Route::controller(ShoppingCartPageController::class)->group(function () {
 
     Route::get('/cart/count', 'getCartCounter')->name('getCartCounter');
 });
-Route::middleware('auth')->controller(ShoppingCartPageController::class)->group(function () {
+Route::middleware('auth:web')->controller(ShoppingCartPageController::class)->group(function () {
 
 
     Route::get('/cart', 'getShoppingCartProducts')->name('shoppingCartPage');

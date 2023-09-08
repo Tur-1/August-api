@@ -2,6 +2,7 @@
 
 namespace App\Modules\Colors\Repository;
 
+use App\Exceptions\PageNotFoundException;
 use App\Modules\Colors\Models\Color;
 use App\Traits\ImageUpload;
 use Illuminate\Support\Str;
@@ -50,7 +51,12 @@ class ColorRepository
 
     public function getColor($id)
     {
-        return $this->color->find($id);
+        $this->color = $this->color->find($id);
+        if (is_null($this->color)) {
+            throw new PageNotFoundException();
+        }
+
+        return $this->color;
     }
 
     public function updateColor($validatedRequest, $id)

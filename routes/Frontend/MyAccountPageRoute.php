@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::middleware(['auth:sanctum'])->controller(MyAccountPageController::class)->group(function () {
+Route::middleware(['auth:web'])->controller(MyAccountPageController::class)->group(function () {
 
 
     Route::get('/my-account/user-info', 'getUserInformation');
@@ -30,7 +30,7 @@ Route::middleware(['auth:sanctum'])->controller(MyAccountPageController::class)-
     Route::get('/my-account/orders/{order_id}', 'showUserOrder');
 });
 
-Route::middleware(['auth:sanctum'])->controller(UserAddressController::class)->group(function () {
+Route::middleware(['auth:web'])->controller(UserAddressController::class)->group(function () {
 
     // get user addresses
     Route::get('/my-account/user/addresses',  'getUserAddresses');

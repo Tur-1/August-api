@@ -3,6 +3,7 @@
 namespace App\Modules\Sizes\Repository;
 
 use App\Modules\Sizes\Models\Size;
+use App\Exceptions\PageNotFoundException;
 
 class SizeRepository
 {
@@ -47,7 +48,12 @@ class SizeRepository
 
     public function getSize($id)
     {
-        return $this->size->find($id);
+        $this->size = $this->size->find($id);
+        if (is_null($this->size)) {
+            throw new PageNotFoundException();
+        }
+
+        return $this->size;
     }
 
     public function updateSize($validatedRequest, $id)

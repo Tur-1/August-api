@@ -5,6 +5,7 @@ namespace {namespace};
 use {ModulePath}\Models\{Model};
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
+use App\Exceptions\PageNotFoundException;
 
 class {Class_Name}Repository
 {
@@ -24,7 +25,11 @@ class {Class_Name}Repository
     }
     public function get{Model}($id)
     {
-        return $this->{modelVariable}->find($id);
+        $this->{modelVariable} = $this->{modelVariable}->find($id);
+        if (is_null($this->{modelVariable})) {
+            throw new PageNotFoundException();
+        }
+        return $this->{modelVariable};
     }
     public function update{Model}($validatedRequest, $id)
     {

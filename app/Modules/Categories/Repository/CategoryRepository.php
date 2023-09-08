@@ -4,8 +4,9 @@ namespace App\Modules\Categories\Repository;
 
 use App\Traits\ImageUpload;
 use Illuminate\Support\Str;
-use App\Modules\Categories\Models\Category;
 use Illuminate\Support\Facades\Request;
+use App\Exceptions\PageNotFoundException;
+use App\Modules\Categories\Models\Category;
 
 class CategoryRepository
 {
@@ -57,7 +58,13 @@ class CategoryRepository
 
     public function find($category_id)
     {
-        return $this->category::find($category_id);
+
+        $this->category = $this->category::find($category_id);
+        if (is_null($this->category)) {
+            throw new PageNotFoundException();
+        }
+
+        return $this->category;
     }
 
 

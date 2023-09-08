@@ -3,6 +3,7 @@
 namespace App\Modules\Users\Repository;
 
 use App\Modules\Users\Models\User;
+use App\Exceptions\PageNotFoundException;
 
 class UserRepository
 {
@@ -23,10 +24,20 @@ class UserRepository
 
     public function createUser($validatedRequest)
     {
-        $user = User::create($validatedRequest);
+        $this->user =  User::create(
+            [
+                'name' => $validatedRequest['register_name'],
+                'email' => $validatedRequest['register_email'],
+                'password' => $validatedRequest['register_password'],
+                'gender' => $validatedRequest['gender'],
+            ]
+        );
+
+        return  $this->user;
     }
     public function getWishlistProducts()
     {
+
         return auth()->user()->wishlistProducts;
     }
     public function getCartProducts()
@@ -43,7 +54,12 @@ class UserRepository
 
     public function getUser($id)
     {
-        return $this->user->find($id);
+        $this->user = $this->user->find($id);
+        if (is_null($this->user)) {
+            throw new PageNotFoundException();
+        }
+
+        return $this->user;
     }
 
 

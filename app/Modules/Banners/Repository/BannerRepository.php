@@ -2,10 +2,11 @@
 
 namespace App\Modules\Banners\Repository;
 
+use App\Traits\ImageUpload;
 use Illuminate\Support\Str;
 use App\Modules\Banners\Models\Banner;
-use App\Traits\ImageUpload;
 use Illuminate\Database\Eloquent\Model;
+use App\Exceptions\PageNotFoundException;
 use Illuminate\Database\Eloquent\Collection;
 
 class BannerRepository
@@ -50,7 +51,12 @@ class BannerRepository
     }
     public function getBanner($id)
     {
-        return $this->banner->find($id);
+        $this->banner = $this->banner->find($id);
+        if (is_null($this->banner)) {
+            throw new PageNotFoundException();
+        }
+
+        return $this->banner;
     }
     public function publishBanner($id)
     {

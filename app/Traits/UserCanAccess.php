@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use Illuminate\Http\Request;
 use App\Exceptions\UnauthorizedException;
 
 trait UserCanAccess
@@ -15,7 +14,7 @@ trait UserCanAccess
         $can = in_array($permission_name, $permissions);
 
         if (!$can) {
-            throw UnauthorizedException::userNotAuthorized();
+            throw new UnauthorizedException($permissions);
         }
         return $can;
     }

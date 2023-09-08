@@ -4,6 +4,7 @@ namespace App\Modules\Admins\Repository;
 
 use App\Modules\Admins\Models\Admin;
 use Illuminate\Database\Eloquent\Model;
+use App\Exceptions\PageNotFoundException;
 use Illuminate\Database\Eloquent\Collection;
 
 class AdminRepository
@@ -31,11 +32,22 @@ class AdminRepository
     }
     public function getAdminWithPermissionsIds($id)
     {
-        return $this->admin->WithPermissionsId()->find($id);
+
+        $this->admin = $this->admin->WithPermissionsId()->find($id);
+        if (is_null($this->admin)) {
+            throw new PageNotFoundException();
+        }
+
+        return $this->admin;
     }
     public function getAdmin($id)
     {
-        return $this->admin->find($id);
+        $this->admin = $this->admin->find($id);
+        if (is_null($this->admin)) {
+            throw new PageNotFoundException();
+        }
+
+        return $this->admin;
     }
     public function updateAdmin($validatedRequest, $id)
     {

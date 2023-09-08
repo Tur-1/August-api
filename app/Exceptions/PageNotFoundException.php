@@ -8,6 +8,9 @@ class PageNotFoundException extends Exception
 {
     public function render($request)
     {
-        return response($this->getMessage());
+        return response()->error(
+            'page not found',
+            404,
+        );
     }
 }

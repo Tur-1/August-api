@@ -14,11 +14,10 @@ class WishlistRepository
         $this->wishlist = new Wishlist();
     }
 
-    public function getWishlistProductsIds(): array
+    public function getWishlistProductsIds()
     {
-        return [];
-        $this->wishlist->query()
-            ->where(['user_id' => auth()->id()])
+        return  $this->wishlist->query()
+            ->where(['user_id' => auth('web')->id()])
             ->pluck('product_id')
             ->toArray();
     }

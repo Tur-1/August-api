@@ -18,7 +18,7 @@ class ShoppingCartRepository
     public function getCartCount()
     {
         return   $this->shoppingCart->query()
-            ->where('user_id', auth()->id())->count();
+            ->where('user_id', auth('web')->id())->count();
     }
     public function isExists($product_id, $size_id)
     {
@@ -66,7 +66,7 @@ class ShoppingCartRepository
 
     private function createCartItem($product_id, $size_id)
     {
-        return     $this->shoppingCart->query()
+        return  $this->shoppingCart->query()
             ->where(['user_id' => auth()->id()])->create([
                 'user_id' =>  auth()->id(),
                 'product_id' => $product_id,

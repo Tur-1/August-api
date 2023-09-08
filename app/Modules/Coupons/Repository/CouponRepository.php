@@ -4,6 +4,7 @@ namespace App\Modules\Coupons\Repository;
 
 use App\Modules\Coupons\Models\Coupon;
 use Illuminate\Database\Eloquent\Model;
+use App\Exceptions\PageNotFoundException;
 use Illuminate\Database\Eloquent\Collection;
 
 class CouponRepository
@@ -31,7 +32,13 @@ class CouponRepository
     }
     public function getCoupon($id)
     {
-        return $this->coupon->find($id);
+
+        $this->coupon = $this->coupon->find($id);
+        if (is_null($this->coupon)) {
+            throw new PageNotFoundException();
+        }
+
+        return $this->coupon;
     }
     public function updateCoupon($validatedRequest, $id)
     {
