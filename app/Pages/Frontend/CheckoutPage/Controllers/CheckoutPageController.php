@@ -41,11 +41,8 @@ class CheckoutPageController extends Controller
             ]);
         }
 
-        try {
-            $checkoutCouponService->getCoupon($request->code);
-        } catch (InValidCouponCodeException $ex) {
-            return  response()->error($ex->getMessage(), 404);
-        }
+        $checkoutCouponService->getCoupon($request->code);
+
 
 
         $cartDetails = $checkoutCouponService->getCartDetailsWithCoupon();
@@ -65,24 +62,12 @@ class CheckoutPageController extends Controller
         $cartDetailsWithCoupon = Session::get('cartDetailsWithCoupon');
         $couponService = new CheckoutCouponService();
 
-
-        try {
-            $checkoutOrderService->getUserAddress($request->address_id);
-        } catch (\Exception $ex) {
-            return  response()->error($ex->getMessage(), 404);
-        }
+        $checkoutOrderService->getUserAddress($request->address_id);
 
 
         if (!is_null($cartDetailsWithCoupon)) {
-
             $cartDetails = $cartDetailsWithCoupon->toArray();
-            try {
-                $this->coupon = $couponService->getCoupon($cartDetails['coupon']['code']);
-            } catch (InValidCouponCodeException $ex) {
-
-                Session::remove('cartDetailsWithCoupon');
-                return  response()->error($ex->getMessage(), 404);
-            }
+            $this->coupon = $couponService->getCoupon($cartDetails['coupon']['code']);
         }
 
 

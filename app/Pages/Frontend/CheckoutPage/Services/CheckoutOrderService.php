@@ -14,6 +14,7 @@ use App\Modules\Orders\Repository\OrderRepository;
 use App\Modules\Products\Repository\ProductRepository;
 use App\Modules\Users\Repository\UserAddressRepository;
 use App\Modules\Products\Repository\ProductSizeRepository;
+use App\Pages\Frontend\CheckoutPage\Exceptions\AddressNotFoundException;
 use App\Pages\Frontend\MyAccountPage\Resources\UserAddressResource;
 use App\Pages\Frontend\ShoppingCartPage\Services\ShoppingCartPageService;
 use App\Pages\Frontend\CheckoutPage\Exceptions\ProductOutOfStockException;
@@ -79,7 +80,7 @@ class  CheckoutOrderService
             ->first();
 
         if (is_null($this->orderAddress)) {
-            throw new Exception('please select an address !');
+            throw new AddressNotFoundException();
         }
     }
     public function storeOrderCoupon($coupon)

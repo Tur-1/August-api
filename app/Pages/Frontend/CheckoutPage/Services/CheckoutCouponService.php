@@ -14,12 +14,12 @@ class CheckoutCouponService
     public function getCoupon(string $code)
     {
 
-
         $this->coupon =  (new CouponRepository())->getValidCoupon($code);
 
         Session::put('coupon', $this->coupon);
         if (is_null($this->coupon)) {
-            throw new InValidCouponCodeException('This coupon is not Valid');
+            Session::remove('cartDetailsWithCoupon');
+            throw new InValidCouponCodeException();
         }
 
 
