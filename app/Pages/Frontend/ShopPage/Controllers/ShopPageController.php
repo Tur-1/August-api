@@ -2,11 +2,9 @@
 
 namespace App\Pages\Frontend\ShopPage\Controllers;
 
-use App\Exceptions\PageNotFoundException;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Pages\Frontend\ShopPage\Services\CategoriesService;
 use App\Pages\Frontend\ShopPage\Services\ShopPageService;
+use App\Pages\Frontend\ShopPage\Services\CategoriesService;
 
 class ShopPageController extends Controller
 {
@@ -26,9 +24,33 @@ class ShopPageController extends Controller
 
         return response()->success([
             'brands' => $shopPageService->getBrands(),
-            'colors' => $shopPageService->getColors(),
+            'colors' => $shopPageService->getColors($category_url),
             'products' => $shopPageService->getProducts(),
-            'sizeOptions' => $shopPageService->getSizeOptions(),
+            'sizeOptions' => $shopPageService->getSizeOptions($category_url),
+        ]);
+    }
+    public function getShopPageTotalProducts($category_url)
+    {
+        $shopPageService = new ShopPageService($category_url);
+
+        return response()->success([
+            'total' => $shopPageService->getShopPageTotalProducts($category_url),
+        ]);
+    }
+
+
+    public function getSizes($category_url, ShopPageService $shopPageService)
+    {
+
+        return response()->success([
+            'sizes' => $shopPageService->getSizeOptions($category_url),
+        ]);
+    }
+    public function getColors($category_url, ShopPageService $shopPageService)
+    {
+
+        return response()->success([
+            'colors' => $shopPageService->getColors($category_url),
         ]);
     }
 }

@@ -38,7 +38,7 @@ class  ShoppingCartPageService
     }
     public function removeCartItem($item_id)
     {
-        $item = $this->getCartItem($item_id);
+        $this->getCartItem($item_id);
 
         return $this->shoppingCartRepository->removeCartItem($item_id);
     }
@@ -54,23 +54,25 @@ class  ShoppingCartPageService
     }
     public function increment($item_id)
     {
+
         return $this->shoppingCartRepository->increment($item_id);
     }
     public function decrement($item_id)
     {
+
         return $this->shoppingCartRepository->decrement($item_id);
     }
 
-    public function moveToWishlist($cart_item_id, $product_id)
+    public function moveToWishlist($item_id, $product_id)
     {
-
+        $this->getCartItem($item_id);
         $wishlist = new WishlistRepository();
         if (!$wishlist->isExists($product_id)) {
 
             $wishlist->storeWishlistProduct($product_id);
         }
 
-        return $this->removeCartItem($cart_item_id);
+        return $this->removeCartItem($item_id);
     }
     public function deleteUserCartProducts()
     {

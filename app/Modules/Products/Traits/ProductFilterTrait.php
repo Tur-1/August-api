@@ -32,7 +32,7 @@ trait ProductFilterTrait
             if (is_array(request()->input('size'))) {
                 $query->whereIn('slug', request()->input('size'));
             } else {
-                $query->where('slug', request()->input('size'))->select('id', 'slug');
+                $query->where('slug', request()->input('size'));
             }
         });
     }

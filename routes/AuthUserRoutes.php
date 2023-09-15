@@ -10,7 +10,6 @@ use App\Pages\Frontend\Auth\Controllers\EmailVerificationNotificationController;
 
 
 
-
 Route::post('/logout', [AuthenticatedUserController::class, 'logout'])
     ->middleware(['auth:web']);
 

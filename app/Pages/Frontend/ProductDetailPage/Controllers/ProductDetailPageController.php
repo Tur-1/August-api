@@ -19,19 +19,15 @@ class ProductDetailPageController extends Controller
     {
 
 
-        try {
-            $product  = $productService->getProductDetail($slug);
+        $product  = $productService->getProductDetail($slug);
 
-            return response()->success([
-                'product' => $product,
-                'sizeOptions' =>  $productService->getSizeOptions(),
-                'categories' => $productService->getCategories(),
-                'images' => $productService->getProductImages(),
+        return response()->success([
+            'product' => $product,
+            'sizeOptions' =>  $productService->getSizeOptions(),
+            'categories' => $productService->getCategories(),
+            'images' => $productService->getProductImages(),
 
-            ]);
-        } catch (PageNotFoundException $ex) {
-            return response()->error($ex->getMessage(), 404);
-        }
+        ]);
     }
     public function getProductReviews($id, ProductDetailPageService $productService)
     {

@@ -41,6 +41,13 @@ class ProductRepository
     {
         return $this->product->withRelatedProducts($productId, $category_ids)->get();
     }
+    public function getShopPageTotalProducts($category_id)
+    {
+        return $this->product
+            ->whereHasCategory($category_id)
+            ->withFilters()
+            ->active()->count();
+    }
     public function getShopPageProducts($category_id)
     {
         return $this->product

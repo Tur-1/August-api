@@ -32,22 +32,21 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
 
 
-            Route::middleware('api')
-                ->prefix('api')
+            Route::middleware('api')->prefix('api')
                 ->group(base_path('routes/AuthUserRoutes.php'));
 
-            Route::middleware('api')
-                ->prefix('api/admin')
-                ->group(base_path('routes/AuthAdminRoutes.php'));
-
-
-            Route::prefix('api')
-                ->middleware(['api'])
+            Route::middleware(['api'])->prefix('api')
                 ->group(function ($route) {
                     foreach (glob(base_path('routes/Frontend/*.php')) as $fileName) {
                         require $fileName;
                     }
                 });
+
+
+
+            Route::middleware('api')
+                ->prefix('api/admin')
+                ->group(base_path('routes/AuthAdminRoutes.php'));
 
 
             Route::prefix('api/admin')

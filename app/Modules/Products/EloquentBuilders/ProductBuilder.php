@@ -54,11 +54,9 @@ class ProductBuilder extends Builder
     }
     public function withRelatedProducts($productId, $category_ids): self
     {
-        return $this->where('id', '!=', $productId)
-            ->whereHas('categories', function ($query) use ($category_ids) {
-                $query->whereIn('id', $category_ids);
-            })
-            ->withMainProductImage()
+        return $this->whereHas('categories', function ($query) use ($category_ids) {
+            $query->whereIn('id', $category_ids);
+        })->withMainProductImage()
             ->withBrandName()
             ->active()
             ->inRandomOrder()

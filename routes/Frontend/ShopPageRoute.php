@@ -20,4 +20,12 @@ Route::controller(ShopPageController::class)->name('shop.')->group(function () {
     Route::get('/shop/category/{category_url?}', 'getCategory');
 
     Route::get('/shop/category/{category_url?}/products', 'getProducts');
+
+    Route::get('/shop/category/{category_url?}/brands', 'getBrands');
+
+    Route::get('/shop/category/{category_url?}/colors', 'getColors');
+
+    Route::get('/shop/category/{category_url?}/sizes', 'getSizes');
+
+    Route::get('/shop/category/{category_url?}/products/total', 'getShopPageTotalProducts');
 });

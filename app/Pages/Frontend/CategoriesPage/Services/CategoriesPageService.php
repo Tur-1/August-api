@@ -30,7 +30,6 @@ class CategoriesPageService
     }
     public function getAllSections()
     {
-
         return SectionsResource::collection(
             $this->sectionRepository->getSectionsHasProducts()
         );
