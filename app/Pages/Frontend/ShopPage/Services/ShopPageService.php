@@ -36,18 +36,6 @@ class  ShopPageService
         });
         return BrandsListResource::collection($brands);
     }
-    public function getColors($category_url)
-    {
-        $colors = (new ColorRepository())->getColorsByProductsCategory($category_url);
-
-
-        return ColorListResource::collection($colors);
-    }
-
-    public function getShopPageTotalProducts()
-    {
-        return (new ProductRepository())->getShopPageTotalProducts($this->category_url);
-    }
     public function getProducts()
     {
         $this->products = (new ProductRepository())->getShopPageProducts($this->category_url);
@@ -62,6 +50,19 @@ class  ShopPageService
         return ProductsListResource::collection($this->products)->response()
             ->getData(true);
     }
+    public function getColors($category_url)
+    {
+        $colors = (new ColorRepository())->getColorsByProductsCategory($category_url);
+
+
+        return ColorListResource::collection($colors);
+    }
+
+    public function getShopPageTotalProducts()
+    {
+        return (new ProductRepository())->getShopPageTotalProducts($this->category_url);
+    }
+
     public function getSizeOptions($category_url)
     {
 
