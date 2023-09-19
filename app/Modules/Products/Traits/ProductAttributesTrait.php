@@ -31,7 +31,7 @@ trait ProductAttributesTrait
     {
         return Attribute::make(
             get: fn ($value) =>
-            config('app.url') .  Storage::url('images/brands/' . $value),
+            $value ? config('app.url') . Storage::url('images/brands/' . $value) : null,
         );
     }
 }

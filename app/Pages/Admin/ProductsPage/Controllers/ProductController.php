@@ -33,10 +33,11 @@ class ProductController extends Controller
     {
         $this->userCan('create-products');
 
-        $this->productService->createProduct();
+        $product = $this->productService->createProduct();
 
         return response()->success([
             'message' => 'Product has been created successfully',
+            'product' =>  $product,
 
         ]);
     }

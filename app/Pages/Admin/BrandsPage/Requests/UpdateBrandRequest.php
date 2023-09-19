@@ -25,7 +25,7 @@ class UpdateBrandRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => ['sometimes', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048'],
             'name' => ['required', 'max:60', Rule::unique('brands', 'name')->ignore($this->id)],
         ];
     }

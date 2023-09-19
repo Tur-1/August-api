@@ -74,6 +74,8 @@ class ProductRepository
         $product = new Product();
 
         $product->save();
+
+        return $product;
     }
     public function findProductBySlug($slug)
     {

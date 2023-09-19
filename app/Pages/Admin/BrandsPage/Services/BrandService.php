@@ -24,9 +24,9 @@ class BrandService
         return BrandResource::collection($this->brandRepository->getAllBrands());
     }
 
-    public function createBrand($validatedRequest)
+    public function createBrand($request)
     {
-        return $this->brandRepository->saveBrand($validatedRequest);
+        return $this->brandRepository->createBrand($request);
     }
 
     public function showBrand($id)

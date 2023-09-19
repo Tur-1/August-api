@@ -48,6 +48,10 @@ class BrandRepository
         $brand->save();
     }
 
+    public function createBrand($request)
+    {
+        return $this->saveBrand($request);
+    }
     public function getBrand($id)
     {
 
