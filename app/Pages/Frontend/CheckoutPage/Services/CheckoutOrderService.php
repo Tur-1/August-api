@@ -102,6 +102,10 @@ class  CheckoutOrderService
             'orderProducts' => $this->orderProducts()
         ];
     }
+    public function sendOrderConfirmationMail()
+    {
+        Mail::to(auth()->user()->email)->send(new NewOrderMail($this->getOrderInformation()));
+    }
     private function getOrderProducts()
     {
         $orderProducts = [];

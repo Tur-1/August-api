@@ -21,6 +21,7 @@ class AdminController extends Controller
 
     public function index(Request $request)
     {
+
         $this->userCan('access-admins');
 
         return $this->adminService->getAllAdmins($request);

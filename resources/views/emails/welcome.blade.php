@@ -26,11 +26,11 @@
         }
 
         p,
-            {
-            margin-top: 0;
-            margin-bottom: 0;
-            padding-top: 0;
-            padding-bottom: 0;
+        {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
         }
 
         span.preheader {
@@ -180,8 +180,7 @@
 
         <tr>
             <td align="center">
-                <table border="0" align="center" width="590" cellpadding="0" cellspacing="0"
-                    class="container590">
+                <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
 
                     <tr>
                         <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
@@ -222,8 +221,7 @@
 
         <tr>
             <td align="center">
-                <table border="0" align="center" width="590" cellpadding="0" cellspacing="0"
-                    class="container590">
+                <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
                     <tr>
 
                         <td>
@@ -311,10 +309,10 @@
 
 
                                         <div style="line-height: 26px;">
-                                            <button type="button"
+                                            <a href="{{ config('app.frontend_url') }}"
                                                 style="color: #ffffff; text-decoration: none; background:none; border:none;">HAPPY
                                                 SHOPPING
-                                                !</button>
+                                                !</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -383,8 +381,12 @@
                                         <div
                                             style="color: #333333; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; font-weight: 600; mso-line-height-rule: exactly; line-height: 23px;">
 
-                                            Email us: <br /> <a href="mailto:"
-                                                style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">tur.august1@gmail.com</a>
+                                            Email us: <br />
+                                            <a href="mailto:"
+                                                style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">
+
+                                                {{ config('mail.mailers.smtp.username') }}
+                                            </a>
 
                                         </div>
                                     </td>

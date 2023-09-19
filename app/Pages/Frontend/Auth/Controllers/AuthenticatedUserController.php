@@ -4,6 +4,7 @@ namespace App\Pages\Frontend\Auth\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Pages\Frontend\Auth\Requests\LoginRequest;
@@ -11,6 +12,7 @@ use App\Pages\Frontend\Auth\Requests\RegisterRequest;
 use App\Pages\Frontend\Auth\Resources\AuthUserResource;
 use App\Pages\Frontend\Auth\Services\AuthService;
 use Illuminate\Auth\Events\Registered;
+
 
 class AuthenticatedUserController extends Controller
 {
@@ -22,6 +24,8 @@ class AuthenticatedUserController extends Controller
         $user = $authService->createUser($request);
 
         Auth::guard('web')->login($user, true);
+
+        $authService->sendWelcomeEmail($user);
 
         return response()->success([
             'user' => AuthUserResource::make($user),

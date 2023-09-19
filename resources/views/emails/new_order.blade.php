@@ -326,7 +326,7 @@
                                                                 <td style="padding:0;Margin:0">
                                                                     <h3 class="storelogo"
                                                                         style="text-align:center;margin-top:15px;Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:'trebuchet ms', helvetica, sans-serif;font-size:24px;font-style:normal;font-weight:normal;color:#333333">
-                                                                        AUGUST</h3>
+                                                                        {{ config('app.name') }}</h3>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -677,8 +677,7 @@
                                                                     <table
                                                                         style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%"
                                                                         class="cke_show_border" cellspacing="1"
-                                                                        cellpadding="1" border="0"
-                                                                        role="presentation">
+                                                                        cellpadding="1" border="0" role="presentation">
                                                                         <tr style="border-collapse:collapse">
                                                                             <td style="padding:0;Margin:0"><span
                                                                                     style="font-size:13px">NAME</span>
@@ -718,9 +717,8 @@
                                                             <tr style="border-collapse:collapse">
                                                                 <td align="center"
                                                                     style="padding:0;Margin:0;padding-bottom:10px;font-size:0">
-                                                                    <table width="100%" height="100%"
-                                                                        cellspacing="0" cellpadding="0"
-                                                                        border="0" role="presentation"
+                                                                    <table width="100%" height="100%" cellspacing="0"
+                                                                        cellpadding="0" border="0" role="presentation"
                                                                         style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                                         <tr style="border-collapse:collapse">
                                                                             <td
@@ -737,98 +735,94 @@
                                         </td>
                                     </tr>
                                     @foreach ($orderProducts as $product)
-                                        <tr style="border-collapse:collapse">
-                                            <td align="left"
-                                                style="Margin:0;padding-top:5px;padding-bottom:10px;padding-left:20px;padding-right:20px">
-                                                <!--[if mso]><table style="width:560px" cellpadding="0" cellspacing="0"><tr><td style="width:178px" valign="top"><![endif]-->
-                                                <table class="es-left" cellspacing="0" cellpadding="0"
-                                                    align="left"
-                                                    style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
-                                                    <tbody>
-                                                        <tr style="border-collapse:collapse">
-                                                            <td class="es-m-p0r es-m-p20b" valign="top"
-                                                                align="center" style="padding:0;Margin:0;width:178px">
-                                                                <table width="100%" cellspacing="0" cellpadding="0"
-                                                                    role="presentation"
-                                                                    style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                                    <tbody>
-                                                                        <tr style="border-collapse:collapse">
-                                                                            <td align="center"
-                                                                                style="padding:0;Margin:0;font-size:0">
-                                                                                <a href="{{ config('app.frontend_url') . '/product-detail/' . $product['product_slug'] }}"
-                                                                                    target="_blank"
-                                                                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#D48344;font-size:14px">
-                                                                                    <img src="{{ $product['product_image'] }}"
-                                                                                        alt="Natural Balance L.I.D., sale 30%"
-                                                                                        class="adapt-img"
-                                                                                        title="Natural Balance L.I.D., sale 30%"
-                                                                                        width="125"
-                                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic">
-                                                                                </a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <!--[if mso]></td><td style="width:20px"></td><td style="width:362px" valign="top"><![endif]-->
-                                                <table cellspacing="0" cellpadding="0" align="right"
-                                                    style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                    <tbody>
-                                                        <tr style="border-collapse:collapse">
-                                                            <td align="left" style="padding:0;Margin:0;width:362px">
-                                                                <table width="100%" cellspacing="0" cellpadding="0"
-                                                                    role="presentation"
-                                                                    style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                                    <tbody>
-                                                                        <tr style="border-collapse:collapse">
-                                                                            <td align="left"
-                                                                                style="padding:0;Margin:0">
-                                                                                <p
-                                                                                    style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
-                                                                                    <br>
-                                                                                </p>
-                                                                                <table
-                                                                                    style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%"
-                                                                                    class="cke_show_border"
-                                                                                    cellspacing="1" cellpadding="1"
-                                                                                    border="0"
-                                                                                    role="presentation">
-                                                                                    <tbody>
-                                                                                        <tr
-                                                                                            style="border-collapse:collapse">
-                                                                                            <td
-                                                                                                style="padding:0;Margin:0">
-                                                                                                {{ $product['product_name'] }}
-                                                                                            </td>
-                                                                                            <td
-                                                                                                style="padding:0;Margin:0;width:60px;text-align:center">
-                                                                                                {{ $product['product_quantity'] }}
-                                                                                            </td>
-                                                                                            <td
-                                                                                                style="padding:0;Margin:0;width:100px;text-align:center">
-                                                                                                {{ $product['total_price'] }}
-                                                                                                SAR</td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                                <p
-                                                                                    style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
-                                                                                    <br>
-                                                                                </p>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <!--[if mso]></td></tr></table><![endif]-->
-                                            </td>
-                                        </tr>
+                                    <tr style="border-collapse:collapse">
+                                        <td align="left"
+                                            style="Margin:0;padding-top:5px;padding-bottom:10px;padding-left:20px;padding-right:20px">
+                                            <!--[if mso]><table style="width:560px" cellpadding="0" cellspacing="0"><tr><td style="width:178px" valign="top"><![endif]-->
+                                            <table class="es-left" cellspacing="0" cellpadding="0" align="left"
+                                                style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
+                                                <tbody>
+                                                    <tr style="border-collapse:collapse">
+                                                        <td class="es-m-p0r es-m-p20b" valign="top" align="center"
+                                                            style="padding:0;Margin:0;width:178px">
+                                                            <table width="100%" cellspacing="0" cellpadding="0"
+                                                                role="presentation"
+                                                                style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                                                                <tbody>
+                                                                    <tr style="border-collapse:collapse">
+                                                                        <td align="center"
+                                                                            style="padding:0;Margin:0;font-size:0">
+                                                                            <a href="{{ config('app.frontend_url') . '/product-detail/' . $product['product_slug'] }}"
+                                                                                target="_blank"
+                                                                                style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#D48344;font-size:14px">
+                                                                                <img src="{{ $product['product_image'] }}"
+                                                                                    alt="Natural Balance L.I.D., sale 30%"
+                                                                                    class="adapt-img"
+                                                                                    title="Natural Balance L.I.D., sale 30%"
+                                                                                    width="125"
+                                                                                    style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic">
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!--[if mso]></td><td style="width:20px"></td><td style="width:362px" valign="top"><![endif]-->
+                                            <table cellspacing="0" cellpadding="0" align="right"
+                                                style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                                                <tbody>
+                                                    <tr style="border-collapse:collapse">
+                                                        <td align="left" style="padding:0;Margin:0;width:362px">
+                                                            <table width="100%" cellspacing="0" cellpadding="0"
+                                                                role="presentation"
+                                                                style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                                                                <tbody>
+                                                                    <tr style="border-collapse:collapse">
+                                                                        <td align="left" style="padding:0;Margin:0">
+                                                                            <p
+                                                                                style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
+                                                                                <br>
+                                                                            </p>
+                                                                            <table
+                                                                                style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;width:100%"
+                                                                                class="cke_show_border" cellspacing="1"
+                                                                                cellpadding="1" border="0"
+                                                                                role="presentation">
+                                                                                <tbody>
+                                                                                    <tr
+                                                                                        style="border-collapse:collapse">
+                                                                                        <td style="padding:0;Margin:0">
+                                                                                            {{ $product['product_name'] }}
+                                                                                        </td>
+                                                                                        <td
+                                                                                            style="padding:0;Margin:0;width:60px;text-align:center">
+                                                                                            {{ $product['product_quantity'] }}
+                                                                                        </td>
+                                                                                        <td
+                                                                                            style="padding:0;Margin:0;width:100px;text-align:center">
+                                                                                            {{ $product['total_price'] }}
+                                                                                            SAR</td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                            <p
+                                                                                style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
+                                                                                <br>
+                                                                            </p>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!--[if mso]></td></tr></table><![endif]-->
+                                        </td>
+                                    </tr>
                                     @endforeach
 
                                     <tr style="border-collapse:collapse">
@@ -845,9 +839,8 @@
                                                             <tr style="border-collapse:collapse">
                                                                 <td align="center"
                                                                     style="padding:0;Margin:0;padding-bottom:10px;font-size:0">
-                                                                    <table width="100%" height="100%"
-                                                                        cellspacing="0" cellpadding="0"
-                                                                        border="0" role="presentation"
+                                                                    <table width="100%" height="100%" cellspacing="0"
+                                                                        cellpadding="0" border="0" role="presentation"
                                                                         style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                                         <tr style="border-collapse:collapse">
                                                                             <td
@@ -877,9 +870,8 @@
                                                             <tr style="border-collapse:collapse">
                                                                 <td align="center"
                                                                     style="padding:0;Margin:0;padding-bottom:10px;font-size:0">
-                                                                    <table width="100%" height="100%"
-                                                                        cellspacing="0" cellpadding="0"
-                                                                        border="0" role="presentation"
+                                                                    <table width="100%" height="100%" cellspacing="0"
+                                                                        cellpadding="0" border="0" role="presentation"
                                                                         style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                                         <tr style="border-collapse:collapse">
                                                                             <td
@@ -909,9 +901,8 @@
                                                             <tr style="border-collapse:collapse">
                                                                 <td align="center"
                                                                     style="padding:0;Margin:0;padding-bottom:10px;font-size:0">
-                                                                    <table width="100%" height="100%"
-                                                                        cellspacing="0" cellpadding="0"
-                                                                        border="0" role="presentation"
+                                                                    <table width="100%" height="100%" cellspacing="0"
+                                                                        cellpadding="0" border="0" role="presentation"
                                                                         style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                                         <tr style="border-collapse:collapse">
                                                                             <td
@@ -956,7 +947,7 @@
                                                                         style="width: 108;display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;">
                                                                         <a href="#"
                                                                             style=" text-decoration: none; color:black">
-                                                                            AUGUST
+                                                                            {{ config('app.name') }}
                                                                         </a>
                                                                     </h4>
                                                                 </td>
@@ -977,7 +968,7 @@
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
 
                                                                         <a target="_blank" href="mailto:your@mail.com"
-                                                                            style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#333333;font-size:14px">tur.august1@gmail.com</a>
+                                                                            style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#333333;font-size:14px">{{ config('mail.mailers.smtp.username') }}</a>
                                                                     </p>
                                                                 </td>
                                                             </tr>

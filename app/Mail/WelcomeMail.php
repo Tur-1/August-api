@@ -9,9 +9,12 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class WelcomeMail extends Mailable
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+
+class WelcomeMail extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
@@ -19,9 +22,9 @@ class WelcomeMail extends Mailable
      * @return void
      */
     public $name;
-    public function __construct($name = null)
+    public function __construct($userName = null)
     {
-        $this->name = $name;
+        $this->name = $userName;
     }
     /**
      * Get the message envelope.

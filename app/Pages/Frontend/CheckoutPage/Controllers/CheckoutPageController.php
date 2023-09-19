@@ -87,6 +87,8 @@ class CheckoutPageController extends Controller
             $couponService->increaseCouponUsedTimes($this->coupon);
 
 
+            $checkoutOrderService->sendOrderConfirmationMail();
+
             (new ShoppingCartPageService())->deleteUserCartProducts();
 
             Session::forget(['cartDetailsWithCoupon', 'cartDetails']);
