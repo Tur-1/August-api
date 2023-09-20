@@ -20,9 +20,9 @@ class SizeRepository
     {
         return $this->size->paginate($records);
     }
-    public function getSizeOptionsByProductsCategory($category_id)
+    public function getSizeOptionsByProductsCategory($category_url)
     {
-        return $this->size->whereHasProductsWithCount($category_id)->get();
+        return $this->size->whereHasProductsWithCount($category_url)->get();
     }
     public function getAllSizes()
     {

@@ -25,6 +25,8 @@ class ShopPageController extends Controller
         return response()->success([
             'brands' => $shopPageService->getBrands(),
             'products' => $shopPageService->getProducts(),
+            'sizes' => $shopPageService->getSizeOptions($category_url),
+
         ]);
     }
     public function getShopPageTotalProducts($category_url)
