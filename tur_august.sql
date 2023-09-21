@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2023 at 08:15 AM
+-- Generation Time: Sep 21, 2023 at 02:44 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -309,7 +309,7 @@ CREATE TABLE `coupons` (
 
 INSERT INTO `coupons` (`id`, `code`, `type`, `amount`, `use_times`, `used_times`, `minimum_purchases`, `starts_at`, `expires_at`, `is_active`, `category_id`, `created_at`, `updated_at`) VALUES
 (1, 'app', 'Percentage', 10, 6, 2, 100.00, '2023-09-03', '2023-09-11', 1, NULL, '2023-09-03 08:46:49', '2023-09-09 10:08:37'),
-(2, 'cod', 'Percentage', 30, 50, 1, 100.00, '2023-09-09', '2023-09-23', 1, NULL, '2023-09-09 10:02:42', '2023-09-16 03:41:17');
+(2, 'cod', 'Percentage', 30, 50, 2, 100.00, '2023-09-09', '2023-09-23', 1, NULL, '2023-09-09 10:02:42', '2023-09-21 08:43:19');
 
 -- --------------------------------------------------------
 
@@ -349,7 +349,9 @@ CREATE TABLE `jobs` (
 
 INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `available_at`, `created_at`) VALUES
 (3, 'default', '{\"uuid\":\"a91b5ffd-2ee4-4e74-9b91-4ae89e8b0181\",\"displayName\":\"App\\\\Mail\\\\WelcomeMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:20:\\\"App\\\\Mail\\\\WelcomeMail\\\":3:{s:4:\\\"name\\\";s:13:\\\"turki alharbi\\\";s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tur.1i@hotmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1695269857-4508-658783627\",\"clockwork_parent_id\":\"1695269856-9641-854410945\"}', 0, NULL, 1695269857, 1695269857),
-(4, 'default', '{\"uuid\":\"d360d0f4-5cf1-4de4-90b7-3f11927f5b51\",\"displayName\":\"App\\\\Mail\\\\NewOrderMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:21:\\\"App\\\\Mail\\\\NewOrderMail\\\":6:{s:5:\\\"order\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:31:\\\"App\\\\Modules\\\\Orders\\\\Models\\\\Order\\\";s:2:\\\"id\\\";i:9;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:15:\\\"shippingAddress\\\";a:7:{s:10:\\\"address_id\\\";i:5;s:7:\\\"address\\\";s:28:\\\"Alzubair Ibn al Awwam street\\\";s:9:\\\"full_name\\\";s:19:\\\"turki noman alharbi\\\";s:4:\\\"city\\\";s:29:\\\"المدينة المنورة\\\";s:6:\\\"street\\\";s:28:\\\"Alzubair Ibn al Awwam street\\\";s:12:\\\"phone_number\\\";s:13:\\\"1223232323232\\\";s:8:\\\"order_id\\\";i:9;}s:13:\\\"orderProducts\\\";a:1:{i:0;a:8:{s:8:\\\"order_id\\\";i:9;s:12:\\\"product_name\\\";s:37:\\\"Chicago Bulls Essential Fleece Hoodie\\\";s:12:\\\"product_slug\\\";s:37:\\\"chicago-bulls-essential-fleece-hoodie\\\";s:13:\\\"product_image\\\";s:93:\\\"http:\\/\\/localhost:8000\\/storage\\/images\\/orders\\/order-9\\/1695182285-1-mobile-web-catalodgdfgdg.png\\\";s:13:\\\"product_price\\\";s:6:\\\"368.00\\\";s:16:\\\"product_quantity\\\";i:2;s:11:\\\"total_price\\\";s:6:\\\"736.00\\\";s:18:\\\"product_attributes\\\";s:27:\\\"{\\\"brand\\\":\\\"Nike\\\",\\\"size\\\":\\\"S\\\"}\\\";}}s:4:\\\"user\\\";a:2:{s:4:\\\"name\\\";s:13:\\\"turki alharbi\\\";s:5:\\\"email\\\";s:18:\\\"tur.1i@hotmail.com\\\";}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tur.1i@hotmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1695274504-9710-1027813910\",\"clockwork_parent_id\":\"1695274504-7436-1138831827\"}', 0, NULL, 1695274504, 1695274504);
+(4, 'default', '{\"uuid\":\"d360d0f4-5cf1-4de4-90b7-3f11927f5b51\",\"displayName\":\"App\\\\Mail\\\\NewOrderMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:21:\\\"App\\\\Mail\\\\NewOrderMail\\\":6:{s:5:\\\"order\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:31:\\\"App\\\\Modules\\\\Orders\\\\Models\\\\Order\\\";s:2:\\\"id\\\";i:9;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:15:\\\"shippingAddress\\\";a:7:{s:10:\\\"address_id\\\";i:5;s:7:\\\"address\\\";s:28:\\\"Alzubair Ibn al Awwam street\\\";s:9:\\\"full_name\\\";s:19:\\\"turki noman alharbi\\\";s:4:\\\"city\\\";s:29:\\\"المدينة المنورة\\\";s:6:\\\"street\\\";s:28:\\\"Alzubair Ibn al Awwam street\\\";s:12:\\\"phone_number\\\";s:13:\\\"1223232323232\\\";s:8:\\\"order_id\\\";i:9;}s:13:\\\"orderProducts\\\";a:1:{i:0;a:8:{s:8:\\\"order_id\\\";i:9;s:12:\\\"product_name\\\";s:37:\\\"Chicago Bulls Essential Fleece Hoodie\\\";s:12:\\\"product_slug\\\";s:37:\\\"chicago-bulls-essential-fleece-hoodie\\\";s:13:\\\"product_image\\\";s:93:\\\"http:\\/\\/localhost:8000\\/storage\\/images\\/orders\\/order-9\\/1695182285-1-mobile-web-catalodgdfgdg.png\\\";s:13:\\\"product_price\\\";s:6:\\\"368.00\\\";s:16:\\\"product_quantity\\\";i:2;s:11:\\\"total_price\\\";s:6:\\\"736.00\\\";s:18:\\\"product_attributes\\\";s:27:\\\"{\\\"brand\\\":\\\"Nike\\\",\\\"size\\\":\\\"S\\\"}\\\";}}s:4:\\\"user\\\";a:2:{s:4:\\\"name\\\";s:13:\\\"turki alharbi\\\";s:5:\\\"email\\\";s:18:\\\"tur.1i@hotmail.com\\\";}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tur.1i@hotmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1695274504-9710-1027813910\",\"clockwork_parent_id\":\"1695274504-7436-1138831827\"}', 0, NULL, 1695274504, 1695274504),
+(5, 'default', '{\"uuid\":\"221c62bc-5b0d-474e-8976-3110677534c7\",\"displayName\":\"App\\\\Mail\\\\NewOrderMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:21:\\\"App\\\\Mail\\\\NewOrderMail\\\":6:{s:5:\\\"order\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:31:\\\"App\\\\Modules\\\\Orders\\\\Models\\\\Order\\\";s:2:\\\"id\\\";i:10;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:15:\\\"shippingAddress\\\";a:7:{s:10:\\\"address_id\\\";i:5;s:7:\\\"address\\\";s:28:\\\"Alzubair Ibn al Awwam street\\\";s:9:\\\"full_name\\\";s:19:\\\"turki noman alharbi\\\";s:4:\\\"city\\\";s:29:\\\"المدينة المنورة\\\";s:6:\\\"street\\\";s:28:\\\"Alzubair Ibn al Awwam street\\\";s:12:\\\"phone_number\\\";s:13:\\\"1223232323232\\\";s:8:\\\"order_id\\\";i:10;}s:13:\\\"orderProducts\\\";a:2:{i:0;a:8:{s:8:\\\"order_id\\\";i:10;s:12:\\\"product_name\\\";s:37:\\\"Chicago Bulls Essential Fleece Hoodie\\\";s:12:\\\"product_slug\\\";s:37:\\\"chicago-bulls-essential-fleece-hoodie\\\";s:13:\\\"product_image\\\";s:94:\\\"http:\\/\\/localhost:8000\\/storage\\/images\\/orders\\/order-10\\/1695182285-1-mobile-web-catalodgdfgdg.png\\\";s:13:\\\"product_price\\\";s:6:\\\"368.00\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"368.00\\\";s:18:\\\"product_attributes\\\";s:28:\\\"{\\\"brand\\\":\\\"Nike\\\",\\\"size\\\":\\\"XS\\\"}\\\";}i:1;a:8:{s:8:\\\"order_id\\\";i:10;s:12:\\\"product_name\\\";s:34:\\\"Airflex+ Light Wash Slim Fit Jeans\\\";s:12:\\\"product_slug\\\";s:33:\\\"airflex-light-wash-slim-fit-jeans\\\";s:13:\\\"product_image\\\";s:96:\\\"http:\\/\\/localhost:8000\\/storage\\/images\\/orders\\/order-10\\/1695182727-1-mobile-web-catalogspkrgd;l.png\\\";s:13:\\\"product_price\\\";s:6:\\\"256.80\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"256.80\\\";s:18:\\\"product_attributes\\\";s:37:\\\"{\\\"brand\\\":\\\"American Eagle\\\",\\\"size\\\":\\\"M\\\"}\\\";}}s:4:\\\"user\\\";a:2:{s:4:\\\"name\\\";s:13:\\\"turki alharbi\\\";s:5:\\\"email\\\";s:18:\\\"tur.1i@hotmail.com\\\";}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tur.1i@hotmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1695296599-4927-604831245\",\"clockwork_parent_id\":\"1695296599-2409-242858996\"}', 0, NULL, 1695296599, 1695296599),
+(6, 'default', '{\"uuid\":\"267aeaa0-1d0f-4427-ab40-a6c39722781e\",\"displayName\":\"App\\\\Mail\\\\NewOrderMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:21:\\\"App\\\\Mail\\\\NewOrderMail\\\":6:{s:5:\\\"order\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:31:\\\"App\\\\Modules\\\\Orders\\\\Models\\\\Order\\\";s:2:\\\"id\\\";i:11;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:15:\\\"shippingAddress\\\";a:7:{s:10:\\\"address_id\\\";i:5;s:7:\\\"address\\\";s:28:\\\"Alzubair Ibn al Awwam street\\\";s:9:\\\"full_name\\\";s:19:\\\"turki noman alharbi\\\";s:4:\\\"city\\\";s:29:\\\"المدينة المنورة\\\";s:6:\\\"street\\\";s:28:\\\"Alzubair Ibn al Awwam street\\\";s:12:\\\"phone_number\\\";s:13:\\\"1223232323232\\\";s:8:\\\"order_id\\\";i:11;}s:13:\\\"orderProducts\\\";a:1:{i:0;a:8:{s:8:\\\"order_id\\\";i:11;s:12:\\\"product_name\\\";s:34:\\\"Airflex+ Light Wash Slim Fit Jeans\\\";s:12:\\\"product_slug\\\";s:33:\\\"airflex-light-wash-slim-fit-jeans\\\";s:13:\\\"product_image\\\";s:96:\\\"http:\\/\\/localhost:8000\\/storage\\/images\\/orders\\/order-11\\/1695182727-1-mobile-web-catalogspkrgd;l.png\\\";s:13:\\\"product_price\\\";s:6:\\\"256.80\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"256.80\\\";s:18:\\\"product_attributes\\\";s:37:\\\"{\\\"brand\\\":\\\"American Eagle\\\",\\\"size\\\":\\\"M\\\"}\\\";}}s:4:\\\"user\\\";a:2:{s:4:\\\"name\\\";s:13:\\\"turki alharbi\\\";s:5:\\\"email\\\";s:18:\\\"tur.1i@hotmail.com\\\";}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tur.1i@hotmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1695296800-0062-1836497664\",\"clockwork_parent_id\":\"1695296799-7374-1346487661\"}', 0, NULL, 1695296800, 1695296800);
 
 -- --------------------------------------------------------
 
@@ -419,9 +421,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `status`, `shipping_fees`, `sub_total`, `total`, `created_at`, `updated_at`) VALUES
-(2, 7, 'Pending', 159.00, 2704.00, 2963.21, '2023-09-09 10:08:37', '2023-09-09 10:08:37'),
-(7, 7, 'Pending', 111.00, 2331.00, 1965.81, '2023-09-16 03:41:17', '2023-09-16 03:41:17'),
-(9, 13, 'Pending', 0.00, 736.00, 846.40, '2023-09-21 02:35:04', '2023-09-21 02:35:04');
+(9, 13, 'Pending', 0.00, 736.00, 846.40, '2023-09-21 02:35:04', '2023-09-21 02:35:04'),
+(10, 13, 'Pending', 0.00, 624.80, 502.96, '2023-09-21 08:43:19', '2023-09-21 08:43:19'),
+(11, 13, 'Pending', 0.00, 256.80, 295.32, '2023-09-21 08:46:39', '2023-09-21 08:46:39');
 
 -- --------------------------------------------------------
 
@@ -446,9 +448,9 @@ CREATE TABLE `order_addresses` (
 --
 
 INSERT INTO `order_addresses` (`id`, `order_id`, `full_name`, `address`, `city`, `phone_number`, `street`, `created_at`, `updated_at`) VALUES
-(2, 2, 'Yardley Rush', 'Odio maxime assumend', 'Id quam voluptatem', '5529525933', 'Quia lorem nesciunt', '2023-09-09 10:08:37', '2023-09-09 10:08:37'),
-(3, 7, 'turki n alharbi', 'Odio maxime assumend', 'Id quam voluptatem', '5529525933', 'Quia lorem nesciunt', '2023-09-16 03:41:17', '2023-09-16 03:41:17'),
-(5, 9, 'turki noman alharbi', 'Alzubair Ibn al Awwam street', 'المدينة المنورة', '1223232323232', 'Alzubair Ibn al Awwam street', '2023-09-21 02:35:04', '2023-09-21 02:35:04');
+(5, 9, 'turki noman alharbi', 'Alzubair Ibn al Awwam street', 'المدينة المنورة', '1223232323232', 'Alzubair Ibn al Awwam street', '2023-09-21 02:35:04', '2023-09-21 02:35:04'),
+(6, 10, 'turki noman alharbi', 'Alzubair Ibn al Awwam street', 'المدينة المنورة', '1223232323232', 'Alzubair Ibn al Awwam street', '2023-09-21 08:43:19', '2023-09-21 08:43:19'),
+(7, 11, 'turki noman alharbi', 'Alzubair Ibn al Awwam street', 'المدينة المنورة', '1223232323232', 'Alzubair Ibn al Awwam street', '2023-09-21 08:46:39', '2023-09-21 08:46:39');
 
 -- --------------------------------------------------------
 
@@ -472,8 +474,7 @@ CREATE TABLE `order_coupons` (
 --
 
 INSERT INTO `order_coupons` (`id`, `order_id`, `code`, `type`, `amount`, `discounted_amount`, `created_at`, `updated_at`) VALUES
-(2, 2, 'app', 'Percentage', '10', '329.25', '2023-09-09 10:08:37', '2023-09-09 10:08:37'),
-(3, 7, 'cod', 'Percentage', '30', '842.49', '2023-09-16 03:41:17', '2023-09-16 03:41:17');
+(4, 10, 'cod', 'Percentage', '30', '215.56', '2023-09-21 08:43:19', '2023-09-21 08:43:19');
 
 -- --------------------------------------------------------
 
@@ -500,14 +501,10 @@ CREATE TABLE `order_products` (
 --
 
 INSERT INTO `order_products` (`id`, `order_id`, `product_name`, `product_slug`, `product_image`, `product_attributes`, `product_quantity`, `product_price`, `total_price`, `created_at`, `updated_at`) VALUES
-(2, 2, 'Clark Bryan', 'clark-bryan', '1694262750-1672578388-1_zoom_desktop.webp', '{\"brand\":\"Nike\",\"size\":\"S\"}', 4, 374.40, 1497.60, NULL, NULL),
-(3, 2, 'Clark Bryan', 'clark-bryan', '1694262750-1672578388-1_zoom_desktop.webp', '{\"brand\":\"Nike\",\"size\":\"M\"}', 1, 374.40, 374.40, NULL, NULL),
-(4, 2, 'Harlan Burnett', 'harlan-burnett', '1694263128-1672578820-1_zoom_desktop_2.webp', '{\"brand\":\"Nike\",\"size\":\"S\"}', 1, 563.00, 563.00, NULL, NULL),
-(5, 2, 'Walter Bolton', 'walter-bolton', '1694263468-1672579823-1_zoom_desktop_9.webp', '{\"brand\":\"Nike\",\"size\":\"M\"}', 1, 269.00, 269.00, NULL, NULL),
-(6, 7, 'Clark Bryan', 'clark-bryan', '1694262750-1672578388-1_zoom_desktop.webp', '{\"brand\":\"Nike\",\"size\":\"M\"}', 2, 468.00, 936.00, NULL, NULL),
-(7, 7, 'Harlan Burnett', 'harlan-burnett', '1694263128-1672578820-1_zoom_desktop_2.webp', '{\"brand\":\"Nike\",\"size\":\"S\"}', 2, 563.00, 1126.00, NULL, NULL),
-(8, 7, 'Walter Bolton', 'walter-bolton', '1694263468-1672579823-1_zoom_desktop_9.webp', '{\"brand\":\"Nike\",\"size\":\"M\"}', 1, 269.00, 269.00, NULL, NULL),
-(10, 9, 'Chicago Bulls Essential Fleece Hoodie', 'chicago-bulls-essential-fleece-hoodie', '1695182285-1-mobile-web-catalodgdfgdg.png', '{\"brand\":\"Nike\",\"size\":\"S\"}', 2, 368.00, 736.00, NULL, NULL);
+(10, 9, 'Chicago Bulls Essential Fleece Hoodie', 'chicago-bulls-essential-fleece-hoodie', '1695182285-1-mobile-web-catalodgdfgdg.png', '{\"brand\":\"Nike\",\"size\":\"S\"}', 2, 368.00, 736.00, NULL, NULL),
+(11, 10, 'Chicago Bulls Essential Fleece Hoodie', 'chicago-bulls-essential-fleece-hoodie', '1695182285-1-mobile-web-catalodgdfgdg.png', '{\"brand\":\"Nike\",\"size\":\"XS\"}', 1, 368.00, 368.00, NULL, NULL),
+(12, 10, 'Airflex+ Light Wash Slim Fit Jeans', 'airflex-light-wash-slim-fit-jeans', '1695182727-1-mobile-web-catalogspkrgd;l.png', '{\"brand\":\"American Eagle\",\"size\":\"M\"}', 1, 256.80, 256.80, NULL, NULL),
+(13, 11, 'Airflex+ Light Wash Slim Fit Jeans', 'airflex-light-wash-slim-fit-jeans', '1695182727-1-mobile-web-catalogspkrgd;l.png', '{\"brand\":\"American Eagle\",\"size\":\"M\"}', 1, 256.80, 256.80, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -686,10 +683,10 @@ INSERT INTO `products` (`id`, `name`, `slug`, `details`, `info_and_care`, `price
 (16, 'Essential Sweatshirt', 'essential-sweatshirt', NULL, NULL, 341.00, 0.00, 15, 'Percentage', '2023-09-20', '2025-01-04', 289.85, '{\"price_after_discount\":289.85,\"type\":\"Percentage\",\"amount\":\"15\",\"start_at\":\"2023-09-20\",\"expires_at\":\"2025-01-04\"}', 10, 1, 18, 2, '2023-09-20 00:50:01', '2023-09-20 00:53:16'),
 (17, 'Logo Crew Neck Sweatshirt', 'logo-crew-neck-sweatshirt', NULL, NULL, 436.00, 0.00, 10, 'Percentage', '2023-09-20', '2024-12-27', 392.40, '{\"price_after_discount\":392.4,\"type\":\"Percentage\",\"amount\":\"10\",\"start_at\":\"2023-09-20\",\"expires_at\":\"2024-12-27\"}', 15, 1, 13, 2, '2023-09-20 00:50:03', '2023-09-20 00:58:31'),
 (18, 'Air Fleece Sweatshirt', 'air-fleece-sweatshirt', NULL, NULL, 463.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 15, 1, 7, 8, '2023-09-20 00:56:12', '2023-09-20 00:58:22'),
-(19, 'Chicago Bulls Essential Fleece Hoodie', 'chicago-bulls-essential-fleece-hoodie', NULL, NULL, 368.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 7, 1, 7, 7, '2023-09-20 00:56:59', '2023-09-21 02:35:04'),
+(19, 'Chicago Bulls Essential Fleece Hoodie', 'chicago-bulls-essential-fleece-hoodie', NULL, NULL, 368.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 6, 1, 7, 7, '2023-09-20 00:56:59', '2023-09-21 08:43:19'),
 (20, 'Nsw Repeat Swoosh Fleece Cargo', 'nsw-repeat-swoosh-fleece-cargo', NULL, NULL, 233.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 9, 1, 7, 7, '2023-09-20 01:00:56', '2023-09-20 01:01:44'),
 (21, 'Essential Logo Fleece Sweatpants', 'essential-logo-fleece-sweatpants', NULL, NULL, 136.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 18, 1, 9, 1, '2023-09-20 01:01:46', '2023-09-20 01:03:26'),
-(22, 'Airflex+ Light Wash Slim Fit Jeans', 'airflex-light-wash-slim-fit-jeans', NULL, NULL, 321.00, 0.00, 20, 'Percentage', '2023-09-20', '2023-11-25', 256.80, '{\"price_after_discount\":256.8,\"type\":\"Percentage\",\"amount\":\"20\",\"start_at\":\"2023-09-20\",\"expires_at\":\"2023-11-25\"}', 13, 1, 12, 1, '2023-09-20 01:03:52', '2023-09-20 01:05:34');
+(22, 'Airflex+ Light Wash Slim Fit Jeans', 'airflex-light-wash-slim-fit-jeans', NULL, NULL, 321.00, 0.00, 20, 'Percentage', '2023-09-20', '2023-11-25', 256.80, '{\"price_after_discount\":256.8,\"type\":\"Percentage\",\"amount\":\"20\",\"start_at\":\"2023-09-20\",\"expires_at\":\"2023-11-25\"}', 11, 1, 12, 1, '2023-09-20 01:03:52', '2023-09-21 08:46:39');
 
 -- --------------------------------------------------------
 
@@ -864,14 +861,14 @@ INSERT INTO `product_sizes` (`id`, `product_id`, `size_id`, `stock`) VALUES
 (40, 18, 7, 9),
 (41, 19, 1, 3),
 (42, 19, 7, 2),
-(43, 19, 8, 2),
+(43, 19, 8, 1),
 (44, 20, 1, 3),
 (45, 20, 8, 6),
 (46, 21, 1, 6),
 (47, 21, 8, 3),
 (48, 21, 2, 9),
 (49, 22, 1, 8),
-(50, 22, 2, 2),
+(50, 22, 2, 0),
 (51, 22, 8, 3);
 
 -- --------------------------------------------------------
@@ -899,7 +896,9 @@ INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `review_id`, `comment`, `i
 (3, 13, 21, NULL, 'jkjhjk', 0, '2023-09-21 02:21:23', '2023-09-21 02:21:23'),
 (4, 13, 19, NULL, 'kkjhjk', 0, '2023-09-21 02:33:53', '2023-09-21 02:33:53'),
 (5, 13, 22, NULL, 'dtlkhtd', 0, '2023-09-21 02:41:13', '2023-09-21 02:41:13'),
-(6, 13, 22, NULL, 'fgfg', 0, '2023-09-21 02:42:49', '2023-09-21 02:42:49');
+(6, 13, 22, NULL, 'fgfg', 0, '2023-09-21 02:42:49', '2023-09-21 02:42:49'),
+(7, 13, 12, NULL, 'fv;ljfkl', 0, '2023-09-21 08:47:10', '2023-09-21 08:47:10'),
+(8, 13, 18, NULL, 'hhhh', 0, '2023-09-21 09:36:04', '2023-09-21 09:36:04');
 
 -- --------------------------------------------------------
 
@@ -1026,6 +1025,13 @@ CREATE TABLE `shopping_carts` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `shopping_carts`
+--
+
+INSERT INTO `shopping_carts` (`id`, `user_id`, `product_id`, `size_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(22, 13, 21, 2, 1, '2023-09-21 08:46:47', '2023-09-21 08:46:47');
+
 -- --------------------------------------------------------
 
 --
@@ -1082,7 +1088,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ph
 (1, 'Ryder Macdonald', 'turki@example.com', NULL, '$2y$10$CnjnOe4UgUVnrzYjF6ZxJ.4jf6oLENCHeql0hG7LuMj7gwqhgN6U.', NULL, 'Female', 'UwfCvyNdekThK06gbanIAl328AGI7xdTTWmukic5dta7qIdNy66JfYVFaepv', '2023-08-26 08:42:29', '2023-09-05 11:33:52'),
 (7, 'Turki Alharbi', 'alharbi.tur1@gmail.com', NULL, '$2y$10$Q5UTXEDngjhvsoOTYmN7zuxNuzTYxRxeEw5g6UwsoOWK4l9SNv.4K', 552952593, 'Male', 'vXSIQX1VpppXAU9CeMaHSPHmD6ZnOYIsAR0GkHlfWxaiZEPwUt2DFcLr0Oxy', '2023-09-07 05:37:53', '2023-09-12 23:43:56'),
 (8, 'Jolie Cash', 'jiqyroka@mailinator.com', NULL, '$2y$10$dkMJkZPr81uETOM.J5qqBurnW72iTef.iAqmVZpHxOQD7t/2fA29S', NULL, 'Male', NULL, '2023-09-07 07:19:08', '2023-09-07 07:19:08'),
-(13, 'turki alharbi', 'tur.1i@hotmail.com', NULL, '$2y$10$JDp340VYoG6BxANfhawO3e1596mxr8LXwxNriBYY7I06SFxa3027a', NULL, 'Female', '93m6DlYX7uUq9aLsa1GKjfUgJVVVlkmSjOJvqL43qKKIdeuI4wgcGb9VzR7Z', '2023-09-21 01:17:37', '2023-09-21 02:33:23');
+(13, 'turki alharbi', 'tur.1i@hotmail.com', NULL, '$2y$10$JDp340VYoG6BxANfhawO3e1596mxr8LXwxNriBYY7I06SFxa3027a', NULL, 'Male', '93m6DlYX7uUq9aLsa1GKjfUgJVVVlkmSjOJvqL43qKKIdeuI4wgcGb9VzR7Z', '2023-09-21 01:17:37', '2023-09-21 08:47:19');
 
 -- --------------------------------------------------------
 
@@ -1127,7 +1133,10 @@ CREATE TABLE `wishlists` (
 --
 
 INSERT INTO `wishlists` (`user_id`, `product_id`) VALUES
-(13, 19);
+(13, 19),
+(13, 22),
+(13, 21),
+(13, 20);
 
 --
 -- Indexes for dumped tables
@@ -1398,7 +1407,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1410,25 +1419,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `order_addresses`
 --
 ALTER TABLE `order_addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `order_coupons`
 --
 ALTER TABLE `order_coupons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_products`
 --
 ALTER TABLE `order_products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -1464,7 +1473,7 @@ ALTER TABLE `product_sizes`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1476,7 +1485,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `shopping_carts`
 --
 ALTER TABLE `shopping_carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `sizes`
