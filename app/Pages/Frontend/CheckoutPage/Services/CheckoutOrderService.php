@@ -42,7 +42,7 @@ class  CheckoutOrderService
 
         $this->order =  $this->orderRepository->createOrder($cartDetails);
 
-        return   $this->order;
+        return  $this->order;
     }
 
     public function checkProductsStock()

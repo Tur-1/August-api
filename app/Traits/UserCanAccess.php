@@ -11,11 +11,11 @@ trait UserCanAccess
 
         $permissions = auth('admin')->user()->permissions->pluck('slug')->toArray();
 
-        $can = in_array($permission_name, $permissions);
+        $canNotAccess = !in_array($permission_name, $permissions);
 
-        if (!$can) {
+        if ($canNotAccess) {
             throw new UnauthorizedException($permissions);
         }
-        return $can;
+        return true;
     }
 }

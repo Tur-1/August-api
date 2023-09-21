@@ -37,7 +37,9 @@ class AdminService
 
     public function updateAdmin($validatedRequest, $id)
     {
-        return AdminShowResource::make($this->adminRepository->updateAdmin($validatedRequest, $id));
+        $admin = $this->adminRepository->updateAdmin($validatedRequest, $id);
+
+        return AdminShowResource::make($admin);
     }
 
     public function deleteAdmin($id)

@@ -54,6 +54,7 @@ class AdminRepository
         $admin = $this->getAdmin($id);
         $admin->update($validatedRequest);
         $admin->permissions()->sync($validatedRequest['permissions_id']);
+        $admin->load('permissions');
 
         return  $admin;
     }

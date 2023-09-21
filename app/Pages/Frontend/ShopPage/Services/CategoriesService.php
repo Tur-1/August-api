@@ -55,10 +55,7 @@ class  CategoriesService
     {
         return  $this->allCategories->where("parent_id", $category_id);
     }
-    private function getSubcategories($parent_ids)
-    {
-        return  $this->allCategories->whereIn("parent_ids", $parent_ids);
-    }
+
     private function getParentCategory($parent_id)
     {
         return  $this->allCategories->where("id", $parent_id)->first();

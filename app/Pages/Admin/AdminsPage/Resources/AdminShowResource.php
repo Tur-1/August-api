@@ -23,8 +23,7 @@ class AdminShowResource extends JsonResource
             'role_id' => $this->role_id,
             'gender' => $this->gender,
             'phone_number' => $this->phone_number,
-
-
+            'permissions' => $this->whenLoaded('permissions', $this->permissions->pluck('slug')->toArray()),
         ];
     }
 }
