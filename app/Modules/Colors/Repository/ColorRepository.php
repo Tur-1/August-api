@@ -30,7 +30,9 @@ class ColorRepository
     }
     public function getColorsByProductsCategory($category_id)
     {
-        return $this->color->whereHasProductsWithCount($category_id)->get();
+        return $this->color->query()
+            ->whereHasProductsWithCount($category_id)
+            ->get();
     }
     public function saveColor($validatedRequest, Color $color = null)
     {

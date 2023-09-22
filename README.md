@@ -1,49 +1,40 @@
- 
-
-## Advance E-commerce website in  Laravel 9
- 
+## Advance E-commerce website in Laravel 9
 
 ### Features :
-- ##### PWA (progressive web app)
+
+-   ##### PWA (progressive web app)
+
 # ====== FRONT-END =======
 
-- Responsive Layout
-- Shopping Cart, Wishlist, Product Reviews
-- Coupons & Discounts
-- Product attributes: cost price, promotion price, stock, size... 
- 
-- Upload manager: banner, images,..  
-- Related Products, Recommendations for you in our categories  
-many more......
+-   Responsive Layout
+-   Shopping Cart, Wishlist, Product Reviews
+-   Coupons & Discounts
+-   Product attributes: cost price, price, stock, size...
 
-- frontend   https://github.com/Tur-1/ecommerce
+-   Upload manager: banner, images,..
+-   Related Products,
+    many more......
+
+-   frontend https://github.com/Tur-1/ecommerce
 
 ## ======= ADMIN =======
 
-- Admin roles, permission
-- Product manager 
-- Banner manager
-- Order management
-- Category management
-- Brand management
-- Shipping Management
-- Review Management 
-- User Management
-- Coupon Management
-- Profile Settings
-Many more....
+-   Admin roles, permission
+-   Product manager
+-   Banner manager
+-   Order management
+-   Category management
+-   Brand management
+-   Review Management
+-   User Management
+-   Coupon Management
+    Many more....
 
-- admin dashboard   https://github.com/Tur-1/ecommerce-admin-dashboard
- 
+-   admin dashboard https://github.com/Tur-1/ecommerce-admin-dashboard
+
 ### Set up :
 
 1. Clone the repo and cd into it
 2. composer install
 3. php artisan storage:link
-4. php artisan serve     
- 
- 
-
-
- 
-
+4. php artisan serve

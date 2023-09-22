@@ -5,6 +5,7 @@ namespace App\Pages\Frontend\ShopPage\Controllers;
 use App\Http\Controllers\Controller;
 use App\Pages\Frontend\ShopPage\Services\ShopPageService;
 use App\Pages\Frontend\ShopPage\Services\CategoriesService;
+use Illuminate\Support\Benchmark;
 
 class ShopPageController extends Controller
 {
@@ -48,6 +49,7 @@ class ShopPageController extends Controller
     }
     public function getColors($category_url, ShopPageService $shopPageService)
     {
+
 
         return response()->success([
             'colors' => $shopPageService->getColors($category_url),

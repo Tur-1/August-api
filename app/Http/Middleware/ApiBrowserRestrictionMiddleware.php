@@ -19,7 +19,7 @@ class ApiBrowserRestrictionMiddleware
 
         // Check if the request originated from the allowed domain
         if ($request->headers->get('origin') !== config('app.backend_url')) {
-            return response('Unauthorized.', 401);
+            return redirect()->to(config('app.frontend_url'));
         }
 
         return $next($request);

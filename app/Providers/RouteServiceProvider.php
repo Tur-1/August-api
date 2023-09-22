@@ -35,7 +35,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('api')->prefix('api')
                 ->group(base_path('routes/AuthUserRoutes.php'));
 
-            Route::middleware(['api'])->prefix('api')
+            Route::middleware('api')
+                ->prefix('api')
                 ->group(function ($route) {
                     foreach (glob(base_path('routes/Frontend/*.php')) as $fileName) {
                         require $fileName;
@@ -50,7 +51,7 @@ class RouteServiceProvider extends ServiceProvider
 
 
             Route::prefix('api/admin')
-                ->middleware(['api', 'auth:admin', 'admin_domain'])
+                ->middleware(['admin_domain', 'api', 'auth:admin'])
                 ->group(function ($route) {
                     foreach (glob(base_path('routes\\Admin\\*.php')) as $fileName) {
                         require $fileName;
