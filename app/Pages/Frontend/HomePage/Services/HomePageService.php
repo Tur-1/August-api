@@ -6,7 +6,7 @@ use App\Modules\Banners\Repository\BannerRepository;
 use App\Modules\Products\Repository\ProductRepository;
 use App\Modules\Wishlist\Repository\WishlistRepository;
 use App\Pages\Frontend\HomePage\Resources\HomeBannerResource;
-use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
+use App\Pages\Frontend\HomePage\Resources\LatestProductsResource;
 
 class  HomePageService
 {
@@ -21,7 +21,7 @@ class  HomePageService
         $products->each(function ($product) use ($wishlistIds) {
             $product->inWishlist = in_array($product->id, $wishlistIds);
         });
-        return  ProductsListResource::collection($products);
+        return  LatestProductsResource::collection($products);
     }
     public function getBanners()
     {

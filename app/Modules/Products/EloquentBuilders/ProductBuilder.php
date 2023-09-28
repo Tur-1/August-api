@@ -45,7 +45,6 @@ class ProductBuilder extends Builder
     }
     public function withFilters()
     {
-
         return $this->when(request()->has('brand'), fn ($query) => $this->filterByBrands($query))
             ->when(request()->has('color'), fn ($query) => $this->filterByColors($query))
             ->when(request()->has('size'), fn ($query) => $this->filterBySizeOptions($query))

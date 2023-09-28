@@ -3,11 +3,12 @@
 namespace App\Pages\Frontend\ProductDetailPage\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Modules\Wishlist\Repository\WishlistRepository;
 use App\Modules\Products\Services\ProductDiscountService;
 
-class ProductDetailResource extends JsonResource
+class RelatedProductsResource extends JsonResource
 {
+
+
     /**
      * Transform the resource collection into an array.
      *
@@ -25,17 +26,13 @@ class ProductDetailResource extends JsonResource
             $this->discount_amount,
         );
 
-
         return [
             'id' => $this->id,
             'name' => $this->name,
             'slug' =>  $this->slug,
-            'info_and_care' => $this->info_and_care,
-            'details' => $this->details,
             'brand_name' => $this->brand_name,
-            'brand_image' => $this->brand_image,
             'main_image_url' => $this->main_image_url,
-            'inWishlist' => (new WishlistRepository())->isExists($this->id),
+            'inWishlist' => $this->inWishlist,
             'in_stock' => $this->stock > 0 ? true : false,
             'price' => $discount->getPrice(),
             'discount' => $this->when(

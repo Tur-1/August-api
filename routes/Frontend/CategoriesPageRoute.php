@@ -19,4 +19,17 @@ Route::controller(CategoriesPageController::class)->group(function () {
     Route::get('/categories', 'getSectionsWithCategories');
 
     Route::get('/categories/sections', 'getAllSections');
+
+
+    Route::get('/categories/{category_url?}', 'getCategory');
+
+    Route::get('/categories/{category_url?}/products', 'getProducts');
+
+    Route::get('/categories/{category_url?}/brands', 'getBrands');
+
+    Route::get('/categories/{category_url?}/colors', 'getColors');
+
+    Route::get('/categories/{category_url?}/sizes', 'getSizes');
+
+    Route::get('/categories/{category_url?}/products/total', 'getShopPageTotalProducts');
 });

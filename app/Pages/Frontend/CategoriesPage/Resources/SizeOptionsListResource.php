@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Pages\Frontend\ShopPage\Resources;
+namespace App\Pages\Frontend\CategoriesPage\Resources;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BrandsListResource extends JsonResource
+class SizeOptionsListResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.

@@ -7,7 +7,7 @@ use App\Exceptions\PageNotFoundException;
 use App\Modules\Reviews\Repository\ReviewRepository;
 use App\Modules\Products\Repository\ProductRepository;
 use App\Modules\ShoppingCart\Repository\ShoppingCartRepository;
-use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
+use App\Pages\Frontend\ProductDetailPage\Resources\RelatedProductsResource;
 use App\Pages\Frontend\ProductDetailPage\Resources\ProductDetailResource;
 use App\Pages\Frontend\ProductDetailPage\Resources\ProductImagesResource;
 use App\Pages\Frontend\ProductDetailPage\Resources\ProductReviewsResource;
@@ -56,7 +56,7 @@ class  ProductDetailPageService
 
     public function getRelatedProducts($product_id)
     {
-        return ProductsListResource::collection((new ProductRepository())
+        return RelatedProductsResource::collection((new ProductRepository())
             ->getRelatedProducts($product_id, Session::get('categoriesIds')));
     }
 

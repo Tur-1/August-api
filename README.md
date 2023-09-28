@@ -17,7 +17,7 @@
 
 -   frontend https://github.com/Tur-1/ecommerce
 
-## ======= ADMIN =======
+## ======= ADMIN DASHBOARD =======
 
 -   Admin roles, permission
 -   Product manager

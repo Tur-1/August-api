@@ -66,6 +66,16 @@ class CategoryRepository
 
         return $this->category;
     }
+    public function findByUrl($category_url)
+    {
+
+        $this->category = $this->category::where('url', $category_url)->first();
+        if (is_null($this->category)) {
+            throw new PageNotFoundException();
+        }
+
+        return $this->category;
+    }
 
 
     public function save($request)

@@ -22,7 +22,7 @@ trait ImageUpload
         // generate unique name for the image
         $newImageName = $this->generateUniqueImageName($imageRequest);
 
-        // upload image to server
+        // upload image 
 
         Storage::putFileAs($this->imagesPath . $Folder, $imageRequest, $newImageName);
 

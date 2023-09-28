@@ -48,7 +48,7 @@ class MyAccountPageController extends Controller
     public function updateUserPhoneNumber(Request $request)
     {
 
-        $request->validate(['phone_number' => 'required|digits_between:10,20|numeric']);
+        $request->validate(['phone_number' => 'required|digits_between:9,10|numeric']);
 
         $this->myAccountService->updatePhoneNumber($request->phone_number);
 

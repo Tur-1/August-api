@@ -3,8 +3,8 @@
 namespace App\Pages\Frontend\ShoppingCartPage\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Modules\Products\Services\ProductDiscountService;
 
-use App\Pages\Frontend\ShopPage\Services\ProductDiscountService;
 
 class ShoppingCartItemsResource extends JsonResource
 {
@@ -16,16 +16,15 @@ class ShoppingCartItemsResource extends JsonResource
      */
     public function toArray($request)
     {
-        $discountData = [
-            'price' =>  $this->price,
-            'price_after_discount' => $this->price_after_discount,
-            'discount_amount' =>  $this->discount_amount,
-            'discount_type' =>  $this->discount_type,
-            'discount_start_at' =>  $this->discount_start_at,
-            'discount_expires_at' =>   $this->discount_expires_at
-        ];
+        $discount = new ProductDiscountService(
+            $this->price,
+            $this->price_after_discount,
+            $this->discount_start_at,
+            $this->discount_expires_at,
+            $this->discount_type,
+            $this->discount_amount,
+        );
 
-        $discount = new ProductDiscountService($discountData);
         $price = $discount->getPrice();
         $size = $this['sizes']->find($this['pivot']['size_id']);
         $total_price = number_format($price * $this->pivot->quantity, 2, '.', '');

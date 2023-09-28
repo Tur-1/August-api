@@ -4,7 +4,7 @@ namespace App\Pages\Frontend\WishlistPage\Services;
 
 use App\Modules\Users\Repository\UserRepository;
 use App\Modules\Wishlist\Repository\WishlistRepository;
-use App\Pages\Frontend\ShopPage\Resources\ProductsListResource;
+use App\Pages\Frontend\CategoriesPage\Resources\ProductsListResource;
 
 class  WishlistPageService
 {

@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Pages\Frontend\ShopPage\Resources;
+namespace App\Pages\Frontend\CategoriesPage\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Pages\Frontend\ShopPage\Services\ProductDiscountService;
-use App\Modules\Coupons\Services\DiscountService;
+use App\Modules\Products\Services\ProductDiscountService;
 
 class ProductsListResource extends JsonResource
 {
@@ -18,18 +17,14 @@ class ProductsListResource extends JsonResource
      */
     public function toArray($request)
     {
-
-        $discountData = [
-            'price' =>  $this->price,
-            'price_after_discount' => $this->price_after_discount,
-            'discount_amount' =>  $this->discount_amount,
-            'discount_type' =>  $this->discount_type,
-            'discount_start_at' =>  $this->discount_start_at,
-            'discount_expires_at' =>   $this->discount_expires_at
-        ];
-
-        $discount = new ProductDiscountService($discountData);
-
+        $discount = new ProductDiscountService(
+            $this->price,
+            $this->price_after_discount,
+            $this->discount_start_at,
+            $this->discount_expires_at,
+            $this->discount_type,
+            $this->discount_amount,
+        );
 
         return [
             'id' => $this->id,

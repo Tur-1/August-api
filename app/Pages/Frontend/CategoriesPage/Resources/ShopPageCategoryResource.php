@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Pages\Frontend\ShopPage\Resources;
+namespace App\Pages\Frontend\CategoriesPage\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,9 +16,8 @@ class ShopPageCategoryResource extends JsonResource
     {
 
         return [
-            'id' => $this['id'],
             'name' => $this['name'],
-            'slug' => $this['slug'],
+            'section_id' => $this['section_id'],
             'url' => $this['url'],
         ];
     }

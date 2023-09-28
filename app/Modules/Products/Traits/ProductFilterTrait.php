@@ -5,6 +5,7 @@ namespace App\Modules\Products\Traits;
 
 trait ProductFilterTrait
 {
+
     public function filterByBrands($query)
     {
         return  $query->whereHas('brand', function ($query) {
@@ -39,14 +40,24 @@ trait ProductFilterTrait
 
     public function filterByStatus($query)
     {
-        return $query->when(request()->input('status') == 'Active', fn ($query) => $query->Active())
-            ->when(request()->input('status') == 'inactive', fn ($query) => $query->InActive());
+        if (request()->input('status') == 'Active') {
+            return $query->Active();
+        }
+        if (request()->input('status') == 'inactive') {
+            return $query->InActive();
+        }
     }
 
     public function filterBySorting($query)
     {
-        return $query->when(request('sort') == 'new', fn ($query) => $query->latest())
-            ->when(request('sort') == 'price-low-to-high', fn ($query) => $query->orderBy('price', 'Asc'))
-            ->when(request('sort') == 'price-high-to-low', fn ($query) => $query->orderByDesc('price'));
+        if (request()->input('sort') == 'new') {
+            return $query->latest();
+        }
+        if (request()->input('sort') == 'price-low-to-high') {
+            return  $query->orderBy('price', 'Asc');
+        }
+        if (request()->input('sort') == 'price-high-to-low') {
+            return  $query->orderByDesc('price');
+        }
     }
 }

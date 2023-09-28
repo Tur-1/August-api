@@ -33,7 +33,7 @@ class BrandRepository
     public function saveBrand($validatedRequest, Brand $brand = null)
     {
         if (is_null($brand)) {
-            $brand = new Brand();
+            $brand = $this->brand;
         }
 
         $brand->name = Str::title($validatedRequest->name);
