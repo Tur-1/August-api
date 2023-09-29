@@ -67,14 +67,10 @@ class AdminController extends Controller
     {
         $this->userCan('delete-admins');
 
-        try {
-            $this->adminService->deleteAdmin($id);
+        $this->adminService->deleteAdmin($id);
 
-            return response()->success([
-                'message' => 'Admin has been deleted successfully',
-            ]);
-        } catch (\Exception $ex) {
-            return response()->error('try Again');
-        }
+        return response()->success([
+            'message' => 'Admin has been deleted successfully',
+        ]);
     }
 }

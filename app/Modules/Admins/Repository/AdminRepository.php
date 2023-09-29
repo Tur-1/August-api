@@ -3,11 +3,12 @@
 namespace App\Modules\Admins\Repository;
 
 use App\Modules\Admins\Models\Admin;
-use Illuminate\Database\Eloquent\Model;
 use App\Exceptions\PageNotFoundException;
+use App\Modules\Admins\Interface\AdminRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
-class AdminRepository
+class AdminRepository implements AdminRepositoryInterface
 {
     private $admin;
 
@@ -15,7 +16,7 @@ class AdminRepository
     {
         $this->admin = $admin;
     }
-    public function getAllAdmins($request)
+    public function getAllAdmins($request): LengthAwarePaginator
     {
         return $this->admin->query()
             ->withRoleName()
@@ -23,14 +24,16 @@ class AdminRepository
             ->paginate(12)
             ->appends($request->all());
     }
-    public function createAdmin($validatedRequest)
+    public function createAdmin($validatedRequest): Admin
     {
 
         $admin = $this->admin->create($validatedRequest);
 
         $admin->permissions()->sync($validatedRequest['permissions_id']);
+
+        return $admin;
     }
-    public function getAdminWithPermissionsIds($id)
+    public function getAdminWithPermissionsIds(int $id): Admin
     {
 
         $this->admin = $this->admin->WithPermissionsId()->find($id);
@@ -40,7 +43,7 @@ class AdminRepository
 
         return $this->admin;
     }
-    public function getAdmin($id)
+    public function findAdminById(int $id): Admin
     {
         $this->admin = $this->admin->find($id);
         if (is_null($this->admin)) {
@@ -49,20 +52,19 @@ class AdminRepository
 
         return $this->admin;
     }
-    public function updateAdmin($validatedRequest, $id)
+    public function updateAdmin($validatedRequest, int $id): Admin
     {
-        $admin = $this->getAdmin($id);
+        $admin = $this->findAdminById($id);
         $admin->update($validatedRequest);
         $admin->permissions()->sync($validatedRequest['permissions_id']);
         $admin->load('permissions');
 
         return  $admin;
     }
-    public function deleteAdmin($id)
+    public function deleteAdmin(int $id): void
     {
-        $this->admin = $this->admin->where('id', $id)->first();
+        $admin = $this->findAdminById($id);
 
-
-        return  $this->admin->delete();
+        $admin->delete();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Pages\Admin\AdminsPage\Services;
 
 use App\Modules\Admins\Repository\AdminRepository;
+use App\Modules\Admins\Interface\AdminRepositoryInterface;
 use App\Pages\Admin\AdminsPage\Resources\AdminShowResource;
 use App\Pages\Admin\AdminsPage\Resources\AdminsListResource;
 
@@ -12,6 +13,7 @@ class AdminService
 
     public function __construct(AdminRepository $adminRepository)
     {
+
         $this->adminRepository = $adminRepository;
     }
 
@@ -25,9 +27,9 @@ class AdminService
         return $this->adminRepository->createAdmin($validatedRequest);
     }
 
-    public function getAdmin($id)
+    public function findAdminById($id)
     {
-        return $this->adminRepository->getAdmin($id);
+        return $this->adminRepository->findAdminById($id);
     }
     public function getAdminWithPermissionsIds($id)
     {
