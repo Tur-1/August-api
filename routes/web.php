@@ -2,6 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/web', function () {
+Route::get('/', function () {
     return 'august';
 });
