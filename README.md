@@ -15,7 +15,7 @@
 -   Related Products,
     many more......
 
--   frontend https://github.com/Tur-1/ecommerce
+-   frontend https://github.com/Tur-1/August
 
 ## ======= ADMIN DASHBOARD =======
 
@@ -30,7 +30,7 @@
 -   Coupon Management
     Many more....
 
--   admin dashboard https://github.com/Tur-1/ecommerce-admin-dashboard
+-   admin dashboard https://github.com/Tur-1/August-admin-dashboard
 
 ### Set up :
 
@@ -38,3 +38,7 @@
 2. composer install
 3. php artisan storage:link
 4. php artisan serve
+
+Run the following command to create a module
+
+-   php artisan make:module {name}

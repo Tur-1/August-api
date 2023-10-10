@@ -24,8 +24,8 @@ class  ProductDetailPageService
     public function getProductDetail($productSlug)
     {
 
-
-        $this->productDetail = (new ProductRepository())->getProductDetail($productSlug);
+        $ProductRepository = (new ProductRepository());
+        $this->productDetail =  $ProductRepository->getProductDetail($productSlug);
 
         if (is_null($this->productDetail)) {
             throw new PageNotFoundException();
@@ -34,8 +34,12 @@ class  ProductDetailPageService
         (new StoreCategoriesIdsInSession())->handle($this->productDetail->categories);
 
 
-
-        return ProductDetailResource::make($this->productDetail);
+        return  [
+            'relatedProducts' => RelatedProductsResource::collection(
+                $ProductRepository->getRelatedProducts($this->productDetail->categories->pluck('id')->toArray())
+            ),
+            'productDetail' => ProductDetailResource::make($this->productDetail),
+        ];
     }
     public function getProductImages()
     {

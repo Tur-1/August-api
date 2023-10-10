@@ -23,11 +23,6 @@ return new class() extends Migration
             $table->text('info_and_care')->nullable();
             $table->decimal('price', 6, 2)->nullable();
             $table->decimal('shipping_cost', 6, 2)->nullable()->default(0);
-            $table->integer('discount_amount')->nullable();
-            $table->enum('discount_type', ['Percentage', 'Fixed'])->nullable();
-            $table->date('discount_start_at')->nullable();
-            $table->date('discount_expires_at')->nullable();
-            $table->decimal('price_after_discount', 6, 2)->nullable();
             $table->json('discount')->nullable();
             $table->integer('stock')->nullable();
             $table->boolean('is_active')->default(false);

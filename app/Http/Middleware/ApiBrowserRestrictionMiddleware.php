@@ -17,9 +17,11 @@ class ApiBrowserRestrictionMiddleware
     public function handle(Request $request, Closure $next)
     {
 
+        $allowedDomains = [config('app.backend_url'),config('app.frontend_url')];
+
         // Check if the request originated from the allowed domain
-        if ($request->headers->get('origin') !== config('app.backend_url')) {
-            return redirect()->to(config('app.frontend_url'));
+        if (!in_array($request->headers->get('origin'),$allowedDomains)) {
+            return abort(404);
         }
 
         return $next($request);

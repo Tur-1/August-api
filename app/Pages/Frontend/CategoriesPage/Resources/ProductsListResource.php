@@ -17,13 +17,14 @@ class ProductsListResource extends JsonResource
      */
     public function toArray($request)
     {
+
         $discount = new ProductDiscountService(
             $this->price,
-            $this->price_after_discount,
-            $this->discount_start_at,
-            $this->discount_expires_at,
-            $this->discount_type,
-            $this->discount_amount,
+            $this->discount['price_after_discount'],
+            $this->discount['start_at'],
+            $this->discount['expires_at'],
+            $this->discount['type'],
+            $this->discount['amount'],
         );
 
         return [

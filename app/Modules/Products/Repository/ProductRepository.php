@@ -23,9 +23,9 @@ class ProductRepository
         $this->product = new Product();
     }
 
-    public function getAll($records)
+    public function getAll()
     {
-        return $this->product->withMainProductImage()->latest()->paginate(80);
+        return $this->product->withMainProductImage()->latest()->paginate(12);
     }
     public function getHomePageProducts()
     {
@@ -37,9 +37,9 @@ class ProductRepository
             ->latest()
             ->get();
     }
-    public function getRelatedProducts($productId, $category_ids)
+    public function getRelatedProducts($category_ids)
     {
-        return $this->product->withRelatedProducts($productId, $category_ids)->get();
+        return $this->product->withRelatedProducts($category_ids)->get();
     }
     public function getShopPageTotalProducts($category_id)
     {
@@ -132,11 +132,6 @@ class ProductRepository
         $product->color_id = $request->color_id;
         $product->price = $request->price;
         $product->shipping_cost = $request->shipping_cost;
-        $product->discount_type = $request->discount_type;
-        $product->discount_amount = $request->discount_amount;
-        $product->discount_start_at = $request->discount_start_at;
-        $product->discount_expires_at = $request->discount_expires_at;
-        $product->price_after_discount = $price_after_discount;
         $product->name = Str::title($request->name);
         $product->slug = (new GenerateProductSlug())->handle($request->name, $product->id);
         $product->stock = $this->getProductStock($sizeOptions);

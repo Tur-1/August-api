@@ -26,7 +26,6 @@ class ProductDetailPageController extends Controller
             'sizeOptions' =>  $productService->getSizeOptions(),
             'categories' => $productService->getCategories(),
             'images' => $productService->getProductImages(),
-
         ]);
     }
     public function getProductReviews($id, ProductDetailPageService $productService)

@@ -51,7 +51,7 @@ class ProductBuilder extends Builder
             ->when(request()->has('sort'), fn ($query) => $this->filterBySorting($query))
             ->when(request()->has('status'), fn ($query) => $this->filterByStatus($query));
     }
-    public function withRelatedProducts($productId, $category_ids): self
+    public function withRelatedProducts($category_ids): self
     {
         return $this->whereHas('categories', function ($query) use ($category_ids) {
             $query->whereIn('id', $category_ids);
