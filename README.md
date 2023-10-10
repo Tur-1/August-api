@@ -34,11 +34,14 @@
 
 ### Set up :
 
-1. Clone the repo and cd into it
-2. composer install
-3. php artisan storage:link
-4. php artisan serve
+1. git clone https://github.com/Tur-1/August-api.git
+2. cp .env.example .env
+3. composer install
+4. php artisan key:generate
+5. php artisan storage:link
+6. php artisan db:seed
+7. php artisan serve
 
-Run the following command to create a module
+to create a new module
 
 -   php artisan make:module {name}

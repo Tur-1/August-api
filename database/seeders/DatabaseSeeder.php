@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -18,15 +19,18 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         // first insert roles 
-        $this->call(RolesSeeder::class);
+        // $this->call(RolesSeeder::class);
 
-        // insert Permissions 
-        $this->call(PermissionsSeeder::class);
+        // // insert Permissions 
+        // $this->call(PermissionsSeeder::class);
 
-        // attach role Permissions
-        $this->call(RolePermissionsSeeder::class);
+        // // attach role Permissions
+        // $this->call(RolePermissionsSeeder::class);
 
-        // attach user Permissions
-        $this->call(UserPermissionsSeeder::class);
+        // // attach user Permissions
+        // $this->call(UserPermissionsSeeder::class);
+
+
+        DB::unprepared(file_get_contents('tur_august.sql'));
     }
 }
