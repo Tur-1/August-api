@@ -2,6 +2,7 @@
 
 namespace App\Modules\Users\Repository;
 
+use Illuminate\Support\Str;
 use App\Modules\Users\Models\User;
 use App\Exceptions\PageNotFoundException;
 
@@ -23,6 +24,25 @@ class UserRepository
     }
 
     public function createUser($validatedRequest)
+    {
+        $this->user =  User::create($validatedRequest);
+
+        return  $this->user;
+    }
+
+    public function firstOrCreate($validatedRequest)
+    {
+        $this->user->query()->firstOrCreate([
+            'email' => $validatedRequest['email']
+        ], [
+            'email' => $validatedRequest['email'],
+            'name' => $validatedRequest['name'],
+            'password' => Str::random(24),
+        ]);
+
+        return  $this->user;
+    }
+    public function register($validatedRequest)
     {
         $this->user =  User::create(
             [
@@ -51,7 +71,6 @@ class UserRepository
         return auth()->user()->shoppingCartProducts;
     }
 
-
     public function getUser($id)
     {
         $this->user = $this->user->find($id);
@@ -62,6 +81,13 @@ class UserRepository
         return $this->user;
     }
 
+    public function isUserExists(string $column, string $value)
+    {
+        return $this->user->query()
+            ->where($column, $value)
+            ->first();
+        //exists
+    }
 
     public function updateUser($validatedRequest, $id)
     {

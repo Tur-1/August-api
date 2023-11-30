@@ -4,15 +4,13 @@ namespace App\Pages\Frontend\Auth\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
+use Laravel\Socialite\Facades\Socialite;
+use App\Pages\Frontend\Auth\Services\AuthService;
 use App\Pages\Frontend\Auth\Requests\LoginRequest;
 use App\Pages\Frontend\Auth\Requests\RegisterRequest;
 use App\Pages\Frontend\Auth\Resources\AuthUserResource;
-use App\Pages\Frontend\Auth\Services\AuthService;
-use Illuminate\Auth\Events\Registered;
-
+use App\Pages\Frontend\Auth\Services\SocialSignInService;
 
 class AuthenticatedUserController extends Controller
 {
@@ -21,7 +19,7 @@ class AuthenticatedUserController extends Controller
 
         $request->validated();
 
-        $user = $authService->createUser($request);
+        $user = $authService->register($request);
 
         Auth::guard('web')->login($user, true);
 
@@ -56,5 +54,25 @@ class AuthenticatedUserController extends Controller
         $request->session()->regenerateToken();
 
         return response()->success(['message' => "You have successfully logged out!"]);
+    }
+
+    public function signInByGithub()
+    {
+        $url = Socialite::driver('github')->redirect()->getTargetUrl();
+
+        return response()->json($url);
+    }
+
+    public function githubRedirect(SocialSignInService $socialSignInService)
+    {
+        $githubUser = Socialite::driver('github')->user();
+
+
+        $socialSignInService->signIn($githubUser);
+
+        return response()->success([
+            'user' => $githubUser,
+            'message' => "You have successfully logged in!"
+        ]);
     }
 }

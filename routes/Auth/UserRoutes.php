@@ -24,6 +24,11 @@ Route::middleware('guest:web')->group(function () {
     Route::post('/reset-password', [NewPasswordController::class, 'store'])
         ->middleware('guest:web')
         ->name('password.update');
+
+
+    Route::get('/github/sign-in', [AuthenticatedUserController::class, 'signInByGithub']);
+
+    Route::get('/github/sign-in/redirect', [AuthenticatedUserController::class, 'githubRedirect']);
 });
 
 Route::middleware('auth:web')->group(function () {

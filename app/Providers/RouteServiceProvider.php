@@ -32,22 +32,22 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
 
 
-            Route::middleware(['api_browser_restriction','api'])->group(base_path('routes\\Auth\\UserRoutes.php'));
+            Route::middleware(['api_browser_restriction', 'api'])->group(base_path('routes/Auth/UserRoutes.php'));
 
-            Route::middleware(['api_browser_restriction','api'])->group(function ($route) {
-                foreach (glob(base_path('routes\\Frontend\\*.php')) as $fileName) {
+            Route::middleware(['api_browser_restriction', 'api'])->group(function ($route) {
+                foreach (glob(base_path('routes/Frontend/*.php')) as $fileName) {
                     require $fileName;
                 }
             });
 
             Route::middleware(['api_browser_restriction', 'api'])
                 ->prefix('admin')
-                ->group(base_path('routes\\Auth\\AdminRoutes.php'));
+                ->group(base_path('routes/Auth/AdminRoutes.php'));
 
             Route::middleware(['api_browser_restriction', 'auth:admin', 'api'])
                 ->prefix('admin')
                 ->group(function () {
-                    foreach (glob(base_path('routes\\Admin\\*.php')) as $fileName) {
+                    foreach (glob(base_path('routes/Admin/*.php')) as $fileName) {
                         require $fileName;
                     }
                 });

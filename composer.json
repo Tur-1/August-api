@@ -8,9 +8,9 @@
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
-        "itsgoingd/clockwork": "^5.1",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
+        "laravel/socialite": "^5.9",
         "laravel/tinker": "^2.7",
         "mavinoo/laravel-batch": "^2.3"
     },

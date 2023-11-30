@@ -2,16 +2,17 @@
 
 namespace App\Modules\Banners\Repository;
 
-use App\Traits\ImageUpload;
+
 use Illuminate\Support\Str;
 use App\Modules\Banners\Models\Banner;
 use Illuminate\Database\Eloquent\Model;
 use App\Exceptions\PageNotFoundException;
+use App\Facades\FileUpload;
 use Illuminate\Database\Eloquent\Collection;
 
 class BannerRepository
 {
-    use ImageUpload;
+
 
     private $imageFolder = 'augustbanners';
     private $banner;
@@ -42,10 +43,13 @@ class BannerRepository
         $banner->type = $validatedRequest->type;
         $banner->link =  $validatedRequest->link ?? '#';
 
-        if ($validatedRequest->hasFile('image')) {
-            $this->deletePreviousImage($this->getBrandOldImagePath($banner->image));
-            $banner->image = $this->uploadImage($validatedRequest->file('image'), $this->imageFolder);
-        }
+        $banner->image = FileUpload::storeImage(
+            $validatedRequest->file('image'),
+            $this->imageFolder,
+            deleteOldImage: true,
+            oldImagePath: $this->getBannerOldImagePath($banner->image)
+        ) ?? $banner->image;
+
 
         $banner->save();
     }
@@ -82,10 +86,12 @@ class BannerRepository
     {
         $banner = $this->getBanner($id);
 
-        $this->destroyModelWithImage($banner, $this->getBrandOldImagePath($banner->image));
+        $banner->delete();
+
+        FileUpload::deleteImage($this->getBannerOldImagePath($banner->image));
     }
 
-    private function getBrandOldImagePath($image)
+    private function getBannerOldImagePath($image)
     {
         return $this->imageFolder . '/' . $image;
     }

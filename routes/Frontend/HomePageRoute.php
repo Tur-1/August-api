@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(HomePageController::class)->group(function () {
 
+
     Route::get('/home-items', 'getBanners');
     Route::get('/home-latest-products', 'getLatestProducts');
 });

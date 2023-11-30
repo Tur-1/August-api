@@ -71,9 +71,12 @@ class ProductController extends Controller
 
     public function updateProduct(UpdateProductRequest $request, $id)
     {
+
+
         $this->userCan('update-products');
 
         $request->validated();
+
 
 
         $product =  $this->productService->updateProduct($request, $id);
@@ -82,7 +85,6 @@ class ProductController extends Controller
         return response()->success([
             'message' => 'Product has been updated successfully',
             'product' =>  $product,
-
         ]);
     }
 

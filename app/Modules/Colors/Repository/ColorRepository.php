@@ -2,14 +2,15 @@
 
 namespace App\Modules\Colors\Repository;
 
-use App\Exceptions\PageNotFoundException;
-use App\Modules\Colors\Models\Color;
-use App\Traits\ImageUpload;
+use App\Facades\FileUpload;
+
 use Illuminate\Support\Str;
+use App\Modules\Colors\Models\Color;
+use App\Exceptions\PageNotFoundException;
 
 class ColorRepository
 {
-    use ImageUpload;
+
 
     private $imageFolder = 'colors';
     private $color;
@@ -43,9 +44,15 @@ class ColorRepository
         $color->name = Str::title($validatedRequest->name);
         $color->slug = Str::slug($validatedRequest->name);
 
+
         if ($validatedRequest->hasFile('image')) {
-            $this->deletePreviousImage($this->getColorOldImagePath($color->image));
-            $color->image = $this->uploadImage($validatedRequest->file('image'), $this->imageFolder);
+
+            $color->image = FileUpload::storeImage(
+                requestImage: $validatedRequest->file('image'),
+                folderName: $this->imageFolder,
+                deleteOldImage: true,
+                oldImagePath: $this->getColorOldImagePath($color->image)
+            );
         }
 
         $color->save();
@@ -73,7 +80,10 @@ class ColorRepository
     {
         $color = $this->getColor($id);
 
-        $this->destroyModelWithImage($color, $this->getColorOldImagePath($color->image));
+
+        $color->delete();
+
+        FileUpload::deleteImage($this->getColorOldImagePath($color->image));
     }
 
     private function getColorOldImagePath($image)

@@ -2,14 +2,16 @@
 
 namespace App\Modules\Brands\Repository;
 
-use App\Traits\ImageUpload;
+use App\Facades\FileUpload;
+
 use Illuminate\Support\Str;
 use App\Modules\Brands\Models\Brand;
 use App\Exceptions\PageNotFoundException;
 
 class BrandRepository
 {
-    use ImageUpload;
+
+
     private $imageFolder = 'brands';
     private $brand;
 
@@ -39,11 +41,13 @@ class BrandRepository
         $brand->name = Str::title($validatedRequest->name);
         $brand->slug = Str::slug($validatedRequest->name);
 
-        if ($validatedRequest->hasFile('image')) {
+        $brand->image = FileUpload::storeImage(
+            requestImage: $validatedRequest->file('image'),
+            folderName: $this->imageFolder,
+            deleteOldImage: true,
+            oldImagePath: $this->getBrandOldImagePath($brand->image)
+        ) ?? $brand->image;
 
-            $this->deletePreviousImage($this->getBrandOldImagePath($brand->image));
-            $brand->image = $this->uploadImage($validatedRequest->file('image'), $this->imageFolder);
-        }
 
         $brand->save();
     }
@@ -76,7 +80,9 @@ class BrandRepository
     {
         $brand = $this->getBrand($id);
 
-        $this->destroyModelWithImage($brand, $this->getBrandOldImagePath($brand->image));
+        $brand->delete();
+
+        FileUpload::deleteImage($this->getBrandOldImagePath($brand->image));
     }
 
     private function getBrandOldImagePath($image)

@@ -2,20 +2,19 @@
 
 namespace App\Modules\Products\Repository;
 
-use App\Traits\ImageUpload;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\Products\Models\Product;
 use App\Exceptions\PageNotFoundException;
+use App\Facades\FileUpload;
 use App\Modules\Categories\Models\Category;
 use App\Modules\Products\Actions\GenerateProductSlug;
+use App\Modules\Products\Services\StoreProductImagesService;
 use App\Modules\Products\Services\StoreProductDiscountService;
 
 class ProductRepository
 {
-    use ImageUpload;
 
-    private $imagesFolder = 'products/product_';
     private $product;
 
     public function __construct()
@@ -118,17 +117,20 @@ class ProductRepository
     {
         $this->product->where('id', $id)->delete();
 
-        $this->deleteImagesDirectory('products/product_' . $id);
+        FileUpload::deleteImagesDirectory('products/product_' . $id);
     }
 
     public function saveProduct($request, $product)
     {
+
+
         $sizeOptions = $this->getSizeOptions($request->sizes);
 
         $price_after_discount =  (new StoreProductDiscountService())->getPriceAfterDiscount($request);
         $product->details = $request->details;
         $product->info_and_care = $request->info_and_care;
         $product->brand_id = $request->brand_id;
+
         $product->color_id = $request->color_id;
         $product->price = $request->price;
         $product->shipping_cost = $request->shipping_cost;
@@ -145,11 +147,11 @@ class ProductRepository
         $product->save();
 
         $product->sizes()->sync($sizeOptions);
+
         $this->storeCategories($product, $request->category_id);
 
-        if ($request->hasFile('productImages') || $request->mainImage) {
-            $this->storeProductImages($product, $request->file('productImages'), $request->mainImage);
-        }
+        (new StoreProductImagesService())->store($product, $request->product_images);
+
 
         return $product;
     }
@@ -181,45 +183,5 @@ class ProductRepository
     private function getProductStock($sizeOptions)
     {
         return collect($sizeOptions)->sum('stock');
-    }
-
-    private function storeProductImages(Model $product, $productImages, $mainImage = null)
-    {
-        $images = [];
-
-        $imagesFolder = $this->getImagesFolder($product->id);
-
-        if (!is_null($mainImage)) {
-            $newImageName = $this->uploadImage($mainImage, $imagesFolder);
-            if (is_null($productImages) || empty($productImages)) {
-                $product->productImages()->update(['is_main_image' => false]);
-            }
-            $product->productImages()->create([
-                'image' => $newImageName,
-                'is_main_image' => true,
-            ]);
-        }
-
-        if (!is_null($productImages) || !empty($productImages)) {
-
-            foreach ($productImages as $image) {
-                $newImageName = $this->uploadImage($image, $imagesFolder);
-                $images[] = [
-                    'image' => $newImageName,
-                    'is_main_image' => false,
-                ];
-            }
-
-            if (is_null($mainImage)) { // if the main image is not present,  make the first image the main image
-                $images[0]['is_main_image'] = true;
-            }
-
-            $product->productImages()->createMany($images);
-        }
-    }
-
-    private function getImagesFolder($productId)
-    {
-        return  $this->imagesFolder . $productId;
     }
 }

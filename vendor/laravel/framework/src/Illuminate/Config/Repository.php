@@ -11,6 +11,7 @@ class Repository implements ArrayAccess, ConfigContract
 {
     use Macroable;
 
+
     /**
      * All of the configuration items.
      *

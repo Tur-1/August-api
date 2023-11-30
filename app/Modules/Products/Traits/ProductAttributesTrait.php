@@ -10,13 +10,14 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 trait ProductAttributesTrait
 {
 
-
+    public function getImageStoragePath()
+    {
+        return config('app.url') .  Storage::url('images/products/product_' . $this->id . '/' . $this->main_image);
+    }
     protected function mainImageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $this->main_image ?
-                config('app.url') .  Storage::url('images/products/product_' . $this->id . '/' . $this->main_image)
-                : null,
+            get: fn ($value) => $this->main_image ? $this->getImageStoragePath() : null,
         );
     }
     protected function mainImageName(): Attribute

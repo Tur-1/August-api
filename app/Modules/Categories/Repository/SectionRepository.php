@@ -2,13 +2,14 @@
 
 namespace App\Modules\Categories\Repository;
 
-use App\Traits\ImageUpload;
+use App\Facades\FileUpload;
+
 use Illuminate\Support\Str;
 use App\Modules\Categories\Models\Category;
 
 class SectionRepository
 {
-    use ImageUpload;
+    
 
     private $category;
     private $imageFolder = 'categories';
@@ -52,10 +53,13 @@ class SectionRepository
         $this->category->slug = Str::slug($request['name'], '_');
         $this->category->is_section = true;
         $this->category->url = Str::slug($request['name'], '_');
-        if ($request->hasFile('image')) {
-            $this->deletePreviousImage($this->getCategoryOldImagePath($this->category->image));
-            $this->category->image = $this->uploadImage($request->file('image'), $this->imageFolder);
-        }
+
+        $this->category->image = FileUpload::storeImage(
+            requestImage: $request->file('image'),
+            folderName: $this->imageFolder,
+            deleteOldImage: true,
+            oldImagePath: $this->getCategoryOldImagePath($this->category->image)
+        ) ??  $this->category->image;
 
         return $this->category->save();
     }

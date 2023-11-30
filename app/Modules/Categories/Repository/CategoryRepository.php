@@ -2,7 +2,8 @@
 
 namespace App\Modules\Categories\Repository;
 
-use App\Traits\ImageUpload;
+use App\Facades\FileUpload;
+
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Request;
 use App\Exceptions\PageNotFoundException;
@@ -10,7 +11,7 @@ use App\Modules\Categories\Models\Category;
 
 class CategoryRepository
 {
-    use ImageUpload;
+
     private $category;
     private $imageFolder = 'categories';
 
@@ -98,12 +99,13 @@ class CategoryRepository
         $this->category->slug = Str::slug($request['name'], '_');
         $this->category->url =   $parentCategory['url'] . '-' .  Str::slug($request['name'], '_');
 
+        $this->category->image = FileUpload::storeImage(
+            requestImage: $request->file('image'),
+            folderName: $this->imageFolder,
+            deleteOldImage: true,
+            oldImagePath: $this->getCategoryOldImagePath($this->category->image)
+        ) ??  $this->category->image;
 
-
-        if ($request->hasFile('image')) {
-            $this->deletePreviousImage($this->getCategoryOldImagePath($this->category->image));
-            $this->category->image = $this->uploadImage($request->file('image'), $this->imageFolder);
-        }
 
         return $this->category->save();
     }
@@ -121,7 +123,9 @@ class CategoryRepository
     {
         $category = $this->find($category_id);
 
-        $this->destroyModelWithImage($category, $this->getCategoryOldImagePath($category->image));
+        $category->delete();
+
+        FileUpload::deleteImage($this->getCategoryOldImagePath($category->image));
     }
 
     private function getParentCategory($parent_id)

@@ -44,7 +44,7 @@ class UpdateProductRequest extends FormRequest
             'details' => 'nullable',
             'shipping_cost' => 'nullable',
             'info_and_care' => 'nullable',
-            'productImages.*' => 'nullable|file|image|mimes:jpeg,png,jpg,webp|max:5000',
+            'product_images.*.file' => 'nullable|file|image|mimes:jpeg,png,jpg,webp|max:5000',
             'price' => 'required|numeric',
             'discount_amount' => 'nullable|numeric|required_with:discount_start_at,discount_expires_at',
             'discount_type' => 'nullable|required_with:discount_amount',

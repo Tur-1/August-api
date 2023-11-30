@@ -10,10 +10,10 @@ class AuthService
 {
 
     private $userRepository;
-    public function createUser($validatedRequest)
+    public function register($validatedRequest)
     {
         $this->userRepository = new UserRepository();
-        return $this->userRepository->createUser($validatedRequest);
+        return $this->userRepository->register($validatedRequest);
     }
 
     public function sendWelcomeEmail($user)
