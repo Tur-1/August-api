@@ -56,22 +56,13 @@ class AuthenticatedUserController extends Controller
         return response()->success(['message' => "You have successfully logged out!"]);
     }
 
-    public function signInByGithub()
+    public function getAuthenticatedUser(Request $request)
     {
-        $url = Socialite::driver('github')->redirect()->getTargetUrl();
 
-        return response()->json($url);
-    }
-
-    public function githubRedirect(SocialSignInService $socialSignInService)
-    {
-        $githubUser = Socialite::driver('github')->user();
-
-
-        $socialSignInService->signIn($githubUser);
+        $user =  $request->user('web');
 
         return response()->success([
-            'user' => $githubUser,
+            'user' => AuthUserResource::make($user),
             'message' => "You have successfully logged in!"
         ]);
     }

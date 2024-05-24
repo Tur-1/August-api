@@ -6,11 +6,7 @@ use App\Pages\Frontend\Auth\Controllers\VerifyEmailController;
 use App\Pages\Frontend\Auth\Controllers\PasswordResetLinkController;
 use App\Pages\Frontend\Auth\Controllers\AuthenticatedUserController;
 use App\Pages\Frontend\Auth\Controllers\EmailVerificationNotificationController;
-
-
-
-
-
+use App\Pages\Frontend\Auth\Controllers\GoogleSignInController;
 
 Route::middleware('guest:web')->group(function () {
 
@@ -26,13 +22,16 @@ Route::middleware('guest:web')->group(function () {
         ->name('password.update');
 
 
-    Route::get('/github/sign-in', [AuthenticatedUserController::class, 'signInByGithub']);
+    Route::get('oauth/google/redirect', [GoogleSignInController::class, 'redirectToGoogle']);
 
-    Route::get('/github/sign-in/redirect', [AuthenticatedUserController::class, 'githubRedirect']);
+    Route::get('oauth/google/callback', [GoogleSignInController::class, 'callback']);
 });
 
 Route::middleware('auth:web')->group(function () {
     Route::post('/logout', [AuthenticatedUserController::class, 'logout']);
+
+
+    Route::post('/get-auth-user', [AuthenticatedUserController::class, 'getAuthenticatedUser']);
 
 
     Route::get('/verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])

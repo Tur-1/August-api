@@ -29,7 +29,7 @@ class SocialSignInService
 
         $user = $this->isUserExists($user) ?? $this->registerNewUser($userName, $user->getEmail());
 
-        Auth::login($user, true);
+        Auth::guard('web')->login($user, true);
     }
 
 
