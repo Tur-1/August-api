@@ -44,7 +44,7 @@ class CategoryRepository
             ->withSection()
             ->WhenSortBySection($section_id)
             ->latest()
-            ->paginate(15)
+            ->paginate(10)
             ->withQueryString();
     }
 
