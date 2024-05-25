@@ -39,9 +39,11 @@
 3. composer install
 4. php artisan key:generate
 5. php artisan storage:link
-6. php artisan db:seed
+6. import tur_august_database.sql file
 7. php artisan serve
 
-to create a new module
-
--   php artisan make:module {name}
+## To create a new module
+use the following Artisan command:
+```php
+   php artisan make:module {name}
+```
