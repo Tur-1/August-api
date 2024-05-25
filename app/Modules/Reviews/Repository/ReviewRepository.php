@@ -37,14 +37,15 @@ class ReviewRepository
         $currentDate = Carbon::now('GMT+3');
 
         $review = $this->getReview($review_id);
-        $reply = null;
+
         if (!is_null($review->reply)) {
-            $reply =   $review->reply()->update([
+            $review->reply()->update([
                 'comment' => $comment,
             ]);
         } else {
-            $reply =   $review->reply()->create([
-                'user_id' => auth()->id(),
+            $review->reply()->create([
+                'user_id' => $review->user_id,
+                'admin_id' => auth()->guard('admin')->id(),
                 'product_id' => $review->product_id,
                 'comment' => $comment,
                 'create_at' =>  $currentDate,
@@ -53,18 +54,7 @@ class ReviewRepository
         $review->load('reply');
         return $review;
     }
-    public function createReview($comment, $product_id)
-    {
-        $currentDate = Carbon::now('GMT+3');
 
-        return $this->review->create([
-            'user_id' => auth()->id(),
-            'product_id' => $product_id,
-            'comment' => $comment,
-            'create_at' =>  $currentDate,
-
-        ]);
-    }
     public function getReview($id)
     {
         $this->review = $this->review->with('reply', 'user')->find($id);
@@ -73,6 +63,18 @@ class ReviewRepository
         }
 
         return $this->review;
+    }
+    public function createReview($comment, $product_id)
+    {
+        $currentDate = Carbon::now('GMT+3');
+
+        return $this->review->create([
+            'user_id' => auth()->guard('web')->id(),
+            'product_id' => $product_id,
+            'comment' => $comment,
+            'create_at' =>  $currentDate,
+
+        ]);
     }
     public function updateReview($comment, $id)
     {

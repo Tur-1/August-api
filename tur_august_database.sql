@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2023 at 03:54 AM
+-- Generation Time: May 25, 2024 at 12:37 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,7 +46,8 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `phone_number`, `gender`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@admin.com', NULL, '$2y$10$fNE72XZN.YZhmc0fp1YLkOhhwyPYUkPsOq6ak2v48xm/EF/KMnoCm', NULL, 'Male', 1, 'SRL7972N40l65BqU9Hif2Tl1LXWh1V6LwpCjY3QftdZONkTQoisSkaDVQxtz', '2023-08-25 09:44:33', '2023-10-10 00:34:12');
+(1, 'admin', 'admin@admin.com', NULL, '$2y$10$xSugoyKv765TY8DsERJ2/.mPIOwLNdM5Iw1n3x1XNVymBlHNG4cX6', NULL, 'Male', 1, '6bTqrzDqjSidiTDN8Z44aS7OhPxBDeYLNyYii8ePxK8ssQx79T6ADjk8rxDk', '2023-08-25 09:44:33', '2023-10-10 00:34:12'),
+(11, 'ahemd', 'ahmed@admin.com', NULL, '$2y$10$1kNLI27kGNZI/Ih8jKCgKe76jRzoEi77uwAsw2.9aUS.qpQvALzZC', 46632329563, 'Male', 1, 'HBGlnpJp1kdqbyfUa6MlMuBCj53pIHeh0uDzNkxspi7ZDQ77p0aRdjgSkNfW', '2024-05-24 10:00:49', '2024-05-24 10:02:37');
 
 -- --------------------------------------------------------
 
@@ -120,7 +121,6 @@ INSERT INTO `admin_permission` (`admin_id`, `permission_id`) VALUES
 (1, 61),
 (1, 62),
 (1, 63),
-(1, 64),
 (1, 65),
 (1, 66),
 (1, 67),
@@ -131,8 +131,20 @@ INSERT INTO `admin_permission` (`admin_id`, `permission_id`) VALUES
 (1, 24),
 (1, 4),
 (1, 19),
+(1, 3),
+(1, 2),
+(1, 14),
+(1, 12),
+(1, 64),
 (1, 9),
-(1, 3);
+(11, 19),
+(11, 29),
+(11, 3),
+(11, 50),
+(11, 49),
+(11, 48),
+(11, 46),
+(11, 47);
 
 -- --------------------------------------------------------
 
@@ -181,7 +193,7 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `name`, `image`, `slug`, `created_at`, `updated_at`) VALUES
-(7, 'Nike', '1694262610-nke.png', 'nike', '2023-08-29 08:38:44', '2023-09-09 09:30:10'),
+(7, 'Nike', '65676605e2f90_60acc7078348f30d.png', 'nike', '2023-08-29 08:38:44', '2023-11-29 16:25:41'),
 (8, 'Addidas', NULL, 'addidas', '2023-09-19 02:51:27', '2023-09-19 02:51:27'),
 (9, 'Puma', NULL, 'puma', '2023-09-19 02:51:43', '2023-09-19 02:51:43'),
 (10, 'Adidas Originals', NULL, 'adidas-originals', '2023-09-19 02:52:16', '2023-09-19 02:52:16'),
@@ -300,7 +312,7 @@ CREATE TABLE `coupons` (
 --
 
 INSERT INTO `coupons` (`id`, `code`, `type`, `amount`, `use_times`, `used_times`, `minimum_purchases`, `starts_at`, `expires_at`, `is_active`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'app', 'Percentage', 10, 100, 2, 100.00, '2023-09-03', '2025-12-19', 1, NULL, '2023-09-03 08:46:49', '2023-10-09 22:33:03'),
+(1, 'app', 'Percentage', 10, 100, 4, 100.00, '2023-09-03', '2025-12-19', 1, NULL, '2023-09-03 08:46:49', '2023-10-22 10:12:32'),
 (2, 'cod', 'Percentage', 30, 50, 2, 100.00, '2023-09-09', '2023-09-23', 1, NULL, '2023-09-09 10:02:42', '2023-09-21 08:43:19');
 
 -- --------------------------------------------------------
@@ -348,7 +360,14 @@ INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `availa
 (8, 'default', '{\"uuid\":\"8de74425-084c-4955-ac31-1b144787c0d6\",\"displayName\":\"App\\\\Mail\\\\WelcomeMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:20:\\\"App\\\\Mail\\\\WelcomeMail\\\":3:{s:4:\\\"name\\\";s:13:\\\"turki alharbi\\\";s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tur.1i@hotmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1696598736-7516-230825425\",\"clockwork_parent_id\":\"1696598734-5168-653852155\"}', 0, NULL, 1696598736, 1696598736),
 (9, 'default', '{\"uuid\":\"56adcf84-8b26-4a8d-a476-ac1da3e017b8\",\"displayName\":\"App\\\\Mail\\\\NewOrderMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:21:\\\"App\\\\Mail\\\\NewOrderMail\\\":6:{s:5:\\\"order\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:31:\\\"App\\\\Modules\\\\Orders\\\\Models\\\\Order\\\";s:2:\\\"id\\\";i:13;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:15:\\\"shippingAddress\\\";a:7:{s:10:\\\"address_id\\\";i:6;s:7:\\\"address\\\";s:28:\\\"Alzubair Ibn al Awwam street\\\";s:9:\\\"full_name\\\";s:13:\\\"turki alharbi\\\";s:4:\\\"city\\\";s:29:\\\"المدينة المنورة\\\";s:6:\\\"street\\\";s:28:\\\"Alzubair Ibn al Awwam street\\\";s:12:\\\"phone_number\\\";s:10:\\\"0552952593\\\";s:8:\\\"order_id\\\";i:13;}s:13:\\\"orderProducts\\\";a:1:{i:0;a:8:{s:8:\\\"order_id\\\";i:13;s:12:\\\"product_name\\\";s:34:\\\"Airflex+ Light Wash Slim Fit Jeans\\\";s:12:\\\"product_slug\\\";s:33:\\\"airflex-light-wash-slim-fit-jeans\\\";s:13:\\\"product_image\\\";s:98:\\\"http:\\/\\/192.168.1.8:8000\\/storage\\/images\\/orders\\/order-13\\/1695182727-1-mobile-web-catalogspkrgd;l.png\\\";s:13:\\\"product_price\\\";s:6:\\\"256.80\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"256.80\\\";s:18:\\\"product_attributes\\\";s:37:\\\"{\\\"brand\\\":\\\"American Eagle\\\",\\\"size\\\":\\\"S\\\"}\\\";}}s:4:\\\"user\\\";a:2:{s:4:\\\"name\\\";s:13:\\\"turki alharbi\\\";s:5:\\\"email\\\";s:18:\\\"tur.1i@hotmail.com\\\";}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tur.1i@hotmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1696609463-6041-1913316270\",\"clockwork_parent_id\":\"1696609463-0524-268054904\"}', 0, NULL, 1696609463, 1696609463),
 (10, 'default', '{\"uuid\":\"30d748e5-4de3-470f-88bf-167a335b8a79\",\"displayName\":\"App\\\\Mail\\\\NewOrderMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:21:\\\"App\\\\Mail\\\\NewOrderMail\\\":6:{s:5:\\\"order\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:31:\\\"App\\\\Modules\\\\Orders\\\\Models\\\\Order\\\";s:2:\\\"id\\\";i:14;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:15:\\\"shippingAddress\\\";a:7:{s:10:\\\"address_id\\\";i:6;s:7:\\\"address\\\";s:28:\\\"Alzubair Ibn al Awwam street\\\";s:9:\\\"full_name\\\";s:13:\\\"turki alharbi\\\";s:4:\\\"city\\\";s:29:\\\"المدينة المنورة\\\";s:6:\\\"street\\\";s:28:\\\"Alzubair Ibn al Awwam street\\\";s:12:\\\"phone_number\\\";s:10:\\\"0552952593\\\";s:8:\\\"order_id\\\";i:14;}s:13:\\\"orderProducts\\\";a:1:{i:0;a:8:{s:8:\\\"order_id\\\";i:14;s:12:\\\"product_name\\\";s:20:\\\"Classic Bos Backpack\\\";s:12:\\\"product_slug\\\";s:20:\\\"classic-bos-backpack\\\";s:13:\\\"product_image\\\";s:93:\\\"http:\\/\\/192.168.1.8:8000\\/storage\\/images\\/orders\\/order-14\\/1695111675-1-mobile-web-sfscatalog.png\\\";s:13:\\\"product_price\\\";s:6:\\\"207.00\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"207.00\\\";s:18:\\\"product_attributes\\\";s:40:\\\"{\\\"brand\\\":\\\"Adidas Originals\\\",\\\"size\\\":\\\"OS\\\"}\\\";}}s:4:\\\"user\\\";a:2:{s:4:\\\"name\\\";s:13:\\\"turki alharbi\\\";s:5:\\\"email\\\";s:18:\\\"tur.1i@hotmail.com\\\";}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tur.1i@hotmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1696610978-1243-799553697\",\"clockwork_parent_id\":\"1696610977-9790-484449612\"}', 0, NULL, 1696610978, 1696610978),
-(11, 'default', '{\"uuid\":\"85932c70-7d6e-4b66-bc1d-3248a7814c52\",\"displayName\":\"App\\\\Mail\\\\NewOrderMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:21:\\\"App\\\\Mail\\\\NewOrderMail\\\":6:{s:5:\\\"order\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:31:\\\"App\\\\Modules\\\\Orders\\\\Models\\\\Order\\\";s:2:\\\"id\\\";i:15;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:15:\\\"shippingAddress\\\";a:7:{s:10:\\\"address_id\\\";i:7;s:7:\\\"address\\\";s:19:\\\"Velit delectus amet\\\";s:9:\\\"full_name\\\";s:16:\\\"Carolyn Holloway\\\";s:4:\\\"city\\\";s:20:\\\"Qui autem tempora se\\\";s:6:\\\"street\\\";s:20:\\\"Aperiam ratione id a\\\";s:12:\\\"phone_number\\\";s:11:\\\"35005005050\\\";s:8:\\\"order_id\\\";i:15;}s:13:\\\"orderProducts\\\";a:1:{i:0;a:8:{s:8:\\\"order_id\\\";i:15;s:12:\\\"product_name\\\";s:32:\\\"Essential Logo Fleece Sweatpants\\\";s:12:\\\"product_slug\\\";s:32:\\\"essential-logo-fleece-sweatpants\\\";s:13:\\\"product_image\\\";s:100:\\\"http:\\/\\/192.168.1.8:8000\\/storage\\/images\\/orders\\/order-15\\/1695182590-1-mobile-web-catalogfsfsfsfsds.png\\\";s:13:\\\"product_price\\\";s:6:\\\"136.00\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"136.00\\\";s:18:\\\"product_attributes\\\";s:27:\\\"{\\\"brand\\\":\\\"Puma\\\",\\\"size\\\":\\\"S\\\"}\\\";}}s:4:\\\"user\\\";a:2:{s:4:\\\"name\\\";s:13:\\\"turki alharbi\\\";s:5:\\\"email\\\";s:18:\\\"tur.1i@hotmail.com\\\";}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tur.1i@hotmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1696724047-1939-1034182638\",\"clockwork_parent_id\":\"1696724044-4105-376061647\"}', 0, NULL, 1696724047, 1696724047);
+(11, 'default', '{\"uuid\":\"85932c70-7d6e-4b66-bc1d-3248a7814c52\",\"displayName\":\"App\\\\Mail\\\\NewOrderMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:21:\\\"App\\\\Mail\\\\NewOrderMail\\\":6:{s:5:\\\"order\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:31:\\\"App\\\\Modules\\\\Orders\\\\Models\\\\Order\\\";s:2:\\\"id\\\";i:15;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:15:\\\"shippingAddress\\\";a:7:{s:10:\\\"address_id\\\";i:7;s:7:\\\"address\\\";s:19:\\\"Velit delectus amet\\\";s:9:\\\"full_name\\\";s:16:\\\"Carolyn Holloway\\\";s:4:\\\"city\\\";s:20:\\\"Qui autem tempora se\\\";s:6:\\\"street\\\";s:20:\\\"Aperiam ratione id a\\\";s:12:\\\"phone_number\\\";s:11:\\\"35005005050\\\";s:8:\\\"order_id\\\";i:15;}s:13:\\\"orderProducts\\\";a:1:{i:0;a:8:{s:8:\\\"order_id\\\";i:15;s:12:\\\"product_name\\\";s:32:\\\"Essential Logo Fleece Sweatpants\\\";s:12:\\\"product_slug\\\";s:32:\\\"essential-logo-fleece-sweatpants\\\";s:13:\\\"product_image\\\";s:100:\\\"http:\\/\\/192.168.1.8:8000\\/storage\\/images\\/orders\\/order-15\\/1695182590-1-mobile-web-catalogfsfsfsfsds.png\\\";s:13:\\\"product_price\\\";s:6:\\\"136.00\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"136.00\\\";s:18:\\\"product_attributes\\\";s:27:\\\"{\\\"brand\\\":\\\"Puma\\\",\\\"size\\\":\\\"S\\\"}\\\";}}s:4:\\\"user\\\";a:2:{s:4:\\\"name\\\";s:13:\\\"turki alharbi\\\";s:5:\\\"email\\\";s:18:\\\"tur.1i@hotmail.com\\\";}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tur.1i@hotmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1696724047-1939-1034182638\",\"clockwork_parent_id\":\"1696724044-4105-376061647\"}', 0, NULL, 1696724047, 1696724047),
+(12, 'default', '{\"uuid\":\"0e2d99b6-c700-4740-a46c-027094501183\",\"displayName\":\"App\\\\Mail\\\\WelcomeMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:20:\\\"App\\\\Mail\\\\WelcomeMail\\\":3:{s:4:\\\"name\\\";s:6:\\\"august\\\";s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:16:\\\"august@gmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1696909472-3368-2128284862\",\"clockwork_parent_id\":\"1696909470-0345-89565507\"}', 0, NULL, 1696909472, 1696909472),
+(13, 'default', '{\"uuid\":\"f5e2da46-70d1-4fde-bfbb-359687b80700\",\"displayName\":\"App\\\\Mail\\\\NewOrderMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:21:\\\"App\\\\Mail\\\\NewOrderMail\\\":6:{s:5:\\\"order\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:31:\\\"App\\\\Modules\\\\Orders\\\\Models\\\\Order\\\";s:2:\\\"id\\\";i:16;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:15:\\\"shippingAddress\\\";a:7:{s:10:\\\"address_id\\\";i:8;s:7:\\\"address\\\";s:20:\\\"Voluptatem qui offic\\\";s:9:\\\"full_name\\\";s:6:\\\"august\\\";s:4:\\\"city\\\";s:20:\\\"Voluptates repudiand\\\";s:6:\\\"street\\\";s:19:\\\"Veritatis id eu aut\\\";s:12:\\\"phone_number\\\";s:11:\\\"25656323232\\\";s:8:\\\"order_id\\\";i:16;}s:13:\\\"orderProducts\\\";a:2:{i:0;a:8:{s:8:\\\"order_id\\\";i:16;s:12:\\\"product_name\\\";s:37:\\\"Chicago Bulls Essential Fleece Hoodie\\\";s:12:\\\"product_slug\\\";s:37:\\\"chicago-bulls-essential-fleece-hoodie\\\";s:13:\\\"product_image\\\";s:94:\\\"http:\\/\\/localhost:8000\\/storage\\/images\\/orders\\/order-16\\/1695182285-1-mobile-web-catalodgdfgdg.png\\\";s:13:\\\"product_price\\\";s:6:\\\"368.00\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"368.00\\\";s:18:\\\"product_attributes\\\";s:27:\\\"{\\\"brand\\\":\\\"Nike\\\",\\\"size\\\":\\\"L\\\"}\\\";}i:1;a:8:{s:8:\\\"order_id\\\";i:16;s:12:\\\"product_name\\\";s:34:\\\"Airflex+ Light Wash Slim Fit Jeans\\\";s:12:\\\"product_slug\\\";s:33:\\\"airflex-light-wash-slim-fit-jeans\\\";s:13:\\\"product_image\\\";s:96:\\\"http:\\/\\/localhost:8000\\/storage\\/images\\/orders\\/order-16\\/1695182727-1-mobile-web-catalogspkrgd;l.png\\\";s:13:\\\"product_price\\\";s:6:\\\"256.80\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"256.80\\\";s:18:\\\"product_attributes\\\";s:37:\\\"{\\\"brand\\\":\\\"American Eagle\\\",\\\"size\\\":\\\"S\\\"}\\\";}}s:4:\\\"user\\\";a:2:{s:4:\\\"name\\\";s:6:\\\"august\\\";s:5:\\\"email\\\";s:16:\\\"august@gmail.com\\\";}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:16:\\\"august@gmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1696909795-9706-2013737364\",\"clockwork_parent_id\":\"1696909795-4645-1594550939\"}', 0, NULL, 1696909795, 1696909795),
+(14, 'default', '{\"uuid\":\"fad36ea5-d1f6-4b97-9445-216300b737c5\",\"displayName\":\"App\\\\Mail\\\\NewOrderMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:21:\\\"App\\\\Mail\\\\NewOrderMail\\\":6:{s:5:\\\"order\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:31:\\\"App\\\\Modules\\\\Orders\\\\Models\\\\Order\\\";s:2:\\\"id\\\";i:17;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:15:\\\"shippingAddress\\\";a:7:{s:10:\\\"address_id\\\";i:8;s:7:\\\"address\\\";s:20:\\\"Voluptatem qui offic\\\";s:9:\\\"full_name\\\";s:6:\\\"august\\\";s:4:\\\"city\\\";s:20:\\\"Voluptates repudiand\\\";s:6:\\\"street\\\";s:19:\\\"Veritatis id eu aut\\\";s:12:\\\"phone_number\\\";s:11:\\\"25656323232\\\";s:8:\\\"order_id\\\";i:17;}s:13:\\\"orderProducts\\\";a:4:{i:0;a:8:{s:8:\\\"order_id\\\";i:17;s:12:\\\"product_name\\\";s:32:\\\"Essential Logo Fleece Sweatpants\\\";s:12:\\\"product_slug\\\";s:32:\\\"essential-logo-fleece-sweatpants\\\";s:13:\\\"product_image\\\";s:98:\\\"http:\\/\\/localhost:8000\\/storage\\/images\\/orders\\/order-17\\/1695182590-1-mobile-web-catalogfsfsfsfsds.png\\\";s:13:\\\"product_price\\\";s:6:\\\"136.00\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"136.00\\\";s:18:\\\"product_attributes\\\";s:28:\\\"{\\\"brand\\\":\\\"Puma\\\",\\\"size\\\":\\\"XS\\\"}\\\";}i:1;a:8:{s:8:\\\"order_id\\\";i:17;s:12:\\\"product_name\\\";s:20:\\\"Air Force 1 \'07 An21\\\";s:12:\\\"product_slug\\\";s:19:\\\"air-force-1-07-an21\\\";s:13:\\\"product_image\\\";s:101:\\\"http:\\/\\/localhost:8000\\/storage\\/images\\/orders\\/order-17\\/1695117206-1-mobile-web-catalogefsfsfsfsfdfs.png\\\";s:13:\\\"product_price\\\";s:6:\\\"523.20\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"523.20\\\";s:18:\\\"product_attributes\\\";s:28:\\\"{\\\"brand\\\":\\\"Nike\\\",\\\"size\\\":\\\"41\\\"}\\\";}i:2;a:8:{s:8:\\\"order_id\\\";i:17;s:12:\\\"product_name\\\";s:17:\\\"Mesh-Back T-Shirt\\\";s:12:\\\"product_slug\\\";s:17:\\\"mesh-back-t-shirt\\\";s:13:\\\"product_image\\\";s:86:\\\"http:\\/\\/localhost:8000\\/storage\\/images\\/orders\\/order-17\\/1695181402-5-web-desktop-list.png\\\";s:13:\\\"product_price\\\";s:6:\\\"136.00\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"136.00\\\";s:18:\\\"product_attributes\\\";s:30:\\\"{\\\"brand\\\":\\\"Addidas\\\",\\\"size\\\":\\\"L\\\"}\\\";}i:3;a:8:{s:8:\\\"order_id\\\";i:17;s:12:\\\"product_name\\\";s:33:\\\"205814Fll60Ku Oversize Sunglasses\\\";s:12:\\\"product_slug\\\";s:33:\\\"205814fll60ku-oversize-sunglasses\\\";s:13:\\\"product_image\\\";s:93:\\\"http:\\/\\/localhost:8000\\/storage\\/images\\/orders\\/order-17\\/1695117606-1-mobile-web-catalogefsff.png\\\";s:13:\\\"product_price\\\";s:6:\\\"488.70\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"488.70\\\";s:18:\\\"product_attributes\\\";s:38:\\\"{\\\"brand\\\":\\\"Tommy Hilfiger\\\",\\\"size\\\":\\\"OS\\\"}\\\";}}s:4:\\\"user\\\";a:2:{s:4:\\\"name\\\";s:6:\\\"august\\\";s:5:\\\"email\\\";s:16:\\\"august@gmail.com\\\";}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:16:\\\"august@gmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1696909906-2230-394380154\",\"clockwork_parent_id\":\"1696909905-9213-1107103632\"}', 0, NULL, 1696909906, 1696909906),
+(15, 'default', '{\"uuid\":\"d399dcaa-ee33-4057-9dbb-3bf830def260\",\"displayName\":\"App\\\\Mail\\\\WelcomeMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:20:\\\"App\\\\Mail\\\\WelcomeMail\\\":3:{s:4:\\\"name\\\";s:13:\\\"turki alharbi\\\";s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:28:\\\"alhardsfsfsbi.tur1@gmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1697429351-4502-527630419\",\"clockwork_parent_id\":\"1697429351-0153-844080554\"}', 0, NULL, 1697429351, 1697429351),
+(16, 'default', '{\"uuid\":\"3dbd1e49-c226-4102-b345-5843056e0afa\",\"displayName\":\"App\\\\Mail\\\\WelcomeMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:20:\\\"App\\\\Mail\\\\WelcomeMail\\\":3:{s:4:\\\"name\\\";s:13:\\\"turki alharbi\\\";s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:32:\\\"alhardfcddsfsfsbi.tur1@gmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1697429401-7453-1255423162\",\"clockwork_parent_id\":\"1697429401-3366-2133668448\"}', 0, NULL, 1697429401, 1697429401),
+(17, 'default', '{\"uuid\":\"5e96c510-e37a-4bb1-92cc-3fc7b45b1b2a\",\"displayName\":\"App\\\\Mail\\\\WelcomeMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:20:\\\"App\\\\Mail\\\\WelcomeMail\\\":3:{s:4:\\\"name\\\";s:5:\\\"tukri\\\";s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:36:\\\"alharedfsdfcddsfsfsbi.tur1@gmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1697432657-5613-1721070930\",\"clockwork_parent_id\":\"1697432657-0829-1862897187\"}', 0, NULL, 1697432657, 1697432657),
+(18, 'default', '{\"uuid\":\"ae4bfaa5-cf09-455b-8a45-d288f2dedfa7\",\"displayName\":\"App\\\\Mail\\\\NewOrderMail\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:21:\\\"App\\\\Mail\\\\NewOrderMail\\\":6:{s:5:\\\"order\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:31:\\\"App\\\\Modules\\\\Orders\\\\Models\\\\Order\\\";s:2:\\\"id\\\";i:18;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:15:\\\"shippingAddress\\\";a:7:{s:10:\\\"address_id\\\";i:8;s:7:\\\"address\\\";s:20:\\\"Voluptatem qui offic\\\";s:9:\\\"full_name\\\";s:6:\\\"august\\\";s:4:\\\"city\\\";s:20:\\\"Voluptates repudiand\\\";s:6:\\\"street\\\";s:19:\\\"Veritatis id eu aut\\\";s:12:\\\"phone_number\\\";s:11:\\\"25656323232\\\";s:8:\\\"order_id\\\";i:18;}s:13:\\\"orderProducts\\\";a:1:{i:0;a:8:{s:8:\\\"order_id\\\";i:18;s:12:\\\"product_name\\\";s:34:\\\"Airflex+ Light Wash Slim Fit Jeans\\\";s:12:\\\"product_slug\\\";s:33:\\\"airflex-light-wash-slim-fit-jeans\\\";s:13:\\\"product_image\\\";s:98:\\\"http:\\/\\/192.168.1.6:8000\\/storage\\/images\\/orders\\/order-18\\/1695182727-1-mobile-web-catalogspkrgd;l.png\\\";s:13:\\\"product_price\\\";s:6:\\\"256.80\\\";s:16:\\\"product_quantity\\\";i:1;s:11:\\\"total_price\\\";s:6:\\\"256.80\\\";s:18:\\\"product_attributes\\\";s:37:\\\"{\\\"brand\\\":\\\"American Eagle\\\",\\\"size\\\":\\\"S\\\"}\\\";}}s:4:\\\"user\\\";a:2:{s:4:\\\"name\\\";s:6:\\\"august\\\";s:5:\\\"email\\\";s:16:\\\"august@gmail.com\\\";}s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:16:\\\"august@gmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"},\"clockwork_id\":\"1697969553-3378-9865813\",\"clockwork_parent_id\":\"1697969552-1329-2109073044\"}', 0, NULL, 1697969553, 1697969553);
 
 -- --------------------------------------------------------
 
@@ -394,7 +413,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (25, '2023_01_05_155108_create_banners_table', 1),
 (26, '2023_08_24_113202_create_admins_table', 1),
 (27, '2023_08_24_113204_create_admin_permission_table', 1),
-(28, '2023_09_19_014149_create_jobs_table', 2);
+(28, '2023_09_19_014149_create_jobs_table', 2),
+(29, '2024_05_25_123632_add_admin_id_column_to_reviews_table', 3);
 
 -- --------------------------------------------------------
 
@@ -623,25 +643,25 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `slug`, `details`, `info_and_care`, `price`, `shipping_cost`, `discount_amount`, `discount_type`, `discount_start_at`, `discount_expires_at`, `price_after_discount`, `discount`, `stock`, `is_active`, `brand_id`, `color_id`, `created_at`, `updated_at`) VALUES
-(4, 'Classic Bos Backpack', 'classic-bos-backpack', NULL, NULL, 230.00, 0.00, 10, 'Percentage', '2023-09-19', '2024-12-19', 207.00, '{\"price_after_discount\":207,\"type\":\"Percentage\",\"amount\":\"10\",\"start_at\":\"2023-09-19\",\"expires_at\":\"2024-12-19\"}', 3, 1, 10, 2, '2023-09-19 05:19:21', '2023-10-06 16:49:38'),
-(5, 'Air Force 1 \'07 An21', 'air-force-1-07-an21', NULL, NULL, 654.00, 0.00, 20, 'Percentage', '2023-09-19', '2024-12-28', 523.20, '{\"price_after_discount\":523.2,\"type\":\"Percentage\",\"amount\":\"20\",\"start_at\":\"2023-09-19\",\"expires_at\":\"2024-12-28\"}', 14, 1, 7, 6, '2023-09-19 05:29:23', '2023-09-19 06:53:36'),
-(6, 'Ultraboost 1.0', 'ultraboost-10', NULL, NULL, 763.00, 0.00, 15, 'Percentage', '2023-09-19', '2024-12-28', 648.55, '{\"price_after_discount\":648.55,\"type\":\"Percentage\",\"amount\":\"15\",\"start_at\":\"2023-09-19\",\"expires_at\":\"2024-12-28\"}', 10, 1, 8, 2, '2023-09-19 05:31:30', '2023-09-19 07:00:23'),
-(7, 'Charged Assert 10', 'charged-assert-10', NULL, NULL, 342.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 8, 1, 17, 6, '2023-09-19 05:34:52', '2023-09-19 07:00:22'),
-(8, '205814Fll60Ku Oversize Sunglasses', '205814fll60ku-oversize-sunglasses', NULL, NULL, 543.00, 0.00, 10, 'Percentage', '2023-09-19', '2024-12-21', 488.70, '{\"price_after_discount\":488.7,\"type\":\"Percentage\",\"amount\":\"10\",\"start_at\":\"2023-09-19\",\"expires_at\":\"2024-12-21\"}', 3654, 1, 18, 1, '2023-09-19 05:36:20', '2023-09-19 07:00:20'),
-(9, 'Logo Toiletry Bag', 'logo-toiletry-bag', NULL, NULL, 365.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 1, 1, 16, 2, '2023-09-19 05:36:47', '2023-09-19 06:53:39'),
-(10, 'Adicolor 3 Stripe Classics T-Shirt', 'adicolor-3-stripe-classics-t-shirt', NULL, NULL, 230.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 12, 1, 10, 6, '2023-09-19 06:49:52', '2023-09-20 00:37:32'),
-(11, 'Mesh-Back T-Shirt', 'mesh-back-t-shirt', NULL, NULL, 136.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 9, 1, 8, 6, '2023-09-19 06:51:12', '2023-09-20 00:43:22'),
-(12, 'Nsw Icon Futura T-Shirt', 'nsw-icon-futura-t-shirt', NULL, NULL, 167.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 5, 1, 7, 1, '2023-09-20 00:44:51', '2023-09-20 00:46:38'),
-(13, 'Adicolor 3 Stripe Classics T-Shirt', 'adicolor-3-stripe-classics-t-shirt-pJ-88-s', NULL, NULL, 242.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 5, 1, 10, 2, '2023-09-20 00:46:41', '2023-09-20 00:49:22'),
-(14, 'Project Rock Iron Muscle Tank', 'project-rock-iron-muscle-tank', NULL, NULL, 356.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 15, 1, 17, 1, '2023-09-20 00:46:50', '2023-09-20 00:49:14'),
-(15, 'Teamgoal 23 Causals Hoodie', 'teamgoal-23-causals-hoodie', NULL, NULL, 423.00, 0.00, 10, 'Percentage', '2023-09-20', '2024-12-06', 380.70, '{\"price_after_discount\":380.7,\"type\":\"Percentage\",\"amount\":\"10\",\"start_at\":\"2023-09-20\",\"expires_at\":\"2024-12-06\"}', 5, 1, 9, 2, '2023-09-20 00:49:57', '2023-09-20 00:51:47'),
-(16, 'Essential Sweatshirt', 'essential-sweatshirt', NULL, NULL, 341.00, 0.00, 15, 'Percentage', '2023-09-20', '2025-01-04', 289.85, '{\"price_after_discount\":289.85,\"type\":\"Percentage\",\"amount\":\"15\",\"start_at\":\"2023-09-20\",\"expires_at\":\"2025-01-04\"}', 10, 1, 18, 2, '2023-09-20 00:50:01', '2023-09-20 00:53:16'),
-(17, 'Logo Crew Neck Sweatshirt', 'logo-crew-neck-sweatshirt', NULL, NULL, 436.00, 0.00, 10, 'Percentage', '2023-09-20', '2024-12-27', 392.40, '{\"price_after_discount\":392.4,\"type\":\"Percentage\",\"amount\":\"10\",\"start_at\":\"2023-09-20\",\"expires_at\":\"2024-12-27\"}', 14, 1, 13, 2, '2023-09-20 00:50:03', '2023-10-03 08:15:47'),
-(18, 'Air Fleece Sweatshirt', 'air-fleece-sweatshirt', NULL, NULL, 463.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 15, 1, 7, 8, '2023-09-20 00:56:12', '2023-09-20 00:58:22'),
-(19, 'Chicago Bulls Essential Fleece Hoodie', 'chicago-bulls-essential-fleece-hoodie', NULL, NULL, 368.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 6, 1, 7, 7, '2023-09-20 00:56:59', '2023-09-21 08:43:19'),
-(20, 'Nsw Repeat Swoosh Fleece Cargo', 'nsw-repeat-swoosh-fleece-cargo', NULL, NULL, 233.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 9, 1, 7, 7, '2023-09-20 01:00:56', '2023-09-20 01:01:44'),
-(21, 'Essential Logo Fleece Sweatpants', 'essential-logo-fleece-sweatpants', NULL, NULL, 136.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 17, 1, 9, 1, '2023-09-20 01:01:46', '2023-10-08 00:14:04'),
-(22, 'Airflex+ Light Wash Slim Fit Jeans', 'airflex-light-wash-slim-fit-jeans', NULL, NULL, 321.00, 0.00, 20, 'Percentage', '2023-09-20', '2023-11-25', 256.80, '{\"price_after_discount\":256.8,\"type\":\"Percentage\",\"amount\":\"20\",\"start_at\":\"2023-09-20\",\"expires_at\":\"2023-11-25\"}', 9, 1, 12, 1, '2023-09-20 01:03:52', '2023-10-06 16:24:23');
+(4, 'Classic Bos Backpack', 'classic-bos-backpack', NULL, NULL, 230.00, 0.00, 10, 'Percentage', '2023-09-19', '2024-12-19', 207.00, '{\"price_after_discount\":207,\"type\":\"Percentage\",\"amount\":\"10\",\"start_at\":\"2023-09-19\",\"expires_at\":\"2024-12-19\"}', 3, 1, 10, 2, '2023-09-19 05:19:21', '2024-02-03 00:55:50'),
+(5, 'Air Force 1 \'07 An21', 'air-force-1-07-an21', NULL, NULL, 654.00, 0.00, 20, 'Percentage', '2023-09-19', '2024-12-28', 523.20, '{\"price_after_discount\":523.2,\"type\":\"Percentage\",\"amount\":\"20\",\"start_at\":\"2023-09-19\",\"expires_at\":\"2024-12-28\"}', 13, 1, 7, 6, '2023-09-19 05:29:23', '2024-02-03 00:55:50'),
+(6, 'Ultraboost 1.0', 'ultraboost-10', NULL, NULL, 763.00, 0.00, 15, 'Percentage', '2023-09-19', '2024-12-28', 648.55, '{\"price_after_discount\":648.55,\"type\":\"Percentage\",\"amount\":\"15\",\"start_at\":\"2023-09-19\",\"expires_at\":\"2024-12-28\"}', 10, 1, 8, 2, '2023-09-19 05:31:30', '2024-02-03 00:55:50'),
+(7, 'Charged Assert 10', 'charged-assert-10', NULL, NULL, 342.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 8, 1, 17, 6, '2023-09-19 05:34:52', '2024-02-03 00:55:50'),
+(8, '205814Fll60Ku Oversize Sunglasses', '205814fll60ku-oversize-sunglasses', NULL, NULL, 543.00, 0.00, 10, 'Percentage', '2023-09-19', '2024-12-21', 488.70, '{\"price_after_discount\":488.7,\"type\":\"Percentage\",\"amount\":\"10\",\"start_at\":\"2023-09-19\",\"expires_at\":\"2024-12-21\"}', 3653, 1, 18, 1, '2023-09-19 05:36:20', '2024-02-03 00:55:50'),
+(9, 'Logo Toiletry Bag', 'logo-toiletry-bag', NULL, NULL, 365.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 1, 1, 16, 2, '2023-09-19 05:36:47', '2024-02-03 00:55:50'),
+(10, 'Adicolor 3 Stripe Classics T-Shirt', 'adicolor-3-stripe-classics-t-shirt', NULL, NULL, 230.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 12, 1, 10, 6, '2023-09-19 06:49:52', '2024-02-03 00:55:50'),
+(11, 'Mesh-Back T-Shirt', 'mesh-back-t-shirt', NULL, NULL, 136.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 8, 1, 8, 6, '2023-09-19 06:51:12', '2024-02-03 00:55:50'),
+(12, 'Nsw Icon Futura T-Shirt', 'nsw-icon-futura-t-shirt', NULL, NULL, 167.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 5, 1, 7, 1, '2023-09-20 00:44:51', '2024-02-03 00:55:50'),
+(13, 'Adicolor 3 Stripe Classics T-Shirt', 'adicolor-3-stripe-classics-t-shirt-pJ-88-s', NULL, NULL, 242.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 5, 1, 10, 2, '2023-09-20 00:46:41', '2024-02-03 00:55:50'),
+(14, 'Project Rock Iron Muscle Tank', 'project-rock-iron-muscle-tank', NULL, NULL, 356.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 15, 1, 17, 1, '2023-09-20 00:46:50', '2024-02-03 00:55:50'),
+(15, 'Teamgoal 23 Causals Hoodie', 'teamgoal-23-causals-hoodie', NULL, NULL, 423.00, 0.00, 10, 'Percentage', '2023-09-20', '2024-12-06', 380.70, '{\"price_after_discount\":380.7,\"type\":\"Percentage\",\"amount\":\"10\",\"start_at\":\"2023-09-20\",\"expires_at\":\"2024-12-06\"}', 5, 1, 9, 2, '2023-09-20 00:49:57', '2024-02-03 00:55:50'),
+(16, 'Essential Sweatshirt', 'essential-sweatshirt', NULL, NULL, 341.00, 0.00, 15, 'Percentage', '2023-09-20', '2025-01-04', 289.85, '{\"price_after_discount\":289.85,\"type\":\"Percentage\",\"amount\":\"15\",\"start_at\":\"2023-09-20\",\"expires_at\":\"2025-01-04\"}', 10, 1, 18, 2, '2023-09-20 00:50:01', '2024-02-03 00:55:50'),
+(17, 'Logo Crew Neck Sweatshirt', 'logo-crew-neck-sweatshirt', NULL, NULL, 436.00, 0.00, 10, 'Percentage', '2023-09-20', '2024-12-27', 392.40, '{\"price_after_discount\":392.4,\"type\":\"Percentage\",\"amount\":\"10\",\"start_at\":\"2023-09-20\",\"expires_at\":\"2024-12-27\"}', 14, 1, 13, 2, '2023-09-20 00:50:03', '2024-02-03 00:55:50'),
+(18, 'Air Fleece Sweatshirt', 'air-fleece-sweatshirt', NULL, NULL, 463.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 15, 1, 7, 8, '2023-09-20 00:56:12', '2024-02-03 00:55:50'),
+(19, 'Chicago Bulls Essential Fleece Hoodie', 'chicago-bulls-essential-fleece-hoodie', NULL, NULL, 368.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 5, 1, 7, 7, '2023-09-20 00:56:59', '2024-02-03 00:55:50'),
+(20, 'Nsw Repeat Swoosh Fleece Cargo', 'nsw-repeat-swoosh-fleece-cargo', NULL, NULL, 233.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 9, 1, 7, 7, '2023-09-20 01:00:56', '2024-02-03 00:55:50'),
+(21, 'Essential Logo Fleece Sweatpants', 'essential-logo-fleece-sweatpants', NULL, NULL, 136.00, 0.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 16, 1, 9, 1, '2023-09-20 01:01:46', '2024-02-03 00:55:50'),
+(23, 'Airflex+ Light Wash Slim Fit Jeans', 'airflex-light-wash-slim-fit-jeans', NULL, NULL, 233.00, 903.00, NULL, NULL, NULL, NULL, NULL, '{\"price_after_discount\":null,\"type\":null,\"amount\":null,\"start_at\":null,\"expires_at\":null}', 6, 0, 8, 1, '2023-10-18 11:31:22', '2024-02-03 00:55:50');
 
 -- --------------------------------------------------------
 
@@ -719,9 +739,8 @@ INSERT INTO `product_categories` (`product_id`, `category_id`) VALUES
 (21, 5),
 (21, 16),
 (21, 18),
-(22, 3),
-(22, 5),
-(22, 17);
+(23, 3),
+(23, 6);
 
 -- --------------------------------------------------------
 
@@ -759,7 +778,8 @@ INSERT INTO `product_images` (`id`, `product_id`, `image`, `is_main_image`) VALU
 (27, 19, '1695182285-1-mobile-web-catalodgdfgdg.png', 1),
 (28, 20, '1695182498-1-mobile-web-catalogddfgpo.png', 1),
 (29, 21, '1695182590-1-mobile-web-catalogfsfsfsfsds.png', 1),
-(30, 22, '1695182727-1-mobile-web-catalogspkrgd;l.png', 1);
+(54, 23, '6568fbd42cb23_8e3d74f16769ef31.png', 0),
+(55, 23, '6568fbd42f5bd_75b0ced1c3a9dea0.png', 1);
 
 -- --------------------------------------------------------
 
@@ -783,20 +803,20 @@ INSERT INTO `product_sizes` (`id`, `product_id`, `size_id`, `stock`) VALUES
 (7, 9, 6, 1),
 (8, 5, 3, 2),
 (9, 5, 9, 3),
-(10, 5, 4, 6),
+(10, 5, 4, 5),
 (11, 5, 5, 3),
 (12, 6, 3, 3),
 (13, 6, 4, 4),
 (14, 6, 5, 3),
 (15, 7, 9, 2),
 (16, 7, 4, 6),
-(17, 8, 6, 3654),
+(17, 8, 6, 3653),
 (18, 10, 1, 3),
 (19, 10, 2, 2),
 (20, 10, 8, 1),
 (21, 10, 7, 6),
 (22, 11, 2, 6),
-(23, 11, 7, 3),
+(23, 11, 7, 2),
 (24, 12, 1, 3),
 (25, 12, 2, 2),
 (26, 13, 2, 3),
@@ -815,16 +835,14 @@ INSERT INTO `product_sizes` (`id`, `product_id`, `size_id`, `stock`) VALUES
 (39, 18, 1, 6),
 (40, 18, 7, 9),
 (41, 19, 1, 3),
-(42, 19, 7, 2),
+(42, 19, 7, 1),
 (43, 19, 8, 1),
 (44, 20, 1, 3),
 (45, 20, 8, 6),
 (46, 21, 1, 5),
-(47, 21, 8, 3),
+(47, 21, 8, 2),
 (48, 21, 2, 9),
-(49, 22, 1, 7),
-(50, 22, 2, 0),
-(51, 22, 8, 2);
+(52, 23, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -840,7 +858,8 @@ CREATE TABLE `reviews` (
   `comment` text NOT NULL,
   `is_read` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `admin_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -995,7 +1014,8 @@ INSERT INTO `sizes` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
 (6, 'OS', 'os', '2023-09-19 05:14:32', '2023-09-19 05:14:32'),
 (7, 'L', 'l', '2023-09-19 05:14:39', '2023-09-19 05:14:39'),
 (8, 'XS', 'xs', '2023-09-19 05:14:47', '2023-09-19 05:14:47'),
-(9, '39', '39', '2023-09-19 05:15:01', '2023-09-19 05:15:01');
+(9, '39', '39', '2023-09-19 05:15:01', '2023-09-19 05:15:01'),
+(10, 'MODL', 'rgdf', '2024-02-03 01:04:24', '2024-02-03 01:04:24');
 
 -- --------------------------------------------------------
 
@@ -1209,7 +1229,8 @@ ALTER TABLE `reviews`
   ADD PRIMARY KEY (`id`),
   ADD KEY `reviews_user_id_foreign` (`user_id`),
   ADD KEY `reviews_product_id_foreign` (`product_id`),
-  ADD KEY `reviews_review_id_foreign` (`review_id`);
+  ADD KEY `reviews_review_id_foreign` (`review_id`),
+  ADD KEY `reviews_admin_id_foreign` (`admin_id`);
 
 --
 -- Indexes for table `roles`
@@ -1272,7 +1293,7 @@ ALTER TABLE `wishlists`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `banners`
@@ -1314,37 +1335,37 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `order_addresses`
 --
 ALTER TABLE `order_addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `order_coupons`
 --
 ALTER TABLE `order_coupons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order_products`
 --
 ALTER TABLE `order_products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -1362,25 +1383,25 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `product_sizes`
 --
 ALTER TABLE `product_sizes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1392,25 +1413,25 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `shopping_carts`
 --
 ALTER TABLE `shopping_carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `sizes`
 --
 ALTER TABLE `sizes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `user_addresses`
 --
 ALTER TABLE `user_addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -1497,6 +1518,7 @@ ALTER TABLE `product_sizes`
 -- Constraints for table `reviews`
 --
 ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `reviews_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `reviews_review_id_foreign` FOREIGN KEY (`review_id`) REFERENCES `reviews` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `reviews_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;

@@ -23,6 +23,7 @@ return [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' =>  env('GOOGLE_CLIENT_REDIRECT_URL'),
+        'frontend_callback' => env('GOOGLE_FRONTEND_REDIRECT_URL'),
     ],
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),

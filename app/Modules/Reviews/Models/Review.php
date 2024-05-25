@@ -2,6 +2,7 @@
 
 namespace App\Modules\Reviews\Models;
 
+use App\Modules\Admins\Models\Admin;
 use App\Modules\Users\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\Products\Models\Product;
@@ -20,6 +21,7 @@ class Review extends Model
         'user_id',
         'product_id',
         'comment',
+        'admin_id',
         'review_id',
         'is_read'
     ];
@@ -40,6 +42,10 @@ class Review extends Model
         return $this->belongsTo(User::class)->select('name', 'id', 'gender');
     }
 
+    public function admin(): BelongsTo
+    {
+        return $this->belongsTo(Admin::class)->select('name', 'id', 'gender');
+    }
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class)
@@ -49,6 +55,6 @@ class Review extends Model
 
     public function reply()
     {
-        return $this->hasOne(Review::class, 'review_id')->with('user');
+        return $this->hasOne(Review::class, 'review_id')->with('user', 'admin');
     }
 }
