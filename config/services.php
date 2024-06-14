@@ -25,6 +25,13 @@ return [
         'redirect' =>  env('GOOGLE_CLIENT_REDIRECT_URL'),
         'frontend_callback' => env('GOOGLE_FRONTEND_REDIRECT_URL'),
     ],
+    'e-farmer' => [
+        'url' => env('EPORTAL_SSO'),
+        'client_id' => env('EPORTAL_CLIENT_ID'),
+        'client_secret' => env('EPORTAL_SECRET'),
+        'redirect' =>  env('EPORTAL_CALLBACK'),
+        'frontend_callback' => env('EPORTAL_FRONTEND_CALLBACK'),
+    ],
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),

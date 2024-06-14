@@ -32,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
 
 
+            // frontend routes
             Route::middleware(['api_browser_restriction', 'api'])->group(base_path('routes/Auth/UserRoutes.php'));
 
             Route::middleware(['api_browser_restriction', 'api'])->group(function ($route) {
@@ -40,6 +41,8 @@ class RouteServiceProvider extends ServiceProvider
                 }
             });
 
+
+            // admin routes
             Route::middleware(['api_browser_restriction', 'api'])
                 ->prefix('admin')
                 ->group(base_path('routes/Auth/AdminRoutes.php'));

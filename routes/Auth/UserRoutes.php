@@ -20,11 +20,6 @@ Route::middleware('guest:web')->group(function () {
     Route::post('/reset-password', [NewPasswordController::class, 'store'])
         ->middleware('guest:web')
         ->name('password.update');
-
-
-    Route::get('oauth/google/redirect', [GoogleSignInController::class, 'redirectToGoogle']);
-
-    Route::get('oauth/google/callback', [GoogleSignInController::class, 'callback']);
 });
 
 Route::middleware('auth:web')->group(function () {

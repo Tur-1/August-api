@@ -28,10 +28,11 @@ class ReviewRepository
         return $this->review->where('product_id', $productId)
             ->whereNull('review_id')
             ->with('user', 'reply')
-            ->select('id', 'comment', 'user_id', 'product_id', 'created_at', 'review_id')
+            ->select('id', 'comment', 'user_id', 'product_id', 'created_at', 'review_id','admin_id')
             ->latest()
             ->get();
     }
+
     public function replyReview($comment, $review_id)
     {
         $currentDate = Carbon::now('GMT+3');

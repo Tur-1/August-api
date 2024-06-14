@@ -16,10 +16,14 @@ class ProductReviewsResource extends JsonResource
     {
 
         return [
-            'user' => [
+            'user' => $this->whenLoaded('user', [
                 'name' => $this->user->name,
                 'gender' => $this->user->gender
-            ],
+            ]),
+            'admin' => $this->whenLoaded('admin', [
+                'name' => $this->admin?->name,
+                'gender' => $this->admin?->gender
+            ]),
             'comment' => $this->comment,
             'date' =>  $this->created_at->diffForHumans(),
             'reply' => ProductReviewsResource::make($this->whenLoaded('reply')),
