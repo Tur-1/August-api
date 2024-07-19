@@ -44,6 +44,6 @@ class AppServiceProvider extends ServiceProvider
             ], $status);
         });
 
-        $this->loadMigrationsFrom(glob(base_path('/app/Modules/*/Database/*')));
+        $this->loadMigrationsFrom(glob(base_path('/app/Modules/*/Database/migrations/*')));
     }
 }

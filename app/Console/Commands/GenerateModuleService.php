@@ -45,8 +45,27 @@ class GenerateModuleService
 
             $this->makeDirectory(dirname($migrtionfull_path));
 
-            $migrtionFileContents = $this->getSourceFile($moduleName, $migrtionStubFile, 'Database\\');
+            $migrtionFileContents = $this->getSourceFile($moduleName, $migrtionStubFile, 'Database\\migrations');
             $this->files->put($migrtionfull_path, $migrtionFileContents);
+
+            // create migrtion File
+            $FacatoryStubFile = $this->getFacatoryStubFile();
+            $Facatoryfull_path = $this->getFacatoryFileFullPath($moduleName);
+
+            $this->makeDirectory(dirname($Facatoryfull_path));
+
+            $FacatoryFileContents = $this->getSourceFile($moduleName, $FacatoryStubFile, 'Database\\factories');
+            $this->files->put($Facatoryfull_path, $FacatoryFileContents);
+
+
+            // create migrtion File
+            $SeederStubFile = $this->getSeederStubFile();
+            $Seederfull_path = $this->getSeederFileFullPath($moduleName);
+
+            $this->makeDirectory(dirname($Seederfull_path));
+
+            $SeederFileContents = $this->getSourceFile($moduleName, $SeederStubFile, 'Database\\seeders');
+            $this->files->put($Seederfull_path, $SeederFileContents);
 
             return ['message' => 'Module : ' . $moduleName . ' created successfully.', 'success' => true];
         } else {
@@ -79,9 +98,17 @@ class GenerateModuleService
 
     private function getMigrtionFileFullPath($moduleName)
     {
-        return 'App\Modules\\' . $moduleName . '\\Database\\' . date('Y_m_d_His') . '_create_' . Str::lower($moduleName) . '_table.php';
+        return 'App\Modules\\' . $moduleName . '\\Database\\migrations\\' . date('Y_m_d_His') . '_create_' . Str::snake(Str::plural($moduleName)) . '_table.php';
     }
 
+    private function getFacatoryFileFullPath($moduleName)
+    {
+        return 'App\Modules\\' . $moduleName . '\\Database\\factories\\' . $this->getSingularClassName($moduleName) . 'Factory.php';
+    }
+    private function getSeederFileFullPath($moduleName)
+    {
+        return 'App\Modules\\' . $moduleName . '\\Database\\seeders\\' . $this->getSingularClassName($moduleName) . 'Seeder.php';
+    }
     public function getSingularFolderName($name)
     {
         if (!in_array($name, $this->exceptFoldersNames)) {
@@ -108,8 +135,8 @@ class GenerateModuleService
             'modelVariable' => Str::camel($this->getSingularClassName($moduleName)),
             'Controller_Name' => $this->getSingularClassName($moduleName),
             'Module' => Str::lower($moduleName),
-            'table_name' => Str::lower($moduleName),
-            'database_file_name' => date('Y_m_d') . '_' . time() . '_' . Str::lower($moduleName),
+            'table_name' => Str::snake(Str::plural($moduleName)),
+            'database_file_name' => date('Y_m_d') . '_' . time() . '_' . Str::snake(Str::plural($moduleName)),
         ];
 
         return $this->getStubContent($stub, $vars);
@@ -143,6 +170,15 @@ class GenerateModuleService
 
     private function getMigrationsStubFile()
     {
-        return base_path('app\\Console\\Commands\\custom_stubs\\Database\\{database_file_name}.php');
+        return base_path('app\\Console\\Commands\\custom_stubs\\Database\\migrations\\{database_file_name}.php');
+    }
+
+    private function getFacatoryStubFile()
+    {
+        return base_path('app\\Console\\Commands\\custom_stubs\\Database\\factories\\{Model}Factory.php');
+    }
+    private function getSeederStubFile()
+    {
+        return base_path('app\\Console\\Commands\\custom_stubs\\Database\\seeders\\{Model}Seeder.php');
     }
 }

@@ -756,9 +756,8 @@
                                                                                 target="_blank"
                                                                                 style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#D48344;font-size:14px">
                                                                                 <img src="{{ $product['product_image'] }}"
-                                                                                    alt="Natural Balance L.I.D., sale 30%"
+                                                                                    alt="{{ $product['product_image'] }}"
                                                                                     class="adapt-img"
-                                                                                    title="Natural Balance L.I.D., sale 30%"
                                                                                     width="125"
                                                                                     style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic">
                                                                             </a>

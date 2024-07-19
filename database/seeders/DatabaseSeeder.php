@@ -3,9 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Facades\File;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,21 +19,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // Path to the module seeders
+        $modulesPath = base_path('app\\Modules');
 
-        // first insert roles 
-        // $this->call(RolesSeeder::class);
+        // Get all module directories
+        $modules = File::directories($modulesPath);
 
-        // // insert Permissions 
-        // $this->call(PermissionsSeeder::class);
+        foreach ($modules as $module) {
+            // Check if there is a seeders directory in the module
+            $seedersPath = $module . '\\Database\\Seeders';
 
-        // // attach role Permissions
-        // $this->call(RolePermissionsSeeder::class);
+            if (File::exists($seedersPath)) {
+                // Get all seeder files
+                $seeders = File::files($seedersPath);
 
-        // // attach user Permissions
-        // $this->call(UserPermissionsSeeder::class);
+                foreach ($seeders as $seeder) {
+                    $seederClass = 'App\\Modules\\' . basename($module) . '\\Database\\Seeders\\' . pathinfo($seeder, PATHINFO_FILENAME);
 
-
-        DB::unprepared(file_get_contents('tur_august.sql'));
+                    if (class_exists($seederClass)) {
+                        $this->call($seederClass);
+                    }
+                }
+            }
+        }
     }
 }

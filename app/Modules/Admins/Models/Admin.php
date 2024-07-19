@@ -3,6 +3,8 @@
 namespace App\Modules\Admins\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Modules\Admins\Database\factories\AdminFactory;
 use App\Modules\Admins\EloquentBuilders\AdminBuilder;
 use App\Modules\Admins\Traits\AdminTrait;
 use Laravel\Sanctum\HasApiTokens;
@@ -31,6 +33,7 @@ class Admin extends Authenticatable
         'role_id'
 
     ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -56,5 +59,15 @@ class Admin extends Authenticatable
     public function newEloquentBuilder($query): AdminBuilder
     {
         return new AdminBuilder($query);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return AdminFactory::new();
     }
 }

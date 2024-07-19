@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 trait ProductAttributesTrait
 {
 
-    public function getImageStoragePath()
+    private function getImageStoragePath()
     {
         return config('app.url') .  Storage::url('images/products/product_' . $this->id . '/' . $this->main_image);
     }
